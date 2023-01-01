@@ -1,0 +1,99 @@
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-white-mute: #f2f2f2;
+  --vt-c-white-background: #fffafa;
+
+  --vt-c-grey-mainfont: #3a3c40;
+  --vt-c-grey-main-font: #474a51;
+  --vt-c-grey-font: #82868c;
+  --vt-c-grey-silver: #c0c0c0;
+  --vt-c-grey-lighting: #d3d3d3;
+  --vt-c-grey-gainsboro: #cdcdcd;
+  --vt-c-grey-light: #dcdcdc;
+
+  --vt-c-alert-btn: rgba(255, 164, 116, 1);
+  --vt-c-active-btn: rgba(95, 158, 160, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  min-width: 768px;
+  min-height: 100vh;
+  color: var(--vt-c-grey-main-font);
+  background: var(--vt-c-white-background);
+  transition: color 0.5s, background-color 0.5s;
+  font-family: Montserrat, Arial, Helvetica, Verdana, sans-serif;
+  font-size: 0.75rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+svg {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: inherit;
+}
+
+svg:hover path,
+.btn_fullInfo:hover path {
+  fill: var(--vt-c-active-btn);
+}
+
+svg path {
+  opacity: 0.5;
+}
+button {
+  border: none;
+}
+
+.button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vt-c-white);
+  background: var(--vt-c-active-btn);
+  border: none;
+  border-radius: 20px;
+  opacity: 0.6;
+  padding: 12px;
+}
+.button:hover {
+  opacity: 0.9;
+}
+
+.button:active {
+  opacity: 0.5;
+}
+
+input,
+textarea,
+select {
+  font-style: italic;
+  color: var(--vt-c-grey-main-font);
+  background-color: var(--vt-c-white-background);
+  border: none;
+  outline: none;
+  box-shadow: 1px 1px 0 0 var(--vt-c-grey-silver);
+  border-radius: 17px;
+  padding: 5px 20px;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  font-style: normal;
+}
+
+label {
+  display: grid;
+  align-content: center;
+}
