@@ -8,7 +8,6 @@ export const useEmplStore = defineStore("EmplStore", {
     };
   },
   getters: {
-    //Передача аргументов геттерам https://pinia.vuejs.org/core-concepts/getters.html#accessing-other-getters
     getEmplTelephone: (state) => {
       return (emplId) => {
         const employee = state.employees.find((elem) => elem.id === emplId);
@@ -37,4 +36,3 @@ export const useEmplStore = defineStore("EmplStore", {
     },
   },
 });
- 

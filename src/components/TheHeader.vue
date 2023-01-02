@@ -10,14 +10,14 @@ import IconSearch from "./IconSearch.vue";
         name="search"
         id="search"
         class="search"
-        placeholder="Search..."
+        placeholder="Поиск..."
       />
       <button type="submit" class="btn_search">
         <IconSearch />
       </button>
 
       <div class="container_header container_header-menu">
-        <button type="button" class="button">Add employee</button>
+        <button type="button" class="button">Новый сотрудник</button>
       </div>
     </form>
   </div>

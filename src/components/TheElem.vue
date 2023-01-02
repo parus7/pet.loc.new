@@ -3,14 +3,12 @@ import { useEmplStore } from ".././stores/EmplStore";
 import { mapState } from "pinia";
 // import { storeToRefs } from "pinia";
 import { RouterLink } from "vue-router";
-
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
-
 // const { employeesData } = storeToRefs(useEmplStore());
 const employeesData = useEmplStore(); // eslint-disable-line
-
-const props = defineProps({ // eslint-disable-line
+const props = defineProps({
+  // eslint-disable-line
   employee: {
     id: { type: Number, required: true },
     cn: { type: String, required: true },
@@ -40,6 +38,7 @@ const props = defineProps({ // eslint-disable-line
     <li class="employee_status" :class="{ active: !employee.hide }">
       {{ getEmplStatus }}
     </li>
+
     <li>
       <RouterLink
         :to="{
@@ -52,11 +51,12 @@ const props = defineProps({ // eslint-disable-line
         </button>
       </RouterLink>
     </li>
+
     <li>
       <button
         type="button"
         class="btn_delete"
-        @click="this.$emit('delEmpl', this.employee)"
+        @click="this.$emit('delEmpl', this.employee.id)"
       >
         <IconDelete />
       </button>
@@ -67,9 +67,7 @@ const props = defineProps({ // eslint-disable-line
 <script>
 export default {
   computed: {
-    // использую mapState (раздел без setup() в конце страницы) по https://pinia.vuejs.org/core-concepts/getters.html#with-setup
     ...mapState(useEmplStore, ["getEmplTelephone", "getEmplMobile"]),
-
     getEmplStatus() {
       return this.employee.hide == true ? "online" : "offline";
     },
@@ -90,7 +88,6 @@ export default {
   background-color: var(--vt-c-white-mute);
   padding: 10px;
 }
-
 .photo {
   width: 35px;
   height: 35px;
@@ -98,14 +95,12 @@ export default {
   border-radius: 10%;
   margin: 0;
 }
-
 .full_name,
 .position {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-
 .employee_status {
   display: flex;
   justify-content: center;
@@ -119,7 +114,6 @@ export default {
   padding: 3px 10px;
   margin: 0 auto;
 }
-
 .active {
   background-color: var(--vt-c-active-btn);
 }

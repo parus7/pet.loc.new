@@ -1,5 +1,6 @@
 <script setup>
-// ТУТ ПОКА НЕ РАБОТАЕТ, НЕ ЗАНИМАЛАСЬ ЭТОЙ СТРАНИЦЕЙ ПОСЛЕ ПОДКЛЮЧЕНИЯ PINIA)
+import { useEmplStore } from "../../stores/EmplStore";
+const employeesData = useEmplStore();
 </script>
 
 <template>
@@ -138,23 +139,12 @@
       </div>
     </fieldset>
 
-    <button type="button" class="button btn_edit">Edit employee</button>
+    <button type="button" class="button btn_edit">Изменить</button>
   </form>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      index: 1,
-      disabled: true,
-    };
-  },
-
-  created() {
-    this.paramsId = this.$route.params.id;
-  },
-};
+export default {};
 </script>
 
 <style scoped>

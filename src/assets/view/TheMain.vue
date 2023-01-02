@@ -12,7 +12,7 @@ const employeesData = useEmplStore();
     v-for="employee of employeesData.employees"
     :key="employee.id"
     :employee="employee"
-    @click="employeesData.deleteEmpl(employee.id)"
+    @delEmpl="employeesData.deleteEmpl(employee.id)"
   />
 
   <h2 class="message"></h2>
