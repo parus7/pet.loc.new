@@ -15,7 +15,9 @@ const employeesData = useEmplStore();
     @delEmpl="employeesData.deleteEmpl(employee.id)"
   />
 
-  <h2 class="message"></h2>
+  <h2 class="message" v-if="employeesData.employees.length === 0">
+    Список сотрудников пуст
+  </h2>
 </template>
 
 <script>
