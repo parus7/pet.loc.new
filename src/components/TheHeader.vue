@@ -1,5 +1,6 @@
 <script setup>
 import IconSearch from "./IconSearch.vue";
+import IconAdd from "./IconAdd.vue";
 </script>
 
 <template>
@@ -17,7 +18,7 @@ import IconSearch from "./IconSearch.vue";
       </button>
 
       <div class="container_header container_header-menu">
-        <button type="button" class="button">Новый сотрудник</button>
+        <button type="button" class="button"><IconAdd /></button>
       </div>
     </form>
   </div>
@@ -56,7 +57,7 @@ form {
 }
 .btn_search {
   position: absolute;
-  top: 4px;
+  top: 0;
   left: 340px;
   width: 30px;
   height: 30px;
@@ -71,7 +72,7 @@ form {
 }
 
 .btn_search:active path {
-  fill: var(--vt-c-active-btn);
+  fill: var(--vt-c-active-btn); /* 5F9EA0 */
 }
 
 .container_header-menu {

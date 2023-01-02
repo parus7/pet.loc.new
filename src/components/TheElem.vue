@@ -46,18 +46,14 @@ const props = defineProps({
           params: { id: employee.id },
         }"
       >
-        <button type="button" class="btn_fullInfo">
+        <button type="button">
           <IconFullinfo />
         </button>
       </RouterLink>
     </li>
 
     <li>
-      <button
-        type="button"
-        class="btn_delete"
-        @click="this.$emit('delEmpl', this.employee.id)"
-      >
+      <button type="button" @click="this.$emit('delEmpl', this.employee.id)">
         <IconDelete />
       </button>
     </li>
