@@ -1,14 +1,13 @@
 <script setup>
 import { useEmplStore } from ".././stores/EmplStore";
 import { mapState } from "pinia";
-// import { storeToRefs } from "pinia";
+
 import { RouterLink } from "vue-router";
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
-// const { employeesData } = storeToRefs(useEmplStore());
-const employeesData = useEmplStore(); // eslint-disable-line
+const employeesData = useEmplStore();
+
 const props = defineProps({
-  // eslint-disable-line
   employee: {
     id: { type: Number, required: true },
     cn: { type: String, required: true },
@@ -30,8 +29,6 @@ const props = defineProps({
 
     <li class="position">{{ employee.title }}</li>
     <li class="email">{{ employee.email }}</li>
-
-    <!-- форматинование номера геттерами-->
     <li class="phone">{{ getEmplTelephone(employee.id) }}</li>
     <li class="mobile">{{ getEmplMobile(employee.id) }}</li>
 
