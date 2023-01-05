@@ -69,7 +69,6 @@ button {
   border: none;
   border-radius: 20px;
   opacity: 0.6;
-  /* padding: 12px; */
 }
 .button:hover {
   opacity: 0.9;

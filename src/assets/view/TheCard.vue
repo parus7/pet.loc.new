@@ -1,5 +1,6 @@
 <script setup>
 import { useEmplStore } from "../../stores/EmplStore";
+import { mapState } from "pinia";
 const employeesData = useEmplStore();
 </script>
 
@@ -14,7 +15,7 @@ const employeesData = useEmplStore();
           id="last_name"
           name="last_name"
           ref="last_name"
-          v-model="empl.last_name"
+          v-model="employee.last_name"
           :disabled="disabled"
         />
       </div>
@@ -24,7 +25,7 @@ const employeesData = useEmplStore();
         <input
           id="first_name"
           name="first_name"
-          v-model="empl.first_name"
+          v-model="employee.first_name"
           :disabled="disabled"
         />
       </div>
@@ -34,7 +35,7 @@ const employeesData = useEmplStore();
         <input
           id="middle_name"
           name="middle_name"
-          v-model="empl.middle_name"
+          v-model="employee.middle_name"
           :disabled="disabled"
         />
       </div>
@@ -56,7 +57,7 @@ const employeesData = useEmplStore();
         <input
           id="phone"
           name="phone"
-          v-model="empl.telephone"
+          v-model="employee.telephone"
           :disabled="disabled"
         />
       </div>
@@ -75,7 +76,7 @@ const employeesData = useEmplStore();
         <input
           id="email"
           name="email"
-          v-model="empl.email"
+          v-model="employee.email"
           :disabled="disabled"
         />
       </div>
@@ -85,7 +86,7 @@ const employeesData = useEmplStore();
         <input
           id="born"
           name="born"
-          v-model="empl.birthday"
+          v-model="employee.birthday"
           :disabled="disabled"
         />
       </div>
@@ -95,7 +96,7 @@ const employeesData = useEmplStore();
         <input
           id="mobile"
           name="mobile"
-          v-model="empl.mobile"
+          v-model="employee.mobile"
           :disabled="disabled"
         />
       </div>
@@ -104,7 +105,12 @@ const employeesData = useEmplStore();
     <fieldset class="container">
       <div class="wrapper">
         <label for="company">ГОРОД:</label>
-        <input id="city" name="city" v-model="empl.city" :disabled="disabled" />
+        <input
+          id="city"
+          name="city"
+          v-model="employee.city"
+          :disabled="disabled"
+        />
       </div>
 
       <div class="wrapper">
@@ -112,7 +118,7 @@ const employeesData = useEmplStore();
         <input
           id="company"
           name="company"
-          v-model="empl.company"
+          v-model="employee.company"
           :disabled="disabled"
         />
       </div>
@@ -122,7 +128,7 @@ const employeesData = useEmplStore();
         <input
           id="department"
           name="department"
-          v-model="empl.department"
+          v-model="employee.department"
           :disabled="disabled"
         />
       </div>
@@ -133,7 +139,7 @@ const employeesData = useEmplStore();
           id="position"
           type="text"
           name="position"
-          v-model="empl.title"
+          v-model="employee.title"
           :disabled="disabled"
         />
       </div>
@@ -144,7 +150,16 @@ const employeesData = useEmplStore();
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    ...mapState(useEmplStore, [
+      "getEmplTelephone",
+      "getEmplMobile",
+      "getEmplBirthday",
+      "getEmplGender",
+    ]),
+  },
+};
 </script>
 
 <style scoped>

@@ -10,6 +10,7 @@ const employeesData = useEmplStore();
 const props = defineProps({
   employee: {
     id: { type: Number, required: true },
+    hide: { type: Boolean, required: true }, // Если true то не показывать сотрудника.
     cn: { type: String, required: true },
     title: { type: String, required: true },
     email: { type: String, required: true },
@@ -21,7 +22,7 @@ const props = defineProps({
 
 <template>
   <ul class="container_employee">
-    <li class="photo"></li>
+    <li class="photo" :class="{ employee_status: !employee.hide }"></li>
 
     <li class="full_name">
       {{ employee.cn }}
@@ -31,10 +32,6 @@ const props = defineProps({
     <li class="email">{{ employee.email }}</li>
     <li class="phone">{{ getEmplTelephone(employee.id) }}</li>
     <li class="mobile">{{ getEmplMobile(employee.id) }}</li>
-
-    <li class="employee_status" :class="{ active: !employee.hide }">
-      {{ getEmplStatus }}
-    </li>
 
     <li>
       <RouterLink
@@ -61,9 +58,6 @@ const props = defineProps({
 export default {
   computed: {
     ...mapState(useEmplStore, ["getEmplTelephone", "getEmplMobile"]),
-    getEmplStatus() {
-      return this.employee.hide == true ? "online" : "offline";
-    },
   },
 };
 </script>
@@ -71,7 +65,7 @@ export default {
 <style scoped>
 .container_employee {
   display: grid;
-  grid-template-columns: 5% 20% 10% 15% auto auto 9% 3% 4%;
+  grid-template-columns: 5% 20% 16% 17% auto auto 5% 5%;
   grid-gap: 2%;
   max-width: 100%;
   line-height: 1.6;
@@ -89,25 +83,13 @@ export default {
   margin: 0;
 }
 .full_name,
-.position {
+.position,
+.email {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 .employee_status {
-  display: flex;
-  justify-content: center;
-  width: 60px;
-  color: var(--vt-c-white);
-  font-size: 12px;
-  line-height: 15px;
-  opacity: 0.6;
-  background-color: var(--vt-c-grey-silver);
-  border-radius: 17px;
-  padding: 3px 10px;
-  margin: 0 auto;
-}
-.active {
-  background-color: var(--vt-c-active-btn);
+  border: 2px solid var(--vt-c-active-btn);
 }
 </style>

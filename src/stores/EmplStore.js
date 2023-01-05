@@ -35,31 +35,28 @@ export const useEmplStore = defineStore("EmplStore", {
       };
     },
 
-    // getEmplBirthday: (state) => {
-    //   return (emplId) => {
-    //     const employee = state.employees.find((elem) => elem.id === emplId);
-    //     employee ? employee.birthday.match(/.{2}/g).join(".") : "";
-    //   };
-    // },
+    getEmplBirthday: (state) => {
+      return (emplId) => {
+        const employee = state.employees.find((elem) => elem.id === emplId);
+        employee ? employee.birthday.match(/.{2}/g).join(".") : "";
+      };
+    },
 
-    // getEmplGender: (state) => {
-    //   return (emplId) => {
-    //     const employee = state.employees.find((elem) => elem.id === emplId);
-    //     employee.gender === "m"
-    //       ? "male"
-    //       : employee.gender === "f"
-    //       ? "female"
-    //       : "unknown";
-    //   };
-    // },
+    getEmplGender: (state) => {
+      return (emplId) => {
+        const employee = state.employees.find((elem) => elem.id === emplId);
+        employee.gender === "m"
+          ? "male"
+          : employee.gender === "f"
+          ? "female"
+          : "unknown";
+      };
+    },
   },
 
   actions: {
     deleteEmpl(id) {
       this.employees = this.employees.filter((elem) => elem.id !== id);
     },
-    // addEmpl(empl) {
-    //   this.employees.push(empl);
-    // },
   },
 });

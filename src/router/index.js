@@ -14,7 +14,6 @@ const router = createRouter({
       path: "/card/:id",
       name: "card",
       component: TheCard,
-      props: true,
     },
     // {
     //   path: "/:any(.*)",
