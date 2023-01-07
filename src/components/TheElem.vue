@@ -5,7 +5,6 @@ import { mapState } from "pinia";
 import { RouterLink } from "vue-router";
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
-const employeesData = useEmplStore();
 
 const props = defineProps({
   employee: {
@@ -47,7 +46,7 @@ const props = defineProps({
     </li>
 
     <li>
-      <button type="button" @click="this.$emit('delEmpl', this.employee.id)">
+      <button type="button" @click="this.$emit('delEmpl', employee.id)">
         <IconDelete />
       </button>
     </li>

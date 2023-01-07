@@ -1,20 +1,22 @@
 <script setup>
 import TheHeader from "../../components/TheHeader.vue";
 import TheElem from "../../components/TheElem.vue";
-import { useEmplStore } from "../../stores/EmplStore";
-import { mapState } from "pinia";
 
-const employeesData = useEmplStore();
+import { useEmplStore } from "../../stores/EmplStore";
+import { mapState, mapActions } from "pinia";
+import { storeToRefs } from "pinia";
+
+const { employees } = storeToRefs(useEmplStore());
 </script>
 
 <template>
   <TheHeader />
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="employee of employeesData.employees"
+      v-for="employee of employees"
       :key="employee.id"
       :employee="employee"
-      @delEmpl="employeesData.deleteEmpl(employee.id)"
+      @delEmpl="deleteEmpl(employee.id)"
     />
   </template>
 
@@ -28,7 +30,15 @@ export default {
   components: { TheHeader, TheElem },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore"]),
+    ...mapState(useEmplStore, [
+      "getEmptyStore",
+      "getEmplTelephone",
+      "getEmplMobile",
+    ]),
+  },
+
+  methods: {
+    ...mapActions(useEmplStore, ["deleteEmpl"]),
   },
 };
 </script>

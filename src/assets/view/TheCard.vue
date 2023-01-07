@@ -1,11 +1,10 @@
 <script setup>
 import { useEmplStore } from "../../stores/EmplStore";
 import { mapState } from "pinia";
-const employeesData = useEmplStore();
 </script>
 
 <template>
-  <form class="container_form">
+  <!-- <form class="container_form">
     <fieldset class="container container_fullname">
       <div class="photo" width="128" height="128"></div>
 
@@ -16,7 +15,6 @@ const employeesData = useEmplStore();
           name="last_name"
           ref="last_name"
           v-model="employee.last_name"
-          :disabled="disabled"
         />
       </div>
 
@@ -146,11 +144,17 @@ const employeesData = useEmplStore();
     </fieldset>
 
     <button type="button" class="button btn_edit">Изменить</button>
-  </form>
+  </form> -->
+
+  {{ paramsID }}
 </template>
 
 <script>
 export default {
+  created() {
+    this.paramsID = this.$route.params.id;
+  },
+
   computed: {
     ...mapState(useEmplStore, [
       "getEmplTelephone",
@@ -158,6 +162,9 @@ export default {
       "getEmplBirthday",
       "getEmplGender",
     ]),
+
+    // methods: {
+    // },
   },
 };
 </script>
