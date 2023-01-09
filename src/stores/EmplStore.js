@@ -12,6 +12,13 @@ export const useEmplStore = defineStore("EmplStore", {
       return state.employees.length === 0;
     },
 
+    getEmplById: (state) => {
+      return (emplId) => {
+        const employee = state.employees.find((elem) => elem.id === emplId);
+        return employee;
+      };
+    },
+
     getEmplTelephone: (state) => {
       return (emplId) => {
         const employee = state.employees.find((elem) => elem.id === emplId);
@@ -38,18 +45,20 @@ export const useEmplStore = defineStore("EmplStore", {
     getEmplBirthday: (state) => {
       return (emplId) => {
         const employee = state.employees.find((elem) => elem.id === emplId);
-        employee ? employee.birthday.match(/.{2}/g).join(".") : "";
+
+        return employee ? employee.birthday.match(/.{2}/g).join(".") : "";
       };
     },
 
     getEmplGender: (state) => {
       return (emplId) => {
         const employee = state.employees.find((elem) => elem.id === emplId);
-        employee.gender === "m"
-          ? "male"
-          : employee.gender === "f"
-          ? "female"
-          : "unknown";
+
+        return employee.gender == "m"
+          ? "мужской"
+          : employee.gender == "f"
+          ? "женский"
+          : "неизвестный";
       };
     },
   },

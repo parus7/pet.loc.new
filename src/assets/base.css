@@ -89,6 +89,7 @@ select {
   box-shadow: 1px 1px 0 0 var(--vt-c-grey-silver);
   border-radius: 17px;
   padding: 5px 20px;
+  margin-left: 10px;
 }
 
 input:disabled,

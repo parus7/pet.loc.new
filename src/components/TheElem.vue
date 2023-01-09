@@ -6,21 +6,20 @@ import { RouterLink } from "vue-router";
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
 
+const { employees } = useEmplStore();
+
 const props = defineProps({
   employee: {
-    id: { type: Number, required: true },
-    hide: { type: Boolean, required: true }, // Если true то не показывать сотрудника.
-    cn: { type: String, required: true },
-    title: { type: String, required: true },
-    email: { type: String, required: true },
-    telephone: { type: String, required: true },
-    mobile: { type: String, required: true },
+    type: Object,
+    required: true,
+    default: () => {},
   },
 });
 </script>
 
 <template>
   <ul class="container_employee">
+    <!--Если hide === true то не показывать сотрудника. -->
     <li class="photo" :class="{ employee_status: !employee.hide }"></li>
 
     <li class="full_name">

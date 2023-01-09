@@ -1,21 +1,18 @@
 <script setup>
 import { useEmplStore } from "../../stores/EmplStore";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
+
+const { employees } = useEmplStore();
 </script>
 
 <template>
-  <!-- <form class="container_form">
+  <form class="container_form">
     <fieldset class="container container_fullname">
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
         <label for="last_name">ФАМИЛИЯ:</label>
-        <input
-          id="last_name"
-          name="last_name"
-          ref="last_name"
-          v-model="employee.last_name"
-        />
+        <input id="last_name" name="last_name" v-model="employee.last_name" />
       </div>
 
       <div class="wrapper">
@@ -24,7 +21,6 @@ import { mapState } from "pinia";
           id="first_name"
           name="first_name"
           v-model="employee.first_name"
-          :disabled="disabled"
         />
       </div>
 
@@ -34,7 +30,6 @@ import { mapState } from "pinia";
           id="middle_name"
           name="middle_name"
           v-model="employee.middle_name"
-          :disabled="disabled"
         />
       </div>
     </fieldset>
@@ -42,83 +37,49 @@ import { mapState } from "pinia";
     <fieldset class="container container_contacts">
       <div class="wrapper">
         <label for="id_employee">ID:</label>
-        <input
-          id="id_employee"
-          name="id_employee"
-          v-model="paramsId"
-          :disabled="true"
-        />
+        <input id="id_employee" name="id_employee" v-model="employee.id" />
       </div>
 
       <div class="wrapper wrapper_phone">
-        <label for="phone">ВНУТ.ТЕЛЕФОН:</label>
-        <input
-          id="phone"
-          name="phone"
-          v-model="employee.telephone"
-          :disabled="disabled"
-        />
+        <label for="phone">ВНУТРЕННИЙ:</label>
+        <input id="phone" name="phone" :value="getEmplTelephone(employee.id)" />
       </div>
 
       <div class="wrapper">
         <label for="gender">ПОЛ:</label>
-        <select id="gender" v-model="empl.gender" :disabled="disabled">
+        <input id="phone" name="phone" :value="getEmplGender(employee.id)" />
+        <!-- <select id="gender" name="gender" :value="getEmplGender(employee.id)">
           <option>male</option>
           <option>female</option>
           <option>unknown</option>
-        </select>
+        </select> -->
       </div>
 
       <div class="wrapper wrapper_email">
         <label for="email">ЭЛ. ПОЧТА:</label>
-        <input
-          id="email"
-          name="email"
-          v-model="employee.email"
-          :disabled="disabled"
-        />
+        <input id="email" name="email" v-model="employee.email" />
       </div>
 
       <div class="wrapper">
-        <label for="born">ДАТА РОЖДЕНИЯ:</label>
-        <input
-          id="born"
-          name="born"
-          v-model="employee.birthday"
-          :disabled="disabled"
-        />
+        <label for="born">ДР:</label>
+        <input id="born" name="born" :value="getEmplBirthday(employee.id)" />
       </div>
 
       <div class="wrapper" wrapper_mobile>
-        <label for="mobile">МОБ.ТЕЛЕФОН:</label>
-        <input
-          id="mobile"
-          name="mobile"
-          v-model="employee.mobile"
-          :disabled="disabled"
-        />
+        <label for="mobile">МОБИЛЬНЫЙ:</label>
+        <input id="mobile" name="mobile" :value="getEmplMobile(employee.id)" />
       </div>
     </fieldset>
 
     <fieldset class="container">
       <div class="wrapper">
         <label for="company">ГОРОД:</label>
-        <input
-          id="city"
-          name="city"
-          v-model="employee.city"
-          :disabled="disabled"
-        />
+        <input id="city" name="city" v-model="employee.city" />
       </div>
 
       <div class="wrapper">
         <label for="company">КОМПАНИЯ:</label>
-        <input
-          id="company"
-          name="company"
-          v-model="employee.company"
-          :disabled="disabled"
-        />
+        <input id="company" name="company" v-model="employee.company" />
       </div>
 
       <div class="wrapper">
@@ -127,7 +88,6 @@ import { mapState } from "pinia";
           id="department"
           name="department"
           v-model="employee.department"
-          :disabled="disabled"
         />
       </div>
 
@@ -138,33 +98,35 @@ import { mapState } from "pinia";
           type="text"
           name="position"
           v-model="employee.title"
-          :disabled="disabled"
         />
       </div>
     </fieldset>
 
     <button type="button" class="button btn_edit">Изменить</button>
-  </form> -->
-
-  {{ paramsID }}
+  </form>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      employee: {},
+      isEdit: false,
+    };
+  },
   created() {
-    this.paramsID = this.$route.params.id;
+    const paramsId = Number(this.$route.params.id);
+    this.employee = this.getEmplById(paramsId);
   },
 
   computed: {
     ...mapState(useEmplStore, [
+      "getEmplById",
       "getEmplTelephone",
       "getEmplMobile",
       "getEmplBirthday",
       "getEmplGender",
     ]),
-
-    // methods: {
-    // },
   },
 };
 </script>
@@ -173,7 +135,7 @@ export default {
 .container_form {
   display: grid;
   gap: 20px;
-  width: 80%;
+  width: 90%;
   background-color: var(--vt-c-white-mute);
   padding: 40px;
   margin: 0 auto;
@@ -217,7 +179,9 @@ textarea {
 }
 
 .btn_edit {
+  width: auto;
   justify-self: end;
+  padding: 10px;
   margin: 10px;
 }
 </style>
