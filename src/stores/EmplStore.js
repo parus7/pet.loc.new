@@ -8,52 +8,32 @@ export const useEmplStore = defineStore("EmplStore", {
     };
   },
   getters: {
-    getEmptyStore: (state) => {
-      return state.employees.length === 0;
-    },
+    getEmptyStore: (state) => state.employees.length === 0,
 
-    getEmplById: (state) => {
-      return (emplId) => {
-        const employee = state.employees.find((elem) => elem.id === emplId);
-        return employee;
-      };
-    },
+    getEmplById: (state) => (emplId) =>
+      state.employees.find((elem) => elem.id === emplId),
 
-    getEmplTelephone: (state) => {
-      return (emplId) => {
-        const employee = state.employees.find((elem) => elem.id === emplId);
+    getEmplTelephone: (state) => (emplId) =>
+      state.employees
+        .find((elem) => elem.id === emplId)
+        .telephone.split("")
+        .reduce((accum, elem) => accum.replace("x", elem), "xx-xx"),
 
-        return employee ? employee.telephone.match(/.{2}/g).join("-") : "";
-      };
-    },
+    getEmplMobile: (state) => (emplId) =>
+      state.employees
+        .find((elem) => elem.id === emplId)
+        .mobile.split("")
+        .reduce((accum, elem) => accum.replace("x", elem), "+7 xxx xxx-xx-xx"),
 
-    getEmplMobile: (state) => {
-      return (emplId) => {
-        const employee = state.employees.find((elem) => elem.id === emplId);
-
-        return employee
-          ? employee.mobile
-              .split("")
-              .reduce(
-                (accumulator, elem) => accumulator.replace("x", elem),
-                "xxx xxx-xx-xx"
-              )
-          : "";
-      };
-    },
-
-    getEmplBirthday: (state) => {
-      return (emplId) => {
-        const employee = state.employees.find((elem) => elem.id === emplId);
-
-        return employee ? employee.birthday.match(/.{2}/g).join(".") : "";
-      };
-    },
+    getEmplBirthday: (state) => (emplId) =>
+      state.employees
+        .find((elem) => elem.id === emplId)
+        .birthday.split("")
+        .reduce((accum, elem) => accum.replace("x", elem), "xx.xx"),
 
     getEmplGender: (state) => {
       return (emplId) => {
         const employee = state.employees.find((elem) => elem.id === emplId);
-
         return employee.gender == "m"
           ? "мужской"
           : employee.gender == "f"
