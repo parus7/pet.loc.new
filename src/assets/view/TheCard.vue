@@ -6,8 +6,9 @@ const { employees } = useEmplStore();
 </script>
 
 <template>
-  <form class="container_form">
-    <fieldset class="container container_fullname">
+  <!-- если форма в НЕредактировании (v-if="!isEdit")  isEdit = false кнопка Редактировать-->
+  <form class="container_form" @submit.prevent>
+    <fieldset class="container_fullname">
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
@@ -34,7 +35,7 @@ const { employees } = useEmplStore();
       </div>
     </fieldset>
 
-    <fieldset class="container container_contacts">
+    <fieldset class="container_contacts" :disabled="true">
       <div class="wrapper">
         <label for="id_employee">ID:</label>
         <input id="id_employee" name="id_employee" v-model="employee.id" />
@@ -42,36 +43,36 @@ const { employees } = useEmplStore();
 
       <div class="wrapper wrapper_phone">
         <label for="phone">ВНУТРЕННИЙ:</label>
-        <input id="phone" name="phone" :value="getEmplTelephone(employee.id)" />
+        <input id="phone" name="phone" v-model="employee.telephone" />
       </div>
 
       <div class="wrapper">
         <label for="gender">ПОЛ:</label>
-        <input id="phone" name="phone" :value="getEmplGender(employee.id)" />
-        <!-- <select id="gender" name="gender" :value="getEmplGender(employee.id)">
-          <option>male</option>
-          <option>female</option>
-          <option>unknown</option>
-        </select> -->
+        <select id="gender" name="gender" v-model="employee.gender">
+          <option disabled>Выберите вариант</option>
+          <option>мужской</option>
+          <option>женский</option>
+          <option>неизвестный</option>
+        </select>
       </div>
 
       <div class="wrapper wrapper_email">
         <label for="email">ЭЛ. ПОЧТА:</label>
-        <input id="email" name="email" v-model="employee.email" />
+        <input id="email" name="email" :value="employee.email" />
       </div>
 
       <div class="wrapper">
         <label for="born">ДР:</label>
-        <input id="born" name="born" :value="getEmplBirthday(employee.id)" />
+        <input id="born" name="born" v-model="employee.birthday" />
       </div>
 
-      <div class="wrapper" wrapper_mobile>
+      <div class="wrapper">
         <label for="mobile">МОБИЛЬНЫЙ:</label>
-        <input id="mobile" name="mobile" :value="getEmplMobile(employee.id)" />
+        <input id="mobile" name="mobile" v-model="employee.mobile" />
       </div>
     </fieldset>
 
-    <fieldset class="container">
+    <fieldset :disabled="true">
       <div class="wrapper">
         <label for="company">ГОРОД:</label>
         <input id="city" name="city" v-model="employee.city" />
@@ -87,7 +88,8 @@ const { employees } = useEmplStore();
         <input
           id="department"
           name="department"
-          v-model="employee.department"
+          :value="employee.department"
+          :disabled="true"
         />
       </div>
 
@@ -102,7 +104,13 @@ const { employees } = useEmplStore();
       </div>
     </fieldset>
 
-    <button type="button" class="button btn_edit">Изменить</button>
+    <fieldset class="container-button">
+      <button type="button" class="button btn_edit" @click="editeEmployee">
+        Редактировать
+      </button>
+
+      <button type="submit" class="button btn_submit">Сохранить</button>
+    </fieldset>
   </form>
 </template>
 
@@ -114,9 +122,16 @@ export default {
       isEdit: false,
     };
   },
+
   created() {
     const paramsId = Number(this.$route.params.id);
-    this.employee = this.getEmplById(paramsId);
+    // break object reference from state
+    this.employee = { ...this.getEmplById(paramsId) };
+
+    this.employee.telephone = this.getEmplTelephone(paramsId);
+    this.employee.mobile = this.getEmplMobile(paramsId);
+    this.employee.birthday = this.getEmplBirthday(paramsId);
+    this.employee.gender = this.getEmplGender(paramsId);
   },
 
   computed: {
@@ -127,24 +142,29 @@ export default {
       "getEmplBirthday",
       "getEmplGender",
     ]),
+    // ...mapActions(useEmplStore, [""]),
   },
+
+  // methods: {},
 };
 </script>
 
 <style scoped>
 .container_form {
   display: grid;
+  grid-template-rows: repeat(4, auto);
   gap: 20px;
   width: 90%;
   background-color: var(--vt-c-white-mute);
-  padding: 40px;
+  padding: 35px;
   margin: 0 auto;
 }
 
-.container {
+fieldset {
   display: grid;
   border: none;
   gap: 10px;
+  margin: 0;
 }
 
 .wrapper {
@@ -173,13 +193,16 @@ select {
   appearance: none;
 }
 
-textarea {
-  resize: none;
-  white-space: pre-line;
+.container-button {
+  display: flex;
+  justify-content: end;
+  border: none;
+  padding: 0;
 }
 
-.btn_edit {
-  width: auto;
+.btn_edit,
+.btn_submit {
+  width: 110px;
   justify-self: end;
   padding: 10px;
   margin: 10px;

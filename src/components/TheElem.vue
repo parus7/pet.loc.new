@@ -23,7 +23,8 @@ const props = defineProps({
     <li class="photo" :class="{ employee_status: !employee.hide }"></li>
 
     <li class="full_name">
-      {{ employee.cn }}
+      {{ employee.last_name }} {{ employee.first_name }}
+      {{ employee.middle_name }}
     </li>
 
     <li class="position">{{ employee.title }}</li>
@@ -38,14 +39,18 @@ const props = defineProps({
           params: { id: employee.id },
         }"
       >
-        <button type="button">
+        <button type="button" class="button-icon">
           <IconFullinfo />
         </button>
       </RouterLink>
     </li>
 
     <li>
-      <button type="button" @click="this.$emit('delEmpl', employee.id)">
+      <button
+        type="button"
+        class="button-icon"
+        @click="this.$emit('delEmpl', employee.id)"
+      >
         <IconDelete />
       </button>
     </li>

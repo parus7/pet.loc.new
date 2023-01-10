@@ -47,7 +47,8 @@ svg:hover path,
 svg path {
   opacity: 0.5;
 }
-button {
+
+.button-icon {
   width: 25px;
   height: 25px;
   border: none;
