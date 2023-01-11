@@ -13,6 +13,12 @@ export const useEmplStore = defineStore("EmplStore", {
     getEmplById: (state) => (emplId) =>
       state.employees.find((elem) => elem.id === emplId),
 
+    getEmplIndex: (state) => {
+      return (emplId) => {
+        return state.employees.findIndex((elem) => elem.id == emplId);
+      };
+    },
+
     getEmplTelephone: (state) => (emplId) =>
       state.employees
         .find((elem) => elem.id === emplId)

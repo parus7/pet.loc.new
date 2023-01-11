@@ -6,9 +6,8 @@ const { employees } = useEmplStore();
 </script>
 
 <template>
-  <!-- если форма в НЕредактировании (v-if="!isEdit")  isEdit = false кнопка Редактировать-->
   <form class="container_form" @submit.prevent>
-    <fieldset class="container_fullname">
+    <fieldset class="container_fullname" :disabled="!isEdit">
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
@@ -35,10 +34,15 @@ const { employees } = useEmplStore();
       </div>
     </fieldset>
 
-    <fieldset class="container_contacts" :disabled="true">
+    <fieldset class="container_contacts" :disabled="!isEdit">
       <div class="wrapper">
         <label for="id_employee">ID:</label>
-        <input id="id_employee" name="id_employee" v-model="employee.id" />
+        <input
+          id="id_employee"
+          name="id_employee"
+          v-model="employee.id"
+          disabled
+        />
       </div>
 
       <div class="wrapper wrapper_phone">
@@ -58,7 +62,7 @@ const { employees } = useEmplStore();
 
       <div class="wrapper wrapper_email">
         <label for="email">ЭЛ. ПОЧТА:</label>
-        <input id="email" name="email" :value="employee.email" />
+        <input id="email" name="email" v-model="employee.email" />
       </div>
 
       <div class="wrapper">
@@ -72,7 +76,7 @@ const { employees } = useEmplStore();
       </div>
     </fieldset>
 
-    <fieldset :disabled="true">
+    <fieldset :disabled="!isEdit">
       <div class="wrapper">
         <label for="company">ГОРОД:</label>
         <input id="city" name="city" v-model="employee.city" />
@@ -88,8 +92,7 @@ const { employees } = useEmplStore();
         <input
           id="department"
           name="department"
-          :value="employee.department"
-          :disabled="true"
+          v-model="employee.department"
         />
       </div>
 
@@ -105,13 +108,21 @@ const { employees } = useEmplStore();
     </fieldset>
 
     <fieldset class="container-button">
-      <button type="button" class="button btn_edit" @click="editeEmployee">
+      <button type="button" class="button btn_edit" @click="editEmployee()">
         Редактировать
       </button>
 
-      <button type="submit" class="button btn_submit">Сохранить</button>
+      <button
+        type="submit"
+        class="button btn_submit"
+        @click="saveEmployee(employee.id)"
+      >
+        Сохранить
+      </button>
     </fieldset>
   </form>
+
+  <!-- {{ getEmplIndex(employee.id) }} -->
 </template>
 
 <script>
@@ -120,11 +131,13 @@ export default {
     return {
       employee: {},
       isEdit: false,
+      paramsId: null,
     };
   },
 
   created() {
     const paramsId = Number(this.$route.params.id);
+
     // break object reference from state
     this.employee = { ...this.getEmplById(paramsId) };
 
@@ -141,18 +154,33 @@ export default {
       "getEmplMobile",
       "getEmplBirthday",
       "getEmplGender",
+      "getEmplIndex",
     ]),
-    // ...mapActions(useEmplStore, [""]),
   },
 
-  // methods: {},
+  methods: {
+    editEmployee() {
+      this.isEdit = true;
+    },
+
+    saveEmployee(paramsId) {
+      this.index = this.getEmplIndex(paramsId);
+      // console.log(this.index);
+
+      this.isEdit = false;
+      // console.log(this.isEdit);
+
+      useEmplStore[this.index] = this.employee;
+      // console.log(useEmplStore[this.index]);
+      // console.log(this.employee);
+    },
+  },
 };
 </script>
 
 <style scoped>
 .container_form {
   display: grid;
-  grid-template-rows: repeat(4, auto);
   gap: 20px;
   width: 90%;
   background-color: var(--vt-c-white-mute);
@@ -202,9 +230,9 @@ select {
 
 .btn_edit,
 .btn_submit {
-  width: 110px;
+  width: 130px;
   justify-self: end;
   padding: 10px;
-  margin: 10px;
+  margin: 5px;
 }
 </style>

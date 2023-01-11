@@ -63,7 +63,7 @@ svg path {
   align-items: center;
   width: 65px;
   height: auto;
-  font-size: 12px;
+  font-size: 0.87rem;
   font-weight: 600;
   color: var(--vt-c-white);
   background: var(--vt-c-active-btn);

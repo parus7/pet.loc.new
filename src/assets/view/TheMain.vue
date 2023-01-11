@@ -13,7 +13,7 @@ const { employees } = storeToRefs(useEmplStore());
   <TheHeader />
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="employee of employees"
+      v-for="(employee, index) of employees"
       :key="employee.id"
       :employee="employee"
       @delEmpl="delEmployee(employee.id)"
@@ -38,7 +38,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["delEmployee", "editeEmpl"]),
+    ...mapActions(useEmplStore, ["delEmployee"]),
   },
 };
 </script>
