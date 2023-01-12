@@ -29,7 +29,7 @@ export const useEmplStore = defineStore("EmplStore", {
       state.employees
         .find((elem) => elem.id === emplId)
         .mobile.split("")
-        .reduce((accum, elem) => accum.replace("x", elem), "+7 xxx xxx-xx-xx"),
+        .reduce((accum, elem) => accum.replace("x", elem), "xxx xxx-xx-xx"),
 
     getEmplBirthday: (state) => (emplId) =>
       state.employees
@@ -52,6 +52,21 @@ export const useEmplStore = defineStore("EmplStore", {
   actions: {
     delEmployee(id) {
       this.employees = this.employees.filter((elem) => elem.id !== id);
+    },
+
+    addEmployee(updatedEmpl) {
+      updatedEmpl.telephone = updatedEmpl.telephone.replace("-", "");
+      updatedEmpl.mobile = updatedEmpl.mobile.replace(/\D/g, "");
+      updatedEmpl.birthday = updatedEmpl.birthday.replace(".", "");
+
+      updatedEmpl.gender =
+        updatedEmpl.gender == "мужской"
+          ? "m"
+          : updatedEmpl.gender == "женский"
+          ? "f"
+          : "u";
+
+      this.employees.push(updatedEmpl);
     },
   },
 });

@@ -121,7 +121,6 @@ const { employees } = useEmplStore();
       </button>
     </fieldset>
   </form>
-
   <!-- {{ getEmplIndex(employee.id) }} -->
 </template>
 
@@ -136,7 +135,7 @@ export default {
   },
 
   created() {
-    const paramsId = Number(this.$route.params.id);
+    const paramsId = parseInt(this.$route.params.id);
 
     // break object reference from state
     this.employee = { ...this.getEmplById(paramsId) };
@@ -154,25 +153,23 @@ export default {
       "getEmplMobile",
       "getEmplBirthday",
       "getEmplGender",
-      "getEmplIndex",
     ]),
   },
 
   methods: {
+    ...mapActions(useEmplStore, ["delEmployee", "addEmployee"]),
+
     editEmployee() {
       this.isEdit = true;
     },
 
     saveEmployee(paramsId) {
-      this.index = this.getEmplIndex(paramsId);
-      // console.log(this.index);
+      this.delEmployee(paramsId);
+
+      // break object reference from state
+      this.addEmployee({ ...this.employee });
 
       this.isEdit = false;
-      // console.log(this.isEdit);
-
-      useEmplStore[this.index] = this.employee;
-      // console.log(useEmplStore[this.index]);
-      // console.log(this.employee);
     },
   },
 };
