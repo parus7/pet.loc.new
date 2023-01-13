@@ -23,8 +23,7 @@ const props = defineProps({
     <li class="photo" :class="{ employee_status: !employee.hide }"></li>
 
     <li class="full_name">
-      {{ employee.last_name }} {{ employee.first_name }}
-      {{ employee.middle_name }}
+      {{ employee.cn }}
     </li>
 
     <li class="position">{{ employee.title }}</li>

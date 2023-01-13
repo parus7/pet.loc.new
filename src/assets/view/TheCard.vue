@@ -35,45 +35,49 @@ const { employees } = useEmplStore();
     </fieldset>
 
     <fieldset class="container_contacts" :disabled="!isEdit">
-      <div class="wrapper">
-        <label for="id_employee">ID:</label>
-        <input
-          id="id_employee"
-          name="id_employee"
-          v-model="employee.id"
-          disabled
-        />
-      </div>
+      <fieldset>
+        <div class="wrapper wrapper_min">
+          <label for="id_employee">ID:</label>
+          <input
+            id="id_employee"
+            name="id_employee"
+            v-model="employee.id"
+            disabled
+          />
+        </div>
 
-      <div class="wrapper wrapper_phone">
-        <label for="phone">ВНУТРЕННИЙ:</label>
-        <input id="phone" name="phone" v-model="employee.telephone" />
-      </div>
+        <div class="wrapper wrapper_min">
+          <label for="gender">ПОЛ:</label>
+          <select id="gender" name="gender" v-model="employee.gender">
+            <option disabled>Выберите вариант</option>
+            <option>мужской</option>
+            <option>женский</option>
+            <option>неизвестный</option>
+          </select>
+        </div>
 
-      <div class="wrapper">
-        <label for="gender">ПОЛ:</label>
-        <select id="gender" name="gender" v-model="employee.gender">
-          <option disabled>Выберите вариант</option>
-          <option>мужской</option>
-          <option>женский</option>
-          <option>неизвестный</option>
-        </select>
-      </div>
+        <div class="wrapper wrapper_min">
+          <label for="born">ДР:</label>
+          <input id="born" name="born" v-model="employee.birthday" />
+        </div>
+      </fieldset>
 
-      <div class="wrapper wrapper_email">
-        <label for="email">ЭЛ. ПОЧТА:</label>
-        <input id="email" name="email" v-model="employee.email" />
-      </div>
+      <fieldset>
+        <div class="wrapper">
+          <label for="phone">ВНУТРЕННИЙ:</label>
+          <input id="phone" name="phone" v-model="employee.telephone" />
+        </div>
 
-      <div class="wrapper">
-        <label for="born">ДР:</label>
-        <input id="born" name="born" v-model="employee.birthday" />
-      </div>
+        <div class="wrapper">
+          <label for="mobile">МОБИЛЬНЫЙ:</label>
+          <input id="mobile" name="mobile" v-model="employee.mobile" />
+        </div>
 
-      <div class="wrapper">
-        <label for="mobile">МОБИЛЬНЫЙ:</label>
-        <input id="mobile" name="mobile" v-model="employee.mobile" />
-      </div>
+        <div class="wrapper">
+          <label for="email">ЭЛ. ПОЧТА:</label>
+          <input id="email" name="email" v-model="employee.email" />
+        </div>
+      </fieldset>
     </fieldset>
 
     <fieldset :disabled="!isEdit">
@@ -88,7 +92,7 @@ const { employees } = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="department">ДЕПАРТАМЕНТ:</label>
+        <label for="department">ОТДЕЛ:</label>
         <input
           id="department"
           name="department"
@@ -179,7 +183,7 @@ export default {
 .container_form {
   display: grid;
   gap: 20px;
-  width: 90%;
+  width: 100%;
   background-color: var(--vt-c-white-mute);
   padding: 35px;
   margin: 0 auto;
@@ -194,8 +198,12 @@ fieldset {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 88px auto;
+  grid-template-columns: 83px auto;
   align-content: center;
+}
+
+.wrapper_min {
+  grid-template-columns: 35px auto;
 }
 
 .container_fullname {
@@ -206,12 +214,13 @@ fieldset {
   grid-row: 1/4;
   background-color: var(--vt-c-white-background);
   border-radius: 20%;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .container_contacts {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
 }
 
 select {

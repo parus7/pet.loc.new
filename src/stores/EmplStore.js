@@ -59,13 +59,20 @@ export const useEmplStore = defineStore("EmplStore", {
       updatedEmpl.mobile = updatedEmpl.mobile.replace(/\D/g, "");
       updatedEmpl.birthday = updatedEmpl.birthday.replace(".", "");
 
+      updatedEmpl.cn =
+        updatedEmpl.last_name +
+        " " +
+        updatedEmpl.first_name +
+        " " +
+        updatedEmpl.middle_name;
+
       updatedEmpl.gender =
         updatedEmpl.gender == "мужской"
           ? "m"
           : updatedEmpl.gender == "женский"
           ? "f"
           : "u";
-
+      // console.log(updatedEmpl);
       this.employees.push(updatedEmpl);
     },
   },
