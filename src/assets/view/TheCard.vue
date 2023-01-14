@@ -125,7 +125,6 @@ const { employees } = useEmplStore();
       </button>
     </fieldset>
   </form>
-  <!-- {{ getEmplIndex(employee.id) }} -->
 </template>
 
 <script>

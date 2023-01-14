@@ -13,7 +13,7 @@ const { employees } = storeToRefs(useEmplStore());
   <TheHeader />
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="(employee, index) of employees"
+      v-for="employee of employees"
       :key="employee.id"
       :employee="employee"
       @delEmpl="delEmployee(employee.id)"

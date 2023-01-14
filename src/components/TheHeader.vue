@@ -1,6 +1,11 @@
 <script setup>
+import { useEmplStore } from ".././stores/EmplStore";
+import { mapActions } from "pinia";
+
 import IconSearch from "./IconSearch.vue";
 import IconAdd from "./IconAdd.vue";
+
+const { employees } = useEmplStore();
 </script>
 
 <template>
@@ -18,11 +23,26 @@ import IconAdd from "./IconAdd.vue";
       </button>
 
       <div class="container_header container_header-menu">
-        <button type="button" class="button"><IconAdd /></button>
+        <button type="button" class="button" @click="onCreateEmployee">
+          <IconAdd />
+        </button>
       </div>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    ...mapActions(useEmplStore, ["createEmployee"]),
+
+    onCreateEmployee() {
+      const id = this.createEmployee().id;
+      this.$router.push({ name: "form", params: { id: id } });
+    },
+  },
+};
+</script>
 
 <style scoped>
 .container_header {

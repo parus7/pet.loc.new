@@ -72,8 +72,33 @@ export const useEmplStore = defineStore("EmplStore", {
           : updatedEmpl.gender == "женский"
           ? "f"
           : "u";
-      // console.log(updatedEmpl);
+
       this.employees.push(updatedEmpl);
+    },
+
+    createEmployee() {
+      let employee = {
+        id: this.employees.length + 1,
+        name: "",
+        hide: false,
+        thumbnail: false,
+        gender: "",
+        first_name: "",
+        last_name: "",
+        middle_name: "",
+        birthday: "",
+        email: "",
+        cn: "",
+        telephone: "",
+        mobile: "",
+        title: "",
+        department: "",
+        company: "",
+        city: "",
+      };
+
+      this.employees.push(employee);
+      return employee;
     },
   },
 });
