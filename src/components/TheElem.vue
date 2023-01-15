@@ -58,6 +58,8 @@ const props = defineProps({
 
 <script>
 export default {
+  components: { IconDelete, IconFullinfo },
+
   computed: {
     ...mapState(useEmplStore, ["getEmplTelephone", "getEmplMobile"]),
   },
@@ -80,7 +82,7 @@ export default {
 .photo {
   width: 35px;
   height: 35px;
-  background-color: var(--vt-c-grey-light);
+  background-color: var(--vt-c-white-background);
   border-radius: 10%;
   margin: 0;
 }

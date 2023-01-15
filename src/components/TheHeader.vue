@@ -3,13 +3,12 @@ import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
 import IconSearch from "./IconSearch.vue";
-import IconAdd from "./IconAdd.vue";
 
 const { employees } = useEmplStore();
 </script>
 
 <template>
-  <div class="container_header container_header-search">
+  <div class="container_header">
     <form>
       <input
         type="text"
@@ -18,21 +17,21 @@ const { employees } = useEmplStore();
         class="search"
         placeholder="Поиск..."
       />
-      <button type="submit" class="btn_search">
+      <button type="submit" class="button-icon btn_search">
         <IconSearch />
       </button>
 
-      <div class="container_header container_header-menu">
-        <button type="button" class="button" @click="onCreateEmployee">
-          <IconAdd />
-        </button>
-      </div>
+      <button type="button" class="button" @click="onCreateEmployee">
+        Создать
+      </button>
     </form>
   </div>
 </template>
 
 <script>
 export default {
+  components: { IconSearch },
+
   methods: {
     ...mapActions(useEmplStore, ["createEmployee"]),
 
@@ -48,16 +47,9 @@ export default {
 .container_header {
   display: flex;
   flex-wrap: nowrap;
-  height: auto;
-  font-size: 10px;
-  line-height: 1.6;
   background-color: var(--vt-c-white-mute);
   border-radius: 8px;
-  padding: 15px;
-}
-
-.container_header-menu {
-  padding: 0;
+  padding: 10px;
 }
 
 form {
@@ -68,23 +60,13 @@ form {
 }
 .search {
   position: relative;
-  width: 380px;
-  color: var(--vt-c-grey-font);
-  border-radius: 17px;
-  border: none;
+  width: 250px;
   outline: none;
-  padding: 0 10px;
 }
 .btn_search {
   position: absolute;
-  top: 0;
-  left: 340px;
-  width: 30px;
-  height: 30px;
-  border: none;
-  border-radius: 0 5px 5px 0;
-  background: inherit;
-  padding: 0;
+  top: 5px;
+  left: 220px;
 }
 
 .btn_search:hover path {
@@ -92,12 +74,6 @@ form {
 }
 
 .btn_search:active path {
-  fill: var(--vt-c-active-btn); /* 5F9EA0 */
-}
-
-.container_header-menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  fill: var(--vt-c-active-btn);
 }
 </style>

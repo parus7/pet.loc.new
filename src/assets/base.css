@@ -1,15 +1,11 @@
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-mute: #f2f2f2;
-  --vt-c-white-background: #fffafa;
+  --vt-c-white: rgba(255, 255, 255, 1);
+  --vt-c-white-mute: rgba(242, 242, 242, 1);
+  --vt-c-white-background: rgba(255, 250, 250, 1);
 
-  --vt-c-grey-mainfont: #3a3c40;
-  --vt-c-grey-main-font: #474a51;
-  --vt-c-grey-font: #82868c;
-  --vt-c-grey-silver: #c0c0c0;
-  --vt-c-grey-lighting: #d3d3d3;
-  --vt-c-grey-gainsboro: #cdcdcd;
-  --vt-c-grey-light: #dcdcdc;
+  --vt-c-grey-main-font: rgba(71, 74, 81, 1);
+  --vt-c-grey-font: rgba(130, 134, 140, 1);
+  --vt-c-grey-silver: rgba(192, 192, 192, 1);
 
   --vt-c-alert-btn: rgba(255, 164, 116, 1);
   --vt-c-active-btn: rgba(95, 158, 160, 1);
@@ -32,6 +28,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 svg {
   display: flex;
   align-items: center;
@@ -39,8 +36,7 @@ svg {
   background-color: inherit;
 }
 
-svg:hover path,
-.btn_fullInfo:hover path {
+svg:hover path {
   fill: var(--vt-c-active-btn);
 }
 
@@ -58,43 +54,45 @@ svg path {
 
 .button {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  width: 65px;
+  width: 120px;
   height: auto;
-  font-size: 0.87rem;
+  cursor: pointer;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--vt-c-white);
+  text-transform: uppercase;
   background: var(--vt-c-active-btn);
   border: none;
   border-radius: 20px;
-  opacity: 0.6;
+  opacity: 0.5;
+  padding: 10px 7px;
 }
+
 .button:hover {
   opacity: 0.9;
+  transition: opacity 0.5s;
 }
 
 .button:active {
   opacity: 0.5;
+  transition: opacity 0.5s;
 }
 
 input,
-textarea,
 select {
   font-style: italic;
-  color: var(--vt-c-grey-main-font);
   background-color: var(--vt-c-white-background);
   border: none;
-  outline: none;
+  outline-color: var(--vt-c-active-btn);
   box-shadow: 1px 1px 0 0 var(--vt-c-grey-silver);
   border-radius: 17px;
+  color: var(--vt-c-grey-main-font);
   padding: 5px 20px;
   margin-left: 10px;
 }
 
 input:disabled,
-textarea:disabled,
 select:disabled {
   font-style: normal;
 }
@@ -102,4 +100,5 @@ select:disabled {
 label {
   display: grid;
   align-content: center;
+  text-transform: uppercase;
 }

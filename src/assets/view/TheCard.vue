@@ -11,12 +11,12 @@ const { employees } = useEmplStore();
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
-        <label for="last_name">ФАМИЛИЯ:</label>
+        <label for="last_name">Фамилия:</label>
         <input id="last_name" name="last_name" v-model="employee.last_name" />
       </div>
 
       <div class="wrapper">
-        <label for="first_name">ИМЯ:</label>
+        <label for="first_name">Имя:</label>
         <input
           id="first_name"
           name="first_name"
@@ -25,7 +25,7 @@ const { employees } = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="middle_name">ОТЧЕСТВО :</label>
+        <label for="middle_name">Отчество :</label>
         <input
           id="middle_name"
           name="middle_name"
@@ -47,7 +47,7 @@ const { employees } = useEmplStore();
         </div>
 
         <div class="wrapper wrapper_min">
-          <label for="gender">ПОЛ:</label>
+          <label for="gender">Пол:</label>
           <select id="gender" name="gender" v-model="employee.gender">
             <option disabled>Выберите вариант</option>
             <option>мужской</option>
@@ -64,17 +64,17 @@ const { employees } = useEmplStore();
 
       <fieldset>
         <div class="wrapper">
-          <label for="phone">ВНУТРЕННИЙ:</label>
+          <label for="phone">Внутренний:</label>
           <input id="phone" name="phone" v-model="employee.telephone" />
         </div>
 
         <div class="wrapper">
-          <label for="mobile">МОБИЛЬНЫЙ:</label>
+          <label for="mobile">Мобильный:</label>
           <input id="mobile" name="mobile" v-model="employee.mobile" />
         </div>
 
         <div class="wrapper">
-          <label for="email">ЭЛ. ПОЧТА:</label>
+          <label for="email">Эл. почта:</label>
           <input id="email" name="email" v-model="employee.email" />
         </div>
       </fieldset>
@@ -82,17 +82,17 @@ const { employees } = useEmplStore();
 
     <fieldset :disabled="!isEdit">
       <div class="wrapper">
-        <label for="company">ГОРОД:</label>
+        <label for="company">Город:</label>
         <input id="city" name="city" v-model="employee.city" />
       </div>
 
       <div class="wrapper">
-        <label for="company">КОМПАНИЯ:</label>
+        <label for="company">Компания:</label>
         <input id="company" name="company" v-model="employee.company" />
       </div>
 
       <div class="wrapper">
-        <label for="department">ОТДЕЛ:</label>
+        <label for="department">Отдел:</label>
         <input
           id="department"
           name="department"
@@ -101,7 +101,7 @@ const { employees } = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="position">ДОЛЖНОСТЬ:</label>
+        <label for="position">Должность:</label>
         <input
           id="position"
           type="text"
@@ -112,15 +112,11 @@ const { employees } = useEmplStore();
     </fieldset>
 
     <fieldset class="container-button">
-      <button type="button" class="button btn_edit" @click="editEmployee()">
+      <button type="text" class="button" @click="editEmployee()">
         Редактировать
       </button>
 
-      <button
-        type="submit"
-        class="button btn_submit"
-        @click="saveEmployee(employee.id)"
-      >
+      <button type="submit" class="button" @click="saveEmployee(employee.id)">
         Сохранить
       </button>
     </fieldset>
@@ -231,13 +227,5 @@ select {
   justify-content: end;
   border: none;
   padding: 0;
-}
-
-.btn_edit,
-.btn_submit {
-  width: 130px;
-  justify-self: end;
-  padding: 10px;
-  margin: 5px;
 }
 </style>
