@@ -1,6 +1,7 @@
 <script setup>
 import { useEmplStore } from "../../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
+import ThePopup from "../../components/ThePopup.vue";
 
 const { employees } = useEmplStore();
 </script>
@@ -111,25 +112,32 @@ const { employees } = useEmplStore();
       </div>
     </fieldset>
 
-    <fieldset class="container-button">
-      <button type="text" class="button" @click="editEmployee()">
+    <div class="container-button">
+      <button type="text" class="button" @click="isOpen = true">
         Редактировать
       </button>
+
+      <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
+        >Вы действительно хотите редактировать данные сотрудника?
+      </ThePopup>
 
       <button type="submit" class="button" @click="saveEmployee(employee.id)">
         Сохранить
       </button>
-    </fieldset>
+    </div>
   </form>
 </template>
 
 <script>
 export default {
+  components: { ThePopup },
+
   data() {
     return {
       employee: {},
       isEdit: false,
       paramsId: null,
+      isOpen: false,
     };
   },
 
@@ -158,10 +166,6 @@ export default {
   methods: {
     ...mapActions(useEmplStore, ["delEmployee", "addEmployee"]),
 
-    editEmployee() {
-      this.isEdit = true;
-    },
-
     saveEmployee(paramsId) {
       this.delEmployee(paramsId);
 
@@ -169,6 +173,11 @@ export default {
       this.addEmployee({ ...this.employee });
 
       this.isEdit = false;
+    },
+
+    popupConfirm() {
+      this.isOpen = false;
+      this.isEdit = true;
     },
   },
 };
@@ -220,12 +229,5 @@ fieldset {
 
 select {
   appearance: none;
-}
-
-.container-button {
-  display: flex;
-  justify-content: end;
-  border: none;
-  padding: 0;
 }
 </style>

@@ -5,6 +5,7 @@ import { mapState } from "pinia";
 import { RouterLink } from "vue-router";
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
+import ThePopup from "./ThePopup.vue";
 
 const { employees } = useEmplStore();
 
@@ -45,23 +46,36 @@ const props = defineProps({
     </li>
 
     <li>
-      <button
-        type="button"
-        class="button-icon"
-        @click="this.$emit('delEmpl', employee.id)"
-      >
+      <button type="button" class="button-icon" @click="isOpen = true">
         <IconDelete />
       </button>
+
+      <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
+        >Вы действительно хотите удалить сотрудника?
+      </ThePopup>
     </li>
   </ul>
 </template>
 
 <script>
 export default {
-  components: { IconDelete, IconFullinfo },
+  components: { IconDelete, IconFullinfo, ThePopup },
+
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
 
   computed: {
     ...mapState(useEmplStore, ["getEmplTelephone", "getEmplMobile"]),
+  },
+
+  methods: {
+    popupConfirm() {
+      this.$emit("delEmpl", this.employee.id);
+      this.isOpen = false;
+    },
   },
 };
 </script>
