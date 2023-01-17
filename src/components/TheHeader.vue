@@ -3,6 +3,7 @@ import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
 import IconSearch from "./IconSearch.vue";
+import ThePopup from "./ThePopup.vue";
 
 const { employees } = useEmplStore();
 </script>
@@ -21,16 +22,30 @@ const { employees } = useEmplStore();
         <IconSearch />
       </button>
 
-      <button type="button" class="button" @click="onCreateEmployee">
+      <button type="button" class="button" @click="isOpen = true">
         Создать
       </button>
+
+      <ThePopup
+        :is-open="isOpen"
+        @ok="onCreateEmployee"
+        @close="isOpen = false"
+      >
+        Вы хотите создать карточку нового сотрудника?
+      </ThePopup>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  components: { IconSearch },
+  components: { IconSearch, ThePopup },
+
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
 
   methods: {
     ...mapActions(useEmplStore, ["createEmployee"]),
@@ -38,6 +53,7 @@ export default {
     onCreateEmployee() {
       const id = this.createEmployee().id;
       this.$router.push({ name: "form", params: { id: id } });
+      this.isOpen = false;
     },
   },
 };

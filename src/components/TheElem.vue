@@ -1,6 +1,6 @@
 <script setup>
 import { useEmplStore } from ".././stores/EmplStore";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 
 import { RouterLink } from "vue-router";
 import IconDelete from "./IconDelete.vue";
@@ -50,8 +50,8 @@ const props = defineProps({
         <IconDelete />
       </button>
 
-      <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
-        >Вы действительно хотите удалить сотрудника?
+      <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
+        >Вы хотите удалить сотрудника?
       </ThePopup>
     </li>
   </ul>
@@ -69,12 +69,12 @@ export default {
 
   computed: {
     ...mapState(useEmplStore, ["getEmplTelephone", "getEmplMobile"]),
+    ...mapActions(useEmplStore, ["popupConfirm"]),
   },
 
   methods: {
-    popupConfirm() {
+    popupDelete() {
       this.$emit("delEmpl", this.employee.id);
-      this.isOpen = false;
     },
   },
 };
@@ -85,6 +85,7 @@ export default {
   display: grid;
   grid-template-columns: 5% 20% 16% 17% auto auto 5% 5%;
   grid-gap: 2%;
+
   max-width: 100%;
   line-height: 1.6;
   align-items: center;

@@ -1,9 +1,9 @@
 <template>
   <div v-if="isOpen" class="popup-container" @click="closePopup">
     <div class="popup" @click.stop>
-      <span class="slot_text">
+      <span>
         <p>Внимание!</p>
-        <slot :close="close" confirm="confirm"></slot>
+        <slot></slot>
       </span>
 
       <div class="container-button">
@@ -21,10 +21,6 @@ export default {
       type: Boolean,
       required: true,
     },
-  },
-  emits: {
-    ok: null,
-    close: null,
   },
 
   methods: {
@@ -46,16 +42,19 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+
   background: var(--vt-c-white-background-confirm);
   z-index: 10;
 }
 .popup {
   position: absolute;
-  top: 30%;
-  right: 10%;
+  top: 35%;
+  right: 35%;
+
   display: flex;
   flex-direction: column;
   gap: 20px;
+
   width: 300px;
   height: auto;
   background: var(--vt-c-white);

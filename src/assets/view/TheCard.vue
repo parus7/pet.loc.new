@@ -118,7 +118,7 @@ const { employees } = useEmplStore();
       </button>
 
       <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
-        >Вы действительно хотите редактировать данные сотрудника?
+        >Вы хотите редактировать данные сотрудника?
       </ThePopup>
 
       <button type="submit" class="button" @click="saveEmployee(employee.id)">
@@ -135,8 +135,8 @@ export default {
   data() {
     return {
       employee: {},
-      isEdit: false,
       paramsId: null,
+      isEdit: false,
       isOpen: false,
     };
   },
