@@ -3,6 +3,8 @@ import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
 import IconSearch from "./IconSearch.vue";
+import IconFilter from "../components/IconFilter.vue";
+
 import ThePopup from "./ThePopup.vue";
 
 const { employees } = useEmplStore();
@@ -10,18 +12,7 @@ const { employees } = useEmplStore();
 
 <template>
   <div class="container_header">
-    <form>
-      <input
-        type="text"
-        name="search"
-        id="search"
-        class="search"
-        placeholder="Поиск..."
-      />
-      <button type="submit" class="button-icon btn_search">
-        <IconSearch />
-      </button>
-
+    <form @submit.prevent>
       <button type="button" class="button" @click="isOpen = true">
         Создать
       </button>
@@ -31,19 +22,59 @@ const { employees } = useEmplStore();
         @ok="onCreateEmployee"
         @close="isOpen = false"
       >
-        Вы хотите создать карточку нового сотрудника?
+        Вы хотите создать нового сотрудника?
       </ThePopup>
+
+      <div class="container-button">
+        <IconFilter />
+
+        <select class="search" id="filter" name="filter" v-model="selected">
+          <option value="" disabled>Выберите категорию</option>
+          <option v-for="category in categories" :key="category.id">
+            {{ category.text }}
+          </option>
+        </select>
+
+        <input
+          type="text"
+          name="search"
+          id="search"
+          class="search"
+          placeholder="Поиск..."
+          v-model="inputValue"
+        />
+
+        <button class="button-icon btn_search" @click="sendFilterData">
+          <IconSearch />
+        </button>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  components: { IconSearch, ThePopup },
+  components: { ThePopup, IconFilter, IconSearch },
 
   data() {
     return {
       isOpen: false,
+      selected: "",
+      inputValue: null,
+
+      categories: [
+        { id: 1, text: "идентификационный номер", item: "id" },
+        { id: 2, text: "пол", item: "gender" },
+        { id: 3, text: "имя", item: "first_name" },
+        { id: 4, text: "фамилия", item: "last_name" },
+        { id: 5, text: "отчество", item: "middle_name" },
+        { id: 6, text: "день рождения", item: "birthday" },
+        { id: 7, text: "внутренний телефон", item: "telephone" },
+        { id: 8, text: "мобильный телефон", item: "mobile" },
+        { id: 9, text: "отдел", item: "department" },
+        { id: 10, text: "компания", item: "company" },
+        { id: 11, text: "город", item: "city" },
+      ],
     };
   },
 
@@ -55,6 +86,14 @@ export default {
       this.$router.push({ name: "form", params: { id: id } });
       this.isOpen = false;
     },
+
+    sendFilterData() {
+      this.category = this.categories.find(
+        (elem) => elem.text == this.selected
+      );
+
+      this.$emit("filterEmpl", this.category.item, this.inputValue);
+    },
   },
 };
 </script>
@@ -65,7 +104,7 @@ export default {
   flex-wrap: nowrap;
   background-color: var(--vt-c-white-mute);
   border-radius: 8px;
-  padding: 10px;
+  padding: 20px;
 }
 
 form {
@@ -74,21 +113,23 @@ form {
   position: relative;
   width: 100%;
 }
+
 .search {
-  position: relative;
-  width: 250px;
-  outline: none;
+  width: 260px;
 }
+
+.active_filter path {
+  fill: var(--vt-c-alert-btn);
+}
+
 .btn_search {
   position: absolute;
   top: 5px;
-  left: 220px;
+  right: 15px;
 }
-
 .btn_search:hover path {
   fill: var(--vt-c-grey-font);
 }
-
 .btn_search:active path {
   fill: var(--vt-c-active-btn);
 }

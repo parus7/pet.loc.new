@@ -2,7 +2,7 @@
   --vt-c-white: rgba(255, 255, 255, 1);
   --vt-c-white-mute: rgba(242, 242, 242, 1);
   --vt-c-white-background: rgba(255, 250, 250, 1);
-  --vt-c-white-background-confirm: rgba(255, 250, 250, 0.3);
+  --vt-c-white-background-confirm: rgba(255, 250, 250, 0.2);
 
   --vt-c-grey-main-font: rgba(71, 74, 81, 1);
   --vt-c-grey-font: rgba(130, 134, 140, 1);
@@ -35,13 +35,14 @@ svg {
   align-items: center;
   border: none;
   background-color: inherit;
+  opacity: 0.5;
 }
 
 svg:hover path {
   fill: var(--vt-c-active-btn);
 }
 
-svg path {
+svg:active path {
   opacity: 0.5;
 }
 
@@ -63,7 +64,7 @@ svg path {
 .button {
   display: flex;
   justify-content: center;
-  width: 120px;
+  width: 90px;
   height: auto;
   cursor: pointer;
   font-size: 0.7rem;
@@ -72,7 +73,7 @@ svg path {
   text-transform: uppercase;
   background: var(--vt-c-active-btn);
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   opacity: 0.5;
   padding: 10px 7px;
   margin-right: 15px;
@@ -93,10 +94,11 @@ select {
   font-style: italic;
   background-color: var(--vt-c-white-background);
   border: none;
-  outline-color: var(--vt-c-active-btn);
+  outline: none;
   box-shadow: 1px 1px 0 0 var(--vt-c-grey-silver);
-  border-radius: 17px;
+  border-radius: 8px;
   color: var(--vt-c-grey-main-font);
+  appearance: none;
   padding: 5px 20px;
   margin-left: 10px;
 }
@@ -109,5 +111,5 @@ select:disabled {
 label {
   display: grid;
   align-content: center;
-  text-transform: uppercase;
+  font-size: 0.9rem;
 }

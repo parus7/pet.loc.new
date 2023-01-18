@@ -1,6 +1,8 @@
 <script setup>
 import { useEmplStore } from "../../stores/EmplStore";
+import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "pinia";
+
 import ThePopup from "../../components/ThePopup.vue";
 
 const { employees } = useEmplStore();
@@ -114,16 +116,18 @@ const { employees } = useEmplStore();
 
     <div class="container-button">
       <button type="text" class="button" @click="isOpen = true">
-        Редактировать
+        Записать
       </button>
 
       <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
-        >Вы хотите редактировать данные сотрудника?
+        >Вы хотите изменить данные сотрудника?
       </ThePopup>
 
-      <button type="submit" class="button" @click="saveEmployee(employee.id)">
-        Сохранить
-      </button>
+      <RouterLink class="link" :to="{ name: 'main' }">
+        <button type="submit" class="button" @click="saveEmployee(employee.id)">
+          Закрыть
+        </button>
+      </RouterLink>
     </div>
   </form>
 </template>
@@ -226,8 +230,7 @@ fieldset {
   grid-template-columns: auto 1fr;
   gap: 20px;
 }
-
-select {
-  appearance: none;
+.link {
+  text-decoration: none;
 }
 </style>

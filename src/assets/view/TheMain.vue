@@ -11,6 +11,7 @@ const { employees } = storeToRefs(useEmplStore());
 
 <template>
   <TheHeader />
+
   <template v-if="!getEmptyStore">
     <TheElem
       v-for="employee of employees"

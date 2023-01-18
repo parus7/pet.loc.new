@@ -110,5 +110,6 @@ export default {
 }
 .employee_status {
   border: 2px solid var(--vt-c-active-btn);
+  opacity: 0.7;
 }
 </style>
