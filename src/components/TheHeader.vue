@@ -44,7 +44,7 @@ const { employees } = useEmplStore();
           v-model="inputValue"
         />
 
-        <button class="button-icon btn_search" @click="sendFilterData">
+        <button class="button-icon btn_search" @click="convertSelected">
           <IconSearch />
         </button>
       </div>
@@ -87,12 +87,15 @@ export default {
       this.isOpen = false;
     },
 
-    sendFilterData() {
+    convertSelected() {
       this.category = this.categories.find(
         (elem) => elem.text == this.selected
       );
 
-      this.$emit("filterEmpl", this.category.item, this.inputValue);
+      this.$emit("filterEmpl", {
+        parame: this.category.item,
+        value: this.inputValue,
+      });
     },
   },
 };

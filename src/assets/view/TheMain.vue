@@ -4,17 +4,14 @@ import TheElem from "../../components/TheElem.vue";
 
 import { useEmplStore } from "../../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
-import { storeToRefs } from "pinia";
-
-const { employees } = storeToRefs(useEmplStore());
 </script>
 
 <template>
-  <TheHeader />
+  <TheHeader @filterEmpl="onFilterData($event)" />
 
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="employee of employees"
+      v-for="employee of employeesFilter"
       :key="employee.id"
       :employee="employee"
       @delEmpl="delEmployee(employee.id)"
@@ -30,16 +27,33 @@ const { employees } = storeToRefs(useEmplStore());
 export default {
   components: { TheHeader, TheElem },
 
+  created() {
+    this.employees = { ...this.getAllEmployees };
+    this.employeesFilter = { ...this.employees };
+  },
+
+  data() {
+    return {
+      employees: [],
+      employeesFilter: [],
+    };
+  },
+
   computed: {
     ...mapState(useEmplStore, [
       "getEmptyStore",
+      "getAllEmployees",
       "getEmplTelephone",
       "getEmplMobile",
     ]),
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["delEmployee"]),
+    ...mapActions(useEmplStore, ["delEmployee", "getFilterData"]),
+
+    onFilterData(event) {
+      this.employeesFilter = this.getFilterData(event);
+    },
   },
 };
 </script>

@@ -10,14 +10,10 @@ export const useEmplStore = defineStore("EmplStore", {
   getters: {
     getEmptyStore: (state) => state.employees.length === 0,
 
+    getAllEmployees: (state) => state.employees,
+
     getEmplById: (state) => (emplId) =>
       state.employees.find((elem) => elem.id === emplId),
-
-    getEmplIndex: (state) => {
-      return (emplId) => {
-        return state.employees.findIndex((elem) => elem.id == emplId);
-      };
-    },
 
     getEmplTelephone: (state) => (emplId) =>
       state.employees
@@ -99,6 +95,12 @@ export const useEmplStore = defineStore("EmplStore", {
 
       this.employees.push(employee);
       return employee;
+    },
+
+    getFilterData(event) {
+      return this.employees.filter(
+        (elem) => elem[event.parame] === event.value
+      );
     },
   },
 });
