@@ -8,14 +8,6 @@ import IconFullinfo from "./IconFullinfo.vue";
 import ThePopup from "./ThePopup.vue";
 
 const { employees } = useEmplStore();
-
-const props = defineProps({
-  employee: {
-    type: Object,
-    required: true,
-    default: () => {},
-  },
-});
 </script>
 
 <template>
@@ -60,6 +52,28 @@ const props = defineProps({
 <script>
 export default {
   components: { IconDelete, IconFullinfo, ThePopup },
+
+  props: {
+    employee: {
+      id: Number,
+      name: String,
+      hide: Boolean,
+      thumbnail: Boolean,
+      gender: String,
+      first_name: String,
+      last_name: String,
+      middle_name: String,
+      birthday: String,
+      email: String,
+      cn: String,
+      telephone: String,
+      mobile: String,
+      title: String,
+      department: String,
+      company: String,
+      city: String,
+    },
+  },
 
   data() {
     return {

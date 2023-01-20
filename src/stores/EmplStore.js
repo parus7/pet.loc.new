@@ -47,7 +47,7 @@ export const useEmplStore = defineStore("EmplStore", {
 
   actions: {
     delEmployee(id) {
-      this.employees = this.employees.filter((elem) => elem.id !== id);
+      return (this.employees = this.employees.filter((elem) => elem.id !== id));
     },
 
     addEmployee(updatedEmpl) {
@@ -98,9 +98,7 @@ export const useEmplStore = defineStore("EmplStore", {
     },
 
     getFilterData(event) {
-      return this.employees.filter(
-        (elem) => elem[event.parame] === event.value
-      );
+      return this.employees.filter((elem) => elem[event.param] === event.value);
     },
   },
 });

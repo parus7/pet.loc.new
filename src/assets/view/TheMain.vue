@@ -14,7 +14,7 @@ import { mapState, mapActions } from "pinia";
       v-for="employee of employeesFilter"
       :key="employee.id"
       :employee="employee"
-      @delEmpl="delEmployee(employee.id)"
+      @delEmpl="onDelete(employee.id)"
     />
   </template>
 
@@ -28,13 +28,11 @@ export default {
   components: { TheHeader, TheElem },
 
   created() {
-    this.employees = { ...this.getAllEmployees };
-    this.employeesFilter = { ...this.employees };
+    this.employeesFilter = { ...this.getAllEmployees };
   },
 
   data() {
     return {
-      employees: [],
       employeesFilter: [],
     };
   },
@@ -53,6 +51,10 @@ export default {
 
     onFilterData(event) {
       this.employeesFilter = this.getFilterData(event);
+    },
+
+    onDelete(id) {
+      this.employeesFilter = this.delEmployee(id);
     },
   },
 };

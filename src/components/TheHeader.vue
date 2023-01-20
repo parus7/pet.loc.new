@@ -63,7 +63,7 @@ export default {
       inputValue: null,
 
       categories: [
-        { id: 1, text: "идентификационный номер", item: "id" },
+        { id: 1, text: "", item: "" },
         { id: 2, text: "пол", item: "gender" },
         { id: 3, text: "имя", item: "first_name" },
         { id: 4, text: "фамилия", item: "last_name" },
@@ -71,9 +71,10 @@ export default {
         { id: 6, text: "день рождения", item: "birthday" },
         { id: 7, text: "внутренний телефон", item: "telephone" },
         { id: 8, text: "мобильный телефон", item: "mobile" },
-        { id: 9, text: "отдел", item: "department" },
-        { id: 10, text: "компания", item: "company" },
-        { id: 11, text: "город", item: "city" },
+        { id: 9, text: "должность", item: "title" },
+        { id: 10, text: "отдел", item: "department" },
+        { id: 11, text: "компания", item: "company" },
+        { id: 12, text: "город", item: "city" },
       ],
     };
   },
@@ -93,7 +94,7 @@ export default {
       );
 
       this.$emit("filterEmpl", {
-        parame: this.category.item,
+        param: this.category.item,
         value: this.inputValue,
       });
     },
