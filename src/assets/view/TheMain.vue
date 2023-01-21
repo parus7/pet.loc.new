@@ -7,7 +7,10 @@ import { mapState, mapActions } from "pinia";
 </script>
 
 <template>
-  <TheHeader @filterEmpl="onFilterData($event)" />
+  <TheHeader
+    @filterEmpl="onFilterData($event)"
+    @alphabetSort="onAlphabetSort"
+  />
 
   <template v-if="!getEmptyStore">
     <TheElem
@@ -43,6 +46,7 @@ export default {
       "getAllEmployees",
       "getEmplTelephone",
       "getEmplMobile",
+      "getAlphabetSort",
     ]),
   },
 
@@ -55,6 +59,10 @@ export default {
 
     onDelete(id) {
       this.employeesFilter = this.delEmployee(id);
+    },
+
+    onAlphabetSort() {
+      this.employeesFilter = this.getAlphabetSort();
     },
   },
 };

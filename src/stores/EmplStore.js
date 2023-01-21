@@ -100,5 +100,9 @@ export const useEmplStore = defineStore("EmplStore", {
     getFilterData(event) {
       return this.employees.filter((elem) => elem[event.param] === event.value);
     },
+
+    getAlphabetSort() {
+      return this.employees.sort((a, b) => a.cn.localeCompare(b.last_name));
+    },
   },
 });

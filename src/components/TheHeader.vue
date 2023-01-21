@@ -3,7 +3,7 @@ import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
 import IconSearch from "./IconSearch.vue";
-import IconFilter from "../components/IconFilter.vue";
+import IconAlphabetFilter from "../components/IconAlphabetFilter.vue";
 
 import ThePopup from "./ThePopup.vue";
 
@@ -26,7 +26,9 @@ const { employees } = useEmplStore();
       </ThePopup>
 
       <div class="container-button">
-        <IconFilter />
+        <button type="submit" class="button-icon" @click="alphabetSort">
+          <IconAlphabetFilter />
+        </button>
 
         <select class="search" id="filter" name="filter" v-model="selected">
           <option value="" disabled>Выберите категорию</option>
@@ -54,7 +56,7 @@ const { employees } = useEmplStore();
 
 <script>
 export default {
-  components: { ThePopup, IconFilter, IconSearch },
+  components: { ThePopup, IconAlphabetFilter, IconSearch },
 
   data() {
     return {
@@ -63,18 +65,17 @@ export default {
       inputValue: null,
 
       categories: [
-        { id: 1, text: "", item: "" },
-        { id: 2, text: "пол", item: "gender" },
-        { id: 3, text: "имя", item: "first_name" },
-        { id: 4, text: "фамилия", item: "last_name" },
-        { id: 5, text: "отчество", item: "middle_name" },
-        { id: 6, text: "день рождения", item: "birthday" },
-        { id: 7, text: "внутренний телефон", item: "telephone" },
-        { id: 8, text: "мобильный телефон", item: "mobile" },
-        { id: 9, text: "должность", item: "title" },
-        { id: 10, text: "отдел", item: "department" },
-        { id: 11, text: "компания", item: "company" },
-        { id: 12, text: "город", item: "city" },
+        { id: 1, text: "пол", item: "gender" },
+        { id: 2, text: "имя", item: "first_name" },
+        { id: 3, text: "фамилия", item: "last_name" },
+        { id: 4, text: "отчество", item: "middle_name" },
+        { id: 5, text: "день рождения", item: "birthday" },
+        { id: 6, text: "внутренний телефон", item: "telephone" },
+        { id: 7, text: "мобильный телефон", item: "mobile" },
+        { id: 8, text: "должность", item: "title" },
+        { id: 9, text: "отдел", item: "department" },
+        { id: 10, text: "компания", item: "company" },
+        { id: 11, text: "город", item: "city" },
       ],
     };
   },
@@ -97,6 +98,13 @@ export default {
         param: this.category.item,
         value: this.inputValue,
       });
+
+      this.selected = "";
+      this.inputValue = "";
+    },
+
+    alphabetSort() {
+      this.$emit("alphabetSort");
     },
   },
 };
