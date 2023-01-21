@@ -102,7 +102,7 @@ export const useEmplStore = defineStore("EmplStore", {
     },
 
     getAlphabetSort() {
-      return this.employees.sort((a, b) => a.cn.localeCompare(b.last_name));
+      return this.employees.sort((a, b) => a.cn.localeCompare(b.cn));
     },
   },
 });
