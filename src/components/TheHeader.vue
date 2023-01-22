@@ -46,9 +46,7 @@ const { employees } = useEmplStore();
           v-model="inputValue"
         />
 
-        <button class="button-icon btn_search" @click="convertSelected">
-          <IconSearch />
-        </button>
+        <IconSearch class="btn_search" @click="convertSelected" />
       </div>
     </form>
   </div>
@@ -65,6 +63,7 @@ export default {
       inputValue: null,
 
       categories: [
+        { id: 0, text: "идентификационный номер", item: "id" },
         { id: 1, text: "пол", item: "gender" },
         { id: 2, text: "имя", item: "first_name" },
         { id: 3, text: "фамилия", item: "last_name" },
@@ -85,6 +84,7 @@ export default {
 
     onCreateEmployee() {
       const id = this.createEmployee().id;
+
       this.$router.push({ name: "form", params: { id: id } });
       this.isOpen = false;
     },
@@ -93,6 +93,9 @@ export default {
       this.category = this.categories.find(
         (elem) => elem.text == this.selected
       );
+
+      this.inputValue =
+        this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1);
 
       this.$emit("filterEmpl", {
         param: this.category.item,
@@ -127,7 +130,10 @@ form {
 }
 
 .search {
+  position: relative;
   width: 260px;
+  text-overflow: ellipsis;
+  padding: 5px 35px 5px 15px;
 }
 
 .active_filter path {
@@ -137,7 +143,7 @@ form {
 .btn_search {
   position: absolute;
   top: 5px;
-  right: 15px;
+  right: 5px;
 }
 .btn_search:hover path {
   fill: var(--vt-c-grey-font);

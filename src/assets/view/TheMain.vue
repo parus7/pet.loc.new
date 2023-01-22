@@ -53,12 +53,12 @@ export default {
   methods: {
     ...mapActions(useEmplStore, ["delEmployee", "getFilterData"]),
 
-    onFilterData(event) {
-      this.employeesFilter = this.getFilterData(event);
-    },
-
     onDelete(id) {
       this.employeesFilter = this.delEmployee(id);
+    },
+
+    onFilterData(event) {
+      this.employeesFilter = this.getFilterData(event);
     },
 
     onAlphabetSort() {

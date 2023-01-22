@@ -70,6 +70,7 @@ export const useEmplStore = defineStore("EmplStore", {
           : "u";
 
       this.employees.push(updatedEmpl);
+      return updatedEmpl;
     },
 
     createEmployee() {
@@ -98,7 +99,7 @@ export const useEmplStore = defineStore("EmplStore", {
     },
 
     getFilterData(event) {
-      return this.employees.filter((elem) => elem[event.param] === event.value);
+      return this.employees.filter((elem) => elem[event.param] == event.value);
     },
 
     getAlphabetSort() {
