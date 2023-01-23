@@ -4,7 +4,7 @@ import employeesData from "../data/employeesData.json";
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
-      employees: employeesData,
+      employees: {},
     };
   },
   getters: {
@@ -46,6 +46,10 @@ export const useEmplStore = defineStore("EmplStore", {
   },
 
   actions: {
+    setObj(data) {
+      this.employees = data;
+    },
+
     delEmployee(id) {
       return (this.employees = this.employees.filter((elem) => elem.id !== id));
     },

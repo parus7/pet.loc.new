@@ -1,9 +1,11 @@
 <script setup>
 import TheHeader from "../../components/TheHeader.vue";
 import TheElem from "../../components/TheElem.vue";
+import employeesData from "../../data/employeesData.json";
 
 import { useEmplStore } from "../../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
+// const { employees } = useEmplStore();
 </script>
 
 <template>
@@ -14,7 +16,7 @@ import { mapState, mapActions } from "pinia";
 
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="employee of employeesFilter"
+      v-for="employee of employees"
       :key="employee.id"
       :employee="employee"
       @delEmpl="onDelete(employee.id)"
@@ -31,12 +33,13 @@ export default {
   components: { TheHeader, TheElem },
 
   created() {
-    this.employeesFilter = { ...this.getAllEmployees };
+    this.employees = this.setObj(employeesData);
+    this.employees = this.getAllEmployees;
   },
 
   data() {
     return {
-      employeesFilter: [],
+      employees: [],
     };
   },
 
@@ -51,18 +54,18 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["delEmployee", "getFilterData"]),
+    ...mapActions(useEmplStore, ["setObj"]),
 
     onDelete(id) {
-      this.employeesFilter = this.delEmployee(id);
+      this.employees = this.delEmployee(id);
     },
 
     onFilterData(event) {
-      this.employeesFilter = this.getFilterData(event);
+      this.employees = this.getFilterData(event);
     },
 
     onAlphabetSort() {
-      this.employeesFilter = this.getAlphabetSort();
+      this.employees = this.getAlphabetSort();
     },
   },
 };
