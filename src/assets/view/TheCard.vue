@@ -125,7 +125,7 @@ const { employees } = useEmplStore();
 
       <RouterLink class="link" :to="{ name: 'main' }">
         <button type="submit" class="button" @click="saveEmployee(employee.id)">
-          Закрыть
+          Сохранить
         </button>
       </RouterLink>
     </div>
