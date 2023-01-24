@@ -78,8 +78,11 @@ export const useEmplStore = defineStore("EmplStore", {
     },
 
     createEmployee() {
+      let lastId = this.employees.length;
+      // console.log(lastId);
+
       let employee = {
-        id: this.employees.length + 1,
+        id: lastId + 1,
         name: "",
         hide: false,
         thumbnail: false,
@@ -99,6 +102,7 @@ export const useEmplStore = defineStore("EmplStore", {
       };
 
       this.employees.push(employee);
+      // console.log(employee);
       return employee;
     },
 

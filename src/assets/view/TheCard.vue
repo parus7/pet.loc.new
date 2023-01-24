@@ -149,7 +149,7 @@ export default {
     const paramsId = parseInt(this.$route.params.id);
 
     // break object reference from state
-    this.employee = { ...this.getEmplById(paramsId) };
+    this.employee = this.getEmplById(paramsId);
 
     this.employee.telephone = this.getEmplTelephone(paramsId);
     this.employee.mobile = this.getEmplMobile(paramsId);
@@ -174,7 +174,7 @@ export default {
       this.delEmployee(paramsId);
 
       // break object reference from state
-      this.addEmployee({ ...this.employee });
+      this.addEmployee(this.employee);
 
       this.isEdit = false;
     },

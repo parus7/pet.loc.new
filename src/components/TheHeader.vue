@@ -46,7 +46,7 @@ const { employees } = useEmplStore();
           v-model="inputValue"
         />
 
-        <IconSearch class="btn_search" @click="convertSelected" />
+        <IconSearch class="btn_search" @click="transformtData" />
       </div>
     </form>
   </div>
@@ -79,17 +79,19 @@ export default {
     };
   },
 
+  // не записывает данные но сохраняет сотрудника нового
   methods: {
     ...mapActions(useEmplStore, ["createEmployee"]),
 
     onCreateEmployee() {
       const id = this.createEmployee().id;
+      // console.log(id);// ok
 
       this.$router.push({ name: "form", params: { id: id } });
       this.isOpen = false;
     },
 
-    convertSelected() {
+    transformtData() {
       this.category = this.categories.find(
         (elem) => elem.text == this.selected
       );

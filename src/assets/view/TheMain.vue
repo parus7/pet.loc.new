@@ -35,6 +35,7 @@ export default {
   created() {
     this.employees = this.setObj(employeesData);
     this.employees = this.getAllEmployees;
+    // console.log(this.employees);
   },
 
   data() {
@@ -44,28 +45,30 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, [
-      "getEmptyStore",
-      "getAllEmployees",
-      "getEmplTelephone",
-      "getEmplMobile",
-      "getAlphabetSort",
-    ]),
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setObj"]),
+    ...mapActions(useEmplStore, [
+      "setObj",
+      "getFilterData",
+      "getAlphabetSort",
+      "delEmployee",
+    ]),
 
     onDelete(id) {
       this.employees = this.delEmployee(id);
+      // console.log(this.employees); //ок
     },
 
     onFilterData(event) {
       this.employees = this.getFilterData(event);
+      // console.log(this.employees); //ок
     },
 
     onAlphabetSort() {
       this.employees = this.getAlphabetSort();
+      // console.log(this.employees); //ок
     },
   },
 };
