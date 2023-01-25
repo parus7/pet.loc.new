@@ -17,16 +17,13 @@ const { employees } = useEmplStore();
         Создать
       </button>
 
-      <ThePopup
-        :is-open="isOpen"
-        @ok="onCreateEmployee"
-        @close="isOpen = false"
-      >
+      <ThePopup :is-open="isOpen" @close="isOpen = false">
         Вы хотите создать нового сотрудника?
       </ThePopup>
+      <!-- @ok="onCreateEmployee" -->
 
       <div class="container-button">
-        <button type="submit" class="button-icon" @click="alphabetSort">
+        <button type="submit" class="button-icon" @click="alphabet">
           <IconAlphabetFilter />
         </button>
 
@@ -46,7 +43,8 @@ const { employees } = useEmplStore();
           v-model="inputValue"
         />
 
-        <IconSearch class="btn_search" @click="transformtData" />
+        <IconSearch class="btn_search" />
+        <!-- @click="transformtData"  -->
       </div>
     </form>
   </div>
@@ -79,38 +77,8 @@ export default {
     };
   },
 
-  // не записывает данные но сохраняет сотрудника нового
   methods: {
     ...mapActions(useEmplStore, ["createEmployee"]),
-
-    onCreateEmployee() {
-      const id = this.createEmployee().id;
-      // console.log(id);// ok
-
-      this.$router.push({ name: "form", params: { id: id } });
-      this.isOpen = false;
-    },
-
-    transformtData() {
-      this.category = this.categories.find(
-        (elem) => elem.text == this.selected
-      );
-
-      this.inputValue =
-        this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1);
-
-      this.$emit("filterEmpl", {
-        param: this.category.item,
-        value: this.inputValue,
-      });
-
-      this.selected = "";
-      this.inputValue = "";
-    },
-
-    alphabetSort() {
-      this.$emit("alphabetSort");
-    },
   },
 };
 </script>

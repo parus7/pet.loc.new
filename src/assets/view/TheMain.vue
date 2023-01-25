@@ -5,25 +5,24 @@ import employeesData from "../../data/employeesData.json";
 
 import { useEmplStore } from "../../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
-// const { employees } = useEmplStore();
 </script>
 
 <template>
-  <TheHeader
-    @filterEmpl="onFilterData($event)"
-    @alphabetSort="onAlphabetSort"
-  />
+  <TheHeader />
+  <!-- @alphabet="onAlphabetSort"
+    @filterEmpl="onFilterData($event)" -->
 
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="employee of employees"
-      :key="employee.id"
+      v-for="(employee, key) in emplValues"
+      :key="key"
       :employee="employee"
-      @delEmpl="onDelete(employee.id)"
+      @delEmpl="delEmployee(employee.id)"
     />
   </template>
 
   <template v-else>
+    {{ emplValues }}
     <h2 class="message">Список сотрудников пуст</h2>
   </template>
 </template>
@@ -32,44 +31,36 @@ import { mapState, mapActions } from "pinia";
 export default {
   components: { TheHeader, TheElem },
 
-  created() {
-    this.employees = this.setObj(employeesData);
-    this.employees = this.getAllEmployees;
-    // console.log(this.employees);
-  },
-
   data() {
     return {
-      employees: [],
+      employees: {},
+      emplValues: {},
     };
   },
 
+  created() {
+    this.employees = this.setMapEmployees(employeesData);
+    this.emplValues = this.employees.values();
+    // console.log(this.employees);// ok
+  },
+
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
+    ...mapState(useEmplStore, ["getEmptyStore"]),
   },
 
   methods: {
     ...mapActions(useEmplStore, [
-      "setObj",
+      "setMapEmployees",
       "getFilterData",
       "getAlphabetSort",
       "delEmployee",
     ]),
 
-    onDelete(id) {
-      this.employees = this.delEmployee(id);
-      // console.log(this.employees); //ок
-    },
-
-    onFilterData(event) {
-      this.employees = this.getFilterData(event);
-      // console.log(this.employees); //ок
-    },
-
-    onAlphabetSort() {
-      this.employees = this.getAlphabetSort();
-      // console.log(this.employees); //ок
-    },
+    // onDelete(id) {
+    //   // const id = this.employees.get(key);
+    //   this.emplValues = this.delEmployee(id);
+    //   // console.log(this.emplValues);
+    // },
   },
 };
 </script>

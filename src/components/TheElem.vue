@@ -21,8 +21,8 @@ const { employees } = useEmplStore();
 
     <li class="position">{{ employee.title }}</li>
     <li class="email">{{ employee.email }}</li>
-    <li class="phone">{{ getEmplTelephone(employee.id) }}</li>
-    <li class="mobile">{{ getEmplMobile(employee.id) }}</li>
+    <li class="phone">{{ employee.telephone }}</li>
+    <li class="mobile">{{ employee.mobile }}</li>
 
     <li>
       <RouterLink
@@ -55,7 +55,7 @@ export default {
 
   props: {
     employee: {
-      id: Number,
+      id: String,
       name: String,
       hide: Boolean,
       thumbnail: Boolean,
@@ -82,7 +82,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmplTelephone", "getEmplMobile"]),
+    ...mapState(useEmplStore, []),
     ...mapActions(useEmplStore, ["popupConfirm"]),
   },
 

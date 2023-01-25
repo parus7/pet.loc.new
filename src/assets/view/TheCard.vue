@@ -124,11 +124,13 @@ const { employees } = useEmplStore();
       </ThePopup>
 
       <RouterLink class="link" :to="{ name: 'main' }">
-        <button type="submit" class="button" @click="saveEmployee(employee.id)">
+        <button type="submit" class="button">
+          <!-- @click="saveEmployee(employee.id)" -->
           Закрыть
         </button>
       </RouterLink>
     </div>
+    {{ employee }}
   </form>
 </template>
 
@@ -147,33 +149,17 @@ export default {
 
   created() {
     const paramsId = parseInt(this.$route.params.id);
-
-    // break object reference from state
-    this.employee = this.getEmplById(paramsId);
-
-    this.employee.telephone = this.getEmplTelephone(paramsId);
-    this.employee.mobile = this.getEmplMobile(paramsId);
-    this.employee.birthday = this.getEmplBirthday(paramsId);
-    this.employee.gender = this.getEmplGender(paramsId);
   },
 
-  computed: {
-    ...mapState(useEmplStore, [
-      "getEmplById",
-      "getEmplTelephone",
-      "getEmplMobile",
-      "getEmplBirthday",
-      "getEmplGender",
-    ]),
-  },
+  // computed: {
+  //   ...mapState(useEmplStore, []),
+  // },
 
   methods: {
     ...mapActions(useEmplStore, ["delEmployee", "addEmployee"]),
 
     saveEmployee(paramsId) {
       this.delEmployee(paramsId);
-
-      // break object reference from state
       this.addEmployee(this.employee);
 
       this.isEdit = false;

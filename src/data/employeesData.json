@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "name": "I.Ivanov",
         "hide": false,
         "thumbnail": true,
@@ -19,7 +19,7 @@
         "city": "Москва"
     },
     {
-        "id": 2,
+        "id": "2",
         "name": "K.Romanova",
         "hide": false,
         "thumbnail": true,
@@ -38,7 +38,7 @@
         "city": "Москва"
     },
     {
-        "id": 3,
+        "id": "3",
         "name": "I.Petrova",
         "hide": true,
         "thumbnail": true,
@@ -57,7 +57,7 @@
         "city": "Москва"
     },
     {
-        "id": 4,
+        "id": "4",
         "name": "I.Pupkin",
         "hide": false,
         "thumbnail": true,
@@ -76,7 +76,7 @@
         "city": "Санкт-Петербург"
     },
     {
-        "id": 5,
+        "id": "5",
         "name": "А.Vasilieva",
         "hide": false,
         "thumbnail": true,
@@ -95,7 +95,7 @@
         "city": "Псков"
     },
     {
-        "id": 6,
+        "id": "6",
         "name": "O.Borodinov",
         "hide": true,
         "thumbnail": true,
@@ -114,7 +114,7 @@
         "city": "Псков"
     },
     {
-        "id": 7,
+        "id": "7",
         "name": "Z.Petrova",
         "hide": true,
         "thumbnail": true,
