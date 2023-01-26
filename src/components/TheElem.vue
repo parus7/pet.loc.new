@@ -89,6 +89,7 @@ export default {
   methods: {
     popupDelete() {
       this.$emit("delEmpl", this.employee.id);
+      this.isOpen = false;
     },
   },
 };

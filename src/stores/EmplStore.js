@@ -7,20 +7,22 @@ export const useEmplStore = defineStore("EmplStore", {
       employees: {},
     };
   },
-  getters: {},
+  getters: {
+    getEmptyStore: (state) => state.employees.size === 0,
+  },
 
   actions: {
     setMapEmployees(data) {
       this.employees = new Map();
-      data.forEach((elem) => this.employees.set("0" + elem.id, elem));
+      data.forEach((elem) => this.employees.set(elem.id, elem));
 
-      console.log(this.employees); // ok
+      // console.log(this.employees);
       return this.employees;
     },
 
     delEmployee(id) {
-      console.log(id);
       this.employees.delete(id);
+      return this.employees;
     },
   },
 });
