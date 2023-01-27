@@ -17,14 +17,18 @@ const { employees } = useEmplStore();
         Создать
       </button>
 
-      <ThePopup :is-open="isOpen" @close="isOpen = false">
+      <ThePopup
+        :is-open="isOpen"
+        @close="isOpen = false"
+        @ok="onCreateEmployee"
+      >
         Вы хотите создать нового сотрудника?
       </ThePopup>
-      <!-- @ok="onCreateEmployee" -->
 
       <div class="container-button">
-        <button type="submit" class="button-icon" @click="alphabet">
+        <button type="submit" class="button-icon">
           <IconAlphabetFilter />
+          <!-- @click="alphabet" -->
         </button>
 
         <select class="search" id="filter" name="filter" v-model="selected">
@@ -79,6 +83,14 @@ export default {
 
   methods: {
     ...mapActions(useEmplStore, ["createEmployee"]),
+
+    onCreateEmployee() {
+      const id = this.createEmployee();
+      // console.log(id); // 8
+
+      this.$router.push({ name: "form", params: { id: id } });
+      this.isOpen = false;
+    },
   },
 };
 </script>

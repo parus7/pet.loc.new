@@ -18,6 +18,7 @@ import { mapState, mapActions } from "pinia";
       :key="employee.id"
       :employee="employee"
       @delEmpl="onDelete(employee.id)"
+      @saveEmpl="onDelete(employee.id)"
     />
   </template>
 
@@ -40,6 +41,7 @@ export default {
   created() {
     this.employees = this.setMapEmployees(employeesData);
     this.emplValues = this.employees.values();
+    // console.log(this.employees);
   },
 
   computed: {

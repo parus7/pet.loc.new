@@ -4,12 +4,14 @@ import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "pinia";
 
 import ThePopup from "../../components/ThePopup.vue";
+import employeesData from "../../data/employeesData.json";
 
 const { employees } = useEmplStore();
 </script>
 
 <template>
   <form class="container_form" @submit.prevent>
+    <!-- {{ employee }} -->
     <fieldset class="container_fullname" :disabled="!isEdit">
       <div class="photo" width="128" height="128"></div>
 
@@ -124,13 +126,16 @@ const { employees } = useEmplStore();
       </ThePopup>
 
       <RouterLink class="link" :to="{ name: 'main' }">
-        <button type="submit" class="button">
-          <!-- @click="saveEmployee(employee.id)" -->
+        <button
+          type="submit"
+          class="button"
+          @saveEmpl="saveEmployee(employee.id)"
+        >
           Закрыть
         </button>
       </RouterLink>
     </div>
-    {{ employee }}
+    <!-- {{ employee }} -->
   </form>
 </template>
 
@@ -148,20 +153,27 @@ export default {
   },
 
   created() {
-    const paramsId = parseInt(this.$route.params.id);
+    const paramsId = this.$route.params.id;
+    // console.log(typeof paramsId); // string
+    this.employee = this.getEmplById(paramsId);
+    // console.log(this.employees);
+    console.log(this.employee);
   },
 
-  // computed: {
-  //   ...mapState(useEmplStore, []),
-  // },
+  computed: {
+    ...mapState(useEmplStore, ["getEmplById"]),
+  },
 
   methods: {
     ...mapActions(useEmplStore, ["delEmployee", "addEmployee"]),
 
     saveEmployee(paramsId) {
+      // console.log(this.employee);// ok
+      console.log(paramsId); // 8
+      // console.log(typeof paramsId); // string
+
       this.delEmployee(paramsId);
       this.addEmployee(this.employee);
-
       this.isEdit = false;
     },
 

@@ -83,7 +83,7 @@ export default {
 
   computed: {
     ...mapState(useEmplStore, []),
-    ...mapActions(useEmplStore, ["popupConfirm"]),
+    // ...mapActions(useEmplStore, [""]),
   },
 
   methods: {
