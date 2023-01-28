@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import employeesData from "../data/employeesData.json";
+// import employeesData from "../data/employeesData.json";
 
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
@@ -17,7 +17,6 @@ export const useEmplStore = defineStore("EmplStore", {
     setMapEmployees(data) {
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
-      // console.log(this.employees);
       return this.employees;
     },
 
@@ -26,9 +25,21 @@ export const useEmplStore = defineStore("EmplStore", {
       return this.employees;
     },
 
+    addEmployee(updatedEmpl) {
+      updatedEmpl.cn =
+        updatedEmpl.last_name +
+        " " +
+        updatedEmpl.first_name +
+        " " +
+        updatedEmpl.middle_name;
+
+      this.employees.set(updatedEmpl.id, updatedEmpl);
+      // console.log(this.employees);
+      return updatedEmpl;
+    },
+
     createEmployee() {
       const idNext = String(Number(Math.max(...this.employees.keys())) + 1);
-      // console.log(idNew); // 8
 
       let employee = {
         id: idNext,
@@ -52,14 +63,6 @@ export const useEmplStore = defineStore("EmplStore", {
       this.employees.set(idNext, employee);
       // console.log(this.employees); // ok
       return idNext;
-    },
-
-    addEmployee(updatedEmpl) {
-      // console.log(updatedEmpl.id);// 8
-      console.log(this.employees);
-      this.employees.set(updatedEmpl.id, updatedEmpl);
-      console.log(this.employees);
-      // console.log(updatedEmpl);
     },
   },
 });

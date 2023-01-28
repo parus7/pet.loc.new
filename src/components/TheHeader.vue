@@ -6,8 +6,7 @@ import IconSearch from "./IconSearch.vue";
 import IconAlphabetFilter from "../components/IconAlphabetFilter.vue";
 
 import ThePopup from "./ThePopup.vue";
-
-const { employees } = useEmplStore();
+// const { employees } = useEmplStore();
 </script>
 
 <template>
@@ -86,7 +85,6 @@ export default {
 
     onCreateEmployee() {
       const id = this.createEmployee();
-      // console.log(id); // 8
 
       this.$router.push({ name: "form", params: { id: id } });
       this.isOpen = false;

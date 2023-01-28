@@ -1,13 +1,11 @@
 <script setup>
 import { useEmplStore } from ".././stores/EmplStore";
-import { mapState, mapActions } from "pinia";
-
 import { RouterLink } from "vue-router";
+
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
 import ThePopup from "./ThePopup.vue";
-
-const { employees } = useEmplStore();
+// const { employees } = useEmplStore();
 </script>
 
 <template>
@@ -79,11 +77,6 @@ export default {
     return {
       isOpen: false,
     };
-  },
-
-  computed: {
-    ...mapState(useEmplStore, []),
-    // ...mapActions(useEmplStore, [""]),
   },
 
   methods: {

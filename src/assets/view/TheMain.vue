@@ -14,11 +14,10 @@ import { mapState, mapActions } from "pinia";
 
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="employee in emplValues"
+      v-for="employee in employees.values()"
       :key="employee.id"
       :employee="employee"
       @delEmpl="onDelete(employee.id)"
-      @saveEmpl="onDelete(employee.id)"
     />
   </template>
 
@@ -34,13 +33,11 @@ export default {
   data() {
     return {
       employees: {},
-      emplValues: {},
     };
   },
 
   created() {
     this.employees = this.setMapEmployees(employeesData);
-    this.emplValues = this.employees.values();
     // console.log(this.employees);
   },
 
@@ -58,7 +55,7 @@ export default {
 
     onDelete(id) {
       this.employees = this.delEmployee(id);
-      this.emplValues = this.employees.values();
+      // console.log(this.employees);
     },
   },
 };
