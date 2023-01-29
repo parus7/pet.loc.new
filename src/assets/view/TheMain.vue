@@ -37,12 +37,17 @@ export default {
   },
 
   created() {
-    this.employees = this.setMapEmployees(employeesData);
+    // console.log(this.getEmptyStore);
+    // console.log(this.getAllEmployees);
+
+    this.employees = this.getEmptyStore
+      ? this.setMapEmployees(employeesData)
+      : this.getAllEmployees;
     // console.log(this.employees);
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore"]),
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
   },
 
   methods: {

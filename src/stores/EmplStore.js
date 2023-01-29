@@ -4,11 +4,14 @@ import { defineStore } from "pinia";
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
-      employees: {},
+      employees: null,
     };
   },
   getters: {
-    getEmptyStore: (state) => state.employees.size === 0,
+    getEmptyStore: (state) =>
+      !state.employees ? true : state.employees.size === 0,
+
+    getAllEmployees: (state) => state.employees,
 
     getEmplById: (state) => (emplId) => state.employees.get(emplId),
   },
@@ -61,7 +64,7 @@ export const useEmplStore = defineStore("EmplStore", {
         city: "",
       };
       this.employees.set(idNext, employee);
-      // console.log(this.employees); // ok
+      console.log(this.employees); // ok
       return idNext;
     },
   },

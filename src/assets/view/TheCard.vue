@@ -164,10 +164,10 @@ export default {
 
     onSaveEmployee(paramsId) {
       // console.log(this.employee); // ok
-
+      this.isEdit = false;
       this.delEmployee(paramsId);
       this.addEmployee(this.employee);
-      this.isEdit = false;
+      // console.log(this.employee); // ok
     },
 
     popupConfirm() {

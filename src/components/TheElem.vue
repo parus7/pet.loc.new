@@ -1,5 +1,5 @@
 <script setup>
-import { useEmplStore } from ".././stores/EmplStore";
+// import { useEmplStore } from ".././stores/EmplStore";
 import { RouterLink } from "vue-router";
 
 import IconDelete from "./IconDelete.vue";
