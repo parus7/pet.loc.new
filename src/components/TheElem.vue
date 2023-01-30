@@ -1,11 +1,9 @@
 <script setup>
-// import { useEmplStore } from ".././stores/EmplStore";
 import { RouterLink } from "vue-router";
 
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
 import ThePopup from "./ThePopup.vue";
-// const { employees } = useEmplStore();
 </script>
 
 <template>

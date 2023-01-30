@@ -3,10 +3,9 @@ import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
 import IconSearch from "./IconSearch.vue";
-import IconAlphabetFilter from "../components/IconAlphabetFilter.vue";
+import IconReset from "./IconReset.vue";
 
 import ThePopup from "./ThePopup.vue";
-// const { employees } = useEmplStore();
 </script>
 
 <template>
@@ -25,9 +24,8 @@ import ThePopup from "./ThePopup.vue";
       </ThePopup>
 
       <div class="container-button">
-        <button type="submit" class="button-icon">
-          <IconAlphabetFilter />
-          <!-- @click="alphabet" -->
+        <button type="button" class="button-icon" @click="resetFilters">
+          <IconReset />
         </button>
 
         <select class="search" id="filter" name="filter" v-model="selected">
@@ -46,8 +44,7 @@ import ThePopup from "./ThePopup.vue";
           v-model="inputValue"
         />
 
-        <IconSearch class="btn_search" />
-        <!-- @click="transformtData"  -->
+        <IconSearch class="btn_search" @click="onConvertSelected" />
       </div>
     </form>
   </div>
@@ -55,7 +52,7 @@ import ThePopup from "./ThePopup.vue";
 
 <script>
 export default {
-  components: { ThePopup, IconAlphabetFilter, IconSearch },
+  components: { ThePopup, IconReset, IconSearch },
 
   data() {
     return {
@@ -88,6 +85,27 @@ export default {
 
       this.$router.push({ name: "form", params: { id: id } });
       this.isOpen = false;
+    },
+
+    onConvertSelected() {
+      this.category = this.categories.find(
+        (elem) => elem.text == this.selected
+      );
+
+      this.inputValue =
+        this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1);
+
+      this.$emit("filterEmpl", {
+        param: this.category.item,
+        value: this.inputValue,
+      });
+
+      this.selected = "";
+      this.inputValue = "";
+    },
+
+    resetFilters() {
+      this.$emit("resetFilters");
     },
   },
 };

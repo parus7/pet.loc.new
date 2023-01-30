@@ -24,8 +24,7 @@ export const useEmplStore = defineStore("EmplStore", {
     },
 
     delEmployee(id) {
-      this.employees.delete(id);
-      return this.employees;
+      return this.employees.delete(id);
     },
 
     addEmployee(updatedEmpl) {
@@ -37,12 +36,13 @@ export const useEmplStore = defineStore("EmplStore", {
         updatedEmpl.middle_name;
 
       this.employees.set(updatedEmpl.id, updatedEmpl);
-      // console.log(this.employees);
       return updatedEmpl;
     },
 
     createEmployee() {
-      const idNext = String(Number(Math.max(...this.employees.keys())) + 1);
+      const idNext = this.getEmptyStore
+        ? "1"
+        : String(Number(Math.max(...this.employees.keys())) + 1);
 
       let employee = {
         id: idNext,
@@ -64,8 +64,8 @@ export const useEmplStore = defineStore("EmplStore", {
         city: "",
       };
       this.employees.set(idNext, employee);
-      console.log(this.employees); // ok
       return idNext;
     },
+    // console.log(this.employees);
   },
 });

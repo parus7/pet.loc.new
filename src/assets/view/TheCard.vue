@@ -4,8 +4,6 @@ import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "pinia";
 
 import ThePopup from "../../components/ThePopup.vue";
-// import employeesData from "../../data/employeesData.json";
-// const { employees } = useEmplStore();
 </script>
 
 <template>
@@ -152,22 +150,20 @@ export default {
   created() {
     const paramsId = this.$route.params.id;
     this.employee = this.getEmplById(paramsId);
-    // console.log(this.employee);
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmplById"]),
+    ...mapState(useEmplStore, ["getEmplById", "getAllEmployees"]),
   },
 
   methods: {
     ...mapActions(useEmplStore, ["delEmployee", "addEmployee"]),
 
     onSaveEmployee(paramsId) {
-      // console.log(this.employee); // ok
       this.isEdit = false;
       this.delEmployee(paramsId);
       this.addEmployee(this.employee);
-      // console.log(this.employee); // ok
+      this.employees = this.getAllEmployees;
     },
 
     popupConfirm() {

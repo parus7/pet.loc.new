@@ -8,13 +8,14 @@ import { mapState, mapActions } from "pinia";
 </script>
 
 <template>
-  <TheHeader />
-  <!-- @alphabet="onAlphabetSort"
-    @filterEmpl="onFilterData($event)" -->
+  <TheHeader
+    @filterEmpl="onFilterData($event)"
+    @resetFilters="onResetFilters"
+  />
 
   <template v-if="!getEmptyStore">
     <TheElem
-      v-for="employee in employees.values()"
+      v-for="employee in employees"
       :key="employee.id"
       :employee="employee"
       @delEmpl="onDelete(employee.id)"
@@ -37,13 +38,11 @@ export default {
   },
 
   created() {
-    // console.log(this.getEmptyStore);
-    // console.log(this.getAllEmployees);
-
     this.employees = this.getEmptyStore
       ? this.setMapEmployees(employeesData)
       : this.getAllEmployees;
-    // console.log(this.employees);
+
+    this.onAlphabetSort(this.employees);
   },
 
   computed: {
@@ -54,13 +53,31 @@ export default {
     ...mapActions(useEmplStore, [
       "setMapEmployees",
       "getFilterData",
-      "getAlphabetSort",
       "delEmployee",
     ]),
 
+    onAlphabetSort() {
+      this.employees = [...this.employees.values()].sort((a, b) =>
+        a.cn.localeCompare(b.cn)
+      );
+    },
+
     onDelete(id) {
       this.employees = this.delEmployee(id);
-      // console.log(this.employees);
+      this.employees = this.getAllEmployees;
+      this.onAlphabetSort(this.employees);
+    },
+
+    onFilterData(event) {
+      this.employees = [...this.employees.values()].filter(
+        (elem) => elem[event.param] == event.value
+      );
+      this.onAlphabetSort(this.employees);
+    },
+
+    onResetFilters() {
+      this.employees = this.getAllEmployees;
+      this.onAlphabetSort(this.employees);
     },
   },
 };
