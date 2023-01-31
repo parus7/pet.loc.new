@@ -41,6 +41,12 @@ export const useEmplStore = defineStore("EmplStore", {
         " " +
         updatedEmpl.middle_name;
 
+      updatedEmpl.gender == "Мужской"
+        ? "m"
+        : updatedEmpl.gender == "Женский"
+        ? "f"
+        : "u";
+
       this.employees.set(updatedEmpl.id, updatedEmpl);
       return updatedEmpl;
     },

@@ -51,9 +51,9 @@ import ThePopup from "../../components/ThePopup.vue";
           <label for="gender">Пол:</label>
           <select id="gender" name="gender" v-model="employee.gender">
             <option disabled>Выберите вариант</option>
-            <option>мужской</option>
-            <option>женский</option>
-            <option>неизвестный</option>
+            <option>Мужской</option>
+            <option>Женский</option>
+            <option>Неизвестный</option>
           </select>
         </div>
 
