@@ -149,6 +149,7 @@ export default {
 
   created() {
     const paramsId = this.$route.params.id;
+
     this.employee = this.getEmplById(paramsId);
   },
 

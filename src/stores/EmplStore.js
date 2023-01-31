@@ -1,6 +1,4 @@
 import { defineStore } from "pinia";
-// import employeesData from "../data/employeesData.json";
-
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
@@ -18,6 +16,14 @@ export const useEmplStore = defineStore("EmplStore", {
 
   actions: {
     setMapEmployees(data) {
+      data.forEach((elem) =>
+        elem.gender === "m"
+          ? (elem.gender = "Мужской")
+          : elem.gender === "f"
+          ? (elem.gender = "Женский")
+          : (elem.gender = "Неизвестный")
+      );
+
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
       return this.employees;
