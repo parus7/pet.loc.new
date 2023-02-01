@@ -8,7 +8,6 @@
   --vt-c-grey-font: rgba(130, 134, 140, 1);
   --vt-c-grey-silver: rgba(192, 192, 192, 1);
 
-  --vt-c-alert-btn: rgba(255, 164, 116, 1);
   --vt-c-active-btn: rgba(95, 158, 160, 1);
 }
 
@@ -96,7 +95,7 @@ select {
   font-style: italic;
   background-color: var(--vt-c-white-background);
   border: none;
-  outline: none;
+  outline-color: var(--vt-c-active-btn);
   box-shadow: 1px 1px 0 0 var(--vt-c-grey-silver);
   border-radius: 8px;
   color: var(--vt-c-grey-main-font);

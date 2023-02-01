@@ -13,14 +13,23 @@ import ThePopup from "../../components/ThePopup.vue";
 
       <div class="wrapper">
         <label for="last_name">Фамилия:</label>
-        <input id="last_name" name="last_name" v-model="employee.last_name" />
+        <input
+          id="last_name"
+          type="text"
+          name="last_name"
+          tabindex="1"
+          ref="lastName"
+          v-model="employee.last_name"
+        />
       </div>
 
       <div class="wrapper">
         <label for="first_name">Имя:</label>
         <input
           id="first_name"
+          type="text"
           name="first_name"
+          tabindex="2"
           v-model="employee.first_name"
         />
       </div>
@@ -29,7 +38,9 @@ import ThePopup from "../../components/ThePopup.vue";
         <label for="middle_name">Отчество :</label>
         <input
           id="middle_name"
+          type="text"
           name="middle_name"
+          tabindex="3"
           v-model="employee.middle_name"
         />
       </div>
@@ -41,6 +52,7 @@ import ThePopup from "../../components/ThePopup.vue";
           <label for="id_employee">ID:</label>
           <input
             id="id_employee"
+            type="text"
             name="id_employee"
             v-model="employee.id"
             disabled
@@ -49,8 +61,13 @@ import ThePopup from "../../components/ThePopup.vue";
 
         <div class="wrapper wrapper_min">
           <label for="gender">Пол:</label>
-          <select id="gender" name="gender" v-model="employee.gender">
-            <option disabled>Выберите вариант</option>
+          <select
+            id="gender"
+            name="gender"
+            tabindex="4"
+            v-model="employee.gender"
+          >
+            <option selected disabled>Выберите вариант</option>
             <option>Мужской</option>
             <option>Женский</option>
             <option>Неизвестный</option>
@@ -59,24 +76,48 @@ import ThePopup from "../../components/ThePopup.vue";
 
         <div class="wrapper wrapper_min">
           <label for="born">ДР:</label>
-          <input id="born" name="born" v-model="employee.birthday" />
+          <input
+            id="born"
+            type="text"
+            name="born"
+            tabindex="5"
+            v-model="employee.birthday"
+          />
         </div>
       </fieldset>
 
       <fieldset>
         <div class="wrapper">
           <label for="phone">Внутренний:</label>
-          <input id="phone" name="phone" v-model="employee.telephone" />
+          <input
+            id="phone"
+            type="text"
+            name="phone"
+            tabindex="6"
+            v-model="employee.telephone"
+          />
         </div>
 
         <div class="wrapper">
           <label for="mobile">Мобильный:</label>
-          <input id="mobile" name="mobile" v-model="employee.mobile" />
+          <input
+            id="mobile"
+            type="text"
+            name="mobile"
+            tabindex="7"
+            v-model="employee.mobile"
+          />
         </div>
 
         <div class="wrapper">
           <label for="email">Эл. почта:</label>
-          <input id="email" name="email" v-model="employee.email" />
+          <input
+            id="email"
+            type="text"
+            name="email"
+            tabindex="8"
+            v-model="employee.email"
+          />
         </div>
       </fieldset>
     </fieldset>
@@ -84,19 +125,33 @@ import ThePopup from "../../components/ThePopup.vue";
     <fieldset :disabled="!isEdit">
       <div class="wrapper">
         <label for="company">Город:</label>
-        <input id="city" name="city" v-model="employee.city" />
+        <input
+          id="city"
+          type="text"
+          name="city"
+          tabindex="9"
+          v-model="employee.city"
+        />
       </div>
 
       <div class="wrapper">
         <label for="company">Компания:</label>
-        <input id="company" name="company" v-model="employee.company" />
+        <input
+          id="company"
+          type="text"
+          name="company"
+          tabindex="10"
+          v-model="employee.company"
+        />
       </div>
 
       <div class="wrapper">
         <label for="department">Отдел:</label>
         <input
           id="department"
+          type="text"
           name="department"
+          tabindex="11"
           v-model="employee.department"
         />
       </div>
@@ -107,13 +162,14 @@ import ThePopup from "../../components/ThePopup.vue";
           id="position"
           type="text"
           name="position"
+          tabindex="12"
           v-model="employee.title"
         />
       </div>
     </fieldset>
 
     <div class="container-button">
-      <button type="text" class="button" @click="isOpen = true">
+      <button tabindex="0" type="button" class="button" @click="isOpen = true">
         Записать
       </button>
 
@@ -123,8 +179,9 @@ import ThePopup from "../../components/ThePopup.vue";
 
       <RouterLink class="link" :to="{ name: 'main' }">
         <button
-          type="submit"
+          type="button"
           class="button"
+          tabindex="13"
           @click="onSaveEmployee(employee.id)"
         >
           Закрыть
@@ -169,6 +226,11 @@ export default {
 
     popupConfirm() {
       this.isOpen = false;
+
+      this.$nextTick(() => {
+        this.$refs.lastName.focus();
+      });
+
       this.isEdit = true;
     },
   },

@@ -11,7 +11,7 @@ import ThePopup from "./ThePopup.vue";
 <template>
   <div class="container_header">
     <form @submit.prevent>
-      <button type="button" class="button" @click="isOpen = true">
+      <button type="button" class="button" tabindex="1" @click="isOpen = true">
         Создать
       </button>
 
@@ -24,11 +24,22 @@ import ThePopup from "./ThePopup.vue";
       </ThePopup>
 
       <div class="container-button">
-        <button type="button" class="button-icon" @click="resetFilters">
+        <button
+          type="button"
+          class="button-icon"
+          tabindex="2"
+          @click="resetFilters"
+        >
           <IconReset />
         </button>
 
-        <select class="search" id="filter" name="filter" v-model="selected">
+        <select
+          id="filter"
+          class="search"
+          name="filter"
+          tabindex="3"
+          v-model="selected"
+        >
           <option value="" disabled>Выберите категорию</option>
           <option v-for="category in categories" :key="category.id">
             {{ category.text }}
@@ -36,15 +47,22 @@ import ThePopup from "./ThePopup.vue";
         </select>
 
         <input
-          type="text"
-          name="search"
           id="search"
+          type="text"
           class="search"
+          name="search"
+          tabindex="4"
           placeholder="Поиск..."
           v-model="inputValue"
         />
-
-        <IconSearch class="btn_search" @click="onConvertSelected" />
+        <button
+          type="button"
+          class="btn_search"
+          @click="onConvertSelected"
+          tabindex="5"
+        >
+          <IconSearch />
+        </button>
       </div>
     </form>
   </div>
@@ -140,8 +158,10 @@ form {
 
 .btn_search {
   position: absolute;
-  top: 5px;
+  top: 3px;
   right: 5px;
+  background-color: inherit;
+  border: none;
 }
 .btn_search:hover path {
   fill: var(--vt-c-grey-font);
