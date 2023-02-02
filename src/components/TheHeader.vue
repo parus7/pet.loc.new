@@ -11,7 +11,12 @@ import ThePopup from "./ThePopup.vue";
 <template>
   <div class="container_header">
     <form @submit.prevent>
-      <button type="button" class="button" tabindex="1" @click="isOpen = true">
+      <button
+        type="button"
+        class="button"
+        aria-label="кнопка создания карточки нового сотрудника"
+        @click="isOpen = true"
+      >
         Создать
       </button>
 
@@ -25,19 +30,21 @@ import ThePopup from "./ThePopup.vue";
 
       <div class="container-button">
         <button
-          type="button"
+          type="button button-text"
           class="button-icon"
-          tabindex="2"
+          aria-label="кнопка сброса фильтров"
           @click="resetFilters"
         >
-          <IconReset />
+          <div class="hint" data-name="сброс фильтров">
+            <IconReset />
+          </div>
         </button>
 
         <select
           id="filter"
           class="search"
           name="filter"
-          tabindex="3"
+          aria-label="поле выбора категории поиска"
           v-model="selected"
         >
           <option value="" disabled>Выберите категорию</option>
@@ -51,15 +58,15 @@ import ThePopup from "./ThePopup.vue";
           type="text"
           class="search"
           name="search"
-          tabindex="4"
+          aria-label="поле поиска"
           placeholder="Поиск..."
           v-model="inputValue"
         />
         <button
           type="button"
           class="btn_search"
+          aria-label="кнопка поиска"
           @click="onConvertSelected"
-          tabindex="5"
         >
           <IconSearch />
         </button>
@@ -162,6 +169,8 @@ form {
   right: 5px;
   background-color: inherit;
   border: none;
+  outline-color: var(--vt-c-outline);
+  padding: 0;
 }
 .btn_search:hover path {
   fill: var(--vt-c-grey-font);

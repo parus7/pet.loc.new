@@ -7,8 +7,20 @@
       </span>
 
       <div class="container-button">
-        <button class="button" @click="closePopup">Отмена</button>
-        <button class="button" @click="okPopup">Ok</button>
+        <button
+          class="button"
+          aria-label="кнопка подтверждения действия"
+          @click="okPopup"
+        >
+          Ok
+        </button>
+        <button
+          class="button"
+          aria-label="кнопка отмены действия"
+          @click="closePopup"
+        >
+          Отмена
+        </button>
       </div>
     </div>
   </div>

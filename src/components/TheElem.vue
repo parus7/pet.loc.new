@@ -26,15 +26,25 @@ import ThePopup from "./ThePopup.vue";
           name: 'card',
           params: { id: employee.id },
         }"
+        tabindex="-1"
       >
-        <button type="button" class="button-icon">
+        <button
+          type="button"
+          class="button-icon"
+          aria-label="кнопка перехода в карточку сотрудника"
+        >
           <IconFullinfo />
         </button>
       </RouterLink>
     </li>
 
     <li>
-      <button type="button" class="button-icon" @click="isOpen = true">
+      <button
+        type="button"
+        class="button-icon"
+        aria-label="кнопка удаления сотрудника"
+        @click="isOpen = true"
+      >
         <IconDelete />
       </button>
 

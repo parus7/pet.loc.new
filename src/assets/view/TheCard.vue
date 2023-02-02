@@ -17,7 +17,7 @@ import ThePopup from "../../components/ThePopup.vue";
           id="last_name"
           type="text"
           name="last_name"
-          tabindex="1"
+          tabindex="2"
           ref="lastName"
           v-model="employee.last_name"
         />
@@ -29,7 +29,7 @@ import ThePopup from "../../components/ThePopup.vue";
           id="first_name"
           type="text"
           name="first_name"
-          tabindex="2"
+          tabindex="3"
           v-model="employee.first_name"
         />
       </div>
@@ -40,7 +40,7 @@ import ThePopup from "../../components/ThePopup.vue";
           id="middle_name"
           type="text"
           name="middle_name"
-          tabindex="3"
+          tabindex="4"
           v-model="employee.middle_name"
         />
       </div>
@@ -64,7 +64,7 @@ import ThePopup from "../../components/ThePopup.vue";
           <select
             id="gender"
             name="gender"
-            tabindex="4"
+            tabindex="5"
             v-model="employee.gender"
           >
             <option selected disabled>Выберите вариант</option>
@@ -80,7 +80,7 @@ import ThePopup from "../../components/ThePopup.vue";
             id="born"
             type="text"
             name="born"
-            tabindex="5"
+            tabindex="6"
             v-model="employee.birthday"
           />
         </div>
@@ -93,7 +93,7 @@ import ThePopup from "../../components/ThePopup.vue";
             id="phone"
             type="text"
             name="phone"
-            tabindex="6"
+            tabindex="7"
             v-model="employee.telephone"
           />
         </div>
@@ -104,7 +104,7 @@ import ThePopup from "../../components/ThePopup.vue";
             id="mobile"
             type="text"
             name="mobile"
-            tabindex="7"
+            tabindex="8"
             v-model="employee.mobile"
           />
         </div>
@@ -115,7 +115,7 @@ import ThePopup from "../../components/ThePopup.vue";
             id="email"
             type="text"
             name="email"
-            tabindex="8"
+            tabindex="9"
             v-model="employee.email"
           />
         </div>
@@ -129,7 +129,7 @@ import ThePopup from "../../components/ThePopup.vue";
           id="city"
           type="text"
           name="city"
-          tabindex="9"
+          tabindex="10"
           v-model="employee.city"
         />
       </div>
@@ -140,7 +140,7 @@ import ThePopup from "../../components/ThePopup.vue";
           id="company"
           type="text"
           name="company"
-          tabindex="10"
+          tabindex="11"
           v-model="employee.company"
         />
       </div>
@@ -151,7 +151,7 @@ import ThePopup from "../../components/ThePopup.vue";
           id="department"
           type="text"
           name="department"
-          tabindex="11"
+          tabindex="12"
           v-model="employee.department"
         />
       </div>
@@ -162,31 +162,38 @@ import ThePopup from "../../components/ThePopup.vue";
           id="position"
           type="text"
           name="position"
-          tabindex="12"
+          tabindex="13"
           v-model="employee.title"
         />
       </div>
     </fieldset>
 
     <div class="container-button">
-      <button tabindex="0" type="button" class="button" @click="isOpen = true">
+      <button
+        tabindex="0"
+        type="button"
+        class="button"
+        aria-label="кнопка редактирования данных сотрудника"
+        @click="isOpen = true"
+      >
         Записать
       </button>
 
-      <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
-        >Вы хотите изменить данные сотрудника?
-      </ThePopup>
-
-      <RouterLink class="link" :to="{ name: 'main' }">
+      <RouterLink class="link" :to="{ name: 'main' }" tabindex="-1">
         <button
           type="button"
           class="button"
-          tabindex="13"
+          tabindex="14"
+          aria-label="кнопка сохранения данных и перехода на главную страницу"
           @click="onSaveEmployee(employee.id)"
         >
           Закрыть
         </button>
       </RouterLink>
+
+      <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
+        >Вы хотите изменить данные сотрудника?
+      </ThePopup>
     </div>
   </form>
 </template>

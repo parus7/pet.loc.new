@@ -1,8 +1,8 @@
 <template>
   <svg
-    width="25px"
-    height="25px"
-    viewBox="0 0 13 14"
+    width="26px"
+    height="26px"
+    viewBox="0 0 16 11"
     class="bi bi-filter"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
