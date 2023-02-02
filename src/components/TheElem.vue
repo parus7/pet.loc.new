@@ -33,7 +33,9 @@ import ThePopup from "./ThePopup.vue";
           class="button-icon"
           aria-label="кнопка перехода в карточку сотрудника"
         >
-          <IconFullinfo />
+          <div class="hint" data-name="переход в карточку">
+            <IconFullinfo />
+          </div>
         </button>
       </RouterLink>
     </li>
@@ -45,7 +47,9 @@ import ThePopup from "./ThePopup.vue";
         aria-label="кнопка удаления сотрудника"
         @click="isOpen = true"
       >
-        <IconDelete />
+        <div class="hint" data-name="удаление сотрудника">
+          <IconDelete />
+        </div>
       </button>
 
       <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"

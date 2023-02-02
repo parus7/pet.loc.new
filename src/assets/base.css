@@ -122,14 +122,14 @@ label {
 
 .hint:hover::after {
   position: absolute;
-  right: -55px;
-  top: -25px;
+  right: -35px;
+  top: -30px;
 
   content: attr(data-name);
   font-size: 0.7rem;
   color: var(--vt-c-grey-silver);
 
-  width: 120px;
+  width: 80px;
   height: auto;
   padding: 5px;
 }
