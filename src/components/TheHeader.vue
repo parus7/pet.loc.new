@@ -2,8 +2,8 @@
 import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
-import IconSearch from "./IconSearch.vue";
-import IconReset from "./IconReset.vue";
+import IconSearch from "./icons/IconSearch.vue";
+import IconReset from "./icons/IconReset.vue";
 
 import ThePopup from "./ThePopup.vue";
 </script>
@@ -140,6 +140,10 @@ export default {
 .container_header {
   display: flex;
   flex-wrap: nowrap;
+
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+
   background-color: var(--vt-c-white-mute);
   border-radius: 8px;
   padding: 20px;

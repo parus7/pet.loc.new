@@ -1,8 +1,8 @@
 <script setup>
 import { RouterLink } from "vue-router";
 
-import IconDelete from "./IconDelete.vue";
-import IconFullinfo from "./IconFullinfo.vue";
+import IconDelete from "./icons/IconDelete.vue";
+import IconFullinfo from "./icons/IconFullinfo.vue";
 import ThePopup from "./ThePopup.vue";
 </script>
 
@@ -104,7 +104,7 @@ export default {
 .container_employee {
   display: grid;
   grid-template-columns: 5% 20% 16% 17% auto auto 5% 5%;
-  grid-gap: 2%;
+  gap: 2%;
 
   max-width: 100%;
   line-height: 1.6;
@@ -113,7 +113,9 @@ export default {
   border-radius: 8px;
   background-color: var(--vt-c-white-mute);
   padding: 10px;
+  margin: 0 0 10px;
 }
+
 .photo {
   width: 35px;
   height: 35px;

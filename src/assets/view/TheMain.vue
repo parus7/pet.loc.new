@@ -1,92 +1,29 @@
 <script setup>
 import TheHeader from "../../components/TheHeader.vue";
-import TheElem from "../../components/TheElem.vue";
-import employeesData from "../../data/employeesData.json";
-
-import { useEmplStore } from "../../stores/EmplStore";
-import { mapState, mapActions } from "pinia";
+import TheList from "../../components/TheList.vue";
+import TheBar from "../../components/TheBar.vue";
 </script>
 
 <template>
-  <TheHeader
-    @filterEmpl="onFilterData($event)"
-    @resetFilters="onResetFilters"
-  />
-
-  <template v-if="!getEmptyStore">
-    <TheElem
-      v-for="employee in employees"
-      :key="employee.id"
-      :employee="employee"
-      @delEmpl="onDelete(employee.id)"
-    />
-  </template>
-
-  <template v-else>
-    <h2 class="message">Список сотрудников пуст</h2>
+  <template class="container">
+    <TheHeader />
+    <TheBar />
+    <TheList />
   </template>
 </template>
 
 <script>
 export default {
-  components: { TheHeader, TheElem },
-
-  data() {
-    return {
-      employees: {},
-    };
-  },
-
-  created() {
-    this.employees = this.getEmptyStore
-      ? this.setMapEmployees(employeesData)
-      : this.getAllEmployees;
-
-    this.onAlphabetSort(this.employees);
-  },
-
-  computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
-  },
-
-  methods: {
-    ...mapActions(useEmplStore, [
-      "setMapEmployees",
-      "getFilterData",
-      "delEmployee",
-    ]),
-
-    onAlphabetSort() {
-      this.employees = [...this.employees.values()].sort((a, b) =>
-        a.cn.localeCompare(b.cn)
-      );
-    },
-
-    onDelete(id) {
-      this.employees = this.delEmployee(id);
-      this.employees = this.getAllEmployees;
-      this.onAlphabetSort(this.employees);
-    },
-
-    onFilterData(event) {
-      this.employees = [...this.employees.values()].filter(
-        (elem) => elem[event.param] == event.value
-      );
-      this.onAlphabetSort(this.employees);
-    },
-
-    onResetFilters() {
-      this.employees = this.getAllEmployees;
-      this.onAlphabetSort(this.employees);
-    },
-  },
+  components: { TheHeader, TheList, TheBar },
 };
 </script>
 
-<style scoped>
-.message {
-  color: var(--vt-c-grey-font);
-  text-align: center;
-  margin: 40px 0;
+<style scope>
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  padding: 20px;
 }
 </style>
