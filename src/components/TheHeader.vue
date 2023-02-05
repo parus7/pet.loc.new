@@ -9,8 +9,8 @@ import ThePopup from "./ThePopup.vue";
 </script>
 
 <template>
-  <div class="container_header">
-    <form @submit.prevent>
+  <div class="header">
+    <form class="header__form relative" @submit.prevent>
       <button
         type="button"
         class="button"
@@ -28,21 +28,21 @@ import ThePopup from "./ThePopup.vue";
         Вы хотите создать нового сотрудника?
       </ThePopup>
 
-      <div class="container-button">
+      <div class="container__button">
         <button
-          type="button button-text"
+          type="button"
           class="button-icon"
           aria-label="кнопка сброса фильтров"
           @click="resetFilters"
         >
-          <div class="hint" data-name="сброс фильтров">
+          <div class="hint relative" data-name="сброс фильтров">
             <IconReset />
           </div>
         </button>
 
         <select
           id="filter"
-          class="search"
+          class="header__form-search"
           name="filter"
           aria-label="поле выбора категории поиска"
           v-model="selected"
@@ -56,7 +56,7 @@ import ThePopup from "./ThePopup.vue";
         <input
           id="search"
           type="text"
-          class="search"
+          class="header__form-search relative"
           name="search"
           aria-label="поле поиска"
           placeholder="Поиск..."
@@ -64,7 +64,7 @@ import ThePopup from "./ThePopup.vue";
         />
         <button
           type="button"
-          class="btn_search"
+          class="header__form-btn"
           aria-label="кнопка поиска"
           @click="onConvertSelected"
         >
@@ -137,7 +137,7 @@ export default {
 </script>
 
 <style scoped>
-.container_header {
+.header {
   display: flex;
   flex-wrap: nowrap;
 
@@ -149,25 +149,19 @@ export default {
   padding: 20px;
 }
 
-form {
+.header__form {
   display: flex;
   justify-content: space-between;
-  position: relative;
   width: 100%;
 }
 
-.search {
-  position: relative;
+.header__form-search {
   width: 260px;
   text-overflow: ellipsis;
   padding: 5px 35px 5px 15px;
 }
 
-.active_filter path {
-  fill: var(--vt-c-alert-btn);
-}
-
-.btn_search {
+.header__form-btn {
   position: absolute;
   top: 3px;
   right: 5px;
@@ -176,10 +170,10 @@ form {
   outline-color: var(--vt-c-outline);
   padding: 0;
 }
-.btn_search:hover path {
+.header__form-btn:hover path {
   fill: var(--vt-c-grey-font);
 }
-.btn_search:active path {
+.header__form-btn:active path {
   fill: var(--vt-c-active-btn);
 }
 </style>

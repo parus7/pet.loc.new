@@ -7,7 +7,7 @@ import { mapState, mapActions } from "pinia";
 </script>
 
 <template>
-  <div class="container_list">
+  <div class="list">
     <template v-if="!getEmptyStore">
       <TheElem
         v-for="employee in employees"
@@ -18,7 +18,7 @@ import { mapState, mapActions } from "pinia";
     </template>
 
     <template v-else>
-      <h2 class="message">Список сотрудников пуст</h2>
+      <h2 class="list__message">Список сотрудников пуст</h2>
     </template>
   </div>
 </template>
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style scoped>
-.container_list {
+.list {
   display: flex;
   flex-direction: column;
 
@@ -90,7 +90,7 @@ export default {
   padding: 0;
   margin: 0;
 }
-.message {
+.list-message {
   color: var(--vt-c-grey-font);
   text-align: center;
   margin: 40px 0;

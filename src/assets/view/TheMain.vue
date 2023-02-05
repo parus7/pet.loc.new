@@ -5,7 +5,7 @@ import TheBar from "../../components/TheBar.vue";
 </script>
 
 <template>
-  <template class="container">
+  <template class="main">
     <TheHeader />
     <TheBar />
     <TheList />
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style scope>
-.container {
+.main {
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;

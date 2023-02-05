@@ -7,11 +7,11 @@ import ThePopup from "../../components/ThePopup.vue";
 </script>
 
 <template>
-  <form class="container_form" @submit.prevent>
-    <fieldset class="container_fullname" :disabled="!isEdit">
-      <div class="photo" width="128" height="128"></div>
+  <form class="card-form" @submit.prevent>
+    <fieldset class="card-form__fullname" :disabled="!isEdit">
+      <div class="card-form__photo" width="128" height="128"></div>
 
-      <div class="wrapper">
+      <div class="card-form__wrapper">
         <label for="last_name">Фамилия:</label>
         <input
           id="last_name"
@@ -23,7 +23,7 @@ import ThePopup from "../../components/ThePopup.vue";
         />
       </div>
 
-      <div class="wrapper">
+      <div class="card-form__wrapper">
         <label for="first_name">Имя:</label>
         <input
           id="first_name"
@@ -34,7 +34,7 @@ import ThePopup from "../../components/ThePopup.vue";
         />
       </div>
 
-      <div class="wrapper">
+      <div class="card-form__wrapper">
         <label for="middle_name">Отчество :</label>
         <input
           id="middle_name"
@@ -46,9 +46,9 @@ import ThePopup from "../../components/ThePopup.vue";
       </div>
     </fieldset>
 
-    <fieldset class="container_contacts" :disabled="!isEdit">
+    <fieldset class="card-form__contacts" :disabled="!isEdit">
       <fieldset>
-        <div class="wrapper wrapper_min">
+        <div class="card-form__wrapper card-form__wrapper-min">
           <label for="id_employee">ID:</label>
           <input
             id="id_employee"
@@ -59,7 +59,7 @@ import ThePopup from "../../components/ThePopup.vue";
           />
         </div>
 
-        <div class="wrapper wrapper_min">
+        <div class="card-form__wrapper card-form__wrapper-min">
           <label for="gender">Пол:</label>
           <select
             id="gender"
@@ -74,7 +74,7 @@ import ThePopup from "../../components/ThePopup.vue";
           </select>
         </div>
 
-        <div class="wrapper wrapper_min">
+        <div class="card-form__wrapper card-form__wrapper-min">
           <label for="born">ДР:</label>
           <input
             id="born"
@@ -87,7 +87,7 @@ import ThePopup from "../../components/ThePopup.vue";
       </fieldset>
 
       <fieldset>
-        <div class="wrapper">
+        <div class="card-form__wrapper">
           <label for="phone">Внутренний:</label>
           <input
             id="phone"
@@ -98,7 +98,7 @@ import ThePopup from "../../components/ThePopup.vue";
           />
         </div>
 
-        <div class="wrapper">
+        <div class="card-form__wrapper">
           <label for="mobile">Мобильный:</label>
           <input
             id="mobile"
@@ -109,7 +109,7 @@ import ThePopup from "../../components/ThePopup.vue";
           />
         </div>
 
-        <div class="wrapper">
+        <div class="card-form__wrapper">
           <label for="email">Эл. почта:</label>
           <input
             id="email"
@@ -123,7 +123,7 @@ import ThePopup from "../../components/ThePopup.vue";
     </fieldset>
 
     <fieldset :disabled="!isEdit">
-      <div class="wrapper">
+      <div class="card-form__wrapper">
         <label for="company">Город:</label>
         <input
           id="city"
@@ -134,7 +134,7 @@ import ThePopup from "../../components/ThePopup.vue";
         />
       </div>
 
-      <div class="wrapper">
+      <div class="card-form__wrapper">
         <label for="company">Компания:</label>
         <input
           id="company"
@@ -145,7 +145,7 @@ import ThePopup from "../../components/ThePopup.vue";
         />
       </div>
 
-      <div class="wrapper">
+      <div class="card-form__wrapper">
         <label for="department">Отдел:</label>
         <input
           id="department"
@@ -156,7 +156,7 @@ import ThePopup from "../../components/ThePopup.vue";
         />
       </div>
 
-      <div class="wrapper">
+      <div class="card-form__wrapper">
         <label for="position">Должность:</label>
         <input
           id="position"
@@ -168,7 +168,7 @@ import ThePopup from "../../components/ThePopup.vue";
       </div>
     </fieldset>
 
-    <div class="container-button">
+    <div class="container__button">
       <button
         tabindex="0"
         type="button"
@@ -245,7 +245,7 @@ export default {
 </script>
 
 <style scoped>
-.container_form {
+.card-form {
   display: grid;
   gap: 20px;
   width: 100%;
@@ -261,33 +261,30 @@ fieldset {
   margin: 0;
 }
 
-.wrapper {
+.card-form__wrapper {
   display: grid;
   grid-template-columns: 83px auto;
   align-content: center;
 }
 
-.wrapper_min {
+.card-form__wrapper-min {
   grid-template-columns: 35px auto;
 }
 
-.container_fullname {
+.card-form__fullname {
   grid-template-columns: 148px auto;
 }
 
-.photo {
+.card-form__photo {
   grid-row: 1/4;
   background-color: var(--vt-c-white-background);
   border-radius: 20%;
   margin-right: 10px;
 }
 
-.container_contacts {
+.card-form__contacts {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
-}
-.link {
-  text-decoration: none;
 }
 </style>

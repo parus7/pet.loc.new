@@ -10,7 +10,7 @@
 
   --vt-c-outline: rgba(255, 204, 0, 1);
   --vt-c-active-btn: rgba(95, 158, 160, 1);
-  --vt-c-alert: rgba(205, 92, 92, 0.6);
+  --vt-c-alert: rgba(205, 92, 92, 0.7);
 }
 
 * {
@@ -27,6 +27,14 @@ body {
   text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.link {
+  text-decoration: none;
 }
 
 svg {
@@ -47,7 +55,7 @@ svg:active path {
   opacity: 0.7;
 }
 
-.container-button {
+.container__button {
   display: flex;
   justify-content: end;
   border: none;
@@ -115,10 +123,6 @@ label {
   display: grid;
   align-content: center;
   font-size: 0.9rem;
-}
-
-.hint {
-  position: relative;
 }
 
 .hint:hover::after {

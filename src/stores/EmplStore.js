@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
-      employees: null,
+      employees: new Map(),
     };
   },
   getters: {
@@ -12,6 +12,15 @@ export const useEmplStore = defineStore("EmplStore", {
     getAllEmployees: (state) => state.employees,
 
     getEmplById: (state) => (emplId) => state.employees.get(emplId),
+
+    getAlertBirthday: (state) => (date) => {
+      let sum = 0;
+
+      [...state.employees.values()].forEach((elem) =>
+        elem.birthday === date ? sum++ : sum
+      );
+      return sum;
+    },
   },
 
   actions: {

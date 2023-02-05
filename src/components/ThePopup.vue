@@ -1,12 +1,12 @@
 <template>
-  <div v-if="isOpen" class="popup-container" @click="closePopup">
-    <div class="popup" @click.stop>
+  <div v-if="isOpen" class="popup" @click="closePopup">
+    <div class="popup__body" @click.stop>
       <span>
         <p>Внимание!</p>
         <slot></slot>
       </span>
 
-      <div class="container-button">
+      <div class="container__button">
         <button
           class="button"
           aria-label="кнопка подтверждения действия"
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.popup-container {
+.popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -58,7 +58,7 @@ export default {
   background: var(--vt-c-white-background-confirm);
   z-index: 10;
 }
-.popup {
+.popup__body {
   position: absolute;
   top: 35%;
   right: 35%;

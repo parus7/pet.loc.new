@@ -1,6 +1,6 @@
 <script setup>
 import { useEmplStore } from ".././stores/EmplStore";
-import { mapActions } from "pinia";
+import { mapState } from "pinia";
 
 import IconGift from "./icons/IconGift.vue";
 import IconOtel from "./icons/IconOtel.vue";
@@ -8,10 +8,16 @@ import IconBurger from "./icons/IconBurger.vue";
 </script>
 
 <template>
-  <div class="container_bar">
-    <button class="button-icon button-icon-bar"><IconGift /></button>
-    <button class="button-icon button-icon-bar"><IconOtel /></button>
-    <button class="button-icon button-icon-bar"><IconBurger /></button>
+  <div class="bar">
+    <button class="button-icon relative">
+      <IconGift />
+      <span v-if="(visible = getVisible())" class="bar__alert">
+        {{ onGetAlertBirthday() }}
+      </span>
+    </button>
+
+    <button class="button-icon"><IconOtel /></button>
+    <button class="button-icon"><IconBurger /></button>
   </div>
 </template>
 
@@ -19,24 +25,46 @@ import IconBurger from "./icons/IconBurger.vue";
 export default {
   components: { IconGift, IconOtel, IconBurger },
 
-  //   data() {
-  //     return {};
-  //   },
+  data() {
+    return {
+      visible: false,
+    };
+  },
+
+  computed: {
+    ...mapState(useEmplStore, ["getAlertBirthday"]),
+  },
 
   methods: {
-    ...mapActions(useEmplStore, [""]),
+    getVisible() {
+      return this.onGetAlertBirthday() >= 1 ? true : false;
+    },
+
+    onGetAlertBirthday() {
+      return this.getAlertBirthday(this.getTodayDate());
+    },
+
+    getTodayDate() {
+      let day = String(new Date().getDate());
+      day.length === 1 ? (day = "0" + day) : day;
+
+      let month = String(new Date().getMonth() + 1);
+      month.length === 1 ? (month = "0" + month) : month;
+
+      return day + month;
+    },
   },
 };
 </script>
 
 <style scoped>
-.container_bar {
+.bar {
   display: flex;
   flex-direction: column;
 
   grid-column: 1 / 2;
   grid-row: 2 / 3;
-  gap: 20px;
+  gap: 35px;
 
   background-color: var(--vt-c-white-mute);
   border-radius: 8px;
@@ -44,23 +72,17 @@ export default {
   margin: 0;
 }
 
-.button-icon-bar {
-  position: relative;
-}
-
-.button-icon::after {
+.bar__alert {
   position: absolute;
-  left: 15px;
+  left: 19px;
   bottom: 10px;
-  content: "3";
-  /* content: attr(data-name); */
   font-size: 0.6rem;
   color: var(--vt-c-white);
-
-  width: 6px;
-  height: 6px;
+  width: 15px;
+  height: 15px;
+  vertical-align: center;
   background-color: var(--vt-c-alert);
   border-radius: 50%;
-  padding: 5px 6px;
+  padding: 3px;
 }
 </style>

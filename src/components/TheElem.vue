@@ -7,18 +7,21 @@ import ThePopup from "./ThePopup.vue";
 </script>
 
 <template>
-  <ul class="container_employee">
+  <ul class="employee">
     <!--Если hide === true то не показывать сотрудника. -->
-    <li class="photo" :class="{ employee_status: !employee.hide }"></li>
+    <li
+      class="employee__photo"
+      :class="{ employee__status: !employee.hide }"
+    ></li>
 
-    <li class="full_name">
+    <li class="employee__item">
       {{ employee.cn }}
     </li>
 
-    <li class="position">{{ employee.title }}</li>
-    <li class="email">{{ employee.email }}</li>
-    <li class="phone">{{ employee.telephone }}</li>
-    <li class="mobile">{{ employee.mobile }}</li>
+    <li class="employee__item">{{ employee.title }}</li>
+    <li class="employee__item">{{ employee.email }}</li>
+    <li>{{ employee.telephone }}</li>
+    <li>{{ employee.mobile }}</li>
 
     <li>
       <RouterLink
@@ -33,7 +36,7 @@ import ThePopup from "./ThePopup.vue";
           class="button-icon"
           aria-label="кнопка перехода в карточку сотрудника"
         >
-          <div class="hint" data-name="переход в карточку">
+          <div class="hint relative" data-name="переход в карточку">
             <IconFullinfo />
           </div>
         </button>
@@ -47,7 +50,7 @@ import ThePopup from "./ThePopup.vue";
         aria-label="кнопка удаления сотрудника"
         @click="isOpen = true"
       >
-        <div class="hint" data-name="удаление сотрудника">
+        <div class="hint relative" data-name="удаление сотрудника">
           <IconDelete />
         </div>
       </button>
@@ -101,7 +104,7 @@ export default {
 </script>
 
 <style scoped>
-.container_employee {
+.employee {
   display: grid;
   grid-template-columns: 5% 20% 16% 17% auto auto 5% 5%;
   gap: 2%;
@@ -116,21 +119,20 @@ export default {
   margin: 0 0 10px;
 }
 
-.photo {
+.employee__photo {
   width: 35px;
   height: 35px;
   background-color: var(--vt-c-white-background);
   border-radius: 10%;
   margin: 0;
 }
-.full_name,
-.position,
-.email {
+
+.employee__item {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-.employee_status {
+.employee__status {
   border: 2px solid var(--vt-c-active-btn);
   opacity: 0.7;
 }
