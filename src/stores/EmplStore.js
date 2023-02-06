@@ -87,6 +87,21 @@ export const useEmplStore = defineStore("EmplStore", {
       this.employees.set(idNext, employee);
       return idNext;
     },
+
+    alphabetSort() {
+      return (this.employees = [...this.employees.values()].sort((a, b) =>
+        a.cn.localeCompare(b.cn)
+      ));
+    },
+
+    filterData(event) {
+      this.employees = [...this.employees.values()].filter(
+        (elem) => elem[event.param] == event.value
+      );
+      console.log(this.employees);
+
+      return this.alphabetSort(this.employees);
+    },
     // console.log(this.employees);
   },
 });

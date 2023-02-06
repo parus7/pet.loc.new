@@ -29,7 +29,6 @@ import ThePopup from "./ThePopup.vue";
           name: 'card',
           params: { id: employee.id },
         }"
-        tabindex="-1"
       >
         <button
           type="button"

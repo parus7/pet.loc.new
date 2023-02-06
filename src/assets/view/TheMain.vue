@@ -2,19 +2,58 @@
 import TheHeader from "../../components/TheHeader.vue";
 import TheList from "../../components/TheList.vue";
 import TheBar from "../../components/TheBar.vue";
+
+import { useEmplStore } from "../../stores/EmplStore";
+import { mapState, mapActions } from "pinia";
+import employeesData from "../../data/employeesData.json";
 </script>
 
 <template>
   <template class="main">
-    <TheHeader />
+    <TheHeader
+      @filterEmpl="filterData($event)"
+      @resetFilters="onResetFilters()"
+    />
     <TheBar />
-    <TheList />
+    <TheList :employees="employees" />
   </template>
 </template>
 
 <script>
 export default {
   components: { TheHeader, TheList, TheBar },
+
+  data() {
+    return {
+      employees: {},
+    };
+  },
+
+  created() {
+    this.employees = this.getEmptyStore
+      ? this.setMapEmployees(employeesData)
+      : this.getAllEmployees;
+
+    this.alphabetSort(this.employees);
+    console.log(this.employees);
+  },
+
+  computed: {
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
+  },
+
+  methods: {
+    ...mapActions(useEmplStore, [
+      "setMapEmployees",
+      "filterData",
+      "alphabetSort",
+    ]),
+
+    onResetFilters() {
+      this.employees = this.getAllEmployees;
+      this.alphabetSort(this.employees);
+    },
+  },
 };
 </script>
 

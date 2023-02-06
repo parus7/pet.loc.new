@@ -1,6 +1,5 @@
 <script setup>
 import TheElem from "../components/TheElem.vue";
-import employeesData from "../data/employeesData.json";
 
 import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
@@ -27,18 +26,8 @@ import { mapState, mapActions } from "pinia";
 export default {
   components: { TheElem },
 
-  data() {
-    return {
-      employees: {},
-    };
-  },
-
-  created() {
-    this.employees = this.getEmptyStore
-      ? this.setMapEmployees(employeesData)
-      : this.getAllEmployees;
-
-    this.onAlphabetSort(this.employees);
+  props: {
+    employees: Object,
   },
 
   computed: {
@@ -46,34 +35,14 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, [
-      "setMapEmployees",
-      "getFilterData",
-      "delEmployee",
-    ]),
-
-    onAlphabetSort() {
-      this.employees = [...this.employees.values()].sort((a, b) =>
-        a.cn.localeCompare(b.cn)
-      );
-    },
+    ...mapActions(useEmplStore, ["alphabetSort", "delEmployee"]),
 
     onDelete(id) {
+      // console.log(this.employees);
       this.employees = this.delEmployee(id);
       this.employees = this.getAllEmployees;
-      this.onAlphabetSort(this.employees);
-    },
-
-    onFilterData(event) {
-      this.employees = [...this.employees.values()].filter(
-        (elem) => elem[event.param] == event.value
-      );
-      this.onAlphabetSort(this.employees);
-    },
-
-    onResetFilters() {
-      this.employees = this.getAllEmployees;
-      this.onAlphabetSort(this.employees);
+      this.alphabetSort(this.employees);
+      console.log(this.employees);
     },
   },
 };
