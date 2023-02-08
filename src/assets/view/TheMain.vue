@@ -12,8 +12,9 @@ import employeesData from "../../data/employeesData.json";
   <template class="main">
     <TheHeader
       @filterEmpl="filterData($event)"
-      @resetFilters="onResetFilters()"
-    />
+      @resetFilters="onAlphabetSort()"
+    >
+    </TheHeader>
     <TheBar />
     <TheList :employees="employees" />
   </template>
@@ -33,9 +34,6 @@ export default {
     this.employees = this.getEmptyStore
       ? this.setMapEmployees(employeesData)
       : this.getAllEmployees;
-
-    this.alphabetSort(this.employees);
-    console.log(this.employees);
   },
 
   computed: {
@@ -43,15 +41,20 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, [
-      "setMapEmployees",
-      "filterData",
-      "alphabetSort",
-    ]),
+    ...mapActions(useEmplStore, ["setMapEmployees", "onFilterData"]),
 
-    onResetFilters() {
+    filterData(event) {
+      this.employees = [...this.employees.values()].filter(
+        (elem) => elem[event.param] == event.value
+      );
+      console.log(this.employees);
+    },
+
+    onAlphabetSort() {
       this.employees = this.getAllEmployees;
-      this.alphabetSort(this.employees);
+      // this.employees = [...this.employees.values()].sort((a, b) =>
+      //   a.cn.localeCompare(b.cn)
+      // );
     },
   },
 };

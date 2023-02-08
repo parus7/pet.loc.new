@@ -12,14 +12,14 @@
           aria-label="кнопка подтверждения действия"
           @click="okPopup"
         >
-          Ok
+          Да
         </button>
         <button
           class="button"
           aria-label="кнопка отмены действия"
           @click="closePopup"
         >
-          Отмена
+          Нет
         </button>
       </div>
     </div>

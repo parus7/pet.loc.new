@@ -74,11 +74,11 @@ svg:active path {
 .button {
   display: flex;
   justify-content: center;
-  width: 90px;
+  width: 55px;
   height: auto;
   cursor: pointer;
-  font-size: 0.7rem;
-  font-weight: 600;
+  /* font-size: 0.7rem; */
+  /* font-weight: 600; */
   color: var(--vt-c-white);
   text-transform: uppercase;
   background-color: var(--vt-c-active-btn);
@@ -86,8 +86,8 @@ svg:active path {
   border: none;
   border-radius: 10px;
   opacity: 0.6;
-  padding: 10px 7px;
-  margin-right: 15px;
+  padding: 7px;
+  margin-right: 25px;
 }
 
 .button:hover {

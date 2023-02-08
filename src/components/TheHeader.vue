@@ -4,6 +4,9 @@ import { mapActions } from "pinia";
 
 import IconSearch from "./icons/IconSearch.vue";
 import IconReset from "./icons/IconReset.vue";
+import IconAdd from "./icons/IconAdd.vue";
+import IconBottom from "./icons/IconBottom.vue";
+import IconTop from "./icons/IconTop.vue";
 
 import ThePopup from "./ThePopup.vue";
 </script>
@@ -11,22 +14,32 @@ import ThePopup from "./ThePopup.vue";
 <template>
   <div class="header">
     <form class="header__form relative" @submit.prevent>
-      <button
-        type="button"
-        class="button"
-        aria-label="кнопка создания карточки нового сотрудника"
-        @click="isOpen = true"
-      >
-        Создать
-      </button>
+      <div class="container__button">
+        <button
+          type="button"
+          class="button"
+          aria-label="кнопка создания карточки нового сотрудника"
+          @click="isOpen = true"
+        >
+          <IconAdd />
+        </button>
 
-      <ThePopup
-        :is-open="isOpen"
-        @close="isOpen = false"
-        @ok="onCreateEmployee"
-      >
-        Вы хотите создать нового сотрудника?
-      </ThePopup>
+        <ThePopup
+          :is-open="isOpen"
+          @close="isOpen = false"
+          @ok="onCreateEmployee()"
+        >
+          Вы хотите создать нового сотрудника?
+        </ThePopup>
+
+        <button
+          type="button"
+          class="button-icon"
+          aria-label="кнопка создания карточки нового сотрудника"
+        >
+          <IconBottom />
+        </button>
+      </div>
 
       <div class="container__button">
         <button
@@ -163,8 +176,8 @@ export default {
 
 .header__form-btn {
   position: absolute;
-  top: 3px;
-  right: 5px;
+  top: 8px;
+  right: 8px;
   background-color: inherit;
   border: none;
   outline-color: var(--vt-c-outline);

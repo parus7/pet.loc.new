@@ -35,11 +35,13 @@ export const useEmplStore = defineStore("EmplStore", {
 
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
+      console.log(this.employees);
       return this.employees;
     },
 
     delEmployee(id) {
-      return this.employees.delete(id);
+      this.employees.delete(id);
+      console.log(this.employees);
     },
 
     addEmployee(updatedEmpl) {
@@ -88,20 +90,12 @@ export const useEmplStore = defineStore("EmplStore", {
       return idNext;
     },
 
-    alphabetSort() {
-      return (this.employees = [...this.employees.values()].sort((a, b) =>
-        a.cn.localeCompare(b.cn)
-      ));
-    },
+    // alphabetSort() {
+    //   return [...this.employees.values()].sort((a, b) =>
+    //     a.cn.localeCompare(b.cn)
+    //   );
+    // },
 
-    filterData(event) {
-      this.employees = [...this.employees.values()].filter(
-        (elem) => elem[event.param] == event.value
-      );
-      console.log(this.employees);
-
-      return this.alphabetSort(this.employees);
-    },
-    // console.log(this.employees);
+    // console.log(this.employees),
   },
 });

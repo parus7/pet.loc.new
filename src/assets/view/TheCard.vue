@@ -4,6 +4,8 @@ import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "pinia";
 
 import ThePopup from "../../components/ThePopup.vue";
+import IconEdit from "../../components/icons/IconEdit.vue";
+import IconClose from "../../components/icons/IconClose.vue";
 </script>
 
 <template>
@@ -176,7 +178,7 @@ import ThePopup from "../../components/ThePopup.vue";
         aria-label="кнопка редактирования данных сотрудника"
         @click="isOpen = true"
       >
-        Записать
+        <IconEdit />
       </button>
 
       <RouterLink class="link" :to="{ name: 'main' }" tabindex="-1">
@@ -187,7 +189,7 @@ import ThePopup from "../../components/ThePopup.vue";
           aria-label="кнопка сохранения данных и перехода на главную страницу"
           @click="onSaveEmployee(employee.id)"
         >
-          Закрыть
+         <IconClose/>
         </button>
       </RouterLink>
 
