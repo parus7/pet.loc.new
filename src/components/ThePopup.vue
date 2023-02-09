@@ -8,14 +8,14 @@
 
       <div class="container__button">
         <button
-          class="button"
+          class="button popup__botton"
           aria-label="кнопка подтверждения действия"
           @click="okPopup"
         >
           Да
         </button>
         <button
-          class="button"
+          class="button popup__botton"
           aria-label="кнопка отмены действия"
           @click="closePopup"
         >
@@ -73,5 +73,10 @@ export default {
   border-radius: 20px;
   padding: 20px;
   z-index: 11;
+}
+
+.popup__botton {
+  width: 60px;
+  padding: 8px;
 }
 </style>

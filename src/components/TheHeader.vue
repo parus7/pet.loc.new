@@ -14,43 +14,30 @@ import ThePopup from "./ThePopup.vue";
 <template>
   <div class="header">
     <form class="header__form relative" @submit.prevent>
+      <button
+        type="button"
+        class="button"
+        aria-label="кнопка создания карточки нового сотрудника"
+        @click="isOpen = true"
+      >
+        <IconAdd />
+      </button>
+
+      <ThePopup
+        :is-open="isOpen"
+        @close="isOpen = false"
+        @ok="onCreateEmployee()"
+      >
+        Вы хотите создать нового сотрудника?
+      </ThePopup>
       <div class="container__button">
         <button
           type="button"
-          class="button"
-          aria-label="кнопка создания карточки нового сотрудника"
-          @click="isOpen = true"
-        >
-          <IconAdd />
-        </button>
-
-        <ThePopup
-          :is-open="isOpen"
-          @close="isOpen = false"
-          @ok="onCreateEmployee()"
-        >
-          Вы хотите создать нового сотрудника?
-        </ThePopup>
-
-        <button
-          type="button"
           class="button-icon"
-          aria-label="кнопка создания карточки нового сотрудника"
+          aria-label="кнопка сортировки сотрубников по алфавиту"
         >
+          <IconTop />
           <IconBottom />
-        </button>
-      </div>
-
-      <div class="container__button">
-        <button
-          type="button"
-          class="button-icon"
-          aria-label="кнопка сброса фильтров"
-          @click="resetFilters"
-        >
-          <div class="hint relative" data-name="сброс фильтров">
-            <IconReset />
-          </div>
         </button>
 
         <select
@@ -82,6 +69,17 @@ import ThePopup from "./ThePopup.vue";
           @click="onConvertSelected"
         >
           <IconSearch />
+        </button>
+
+        <button
+          type="button"
+          class="button-icon"
+          aria-label="кнопка сброса фильтров"
+          @click="resetFilters"
+        >
+          <div class="hint relative" data-name="сброс фильтров">
+            <IconReset />
+          </div>
         </button>
       </div>
     </form>
@@ -153,6 +151,7 @@ export default {
 .header {
   display: flex;
   flex-wrap: nowrap;
+  justify-content: space-around;
 
   grid-column: 1 / 3;
   grid-row: 1 / 2;
@@ -166,27 +165,26 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 0 20px;
 }
 
 .header__form-search {
-  width: 260px;
+  width: 40%;
   text-overflow: ellipsis;
-  padding: 5px 35px 5px 15px;
+  padding: 5px 60px 5px 15px;
 }
 
 .header__form-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: inherit;
-  border: none;
+  top: 0;
+  right: 65px;
+
+  width: 55px;
+  height: 32px;
+  background-color: var(--vt-c-active-btn);
   outline-color: var(--vt-c-outline);
-  padding: 0;
-}
-.header__form-btn:hover path {
-  fill: var(--vt-c-grey-font);
-}
-.header__form-btn:active path {
-  fill: var(--vt-c-active-btn);
+  border: none;
+  border-radius: 0 8px 8px 0;
+  opacity: 0.6;
 }
 </style>

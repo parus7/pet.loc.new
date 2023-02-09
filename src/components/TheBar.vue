@@ -61,6 +61,7 @@ export default {
 .bar {
   display: flex;
   flex-direction: column;
+  vertical-align: center;
 
   grid-column: 1 / 2;
   grid-row: 2 / 3;
@@ -68,7 +69,7 @@ export default {
 
   background-color: var(--vt-c-white-mute);
   border-radius: 8px;
-  padding: 25px 15px;
+  padding: 25px 0;
   margin: 0;
 }
 

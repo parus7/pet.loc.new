@@ -29,6 +29,7 @@ import ThePopup from "./ThePopup.vue";
           name: 'card',
           params: { id: employee.id },
         }"
+        tabindex="-1"
       >
         <button
           type="button"
@@ -114,7 +115,7 @@ export default {
   list-style: none;
   border-radius: 8px;
   background-color: var(--vt-c-white-mute);
-  padding: 10px;
+  padding: 10px 20px;
   margin: 0 0 10px;
 }
 

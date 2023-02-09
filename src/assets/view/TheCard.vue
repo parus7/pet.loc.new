@@ -189,7 +189,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           aria-label="кнопка сохранения данных и перехода на главную страницу"
           @click="onSaveEmployee(employee.id)"
         >
-         <IconClose/>
+          <IconClose />
         </button>
       </RouterLink>
 

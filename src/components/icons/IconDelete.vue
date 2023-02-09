@@ -1,12 +1,11 @@
 <template>
   <svg
-    width="26"
-    height="26"
+    width="23"
+    height="23"
     viewBox="0 0 30 30"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="30" height="30" fill="var(--vt-c-white-mute)" />
     <path
       d="M11.4844 10.7344H12.8906V21.9844H11.4844V10.7344Z"
       fill="var( --vt-c-grey-main-font)"

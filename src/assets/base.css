@@ -37,16 +37,6 @@ body {
   text-decoration: none;
 }
 
-svg {
-  display: flex;
-  width: 25px;
-  height: 25px;
-  align-items: center;
-  border: none;
-  background-color: inherit;
-  opacity: 0.7;
-}
-
 svg:hover path {
   fill: var(--vt-c-active-btn);
 }
@@ -69,16 +59,14 @@ svg:active path {
   outline-color: var(--vt-c-outline);
   background: inherit;
   padding: 0;
+  margin-left: 20px;
 }
 
 .button {
-  display: flex;
-  justify-content: center;
-  width: 55px;
-  height: auto;
+  display: inline-block;
+  text-align: center;
   cursor: pointer;
-  /* font-size: 0.7rem; */
-  /* font-weight: 600; */
+  font-size: 0.75rem;
   color: var(--vt-c-white);
   text-transform: uppercase;
   background-color: var(--vt-c-active-btn);
@@ -86,12 +74,12 @@ svg:active path {
   border: none;
   border-radius: 10px;
   opacity: 0.6;
-  padding: 7px;
   margin-right: 25px;
+  padding: 2px 15px;
 }
 
 .button:hover {
-  opacity: 0.9;
+  opacity: 0.8;
   transition: opacity 0.5s;
 }
 
@@ -106,12 +94,12 @@ select {
   background-color: var(--vt-c-white-background);
   border: none;
   box-shadow: 1px 1px 0 0 var(--vt-c-grey-silver);
-  border-radius: 8px;
+  border-radius: 9px;
   outline-color: var(--vt-c-outline);
   color: var(--vt-c-grey-main-font);
   appearance: none;
   padding: 5px 20px;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 input:disabled,

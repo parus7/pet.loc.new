@@ -35,7 +35,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["onFilterData", "delEmployee"]),
+    ...mapActions(useEmplStore, ["delEmployee"]),
 
     onDelete(id) {
       this.delEmployee(id);

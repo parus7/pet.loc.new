@@ -10,10 +10,7 @@ import employeesData from "../../data/employeesData.json";
 
 <template>
   <template class="main">
-    <TheHeader
-      @filterEmpl="filterData($event)"
-      @resetFilters="onAlphabetSort()"
-    >
+    <TheHeader @filterEmpl="filterData($event)" @resetFilters="onResetFilters">
     </TheHeader>
     <TheBar />
     <TheList :employees="employees" />
@@ -27,6 +24,7 @@ export default {
   data() {
     return {
       employees: {},
+      initialEmployees: {},
     };
   },
 
@@ -50,11 +48,8 @@ export default {
       console.log(this.employees);
     },
 
-    onAlphabetSort() {
+    onResetFilters() {
       this.employees = this.getAllEmployees;
-      // this.employees = [...this.employees.values()].sort((a, b) =>
-      //   a.cn.localeCompare(b.cn)
-      // );
     },
   },
 };
@@ -64,7 +59,7 @@ export default {
 .main {
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 60px 1fr;
   gap: 10px;
   padding: 20px;
 }
