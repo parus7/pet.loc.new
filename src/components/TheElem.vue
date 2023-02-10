@@ -34,9 +34,9 @@ import ThePopup from "./ThePopup.vue";
         <button
           type="button"
           class="button-icon"
-          aria-label="кнопка перехода в карточку сотрудника"
+          aria-label="переход в профиль сотрудника"
         >
-          <div class="hint relative" data-name="переход в карточку">
+          <div class="hint relative" data-name="переход в профиль">
             <IconFullinfo />
           </div>
         </button>
@@ -47,12 +47,10 @@ import ThePopup from "./ThePopup.vue";
       <button
         type="button"
         class="button-icon"
-        aria-label="кнопка удаления сотрудника"
+        aria-label="удаления сотрудника"
         @click="isOpen = true"
       >
-        <div class="hint relative" data-name="удаление сотрудника">
-          <IconDelete />
-        </div>
+        <IconDelete />
       </button>
 
       <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
@@ -106,7 +104,7 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: 5% 20% 16% 17% auto auto 5% 5%;
+  grid-template-columns: 5% 20% 16% 17% auto auto 6% 6%;
   gap: 2%;
 
   max-width: 100%;

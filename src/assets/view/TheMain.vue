@@ -10,10 +10,15 @@ import employeesData from "../../data/employeesData.json";
 
 <template>
   <template class="main">
-    <TheHeader @filterEmpl="filterData($event)" @resetFilters="onResetFilters">
+    <TheHeader
+      @filterEmpl="filterData($event)"
+      @resetFilters="onResetFilters()"
+      @up="alphabetUp()"
+      @down="alphabetDown()"
+    >
     </TheHeader>
     <TheBar />
-    <TheList :employees="employees" />
+    <TheList :employees="setEmployees()" />
   </template>
 </template>
 
@@ -24,7 +29,6 @@ export default {
   data() {
     return {
       employees: {},
-      initialEmployees: {},
     };
   },
 
@@ -51,6 +55,20 @@ export default {
     onResetFilters() {
       this.employees = this.getAllEmployees;
     },
+
+    // А-Я
+    alphabetDown() {
+      console.log(this.employees);
+    },
+
+    // Я-А
+    alphabetUp() {
+      console.log(this.employees);
+    },
+
+    setEmployees() {
+      return this.employees.values();
+    },
   },
 };
 </script>
@@ -59,8 +77,10 @@ export default {
 .main {
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: 65px 1fr;
   gap: 10px;
-  padding: 20px;
+
+  padding: 25px;
+  margin: auto;
 }
 </style>

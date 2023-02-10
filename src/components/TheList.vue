@@ -9,7 +9,7 @@ import { mapState, mapActions } from "pinia";
   <div class="list">
     <template v-if="!getEmptyStore">
       <TheElem
-        v-for="employee in employees.values()"
+        v-for="employee in employees"
         :key="employee.id"
         :employee="employee"
         @delEmpl="onDelete(employee.id)"
@@ -38,6 +38,7 @@ export default {
     ...mapActions(useEmplStore, ["delEmployee"]),
 
     onDelete(id) {
+      // console.log(this.employees);
       this.delEmployee(id);
     },
   },

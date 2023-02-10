@@ -250,7 +250,7 @@ export default {
 .card-form {
   display: grid;
   gap: 20px;
-  width: 100%;
+  width: 90%;
   background-color: var(--vt-c-white-mute);
   padding: 35px;
   margin: 0 auto;

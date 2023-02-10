@@ -60,7 +60,7 @@ export default {
 }
 .popup__body {
   position: absolute;
-  top: 35%;
+  top: 30%;
   right: 35%;
 
   display: flex;
@@ -76,7 +76,7 @@ export default {
 }
 
 .popup__botton {
-  width: 60px;
-  padding: 8px;
+  width: 68px;
+  padding: 8px 10px;
 }
 </style>

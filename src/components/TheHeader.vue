@@ -2,11 +2,11 @@
 import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
+import IconAdd from "./icons/IconAdd.vue";
+import IconUp from "./icons/IconDown.vue";
+import IconDown from "./icons/IconUp.vue";
 import IconSearch from "./icons/IconSearch.vue";
 import IconReset from "./icons/IconReset.vue";
-import IconAdd from "./icons/IconAdd.vue";
-import IconBottom from "./icons/IconBottom.vue";
-import IconTop from "./icons/IconTop.vue";
 
 import ThePopup from "./ThePopup.vue";
 </script>
@@ -14,14 +14,16 @@ import ThePopup from "./ThePopup.vue";
 <template>
   <div class="header">
     <form class="header__form relative" @submit.prevent>
-      <button
-        type="button"
-        class="button"
-        aria-label="кнопка создания карточки нового сотрудника"
-        @click="isOpen = true"
-      >
-        <IconAdd />
-      </button>
+      <div class="hint relative" data-name="создать сотрудника">
+        <button
+          type="button"
+          class="button"
+          aria-label="создать сотрудника"
+          @click="isOpen = true"
+        >
+          <IconAdd />
+        </button>
+      </div>
 
       <ThePopup
         :is-open="isOpen"
@@ -34,17 +36,30 @@ import ThePopup from "./ThePopup.vue";
         <button
           type="button"
           class="button-icon"
-          aria-label="кнопка сортировки сотрубников по алфавиту"
+          aria-label="сортировка А → Я"
+          @click="setAlphabetSortDown"
         >
-          <IconTop />
-          <IconBottom />
+          <div class="hint relative" data-name="А &#8594; Я">
+            <IconDown />
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="button-icon"
+          aria-label="сортировка Я - А"
+          @click="setAlphabetSortUp"
+        >
+          <div class="hint relative" data-name="Я &#8594; А">
+            <IconUp />
+          </div>
         </button>
 
         <select
           id="filter"
           class="header__form-search"
           name="filter"
-          aria-label="поле выбора категории поиска"
+          aria-label="поле выбора категории для поиска"
           v-model="selected"
         >
           <option value="" disabled>Выберите категорию</option>
@@ -65,7 +80,7 @@ import ThePopup from "./ThePopup.vue";
         <button
           type="button"
           class="header__form-btn"
-          aria-label="кнопка поиска"
+          aria-label="поиск"
           @click="onConvertSelected"
         >
           <IconSearch />
@@ -74,7 +89,7 @@ import ThePopup from "./ThePopup.vue";
         <button
           type="button"
           class="button-icon"
-          aria-label="кнопка сброса фильтров"
+          aria-label="сброс фильтров"
           @click="resetFilters"
         >
           <div class="hint relative" data-name="сброс фильтров">
@@ -143,6 +158,14 @@ export default {
     resetFilters() {
       this.$emit("resetFilters");
     },
+
+    setAlphabetSortUp() {
+      this.$emit("up");
+    },
+
+    setAlphabetSortDown() {
+      this.$emit("down");
+    },
   },
 };
 </script>
@@ -158,7 +181,7 @@ export default {
 
   background-color: var(--vt-c-white-mute);
   border-radius: 8px;
-  padding: 20px;
+  padding: 25px 20px;
 }
 
 .header__form {
@@ -180,7 +203,7 @@ export default {
   right: 65px;
 
   width: 55px;
-  height: 32px;
+  height: 28px;
   background-color: var(--vt-c-active-btn);
   outline-color: var(--vt-c-outline);
   border: none;
