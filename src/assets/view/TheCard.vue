@@ -231,6 +231,7 @@ export default {
       this.delEmployee(paramsId);
       this.addEmployee(this.employee);
       this.employees = this.getAllEmployees;
+      //  console.log(this.employees, "addEmployee");
     },
 
     popupConfirm() {

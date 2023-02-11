@@ -35,13 +35,13 @@ export const useEmplStore = defineStore("EmplStore", {
 
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
-      console.log(this.employees);
+      // console.log(this.employees, "setMapEmployees");
       return this.employees;
     },
 
     delEmployee(id) {
       this.employees.delete(id);
-      console.log(this.employees);
+      // console.log(this.employees);
     },
 
     addEmployee(updatedEmpl) {

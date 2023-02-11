@@ -58,16 +58,23 @@ export default {
 
     // А-Я
     alphabetDown() {
-      console.log(this.employees);
+      this.employees = [...this.employees.values()].sort((a, b) =>
+        a.cn.localeCompare(b.cn)
+      );
+      // console.log(this.employees, "alphabetDown");
     },
 
     // Я-А
     alphabetUp() {
-      console.log(this.employees);
+      this.employees = [...this.employees.values()].sort((a, b) =>
+        b.cn.localeCompare(a.cn)
+      );
+      // console.log(this.employees, "alphabetUp");
     },
 
     setEmployees() {
-      return this.employees.values();
+      // console.log(this.employees, "setEmployees");
+      return this.employees;
     },
   },
 };
