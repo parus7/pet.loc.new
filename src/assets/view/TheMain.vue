@@ -18,7 +18,10 @@ import employeesData from "../../data/employeesData.json";
     >
     </TheHeader>
     <TheBar />
-    <TheList :employees="setEmployees()" />
+    <TheList
+      :employees="getEmployees().values()"
+      @deleteEmoployee="onDeletete($event)"
+    />
   </template>
 </template>
 
@@ -29,6 +32,7 @@ export default {
   data() {
     return {
       employees: {},
+      sortType: "null",
     };
   },
 
@@ -39,7 +43,11 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
+    ...mapState(useEmplStore, [
+      "getEmptyStore",
+      "getAllEmployees",
+      "delEmployee",
+    ]),
   },
 
   methods: {
@@ -49,7 +57,7 @@ export default {
       this.employees = [...this.employees.values()].filter(
         (elem) => elem[event.param] == event.value
       );
-      console.log(this.employees);
+      // console.log(this.employees);
     },
 
     onResetFilters() {
@@ -58,7 +66,8 @@ export default {
 
     // А-Я
     alphabetDown() {
-      this.employees = [...this.employees.values()].sort((a, b) =>
+      this.sortType = "down";
+      this.employees = [...this.getAllEmployees.values()].sort((a, b) =>
         a.cn.localeCompare(b.cn)
       );
       // console.log(this.employees, "alphabetDown");
@@ -66,15 +75,29 @@ export default {
 
     // Я-А
     alphabetUp() {
-      this.employees = [...this.employees.values()].sort((a, b) =>
+      this.sortType = "up";
+      this.employees = [...this.getAllEmployees.values()].sort((a, b) =>
         b.cn.localeCompare(a.cn)
       );
       // console.log(this.employees, "alphabetUp");
     },
 
-    setEmployees() {
-      // console.log(this.employees, "setEmployees");
+    getEmployees() {
       return this.employees;
+    },
+
+    onDeletete(id) {
+      this.delEmployee(id);
+      switch (this.sortType) {
+        case "down":
+          this.alphabetDown();
+          break;
+        case "up":
+          this.alphabetUp();
+          break;
+        default:
+          this.employees = this.getAllEmployees;
+      }
     },
   },
 };

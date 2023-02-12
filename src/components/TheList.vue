@@ -1,18 +1,15 @@
 <script setup>
 import TheElem from "../components/TheElem.vue";
-
-import { useEmplStore } from "../stores/EmplStore";
-import { mapState, mapActions } from "pinia";
 </script>
 
 <template>
   <div class="list">
-    <template v-if="!getEmptyStore">
+    <template v-if="employees">
       <TheElem
-        v-for="employee in employees.values()"
+        v-for="employee in employees"
         :key="employee.id"
         :employee="employee"
-        @delEmpl="onDelete(employee.id)"
+        @delEmpl="$emit('deleteEmoployee', employee.id)"
       />
     </template>
 
@@ -25,24 +22,8 @@ import { mapState, mapActions } from "pinia";
 <script>
 export default {
   components: { TheElem },
-
   props: {
     employees: Object,
-  },
-
-  computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
-  },
-
-  methods: {
-    ...mapActions(useEmplStore, ["delEmployee"]),
-
-    onDelete(id) {
-      // console.log(this.employees);
-      this.delEmployee(id);
-
-      // console.log(this.employees, "delEmployee");
-    },
   },
 };
 </script>
