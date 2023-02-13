@@ -107,7 +107,7 @@ export default {
 .main {
   display: grid;
   grid-column: 2 / 3;
-  grid-template-columns: 42px 1fr;
+  grid-template-columns: 55px 1fr;
   grid-template-rows: auto auto 1fr;
   gap: 10px;
 

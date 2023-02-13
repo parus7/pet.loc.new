@@ -18,7 +18,6 @@ import ThePopup from "./ThePopup.vue";
       {{ employee.cn }}
     </li>
 
-    <!-- <li class="employee__item employee__item-title">{{ employee.title }}</li> -->
     <li class="employee__item">{{ employee.email }}</li>
     <li>{{ employee.telephone }}</li>
     <li>{{ employee.mobile }}</li>
@@ -117,6 +116,10 @@ export default {
   margin: 0 0 10px;
 }
 
+.employee:last-child {
+  margin: 0;
+}
+
 .employee__photo {
   width: 35px;
   height: 35px;
@@ -126,6 +129,7 @@ export default {
 }
 
 .employee__item {
+  width: auto;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

@@ -232,14 +232,13 @@ export default {
 
   .header__button-icon {
     position: absolute;
-    top: 67px;
+    top: 65px;
     z-index: 11;
   }
   .down {
     right: 100px;
   }
 
-  /* вверх смотрит  это ап */
   .up {
     right: 200px;
   }
