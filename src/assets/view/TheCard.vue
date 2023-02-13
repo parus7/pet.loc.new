@@ -251,10 +251,12 @@ export default {
 .card-form {
   display: grid;
   gap: 20px;
-  width: 90%;
+  /* grid-template-columns: minmax(320px, 1024px); */
   background-color: var(--vt-c-white-mute);
+
+  max-width: 1024px;
   padding: 35px;
-  margin: 0 auto;
+  margin:  auto;
 }
 
 fieldset {
@@ -290,4 +292,64 @@ fieldset {
   grid-template-columns: auto 1fr;
   gap: 20px;
 }
+
+/* @media (min-width: 960px) {
+  .card-form {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1440px)  {
+  .card-form {
+    width: 70%;
+  }
+} */
+/* 
+@media (min-width: 1440px)  {
+  .card-form {
+    width: 55%;
+  }
+} */
+
+/* @media (min-width: 2560px)  {
+  .card-form {
+    width: 50%;
+  }
+} */
+/* 
+@media (min-width: 960px) and (max-width: 1024px) {
+  .card-form {
+    max-width: 95%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .card-form {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 2560px) {
+  .card-form {
+    max-width: 85%;
+  }
+}
+
+@media (min-width: 960px) and (max-width: 1280px) {
+  .card-form {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .card-form {
+    max-width: 75%;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 2560px) {
+  .card-form {
+    width: 60%;
+  }
+} */
 </style>

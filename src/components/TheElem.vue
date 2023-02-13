@@ -18,7 +18,7 @@ import ThePopup from "./ThePopup.vue";
       {{ employee.cn }}
     </li>
 
-    <li class="employee__item">{{ employee.title }}</li>
+    <!-- <li class="employee__item employee__item-title">{{ employee.title }}</li> -->
     <li class="employee__item">{{ employee.email }}</li>
     <li>{{ employee.telephone }}</li>
     <li>{{ employee.mobile }}</li>
@@ -104,8 +104,8 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: 5% 20% 16% 17% auto auto 6% 6%;
-  gap: 2%;
+  grid-template-columns: 5% 30% 20% 10% 15% 8% 8%;
+  gap: 10px;
 
   max-width: 100%;
   line-height: 1.6;
@@ -113,7 +113,7 @@ export default {
   list-style: none;
   border-radius: 8px;
   background-color: var(--vt-c-white-mute);
-  padding: 10px 20px;
+  padding: 10px 15px;
   margin: 0 0 10px;
 }
 
@@ -133,5 +133,16 @@ export default {
 .employee__status {
   border: 2px solid var(--vt-c-active-btn);
   opacity: 0.7;
+}
+
+@media (max-width: 767px) {
+  .employee {
+    grid-template-columns: 35% 25% 8% 17% 7% 7%;
+    padding: 10px 40px;
+  }
+
+  .employee__photo {
+    display: none;
+  }
 }
 </style>

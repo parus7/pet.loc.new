@@ -8,7 +8,7 @@ import IconBurger from "./icons/IconBurger.vue";
 </script>
 
 <template>
-  <div class="bar">
+  <div class="bar relative">
     <button class="button-icon relative">
       <IconGift />
       <span v-if="(visible = getVisible())" class="bar__alert">
@@ -65,8 +65,7 @@ export default {
 
   background-color: var(--vt-c-white-mute);
   border-radius: 8px;
-  padding: 25px 0;
-  margin: 0;
+  padding: 25px 10px;
 }
 
 .bar__alert {
@@ -81,5 +80,15 @@ export default {
   background-color: var(--vt-c-alert);
   border-radius: 50%;
   padding: 3px;
+}
+
+@media (max-width: 767px) {
+  .bar {
+    flex-direction: row;
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    gap: 60px;
+    padding: 11px 20px;
+  }
 }
 </style>

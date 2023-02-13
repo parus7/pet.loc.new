@@ -9,7 +9,7 @@ import employeesData from "../../data/employeesData.json";
 </script>
 
 <template>
-  <template class="main">
+  <div class="main">
     <TheHeader
       @filterEmpl="filterData($event)"
       @resetFilters="onResetFilters()"
@@ -22,7 +22,7 @@ import employeesData from "../../data/employeesData.json";
       :employees="getEmployees().values()"
       @deleteEmoployee="onDeletete($event)"
     />
-  </template>
+  </div>
 </template>
 
 <script>
@@ -106,11 +106,13 @@ export default {
 <style scope>
 .main {
   display: grid;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 65px 1fr;
+  grid-column: 2 / 3;
+  grid-template-columns: 42px 1fr;
+  grid-template-rows: auto auto 1fr;
   gap: 10px;
 
+  max-width: 1024px;
   padding: 25px;
-  margin: auto;
+  margin: 0 auto;
 }
 </style>

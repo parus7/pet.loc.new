@@ -44,4 +44,10 @@ export default {
   text-align: center;
   margin: 40px 0;
 }
+@media  (max-width: 767px) {
+  .list {
+    grid-column: 1 / 3;
+     grid-row: 3 / 4;
+  }
+}
 </style>
