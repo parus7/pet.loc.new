@@ -4,26 +4,26 @@ import { mapState } from "pinia";
 
 import IconGift from "./icons/IconGift.vue";
 import IconOtel from "./icons/IconOtel.vue";
-import IconBurger from "./icons/IconBurger.vue";
+import IconFood from "./icons/IconFood.vue";
 </script>
 
 <template>
-  <div class="bar relative">
-    <button class="button-icon relative">
+  <div class="bar">
+    <button name="gift" class="button-icon relative">
       <IconGift />
-      <span v-if="(visible = getVisible())" class="bar__alert">
+      <span v-if="(visible = getVisibleAlertBirthday())" class="bar__alert">
         {{ onGetAlertBirthday() }}
       </span>
     </button>
 
-    <button class="button-icon"><IconOtel /></button>
-    <button class="button-icon"><IconBurger /></button>
+    <button name="otel" class="button-icon"><IconOtel /></button>
+    <button name="food" class="button-icon"><IconFood /></button>
   </div>
 </template>
 
 <script>
 export default {
-  components: { IconGift, IconOtel, IconBurger },
+  components: { IconGift, IconOtel, IconFood },
 
   data() {
     return {
@@ -36,7 +36,7 @@ export default {
   },
 
   methods: {
-    getVisible() {
+    getVisibleAlertBirthday() {
       return this.onGetAlertBirthday() >= 1 ? true : false;
     },
 
@@ -85,10 +85,17 @@ export default {
 @media (max-width: 767px) {
   .bar {
     flex-direction: row;
+    justify-content: center;
     grid-column: 1 / 3;
     grid-row: 2 / 3;
-    gap: 60px;
-    padding: 11px 20px;
+
+    gap: 100px;
+    padding: 3px;
+  }
+
+  .bar__alert {
+    left: 31px;
+    bottom: 10px;
   }
 }
 </style>

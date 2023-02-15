@@ -3,8 +3,7 @@ import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
 
 import IconAdd from "./icons/IconAdd.vue";
-import IconUp from "./icons/IconUp.vue";
-import IconDown from "./icons/IconDown.vue";
+import IconAlphabet from "./icons/IconAlphabet.vue";
 import IconSearch from "./icons/IconSearch.vue";
 import IconReset from "./icons/IconReset.vue";
 
@@ -13,9 +12,10 @@ import ThePopup from "./ThePopup.vue";
 
 <template>
   <div class="header">
-    <form class="header__form relative" @submit.prevent>
-      <div class="hint relative" data-name="создать сотрудника">
+    <form class="header__form" @submit.prevent>
+      <div class="hint" data-name="создать сотрудника">
         <button
+          name="create"
           type="button"
           class="button"
           aria-label="создать сотрудника"
@@ -32,70 +32,62 @@ import ThePopup from "./ThePopup.vue";
       >
         Вы хотите создать нового сотрудника?
       </ThePopup>
+      <div class="container__button header__button-icon relative">
+        <button
+          name="alphabet"
+          type="button"
+          class="button-icon"
+          aria-label="алфавитная сортировка"
+          @click="setAlphabetSort()"
+        >
+          <div class="hint relative" data-name="алфавитная сортировка">
+            <IconAlphabet />
+          </div>
+        </button>
 
-      <button
-        type="button"
-        class="button-icon header__button-icon down"
-        aria-label="сортировка А → Я"
-        @click="setAlphabetSortDown"
-      >
-        <div class="hint relative" data-name="А &#8594; Я">
-          <IconDown />
-        </div>
-      </button>
+        <select
+          id="filter"
+          class="header__form-search"
+          name="filter"
+          aria-label="поле выбора категории для поиска"
+          v-model="selected"
+        >
+          <option value="" disabled>Выберите категорию</option>
+          <option v-for="category in categories" :key="category.id">
+            {{ category.text }}
+          </option>
+        </select>
 
-      <button
-        type="button"
-        class="button-icon header__button-icon up"
-        aria-label="сортировка Я - А"
-        @click="setAlphabetSortUp"
-      >
-        <div class="hint relative" data-name="Я &#8594; А">
-          <IconUp />
-        </div>
-      </button>
+        <input
+          id="search"
+          type="text"
+          class="header__form-search"
+          name="search"
+          aria-label="поле поиска"
+          placeholder="Поиск..."
+          v-model="inputValue"
+        />
+        <button
+          type="button"
+          class="header__form-btn"
+          aria-label="поиск"
+          @click="onConvertSelected"
+        >
+          <IconSearch />
+        </button>
 
-      <select
-        id="filter"
-        class="header__form-search"
-        name="filter"
-        aria-label="поле выбора категории для поиска"
-        v-model="selected"
-      >
-        <option value="" disabled>Выберите категорию</option>
-        <option v-for="category in categories" :key="category.id">
-          {{ category.text }}
-        </option>
-      </select>
-
-      <input
-        id="search"
-        type="text"
-        class="header__form-search relative"
-        name="search"
-        aria-label="поле поиска"
-        placeholder="Поиск..."
-        v-model="inputValue"
-      />
-      <button
-        type="button"
-        class="header__form-btn"
-        aria-label="поиск"
-        @click="onConvertSelected"
-      >
-        <IconSearch />
-      </button>
-
-      <button
-        type="button"
-        class="button-icon header__button-icon reset"
-        aria-label="сброс фильтров"
-        @click="resetFilters"
-      >
-        <div class="hint relative" data-name="сброс фильтров">
-          <IconReset />
-        </div>
-      </button>
+        <button
+          name="reset"
+          type="button"
+          class="button-icon header__button-icon reset"
+          aria-label="сброс фильтров"
+          @click="resetFilters"
+        >
+          <div class="hint relative" data-name="сброс фильтров">
+            <IconReset />
+          </div>
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -145,7 +137,7 @@ export default {
       this.inputValue =
         this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1);
 
-      this.$emit("filterEmpl", {
+      this.$emit("emplFilter", {
         param: this.category.item,
         value: this.inputValue,
       });
@@ -154,16 +146,12 @@ export default {
       this.inputValue = "";
     },
 
+    setAlphabetSort() {
+      this.$emit("alphabetFilter");
+    },
+
     resetFilters() {
       this.$emit("resetFilters");
-    },
-
-    setAlphabetSortUp() {
-      this.$emit("up");
-    },
-
-    setAlphabetSortDown() {
-      this.$emit("down");
     },
   },
 };
@@ -171,10 +159,6 @@ export default {
 
 <style scoped>
 .header {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-
   grid-column: 1 / 3;
   grid-row: 1 / 2;
 
@@ -187,18 +171,14 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0;
+  padding: 10;
 }
-
-.container__button-alphabet {
-  display: flex;
-  justify-content: end;
-  width: 20%;
-  border: none;
+.header__button-icon {
+  max-width: 95%;
 }
 
 .header__form-search {
-  width: 37%;
+  width: 210px;
   text-overflow: ellipsis;
   padding: 5px 60px 5px 15px;
 }
@@ -206,14 +186,14 @@ export default {
 .header__form-btn {
   position: absolute;
   top: 0;
-  right: 35px;
+  right: 34px;
 
   width: 55px;
   height: 28px;
-  background-color: var(--vt-c-active-btn);
+  background-color: var(--vt-c-active-cloudy-btn);
   outline-color: var(--vt-c-outline);
   border: none;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 9px 9px 0;
   opacity: 0.6;
 }
 
@@ -222,30 +202,8 @@ export default {
 }
 
 @media (max-width: 767px) {
-  .header {
-    padding: 10px 30px;
-  }
-
   .header__form-btn {
-    right: 0;
-  }
-
-  .header__button-icon {
-    position: absolute;
-    top: 65px;
-    z-index: 11;
-  }
-  .down {
-    right: 100px;
-  }
-
-  .up {
-    right: 200px;
-  }
-
-  .reset {
-    top: 60px;
-    right: 0;
+    right: 57px;
   }
 }
 </style>

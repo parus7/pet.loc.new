@@ -11,10 +11,9 @@ import employeesData from "../../data/employeesData.json";
 <template>
   <div class="main">
     <TheHeader
-      @filterEmpl="filterData($event)"
+      @emplFilter="filterData($event)"
       @resetFilters="onResetFilters()"
-      @up="alphabetUp()"
-      @down="alphabetDown()"
+      @alphabetFilter="onAlphabetToggle()"
     >
     </TheHeader>
     <TheBar />
@@ -33,6 +32,7 @@ export default {
     return {
       employees: {},
       sortType: "null",
+      isAlphabet: true,
     };
   },
 
@@ -57,7 +57,6 @@ export default {
       this.employees = [...this.employees.values()].filter(
         (elem) => elem[event.param] == event.value
       );
-      // console.log(this.employees);
     },
 
     onResetFilters() {
@@ -82,12 +81,18 @@ export default {
       // console.log(this.employees, "alphabetUp");
     },
 
+    onAlphabetToggle() {
+      console.log(this.isAlphabet);
+      this.isAlphabet = !this.isAlphabet;
+    },
+
     getEmployees() {
       return this.employees;
     },
 
     onDeletete(id) {
       this.delEmployee(id);
+
       switch (this.sortType) {
         case "down":
           this.alphabetDown();

@@ -8,6 +8,7 @@
 
       <div class="container__button">
         <button
+          name="confirm"
           class="button popup__botton"
           aria-label="кнопка подтверждения действия"
           @click="okPopup"
@@ -15,6 +16,7 @@
           Да
         </button>
         <button
+          name="refusal"
           class="button popup__botton"
           aria-label="кнопка отмены действия"
           @click="closePopup"
@@ -78,5 +80,6 @@ export default {
 .popup__botton {
   width: 68px;
   padding: 8px 10px;
+  opacity: 0.6;
 }
 </style>

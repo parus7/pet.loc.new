@@ -8,10 +8,11 @@ import ThePopup from "./ThePopup.vue";
 
 <template>
   <ul class="employee">
-    <!--Если hide === true то не показывать сотрудника. -->
     <li
       class="employee__photo"
       :class="{ employee__status: !employee.hide }"
+      width="35"
+      heugth="35"
     ></li>
 
     <li class="employee__item">
@@ -31,6 +32,7 @@ import ThePopup from "./ThePopup.vue";
         tabindex="-1"
       >
         <button
+          name="transition"
           type="button"
           class="button-icon"
           aria-label="переход в профиль сотрудника"
@@ -44,12 +46,15 @@ import ThePopup from "./ThePopup.vue";
 
     <li>
       <button
+        name="delete"
         type="button"
         class="button-icon"
         aria-label="удаления сотрудника"
         @click="isOpen = true"
       >
-        <IconDelete />
+        <div class="hint relative" data-name="удаление сотрудника">
+          <IconDelete />
+        </div>
       </button>
 
       <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
@@ -103,7 +108,7 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: 5% 30% 20% 10% 15% 8% 8%;
+  grid-template-columns: 5% 30% 20% 10% 14% 6% 6%;
   gap: 10px;
 
   max-width: 100%;
@@ -141,7 +146,7 @@ export default {
 
 @media (max-width: 767px) {
   .employee {
-    grid-template-columns: 35% 25% 8% 17% 7% 7%;
+    grid-template-columns: 35% 22% 10% 14% 7% 7%;
     padding: 10px 40px;
   }
 

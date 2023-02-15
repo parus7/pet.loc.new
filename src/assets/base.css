@@ -10,6 +10,7 @@
 
   --vt-c-outline: rgba(255, 204, 0, 1);
   --vt-c-active-btn: rgba(95, 158, 160, 1);
+  --vt-c-active-cloudy-btn: rgba(95, 158, 160, 0.8);
   --vt-c-alert: rgba(205, 92, 92, 0.7);
 }
 
@@ -27,7 +28,6 @@ body {
   font-size: 0.8rem;
   text-rendering: optimizeLegibility;
   margin: 0 auto;
-  /* padding: 50px; */
 }
 
 .relative {
@@ -39,7 +39,7 @@ body {
 }
 
 svg:hover path {
-  fill: var(--vt-c-active-btn);
+  fill: var(--vt-c-grey-silver);
 }
 
 svg:active path {
@@ -65,7 +65,7 @@ svg:active path {
   font-size: 0.75rem;
   color: var(--vt-c-white);
   text-transform: uppercase;
-  background-color: var(--vt-c-active-btn);
+  background-color: var(--vt-c-active-cloudy-btn);
   outline-color: var(--vt-c-outline);
   border: none;
   border-radius: 8px;
@@ -121,4 +121,10 @@ label {
   width: 80px;
   height: auto;
   padding: 5px;
+}
+
+@media (max-width: 767px) {
+  .button-icon {
+    width: 48px;
+  }
 }

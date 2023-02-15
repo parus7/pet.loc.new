@@ -9,7 +9,8 @@ import IconClose from "../../components/icons/IconClose.vue";
 </script>
 
 <template>
-  <form class="card-form" @submit.prevent>
+  <form class="card-form" id="add-employee" @submit.prevent>
+    <!-- action="http://localhost:5173/form.html" -->
     <fieldset class="card-form__fullname" :disabled="!isEdit">
       <div class="card-form__photo" width="128" height="128"></div>
 
@@ -22,6 +23,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           tabindex="2"
           ref="lastName"
           v-model="employee.last_name"
+          required
         />
       </div>
 
@@ -33,6 +35,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           name="first_name"
           tabindex="3"
           v-model="employee.first_name"
+          required
         />
       </div>
 
@@ -173,6 +176,7 @@ import IconClose from "../../components/icons/IconClose.vue";
     <div class="container__button">
       <button
         tabindex="0"
+        name="edit"
         type="button"
         class="button"
         aria-label="кнопка редактирования данных сотрудника"
@@ -183,7 +187,8 @@ import IconClose from "../../components/icons/IconClose.vue";
 
       <RouterLink class="link" :to="{ name: 'main' }" tabindex="-1">
         <button
-          type="button"
+          name="save"
+          type="submit"
           class="button"
           tabindex="14"
           aria-label="кнопка сохранения данных и перехода на главную страницу"
@@ -251,6 +256,7 @@ export default {
 .card-form {
   display: grid;
   gap: 20px;
+
   background-color: var(--vt-c-white-mute);
 
   max-width: 768px;
@@ -290,5 +296,11 @@ fieldset {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
+}
+@media (max-width: 767px) {
+  .card-form {
+    border-radius: 0;
+    margin: 0;
+  }
 }
 </style>
