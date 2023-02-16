@@ -63,27 +63,17 @@ export default {
       this.employees = this.getAllEmployees;
     },
 
-    // А-Я
-    alphabetDown() {
-      this.sortType = "down";
-      this.employees = [...this.getAllEmployees.values()].sort((a, b) =>
-        a.cn.localeCompare(b.cn)
-      );
-      // console.log(this.employees, "alphabetDown");
-    },
-
-    // Я-А
-    alphabetUp() {
-      this.sortType = "up";
-      this.employees = [...this.getAllEmployees.values()].sort((a, b) =>
-        b.cn.localeCompare(a.cn)
-      );
-      // console.log(this.employees, "alphabetUp");
-    },
-
     onAlphabetToggle() {
-      console.log(this.isAlphabet);
       this.isAlphabet = !this.isAlphabet;
+
+      this.employees =
+        this.isAlphabet === true
+          ? [...this.getAllEmployees.values()].sort((a, b) =>
+              b.cn.localeCompare(a.cn)
+            )
+          : [...this.getAllEmployees.values()].sort((a, b) =>
+              a.cn.localeCompare(b.cn)
+            );
     },
 
     getEmployees() {
