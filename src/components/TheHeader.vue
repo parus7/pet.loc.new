@@ -15,7 +15,6 @@ import ThePopup from "./ThePopup.vue";
     <form class="header__form" @submit.prevent>
       <div class="hint" data-name="создать сотрудника">
         <button
-          name="create"
           type="button"
           class="button"
           aria-label="создать сотрудника"
@@ -34,7 +33,6 @@ import ThePopup from "./ThePopup.vue";
       </ThePopup>
       <div class="container__button header__button-icon relative">
         <button
-          name="alphabet"
           type="button"
           class="button-icon"
           aria-label="алфавитная сортировка"
@@ -48,7 +46,6 @@ import ThePopup from "./ThePopup.vue";
         <select
           id="filter"
           class="header__form-search"
-          name="filter"
           aria-label="поле выбора категории для поиска"
           v-model="selected"
         >
@@ -62,7 +59,6 @@ import ThePopup from "./ThePopup.vue";
           id="search"
           type="text"
           class="header__form-search"
-          name="search"
           aria-label="поле поиска"
           placeholder="Поиск..."
           v-model="inputValue"
@@ -77,7 +73,6 @@ import ThePopup from "./ThePopup.vue";
         </button>
 
         <button
-          name="reset"
           type="button"
           class="button-icon header__button-icon reset"
           aria-label="сброс фильтров"

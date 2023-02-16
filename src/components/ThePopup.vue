@@ -8,17 +8,15 @@
 
       <div class="container__button">
         <button
-          name="confirm"
           class="button popup__botton"
-          aria-label="кнопка подтверждения действия"
+          aria-label="подтверждение действия"
           @click="okPopup"
         >
           Да
         </button>
         <button
-          name="refusal"
           class="button popup__botton"
-          aria-label="кнопка отмены действия"
+          aria-label="отмены действия"
           @click="closePopup"
         >
           Нет

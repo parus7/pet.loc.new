@@ -19,7 +19,7 @@ import IconClose from "../../components/icons/IconClose.vue";
         <input
           id="last_name"
           type="text"
-          name="last_name"
+          aria-label="фамилия сотрудника"
           tabindex="2"
           ref="lastName"
           v-model="employee.last_name"
@@ -32,7 +32,7 @@ import IconClose from "../../components/icons/IconClose.vue";
         <input
           id="first_name"
           type="text"
-          name="first_name"
+          aria-label="имя сотрудника"
           tabindex="3"
           v-model="employee.first_name"
           required
@@ -44,7 +44,7 @@ import IconClose from "../../components/icons/IconClose.vue";
         <input
           id="middle_name"
           type="text"
-          name="middle_name"
+          aria-label="отчество сотрудника"
           tabindex="4"
           v-model="employee.middle_name"
         />
@@ -58,7 +58,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           <input
             id="id_employee"
             type="text"
-            name="id_employee"
+            aria-label="id сотрудника"
             v-model="employee.id"
             disabled
           />
@@ -68,7 +68,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           <label for="gender">Пол:</label>
           <select
             id="gender"
-            name="gender"
+            aria-label="пол сотрудника"
             tabindex="5"
             v-model="employee.gender"
           >
@@ -84,7 +84,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           <input
             id="born"
             type="text"
-            name="born"
+            aria-label="день рождения сотрудника"
             tabindex="6"
             v-model="employee.birthday"
           />
@@ -97,7 +97,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           <input
             id="phone"
             type="text"
-            name="phone"
+            aria-label="phone"
             tabindex="7"
             v-model="employee.telephone"
           />
@@ -108,7 +108,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           <input
             id="mobile"
             type="text"
-            name="mobile"
+            aria-label="мобильный номер сотрудника"
             tabindex="8"
             v-model="employee.mobile"
           />
@@ -119,7 +119,7 @@ import IconClose from "../../components/icons/IconClose.vue";
           <input
             id="email"
             type="text"
-            name="email"
+            aria-label="email сотрудника"
             tabindex="9"
             v-model="employee.email"
           />
@@ -133,7 +133,7 @@ import IconClose from "../../components/icons/IconClose.vue";
         <input
           id="city"
           type="text"
-          name="city"
+          aria-label="город проживания сотрудника"
           tabindex="10"
           v-model="employee.city"
         />
@@ -144,7 +144,7 @@ import IconClose from "../../components/icons/IconClose.vue";
         <input
           id="company"
           type="text"
-          name="company"
+          aria-label="город, в котором работает сотрудник"
           tabindex="11"
           v-model="employee.company"
         />
@@ -155,7 +155,7 @@ import IconClose from "../../components/icons/IconClose.vue";
         <input
           id="department"
           type="text"
-          name="department"
+          aria-label="департамент, в котором работает сотрудник"
           tabindex="12"
           v-model="employee.department"
         />
@@ -166,7 +166,7 @@ import IconClose from "../../components/icons/IconClose.vue";
         <input
           id="position"
           type="text"
-          name="position"
+          aria-label="должность сотрудника"
           tabindex="13"
           v-model="employee.title"
         />
@@ -176,7 +176,6 @@ import IconClose from "../../components/icons/IconClose.vue";
     <div class="container__button">
       <button
         tabindex="0"
-        name="edit"
         type="button"
         class="button"
         aria-label="кнопка редактирования данных сотрудника"
@@ -187,7 +186,6 @@ import IconClose from "../../components/icons/IconClose.vue";
 
       <RouterLink class="link" :to="{ name: 'main' }" tabindex="-1">
         <button
-          name="save"
           type="submit"
           class="button"
           tabindex="14"

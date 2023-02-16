@@ -9,15 +9,22 @@ import IconFood from "./icons/IconFood.vue";
 
 <template>
   <div class="bar">
-    <button name="gift" class="button-icon relative">
+    <button
+      aria-label="напоминание о сотрудниках, рожденных сегодня"
+      class="button-icon relative"
+    >
       <IconGift />
       <span v-if="(visible = getVisibleAlertBirthday())" class="bar__alert">
         {{ onGetAlertBirthday() }}
       </span>
     </button>
 
-    <button name="otel" class="button-icon"><IconOtel /></button>
-    <button name="food" class="button-icon"><IconFood /></button>
+    <button aria-label="ближайшие к офису отели" class="button-icon">
+      <IconOtel />
+    </button>
+    <button aria-label="билжайшие к офису кафе и рестораны" class="button-icon">
+      <IconFood />
+    </button>
   </div>
 </template>
 

@@ -32,7 +32,6 @@ import ThePopup from "./ThePopup.vue";
         tabindex="-1"
       >
         <button
-          name="transition"
           type="button"
           class="button-icon"
           aria-label="переход в профиль сотрудника"
@@ -46,10 +45,9 @@ import ThePopup from "./ThePopup.vue";
 
     <li>
       <button
-        name="delete"
         type="button"
         class="button-icon"
-        aria-label="удаления сотрудника"
+        aria-label="удаление сотрудника"
         @click="isOpen = true"
       >
         <div class="hint relative" data-name="удаление сотрудника">
