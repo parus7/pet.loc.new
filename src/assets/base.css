@@ -4,6 +4,7 @@
   --vt-c-white-background: rgba(255, 250, 250, 1);
   --vt-c-white-background-confirm: rgba(255, 250, 250, 0.2);
 
+  --vt-c-black-basic-font: rgba(0, 0, 0, 1);
   --vt-c-grey-main-font: rgba(71, 74, 81, 1);
   --vt-c-grey-font: rgba(130, 134, 140, 1);
   --vt-c-grey-silver: rgba(192, 192, 192, 1);
@@ -21,7 +22,7 @@
 body {
   min-width: 768px;
   min-height: 100vh;
-  color: var(--vt-c-grey-main-font);
+  color: var(--vt-c-black-basic-font);
   background-color: var(--vt-c-white-background);
   transition: color 0.5s, background-color 0.5s;
   font-family: Montserrat, Arial, Helvetica, Verdana, sans-serif;
@@ -86,6 +87,7 @@ svg:active path {
 
 input,
 select {
+  font-family: inherit;
   font-style: italic;
   background-color: var(--vt-c-white-background);
   border: none;
@@ -112,7 +114,7 @@ label {
 .hint:hover::after {
   position: absolute;
   right: -35px;
-  top: -33px;
+  top: -31px;
 
   content: attr(data-name);
   font-size: 0.7rem;

@@ -13,14 +13,14 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getEmplById: (state) => (emplId) => state.employees.get(emplId),
 
-    getAlertBirthday: (state) => (date) => {
-      let sum = 0;
-
-      [...state.employees.values()].forEach((elem) =>
-        elem.birthday === date ? sum++ : sum
-      );
-      return sum;
-    },
+    getAlertBirthday:
+      (state) =>
+      (date, sum = 0) => {
+        [...state.employees.values()].forEach((elem) =>
+          elem.birthday === date ? sum++ : sum
+        );
+        return sum;
+      },
   },
 
   actions: {
