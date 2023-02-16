@@ -64,6 +64,7 @@ export default {
     },
 
     onAlphabetToggle() {
+      this.sortType = "alphabet";
       this.isAlphabet = !this.isAlphabet;
 
       this.employees =
@@ -82,17 +83,7 @@ export default {
 
     onDeletete(id) {
       this.delEmployee(id);
-
-      switch (this.sortType) {
-        case "down":
-          this.alphabetDown();
-          break;
-        case "up":
-          this.alphabetUp();
-          break;
-        default:
-          this.employees = this.getAllEmployees;
-      }
+      this.employees = this.getAllEmployees;
     },
   },
 };
