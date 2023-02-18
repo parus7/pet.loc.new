@@ -1,11 +1,11 @@
 <script setup>
-import TheHeader from "../../components/TheHeader.vue";
-import TheList from "../../components/TheList.vue";
-import TheBar from "../../components/TheBar.vue";
+import TheHeader from "../components/TheHeader.vue";
+import TheList from "../components/TheList.vue";
+import TheBar from "../components/TheBar.vue";
 
-import { useEmplStore } from "../../stores/EmplStore";
+import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
-import employeesData from "../../data/employeesData.json";
+import employeesData from "../data/employeesData.json";
 </script>
 
 <template>
@@ -31,7 +31,6 @@ export default {
   data() {
     return {
       employees: {},
-      sortType: "null",
       isAlphabet: true,
     };
   },
@@ -64,7 +63,6 @@ export default {
     },
 
     onAlphabetToggle() {
-      this.sortType = "alphabet";
       this.isAlphabet = !this.isAlphabet;
 
       this.employees =

@@ -24,7 +24,7 @@ export const useEmplStore = defineStore("EmplStore", {
   },
 
   actions: {
-    setMapEmployees(data) {
+    setGender(data) {
       data.forEach((elem) =>
         elem.gender === "m"
           ? (elem.gender = "Мужской")
@@ -32,16 +32,29 @@ export const useEmplStore = defineStore("EmplStore", {
           ? (elem.gender = "Женский")
           : (elem.gender = "Неизвестный")
       );
+    },
+
+    setImage(data) {
+      data.forEach((elem) =>
+        elem.thumbnail == false
+          ? (elem.src = `./src/assets/img/0.jpg`)
+          : (elem.src = `./src/assets/img/${elem.id}.jpg`)
+      );
+    },
+
+    setMapEmployees(data) {
+      this.setGender(data);
+      this.setImage(data);
 
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
-      // console.log(this.employees, "setMapEmployees");
+      console.log(this.employees);
+
       return this.employees;
     },
 
     delEmployee(id) {
       this.employees.delete(id);
-      // console.log(this.employees);
     },
 
     addEmployee(updatedEmpl) {

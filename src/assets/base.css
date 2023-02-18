@@ -10,8 +10,12 @@
   --vt-c-grey-silver: rgba(192, 192, 192, 1);
 
   --vt-c-outline: rgba(255, 204, 0, 1);
-  --vt-c-active-btn: rgba(95, 158, 160, 1);
-  --vt-c-active-cloudy-btn: rgba(95, 158, 160, 0.9);
+  --vt-c-active-2: rgba(95, 158, 160, 0.2);
+  --vt-c-active-4: rgba(95, 158, 160, 0.4);
+  --vt-c-active-6: rgba(95, 158, 160, 0.6);
+  --vt-c-active-9: rgba(95, 158, 160, 0.9);
+  --vt-c-active-10: rgba(95, 158, 160, 1);
+
   --vt-c-alert: rgba(205, 92, 92, 0.7);
 }
 
@@ -66,9 +70,10 @@ svg:active path {
   font-size: 0.75rem;
   color: var(--vt-c-white);
   text-transform: uppercase;
-  background-color: var(--vt-c-active-cloudy-btn);
+  background-color: var(--vt-c-active-9);
   outline-color: var(--vt-c-outline);
   border: none;
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-6);
   border-radius: 8px;
   opacity: 0.6;
   margin-right: 25px;
@@ -91,7 +96,7 @@ select {
   font-style: italic;
   background-color: var(--vt-c-white-background);
   border: none;
-  box-shadow: 1px 1px 0 0 var(--vt-c-grey-silver);
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 9px;
   outline-color: var(--vt-c-outline);
   color: var(--vt-c-grey-main-font);
@@ -117,6 +122,7 @@ label {
   top: -31px;
 
   content: attr(data-name);
+  font-family: inherit;
   font-size: 0.7rem;
   color: var(--vt-c-grey-silver);
 

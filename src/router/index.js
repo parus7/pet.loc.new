@@ -1,10 +1,11 @@
-import { createWebHistory, createRouter } from "vue-router";
-import TheMain from "../assets/view/TheMain.vue";
-import TheCard from "../assets/view/TheCard.vue";
-import TheFormNewEmpl from "../assets/view/TheFormNewEmpl.vue";
+import { createMemoryHistory, createRouter } from "vue-router";
+import TheMain from "../view/TheMain.vue";
+import TheCard from "../view/TheCard.vue";
+import TheFormNewEmpl from "../view/TheFormNewEmpl.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createMemoryHistory(),
   routes: [
     {
       path: "/",

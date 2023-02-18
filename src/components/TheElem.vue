@@ -8,12 +8,16 @@ import ThePopup from "./ThePopup.vue";
 
 <template>
   <ul class="employee">
-    <li
-      class="employee__photo"
-      :class="{ employee__status: !employee.hide }"
-      width="35"
-      heugth="35"
-    ></li>
+    <li>
+      <img
+        class="employee__photo"
+        :class="{ employee__status: !employee.hide }"
+        :alt="`id: ${employee.id}`"
+        :src="employee.src"
+        width="35"
+        heugth="35"
+      />
+    </li>
 
     <li class="employee__item">
       {{ employee.cn }}
@@ -85,6 +89,7 @@ export default {
       department: String,
       company: String,
       city: String,
+      src: String,
     },
   },
 
@@ -106,7 +111,7 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: 5% 30% 20% 10% 14% 6% 6%;
+  grid-template-columns: 7% 30% 20% 10% 14% 6% 6%;
   gap: 10px;
 
   max-width: 100%;
@@ -114,6 +119,7 @@ export default {
   align-items: center;
   list-style: none;
   border-radius: 8px;
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   background-color: var(--vt-c-white-mute);
   padding: 10px 15px;
   margin: 0 0 10px;
@@ -127,6 +133,7 @@ export default {
   width: 35px;
   height: 35px;
   background-color: var(--vt-c-white-background);
+  border: 2px solid var(--vt-c-active-2);
   border-radius: 10%;
   margin: 0;
 }
@@ -136,10 +143,6 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-}
-.employee__status {
-  border: 2px solid var(--vt-c-active-btn);
-  opacity: 0.7;
 }
 
 @media (max-width: 767px) {

@@ -77,7 +77,7 @@ export default {
 
 .popup__botton {
   width: 68px;
-  padding: 8px 10px;
+  padding: 7px 10px;
   opacity: 0.6;
 }
 </style>

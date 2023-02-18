@@ -158,6 +158,7 @@ export default {
   grid-row: 1 / 2;
 
   background-color: var(--vt-c-white-mute);
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
   padding: 25px 20px;
 }
@@ -185,9 +186,10 @@ export default {
 
   width: 55px;
   height: 28px;
-  background-color: var(--vt-c-active-cloudy-btn);
+  background-color: var(--vt-c-active-9);
   outline-color: var(--vt-c-outline);
   border: none;
+  box-shadow: 1px 1px 0 0 var(--vt-c-active-6);
   border-radius: 0 9px 9px 0;
   opacity: 0.6;
 }

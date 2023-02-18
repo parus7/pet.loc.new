@@ -1,18 +1,23 @@
 <script setup>
-import { useEmplStore } from "../../stores/EmplStore";
+import { useEmplStore } from "../stores/EmplStore";
 import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "pinia";
 
-import ThePopup from "../../components/ThePopup.vue";
-import IconEdit from "../../components/icons/IconEdit.vue";
-import IconClose from "../../components/icons/IconClose.vue";
+import ThePopup from "../components/ThePopup.vue";
+import IconEdit from "../components/icons/IconEdit.vue";
+import IconClose from "../components/icons/IconClose.vue";
 </script>
 
 <template>
   <form class="card-form" id="add-employee" @submit.prevent>
-    <!-- action="http://localhost:5173/form.html" -->
     <fieldset class="card-form__fullname" :disabled="!isEdit">
-      <div class="card-form__photo" width="128" height="128"></div>
+      <img
+        class="card-form__photo"
+        :alt="`id: ${employee.id}`"
+        :src="employee.src"
+        width="110"
+        height="110"
+      />
 
       <div class="card-form__wrapper">
         <label for="last_name">Фамилия:</label>
@@ -256,6 +261,8 @@ export default {
   gap: 20px;
 
   background-color: var(--vt-c-white-mute);
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
+  border-radius: 20px;
 
   max-width: 768px;
   padding: 35px;
@@ -271,7 +278,7 @@ fieldset {
 
 .card-form__wrapper {
   display: grid;
-  grid-template-columns: 83px auto;
+  grid-template-columns: 90px auto;
   align-content: center;
 }
 
@@ -280,13 +287,14 @@ fieldset {
 }
 
 .card-form__fullname {
-  grid-template-columns: 148px auto;
+  grid-template-columns: 120px 1fr;
 }
 
 .card-form__photo {
   grid-row: 1/4;
   background-color: var(--vt-c-white-background);
   border-radius: 20%;
+  border: 5px solid var(--vt-c-active-2);
   margin-right: 10px;
 }
 
