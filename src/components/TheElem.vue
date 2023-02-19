@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import { vMaska } from "maska";
 
 import IconDelete from "./icons/IconDelete.vue";
 import IconFullinfo from "./icons/IconFullinfo.vue";
@@ -7,63 +8,77 @@ import ThePopup from "./ThePopup.vue";
 </script>
 
 <template>
-  <ul class="employee">
-    <li>
-      <img
-        class="employee__photo"
-        :class="{ employee__status: !employee.hide }"
-        :alt="`id: ${employee.id}`"
-        :src="employee.src"
-        width="35"
-        heugth="35"
-      />
-    </li>
+  <template class="employee">
+    <img
+      class="employee__photo"
+      :class="{ employee__status: !employee.hide }"
+      :alt="`id: ${employee.id}`"
+      :src="employee.src"
+      width="35"
+      heugth="35"
+    />
 
-    <li class="employee__item">
+    <span class="employee__item">
       {{ employee.cn }}
-    </li>
+    </span>
 
-    <li class="employee__item">{{ employee.email }}</li>
-    <li>{{ employee.telephone }}</li>
-    <li>{{ employee.mobile }}</li>
+    <span class="employee__item">{{ employee.email }}</span>
 
-    <li>
-      <RouterLink
-        :to="{
-          name: 'card',
-          params: { id: employee.id },
-        }"
-        tabindex="-1"
-      >
-        <button
-          type="button"
-          class="button-icon"
-          aria-label="переход в профиль сотрудника"
-        >
-          <div class="hint relative" data-name="переход в профиль">
-            <IconFullinfo />
-          </div>
-        </button>
-      </RouterLink>
-    </li>
+    <input
+      class="input-maska input-maska__min"
+      type="text"
+      aria-label="phone"
+      v-model="employee.telephone"
+      v-maska
+      data-maska="##-##"
+      tabindex="-1"
+      readonly
+    />
 
-    <li>
+    <input
+      class="input-maska"
+      type="text"
+      aria-label="mobile"
+      v-model="employee.mobile"
+      v-maska
+      data-maska="### ###-##-##"
+      tabindex="-1"
+      readonly
+    />
+
+    <RouterLink
+      :to="{
+        name: 'card',
+        params: { id: employee.id },
+      }"
+      tabindex="-1"
+    >
       <button
         type="button"
         class="button-icon"
-        aria-label="удаление сотрудника"
-        @click="isOpen = true"
+        aria-label="переход в профиль сотрудника"
       >
-        <div class="hint relative" data-name="удаление сотрудника">
-          <IconDelete />
+        <div class="hint relative" data-name="переход в профиль">
+          <IconFullinfo />
         </div>
       </button>
+    </RouterLink>
 
-      <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
-        >Вы хотите удалить сотрудника?
-      </ThePopup>
-    </li>
-  </ul>
+    <button
+      type="button"
+      class="button-icon"
+      aria-label="удаление сотрудника"
+      @click="isOpen = true"
+    >
+      <div class="hint relative" data-name="удаление сотрудника">
+        <IconDelete />
+      </div>
+    </button>
+
+    <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
+      >Вы хотите удалить сотрудника?
+    </ThePopup>
+  </template>
 </template>
 
 <script>
@@ -111,7 +126,7 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: 7% 30% 17% 8% 17% 6% 6%;
+  grid-template-columns: 6% 31% 19% 8% 15% 6% 6%;
   gap: 10px;
 
   line-height: 1.6;
@@ -126,6 +141,20 @@ export default {
 
 .employee:last-child {
   margin: 0;
+}
+
+.input-maska {
+  width: 100px;
+  background: inherit;
+  box-shadow: none;
+  font-size: 0.74rem;
+  font-style: normal;
+  padding: 0;
+  margin: 0;
+}
+
+.input-maska__min {
+  width: 50px;
 }
 
 .employee__photo {
@@ -147,7 +176,7 @@ export default {
 
 @media (max-width: 767px) {
   .employee {
-    grid-template-columns: 6% 30% 25% 7% 13% 8% 8%;
+    grid-template-columns: 6% 33% 20% 8% 15% 8% 8%;
     gap: 5px;
     padding: 10px 20px;
   }

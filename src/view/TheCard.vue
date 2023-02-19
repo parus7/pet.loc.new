@@ -2,6 +2,7 @@
 import { useEmplStore } from "../stores/EmplStore";
 import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "pinia";
+import { vMaska } from "maska";
 
 import ThePopup from "../components/ThePopup.vue";
 import IconEdit from "../components/icons/IconEdit.vue";
@@ -92,6 +93,8 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="день рождения сотрудника"
             tabindex="6"
             v-model="employee.birthday"
+            v-maska
+            data-maska="##.##"
           />
         </div>
       </fieldset>
@@ -105,6 +108,8 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="phone"
             tabindex="7"
             v-model="employee.telephone"
+            v-maska
+            data-maska="##-##"
           />
         </div>
 
@@ -116,6 +121,8 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="мобильный номер сотрудника"
             tabindex="8"
             v-model="employee.mobile"
+            v-maska
+            data-maska="### ###-##-##"
           />
         </div>
 

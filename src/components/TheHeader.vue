@@ -50,7 +50,7 @@ import ThePopup from "./ThePopup.vue";
           v-model="selected"
         >
           <option value="" disabled>Выберите категорию</option>
-          <option v-for="category in categories" :key="category.id">
+          <option v-for="category in categories" :key="category.text">
             {{ category.text }}
           </option>
         </select>
@@ -98,18 +98,18 @@ export default {
       inputValue: null,
 
       categories: [
-        { id: 0, text: "идентификационный номер", item: "id" },
-        { id: 1, text: "пол", item: "gender" },
-        { id: 2, text: "имя", item: "first_name" },
-        { id: 3, text: "фамилия", item: "last_name" },
-        { id: 4, text: "отчество", item: "middle_name" },
-        { id: 5, text: "день рождения", item: "birthday" },
-        { id: 6, text: "внутренний телефон", item: "telephone" },
-        { id: 7, text: "мобильный телефон", item: "mobile" },
-        { id: 8, text: "должность", item: "title" },
-        { id: 9, text: "отдел", item: "department" },
-        { id: 10, text: "компания", item: "company" },
-        { id: 11, text: "город", item: "city" },
+        { text: "идентификационный номер", item: "id" },
+        { text: "пол", item: "gender" },
+        { text: "имя", item: "first_name" },
+        { text: "фамилия", item: "last_name" },
+        { text: "отчество", item: "middle_name" },
+        { text: "день рождения", item: "birthday" },
+        { text: "внутренний телефон", item: "telephone" },
+        { text: "мобильный телефон", item: "mobile" },
+        { text: "должность", item: "title" },
+        { text: "отдел", item: "department" },
+        { text: "компания", item: "company" },
+        { text: "город", item: "city" },
       ],
     };
   },
@@ -182,7 +182,7 @@ export default {
 .header__form-btn {
   position: absolute;
   top: 0;
-  right: 47px;
+  right: 57px;
 
   width: 55px;
   height: 32px;
@@ -194,12 +194,12 @@ export default {
 }
 
 .header__button-icon {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 @media (max-width: 767px) {
   .header__form-btn {
-    right: 57px;
+    right: 67px;
   }
 }
 </style>
