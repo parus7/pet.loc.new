@@ -111,10 +111,9 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: 7% 30% 20% 10% 14% 6% 6%;
+  grid-template-columns: 7% 30% 17% 8% 17% 6% 6%;
   gap: 10px;
 
-  max-width: 100%;
   line-height: 1.6;
   align-items: center;
   list-style: none;
@@ -134,7 +133,8 @@ export default {
   height: 35px;
   background-color: var(--vt-c-white-background);
   border: 2px solid var(--vt-c-active-2);
-  border-radius: 10%;
+  border-radius: 14%;
+  box-shadow: 2px 2px 4px 1px var(--vt-c-active-6);
   margin: 0;
 }
 
@@ -147,12 +147,9 @@ export default {
 
 @media (max-width: 767px) {
   .employee {
-    grid-template-columns: 35% 22% 10% 14% 7% 7%;
-    padding: 10px 40px;
-  }
-
-  .employee__photo {
-    display: none;
+    grid-template-columns: 6% 30% 25% 7% 13% 8% 8%;
+    gap: 5px;
+    padding: 10px 20px;
   }
 }
 </style>

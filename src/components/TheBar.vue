@@ -78,8 +78,8 @@ export default {
 
 .bar__alert {
   position: absolute;
-  left: 19px;
-  bottom: 10px;
+  left: 24px;
+  bottom: 15px;
   font-size: 0.6rem;
   color: var(--vt-c-white);
   width: 15px;
@@ -102,8 +102,7 @@ export default {
   }
 
   .bar__alert {
-    left: 31px;
-    bottom: 10px;
+    left: 30px;
   }
 }
 </style>

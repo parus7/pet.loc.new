@@ -261,7 +261,7 @@ export default {
   gap: 20px;
 
   background-color: var(--vt-c-white-mute);
-  box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
+  box-shadow: 4px 4px 4px 0 var(--vt-c-active-4);
   border-radius: 20px;
 
   max-width: 768px;
@@ -295,6 +295,7 @@ fieldset {
   background-color: var(--vt-c-white-background);
   border-radius: 20%;
   border: 5px solid var(--vt-c-active-2);
+  box-shadow: 3px 3px 4px 1px var(--vt-c-active-4);
   margin-right: 10px;
 }
 

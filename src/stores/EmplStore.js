@@ -37,7 +37,7 @@ export const useEmplStore = defineStore("EmplStore", {
     setImage(data) {
       data.forEach((elem) =>
         elem.thumbnail == false
-          ? (elem.src = `./src/assets/img/0.jpg`)
+          ? (elem.src = `./src/assets/img/defaultPhoto.jpg`)
           : (elem.src = `./src/assets/img/${elem.id}.jpg`)
       );
     },
@@ -98,6 +98,7 @@ export const useEmplStore = defineStore("EmplStore", {
         department: "",
         company: "",
         city: "",
+        src: `./src/assets/img/defaultPhoto.jpg`,
       };
       this.employees.set(idNext, employee);
       return idNext;

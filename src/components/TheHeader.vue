@@ -182,14 +182,13 @@ export default {
 .header__form-btn {
   position: absolute;
   top: 0;
-  right: 34px;
+  right: 47px;
 
   width: 55px;
-  height: 28px;
+  height: 32px;
   background-color: var(--vt-c-active-9);
   outline-color: var(--vt-c-outline);
   border: none;
-  box-shadow: 1px 1px 0 0 var(--vt-c-active-6);
   border-radius: 0 9px 9px 0;
   opacity: 0.6;
 }
