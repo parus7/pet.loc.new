@@ -12,8 +12,8 @@ import employeesData from "../data/employeesData.json";
   <div class="main">
     <TheHeader
       @emplFilter="filterData($event)"
-      @resetFilters="onResetFilters()"
-      @alphabetFilter="onAlphabetToggle()"
+      @resetFilters="onResetFilters"
+      @alphabetFilter="onAlphabetToggle"
     >
     </TheHeader>
     <TheBar />
@@ -75,13 +75,13 @@ export default {
             );
     },
 
-    getEmployees() {
-      return this.employees;
-    },
-
     onDeletete(id) {
       this.delEmployee(id);
       this.employees = this.getAllEmployees;
+    },
+
+    getEmployees() {
+      return this.employees;
     },
   },
 };

@@ -1,6 +1,7 @@
 <script setup>
 import { useEmplStore } from ".././stores/EmplStore";
 import { mapActions } from "pinia";
+import { vMaska } from "maska";
 
 import IconAdd from "./icons/IconAdd.vue";
 import IconAlphabet from "./icons/IconAlphabet.vue";
@@ -27,7 +28,7 @@ import ThePopup from "./ThePopup.vue";
       <ThePopup
         :is-open="isOpen"
         @close="isOpen = false"
-        @ok="onCreateEmployee()"
+        @ok="onCreateEmployee"
       >
         Вы хотите создать нового сотрудника?
       </ThePopup>
@@ -36,7 +37,7 @@ import ThePopup from "./ThePopup.vue";
           type="button"
           class="button-icon"
           aria-label="алфавитная сортировка"
-          @click="setAlphabetSort()"
+          @click="setAlphabetSort"
         >
           <div class="hint relative" data-name="алфавитная сортировка">
             <IconAlphabet />
@@ -48,6 +49,7 @@ import ThePopup from "./ThePopup.vue";
           class="header__form-search"
           aria-label="поле выбора категории для поиска"
           v-model="selected"
+          @change="onChangeSelect"
         >
           <option value="" disabled>Выберите категорию</option>
           <option v-for="category in categories" :key="category.text">
@@ -61,13 +63,16 @@ import ThePopup from "./ThePopup.vue";
           class="header__form-search"
           aria-label="поле поиска"
           placeholder="Поиск..."
+          v-maska="onMasked"
           v-model="inputValue"
+          :data-maska="myMask"
         />
+
         <button
           type="button"
           class="header__form-btn"
           aria-label="поиск"
-          @click="onConvertSelected"
+          @click="onSendButtonClick"
         >
           <IconSearch />
         </button>
@@ -90,12 +95,22 @@ import ThePopup from "./ThePopup.vue";
 <script>
 export default {
   components: { ThePopup, IconReset, IconSearch },
+  directives: { maska: vMaska },
 
   data() {
     return {
       isOpen: false,
       selected: "",
       inputValue: null,
+
+      onMasked: {
+        masked: "",
+        unmasked: "",
+        completed: false,
+      },
+
+      category: {},
+      myMask: "",
 
       categories: [
         { text: "идентификационный номер", item: "id" },
@@ -119,23 +134,39 @@ export default {
 
     onCreateEmployee() {
       const id = this.createEmployee();
-
       this.$router.push({ name: "form", params: { id: id } });
       this.isOpen = false;
     },
 
-    onConvertSelected() {
+    onChangeSelect() {
       this.category = this.categories.find(
         (elem) => elem.text == this.selected
       );
 
+      this.myMask =
+        this.category.item === "birthday"
+          ? "##.##"
+          : this.category.item === "telephone"
+          ? "##-##"
+          : this.category.item === "mobile"
+          ? "### ###-##-##"
+          : "";
+    },
+
+    onSendButtonClick() {
       this.inputValue =
         this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1);
 
       this.$emit("emplFilter", {
         param: this.category.item,
         value: this.inputValue,
+        // value: this.onMasked.unmasked,
       });
+
+      // console.log({
+      //   param: this.category.item,
+      //   value: this.onMasked.unmasked,
+      // });
 
       this.selected = "";
       this.inputValue = "";

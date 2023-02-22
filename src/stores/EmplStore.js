@@ -48,7 +48,6 @@ export const useEmplStore = defineStore("EmplStore", {
 
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
-      console.log(this.employees);
 
       return this.employees;
     },
