@@ -1,7 +1,7 @@
 <script setup>
 import TheHeader from "../components/TheHeader.vue";
-import TheList from "../components/TheList.vue";
 import TheBar from "../components/TheBar.vue";
+import TheList from "../components/TheList.vue";
 
 import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
@@ -18,7 +18,9 @@ import employeesData from "../data/employeesData.json";
     </TheHeader>
     <TheBar />
     <TheList
-      :employees="getEmployees().values()"
+      :employees="employees"
+      :message="message"
+      :length="length"
       @deleteEmoployee="onDeletete($event)"
     />
   </div>
@@ -32,12 +34,14 @@ export default {
     return {
       employees: {},
       isAlphabet: true,
+      message: "",
+      length: null,
     };
   },
 
   created() {
     this.employees = this.getEmptyStore
-      ? this.setMapEmployees(employeesData)
+      ? this.setMapEmployees(employeesData).values()
       : this.getAllEmployees;
   },
 
@@ -53,9 +57,18 @@ export default {
     ...mapActions(useEmplStore, ["setMapEmployees", "onFilterData"]),
 
     filterData(event) {
-      this.employees = [...this.employees.values()].filter(
+      this.employees = [...this.employees].filter(
         (elem) => elem[event.param] == event.value
       );
+
+      console.log(Array.isArray(this.employees));
+
+      this.message =
+        this.employees.length === 0
+          ? "Нет сотрудников, соответствующих вашему поиску"
+          : "";
+
+      console.log(this.employees.length);
     },
 
     onResetFilters() {
@@ -67,21 +80,20 @@ export default {
 
       this.employees =
         this.isAlphabet === true
-          ? [...this.getAllEmployees.values()].sort((a, b) =>
-              b.cn.localeCompare(a.cn)
-            )
-          : [...this.getAllEmployees.values()].sort((a, b) =>
-              a.cn.localeCompare(b.cn)
-            );
+          ? [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn))
+          : [...this.getAllEmployees].sort((a, b) => a.cn.localeCompare(b.cn));
     },
 
     onDeletete(id) {
       this.delEmployee(id);
       this.employees = this.getAllEmployees;
-    },
+      console.log(this.employees);
+      console.log(Array.isArray(this.employees)); //true
 
-    getEmployees() {
-      return this.employees;
+      this.message =
+        this.employees.length === 0 ? "Список сотрудников пуст" : "";
+
+      console.log(this.employees);
     },
   },
 };

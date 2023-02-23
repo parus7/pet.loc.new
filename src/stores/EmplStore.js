@@ -9,7 +9,7 @@ export const useEmplStore = defineStore("EmplStore", {
     getEmptyStore: (state) =>
       !state.employees ? true : state.employees.size === 0,
 
-    getAllEmployees: (state) => state.employees,
+    getAllEmployees: (state) => [...state.employees.values()],
 
     getEmplById: (state) => (emplId) => state.employees.get(emplId),
 

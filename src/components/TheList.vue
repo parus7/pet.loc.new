@@ -4,7 +4,7 @@ import TheElem from "../components/TheElem.vue";
 
 <template>
   <div class="list">
-    <template v-if="employees">
+    <template v-if="employees.length !== 0">
       <TheElem
         v-for="employee in employees"
         :key="employee.id"
@@ -14,7 +14,7 @@ import TheElem from "../components/TheElem.vue";
     </template>
 
     <template v-else>
-      <h2 class="list__message">Список сотрудников пуст</h2>
+      <h2 class="list__message">{{ message }}</h2>
     </template>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
   components: { TheElem },
   props: {
     employees: Object,
+    message: String,
   },
 };
 </script>
