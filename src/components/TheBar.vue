@@ -70,6 +70,7 @@ export default {
   flex-direction: column;
   gap: 35px;
 
+  min-height: 40vh;
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
@@ -80,11 +81,13 @@ export default {
   position: absolute;
   left: 24px;
   bottom: 15px;
-  font-size: 0.6rem;
-  color: var(--vt-c-white);
+
   width: 15px;
   height: 15px;
-  vertical-align: center;
+  font-size: 0.6rem;
+  color: var(--vt-c-white);
+
+  /* vertical-align: center; */
   background-color: var(--vt-c-alert);
   border-radius: 50%;
   padding: 3px;
@@ -94,11 +97,13 @@ export default {
   .bar {
     flex-direction: row;
     justify-content: center;
-    grid-column: 1 / 3;
-    grid-row: 2 / 3;
 
+    grid-column: 1 / 3;
+    /* grid-row: 2 / 3; */
     gap: 100px;
-    padding: 3px;
+
+    min-height: 5vh;
+    padding: 10px;
   }
 
   .bar__alert {

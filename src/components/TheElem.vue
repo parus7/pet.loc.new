@@ -149,6 +149,7 @@ export default {
   box-shadow: none;
   font-size: 0.74rem;
   font-style: normal;
+  outline: none;
   padding: 0;
   margin: 0;
 }
@@ -174,7 +175,7 @@ export default {
   white-space: nowrap;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .employee {
     grid-template-columns: 6% 33% 20% 8% 15% 8% 8%;
     gap: 5px;

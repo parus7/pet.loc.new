@@ -24,7 +24,8 @@
 }
 
 body {
-  min-width: 768px;
+  position: relative;
+  min-width: 767px;
   min-height: 100vh;
   color: var(--vt-c-black-basic-font);
   background-color: var(--vt-c-white-background);

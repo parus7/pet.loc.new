@@ -188,16 +188,16 @@ export default {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
 
+  height: 6vh;
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 25px 20px;
+  padding: 20px;
 }
 
 .header__form {
   display: flex;
   justify-content: space-between;
-  width: 100%;
   padding: 10;
 }
 .header__button-icon {

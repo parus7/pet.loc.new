@@ -2,6 +2,7 @@
 import TheHeader from "../components/TheHeader.vue";
 import TheBar from "../components/TheBar.vue";
 import TheList from "../components/TheList.vue";
+import ThePagination from "../components/ThePagination.vue";
 
 import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
@@ -21,21 +22,29 @@ import employeesData from "../data/employeesData.json";
       :employees="employees"
       :message="message"
       :length="length"
+      :numberPage="numberPage"
+      :totalPage="totalPage"
       @deleteEmoployee="onDeletete($event)"
     />
+    <ThePagination />
   </div>
 </template>
 
 <script>
 export default {
-  components: { TheHeader, TheList, TheBar },
+  components: { TheHeader, TheList, TheBar, ThePagination },
 
   data() {
     return {
       employees: {},
       isAlphabet: true,
+
       message: "",
       length: null,
+
+      numberPage: 17,
+      limit: 13,
+      totalPage: 0,
     };
   },
 
@@ -43,6 +52,10 @@ export default {
     this.employees = this.getEmptyStore
       ? this.setMapEmployees(employeesData).values()
       : this.getAllEmployees;
+
+    this.totalPage = Math.ceil(this.numberPage / this.limit);
+    console.log(this.numberPage);
+    console.log(this.totalPage);
   },
 
   computed: {
@@ -61,14 +74,10 @@ export default {
         (elem) => elem[event.param] == event.value
       );
 
-      console.log(Array.isArray(this.employees));
-
       this.message =
         this.employees.length === 0
           ? "Нет сотрудников, соответствующих вашему поиску"
           : "";
-
-      console.log(this.employees.length);
     },
 
     onResetFilters() {
@@ -87,13 +96,9 @@ export default {
     onDeletete(id) {
       this.delEmployee(id);
       this.employees = this.getAllEmployees;
-      console.log(this.employees);
-      console.log(Array.isArray(this.employees)); //true
 
       this.message =
         this.employees.length === 0 ? "Список сотрудников пуст" : "";
-
-      console.log(this.employees);
     },
   },
 };
@@ -104,10 +109,12 @@ export default {
   display: grid;
   grid-column: 2 / 3;
   grid-template-columns: 55px 1fr;
-  grid-template-rows: auto auto 1fr;
-  gap: 10px;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 15px;
 
   max-width: 1024px;
+
+  height: 60vh;
   padding: 25px;
   margin: 0 auto;
 }
