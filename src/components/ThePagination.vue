@@ -1,6 +1,6 @@
 <template>
-  <div class="pagination">
-    <div class="pagination__page" v-for="numberPage in totalPage" :key="numberPage">
+  <div class="pagination" v-if="totalPage !== 1">
+    <div class="number" v-for="page in totalPage" :key="page">
       {{ numberPage }}
     </div>
   </div>
@@ -16,54 +16,48 @@ export default {
   data() {
     return {};
   },
-
-  created() {
-    console.log(this.numberPage);
-    console.log(this.totalPage);
-  },
 };
 </script>
 
 <style scoped>
 .pagination {
-  position: absolute;
-  left: 25px;
-  right: 25px;
-  bottom: 25px;
-
   display: flex;
-  margin-top: 15px;
-  /* grid-column: 1 / 3; */
-  /* grid-row: 4 / 5; */
+  align-items: center;
 
-  max-width: 1024px;
-  height: 5vh;
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
+
+  border: none;
   border-radius: 10px;
   padding: 5px 80px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .pagination__page {
-  min-width: 60px;
-  min-height: 60px;
+  width: 30px;
+  height: 30px;
 
-  border: none;
   outline-color: var(--vt-c-outline);
-  background-color: var(--vt-c-active-6);
   border-radius: 6px;
-  box-shadow: 2px 2px 4px 1px var(--vt-c-active-2);
-  padding: 10px;
+  box-shadow: 2px 2px 4px 1px var(--vt-c-active-4);
+}
+
+.number {
+  width: 30px;
+  height: 30px;
+
+  outline-color: var(--vt-c-outline);
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px 1px var(--vt-c-active-4);
 }
 
 .pagination__page-current {
-  background-color: var(--vt-c-active-9);
+  border: 2px solid var(--vt-c-active-6);
 }
 
-@media (min-width: 767px) {
+@media (max-width: 767px) {
   .pagination {
-    max-width: 1100px;
+    display: none;
   }
 }
 </style>

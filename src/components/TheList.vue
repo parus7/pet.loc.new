@@ -34,9 +34,6 @@ export default {
   display: flex;
   flex-direction: column;
 
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-
   padding: 0;
   margin: 0;
 }
@@ -44,12 +41,5 @@ export default {
   color: var(--vt-c-grey-font);
   text-align: center;
   margin: 40px 0;
-}
-
-@media (max-width: 767px) {
-  .list {
-    grid-column: 1 / 3;
-    grid-row: 3 / 4;
-  }
 }
 </style>

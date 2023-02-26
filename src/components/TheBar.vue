@@ -8,7 +8,7 @@ import IconFood from "./icons/IconFood.vue";
 </script>
 
 <template>
-  <div class="bar">
+  <div class="bar relative">
     <button
       aria-label="напоминание о сотрудниках, рожденных сегодня"
       class="button-icon relative"
@@ -66,48 +66,36 @@ export default {
 
 <style scoped>
 .bar {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 50px;
 
-  min-height: 40vh;
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 25px 10px;
+  padding: 75px 4px;
 }
 
 .bar__alert {
   position: absolute;
-  left: 24px;
-  bottom: 15px;
+  left: 25px;
+  bottom: 16px;
 
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   font-size: 0.6rem;
   color: var(--vt-c-white);
 
-  /* vertical-align: center; */
   background-color: var(--vt-c-alert);
-  border-radius: 50%;
-  padding: 3px;
+  border-radius: 75%;
 }
 
 @media (max-width: 767px) {
   .bar {
     flex-direction: row;
     justify-content: center;
-
-    grid-column: 1 / 3;
-    /* grid-row: 2 / 3; */
     gap: 100px;
-
-    min-height: 5vh;
-    padding: 10px;
-  }
-
-  .bar__alert {
-    left: 30px;
+    padding: 5px 0;
   }
 }
 </style>

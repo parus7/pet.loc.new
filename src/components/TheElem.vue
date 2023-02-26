@@ -126,8 +126,10 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: 6% 31% 19% 8% 15% 6% 6%;
-  gap: 10px;
+  grid-template-columns:
+    6% 35% 22% minmax(7%, auto) minmax(13%, auto)
+    minmax(7%, auto) minmax(6%, auto);
+  gap: 5px;
 
   line-height: 1.6;
   align-items: center;
@@ -135,7 +137,7 @@ export default {
   border-radius: 8px;
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   background-color: var(--vt-c-white-mute);
-  padding: 10px 15px;
+  padding: 10px;
   margin: 0 0 10px;
 }
 
@@ -147,7 +149,7 @@ export default {
   width: 100px;
   background: inherit;
   box-shadow: none;
-  font-size: 0.74rem;
+  font-size: 0.81rem;
   font-style: normal;
   outline: none;
   padding: 0;
@@ -175,11 +177,11 @@ export default {
   white-space: nowrap;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .employee {
-    grid-template-columns: 6% 33% 20% 8% 15% 8% 8%;
-    gap: 5px;
-    padding: 10px 20px;
+    grid-template-columns:
+      6% 32% 22% minmax(7%, auto) minmax(13%, auto)
+      minmax(8%, auto) minmax(7%, auto);
   }
 }
 </style>

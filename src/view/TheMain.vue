@@ -12,21 +12,22 @@ import employeesData from "../data/employeesData.json";
 <template>
   <div class="main">
     <TheHeader
+      class="main_header"
       @emplFilter="filterData($event)"
       @resetFilters="onResetFilters"
       @alphabetFilter="onAlphabetToggle"
     >
     </TheHeader>
-    <TheBar />
+    <TheBar class="main_bar" />
     <TheList
+      class="main_list"
       :employees="employees"
       :message="message"
-      :length="length"
-      :numberPage="numberPage"
       :totalPage="totalPage"
+      :numberPage="numberPage"
       @deleteEmoployee="onDeletete($event)"
     />
-    <ThePagination />
+    <ThePagination class="main_pagination" />
   </div>
 </template>
 
@@ -42,8 +43,8 @@ export default {
       message: "",
       length: null,
 
-      numberPage: 17,
-      limit: 13,
+      numberPage: 1,
+      limitPage: 13,
       totalPage: 0,
     };
   },
@@ -53,9 +54,11 @@ export default {
       ? this.setMapEmployees(employeesData).values()
       : this.getAllEmployees;
 
-    this.totalPage = Math.ceil(this.numberPage / this.limit);
-    console.log(this.numberPage);
-    console.log(this.totalPage);
+    console.log(this.employees);
+
+    this.totalPage = Math.ceil(this.getAllEmployees.length / this.limitPage);
+    console.log(this.totalPage); // 2
+    console.log(this.numberPage); // 1
   },
 
   computed: {
@@ -70,7 +73,7 @@ export default {
     ...mapActions(useEmplStore, ["setMapEmployees", "onFilterData"]),
 
     filterData(event) {
-      this.employees = [...this.employees].filter(
+      this.employees = [...this.getAllEmployees].filter(
         (elem) => elem[event.param] == event.value
       );
 
@@ -107,15 +110,47 @@ export default {
 <style scope>
 .main {
   display: grid;
-  grid-column: 2 / 3;
-  grid-template-columns: 55px 1fr;
-  grid-template-rows: auto auto 1fr auto;
-  gap: 15px;
+  gap: 10px;
+  grid-template-columns: min-content minmax(auto, 1024px);
+  grid-template-rows: min-content minmax(400px, auto) min-content;
+
+  grid-template-areas:
+    " header header  "
+    "bar list "
+    " pagination pagination ";
 
   max-width: 1024px;
 
-  height: 60vh;
-  padding: 25px;
+  padding: 20px;
   margin: 0 auto;
+}
+
+.main_header {
+  grid-area: header;
+}
+
+.main_bar {
+  grid-area: bar;
+}
+
+.main_list {
+  grid-area: list;
+}
+
+.main_pagination {
+  grid-area: pagination;
+}
+
+@media (max-width: 767px) {
+  .main {
+    grid-template-rows: auto 1fr;
+
+    grid-template-areas:
+      " header header  "
+      "bar bar "
+      "list list"
+      "list list";
+    padding: 15px;
+  }
 }
 </style>

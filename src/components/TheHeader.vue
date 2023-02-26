@@ -185,10 +185,6 @@ export default {
 
 <style scoped>
 .header {
-  grid-column: 1 / 3;
-  grid-row: 1 / 2;
-
-  height: 6vh;
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
@@ -198,10 +194,7 @@ export default {
 .header__form {
   display: flex;
   justify-content: space-between;
-  padding: 10;
-}
-.header__button-icon {
-  max-width: 95%;
+  padding: 0;
 }
 
 .header__form-search {
@@ -230,7 +223,7 @@ export default {
 
 @media (max-width: 767px) {
   .header__form-btn {
-    right: 67px;
+    right: 68px;
   }
 }
 </style>
