@@ -22,7 +22,9 @@ import ThePopup from "./ThePopup.vue";
       {{ employee.cn }}
     </span>
 
-    <span class="employee__item">{{ employee.email }}</span>
+    <span class="employee__item employee__item-email">{{
+      employee.email
+    }}</span>
 
     <input
       class="input-maska input-maska__min"
@@ -177,11 +179,18 @@ export default {
   white-space: nowrap;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 320px) and (max-width: 425px) {
   .employee {
     grid-template-columns:
-      6% 32% 22% minmax(7%, auto) minmax(13%, auto)
-      minmax(8%, auto) minmax(7%, auto);
+      43% minmax(10%, auto) minmax(12%, auto)
+      10% 8%;
+
+    padding: 10px 15px;
+  }
+
+  .employee__photo,
+  .employee__item-email {
+    display: none;
   }
 }
 </style>

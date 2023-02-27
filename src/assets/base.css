@@ -137,7 +137,7 @@ label {
   padding: 5px;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 320px) and (max-width: 425px) {
   .button-icon {
     width: 48px;
   }

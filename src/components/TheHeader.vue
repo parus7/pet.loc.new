@@ -198,7 +198,7 @@ export default {
 }
 
 .header__form-search {
-  width: 210px;
+  max-width: 180px;
   text-overflow: ellipsis;
   padding: 5px 60px 5px 15px;
 }
@@ -219,11 +219,5 @@ export default {
 
 .header__button-icon {
   margin-left: 20px;
-}
-
-@media (max-width: 767px) {
-  .header__form-btn {
-    right: 68px;
-  }
 }
 </style>

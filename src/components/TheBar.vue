@@ -66,14 +66,14 @@ export default {
 
 <style scoped>
 .bar {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   gap: 50px;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 75px 4px;
+  padding: 75px 6px;
 }
 
 .bar__alert {
@@ -94,7 +94,7 @@ export default {
   .bar {
     flex-direction: row;
     justify-content: center;
-    gap: 100px;
+    gap: 80px;
     padding: 5px 0;
   }
 }

@@ -23,11 +23,9 @@ import employeesData from "../data/employeesData.json";
       class="main_list"
       :employees="employees"
       :message="message"
-      :totalPage="totalPage"
-      :numberPage="numberPage"
       @deleteEmoployee="onDeletete($event)"
     />
-    <ThePagination class="main_pagination" />
+    <ThePagination class="main_pagination" :totalPage="totalPage" />
   </div>
 </template>
 
@@ -43,7 +41,6 @@ export default {
       message: "",
       length: null,
 
-      numberPage: 1,
       limitPage: 13,
       totalPage: 0,
     };
@@ -57,8 +54,6 @@ export default {
     console.log(this.employees);
 
     this.totalPage = Math.ceil(this.getAllEmployees.length / this.limitPage);
-    console.log(this.totalPage); // 2
-    console.log(this.numberPage); // 1
   },
 
   computed: {
@@ -112,16 +107,16 @@ export default {
   display: grid;
   gap: 10px;
   grid-template-columns: min-content minmax(auto, 1024px);
-  grid-template-rows: min-content minmax(400px, auto) min-content;
+  grid-template-rows: min-content 84vh min-content;
 
   grid-template-areas:
     " header header  "
-    "bar list "
+    " bar list "
     " pagination pagination ";
 
   max-width: 1024px;
 
-  padding: 20px;
+  padding: 17px;
   margin: 0 auto;
 }
 
@@ -147,9 +142,9 @@ export default {
 
     grid-template-areas:
       " header header  "
-      "bar bar "
-      "list list"
-      "list list";
+      " bar bar "
+      " list list "
+      " list list ";
     padding: 15px;
   }
 }

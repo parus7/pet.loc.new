@@ -1,7 +1,7 @@
 <template>
   <div class="pagination" v-if="totalPage !== 1">
-    <div class="number" v-for="page in totalPage" :key="page">
-      {{ numberPage }}
+    <div class="pagination__page" v-for="page in totalPage" :key="page">
+      {{ page }}
     </div>
   </div>
 </template>
@@ -10,12 +10,17 @@
 export default {
   props: {
     totalPage: Number,
-    numberPage: Number,
   },
 
-  data() {
-    return {};
-  },
+  // data() {
+  //   return {};
+  // },
+
+  // methods: {
+  //   get() {
+  //     console.log(this.totalPage);
+  //   },
+  // },
 };
 </script>
 
@@ -23,32 +28,23 @@ export default {
 .pagination {
   display: flex;
   align-items: center;
+  gap: 10px;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
 
   border: none;
   border-radius: 10px;
-  padding: 5px 80px;
+  padding: 6px 80px;
   margin: 0;
 }
 
 .pagination__page {
-  width: 30px;
-  height: 30px;
-
+  flex-basis: 30px;
   outline-color: var(--vt-c-outline);
   border-radius: 6px;
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-4);
-}
-
-.number {
-  width: 30px;
-  height: 30px;
-
-  outline-color: var(--vt-c-outline);
-  border-radius: 6px;
-  box-shadow: 2px 2px 4px 1px var(--vt-c-active-4);
+  padding: 10px 15px;
 }
 
 .pagination__page-current {

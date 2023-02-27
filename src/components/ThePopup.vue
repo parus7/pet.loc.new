@@ -67,7 +67,7 @@ export default {
   flex-direction: column;
   gap: 20px;
 
-  width: 300px;
+  flex-basis: 300px;
   height: auto;
   background: var(--vt-c-white);
   border-radius: 20px;

@@ -108,8 +108,6 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="phone"
             tabindex="7"
             v-model="employee.telephone"
-            v-maska
-            data-maska="##-##"
           />
         </div>
 
@@ -121,8 +119,6 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="мобильный номер сотрудника"
             tabindex="8"
             v-model="employee.mobile"
-            v-maska
-            data-maska="### ###-##-##"
           />
         </div>
 
