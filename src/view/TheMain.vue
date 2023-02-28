@@ -51,8 +51,6 @@ export default {
       ? this.setMapEmployees(employeesData).values()
       : this.getAllEmployees;
 
-    console.log(this.employees);
-
     this.totalPage = Math.ceil(this.getAllEmployees.length / this.limitPage);
   },
 

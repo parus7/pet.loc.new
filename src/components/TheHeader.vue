@@ -159,14 +159,8 @@ export default {
 
       this.$emit("emplFilter", {
         param: this.category.item,
-        value: this.inputValue,
-        // value: this.onMasked.unmasked,
+        value: this.onMasked.unmasked,
       });
-
-      // console.log({
-      //   param: this.category.item,
-      //   value: this.onMasked.unmasked,
-      // });
 
       this.selected = "";
       this.inputValue = "";

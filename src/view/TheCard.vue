@@ -93,7 +93,7 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="день рождения сотрудника"
             tabindex="6"
             v-model="employee.birthday"
-            v-maska
+            v-maska="onMasked"
             data-maska="##.##"
           />
         </div>
@@ -221,13 +221,18 @@ export default {
       paramsId: null,
       isEdit: false,
       isOpen: false,
+
+      onMasked: {
+        masked: "",
+        unmasked: "",
+        completed: false,
+      },
     };
   },
 
   created() {
     const paramsId = this.$route.params.id;
-
-    this.employee = this.getEmplById(paramsId);
+    this.employee = { ...this.getEmplById(paramsId) };
   },
 
   computed: {
@@ -240,7 +245,11 @@ export default {
     onSaveEmployee(paramsId) {
       this.isEdit = false;
       this.delEmployee(paramsId);
-      this.addEmployee(this.employee);
+
+      const unmaskedEmployee = { ...this.employee };
+      unmaskedEmployee.birthday = this.onMasked.unmasked;
+
+      this.addEmployee(unmaskedEmployee);
     },
 
     popupConfirm() {
