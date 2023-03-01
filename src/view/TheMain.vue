@@ -105,10 +105,10 @@ export default {
   display: grid;
   gap: 10px;
   grid-template-columns: min-content minmax(auto, 1024px);
-  grid-template-rows: min-content 84vh min-content;
+  grid-template-rows: min-content 85vh min-content;
 
   grid-template-areas:
-    " header header  "
+    " header header "
     " bar list "
     " pagination pagination ";
 
@@ -134,15 +134,16 @@ export default {
   grid-area: pagination;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 900px) {
   .main {
     grid-template-rows: auto 1fr;
 
     grid-template-areas:
-      " header header  "
-      " bar bar "
-      " list list "
-      " list list ";
+      " header  header"
+      " bar  bar"
+      " list list"
+      " pagination pagination ";
+
     padding: 15px;
   }
 }

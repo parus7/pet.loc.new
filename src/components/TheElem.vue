@@ -128,19 +128,16 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns:
-    6% 35% 22% minmax(7%, auto) minmax(13%, auto)
-    minmax(7%, auto) minmax(6%, auto);
-  gap: 5px;
+  grid-template-columns: auto minmax(auto, 35%) 21% repeat(4, auto);
+  gap: 15px;
 
-  line-height: 1.6;
   align-items: center;
   list-style: none;
   border-radius: 8px;
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   background-color: var(--vt-c-white-mute);
   padding: 10px;
-  margin: 0 0 10px;
+  margin-bottom: 10px;
 }
 
 .employee:last-child {
@@ -151,7 +148,7 @@ export default {
   width: 100px;
   background: inherit;
   box-shadow: none;
-  font-size: 0.81rem;
+  font-size: inherit;
   font-style: normal;
   outline: none;
   padding: 0;
@@ -173,23 +170,19 @@ export default {
 }
 
 .employee__item {
-  width: auto;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-@media (min-width: 320px) and (max-width: 425px) {
+@media screen and (max-width: 800px) {
   .employee {
-    grid-template-columns:
-      43% minmax(10%, auto) minmax(12%, auto)
-      10% 8%;
-
-    padding: 10px 15px;
+    grid-template-columns: repeat (6, auto);
+    grid-template-columns: 45% repeat(4, auto);
   }
 
-  .employee__photo,
-  .employee__item-email {
+  .employee__item-email,
+  .employee__photo {
     display: none;
   }
 }

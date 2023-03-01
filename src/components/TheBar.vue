@@ -68,12 +68,12 @@ export default {
 .bar {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 80px;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 75px 6px;
+  padding: 75px 15px;
 }
 
 .bar__alert {
@@ -81,20 +81,19 @@ export default {
   left: 25px;
   bottom: 16px;
 
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   font-size: 0.6rem;
   color: var(--vt-c-white);
 
   background-color: var(--vt-c-alert);
-  border-radius: 75%;
+  border-radius: 50%;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 900px) {
   .bar {
     flex-direction: row;
     justify-content: center;
-    gap: 80px;
     padding: 5px 0;
   }
 }
