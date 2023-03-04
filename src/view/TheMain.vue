@@ -21,7 +21,7 @@ import employeesData from "../data/employeesData.json";
     <TheBar class="main_bar" />
     <TheList
       class="main_list"
-      :employees="employees"
+      :employees="{ ...employees }"
       :message="message"
       @deleteEmoployee="onDeletete($event)"
     />

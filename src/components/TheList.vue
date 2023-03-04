@@ -8,7 +8,7 @@ import TheElem from "../components/TheElem.vue";
       <TheElem
         v-for="employee in employees"
         :key="employee.id"
-        :employee="employee"
+        :employee="{ ...employee }"
         @delEmpl="$emit('deleteEmoployee', employee.id)"
       />
     </template>

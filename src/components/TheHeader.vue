@@ -152,11 +152,13 @@ export default {
 
     onSendButtonClick() {
       this.inputValue =
-        this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1);
+        this.myMask === ""
+          ? this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1)
+          : this.onMasked.unmasked;
 
       this.$emit("emplFilter", {
         param: this.category.item,
-        value: this.onMasked.unmasked,
+        value: this.inputValue,
       });
 
       this.selected = "";
