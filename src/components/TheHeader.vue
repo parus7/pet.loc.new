@@ -42,7 +42,7 @@ import ThePopup from "./ThePopup.vue";
 
       <select
         id="filter"
-        class="header__form-search"
+        class="header__form-select"
         aria-label="поле выбора категории для поиска"
         v-model="selected"
         @change="onChangeSelect"
@@ -77,7 +77,7 @@ import ThePopup from "./ThePopup.vue";
 
       <button
         type="button"
-        class="button-icon header__button-icon reset"
+        class="button-icon header__button-reset"
         aria-label="сброс фильтров"
         @click="resetFilters"
       >
@@ -116,8 +116,8 @@ export default {
         { text: "фамилия", item: "last_name" },
         { text: "отчество", item: "middle_name" },
         { text: "день рождения", item: "birthday" },
-        { text: "внутренний телефон", item: "telephone" },
-        { text: "мобильный телефон", item: "mobile" },
+        { text: "внутренний тел", item: "telephone" },
+        { text: "мобильный тел", item: "mobile" },
         { text: "должность", item: "title" },
         { text: "отдел", item: "department" },
         { text: "компания", item: "company" },
@@ -179,7 +179,7 @@ export default {
 <style scoped>
 .header {
   display: flex;
-  flex-wrap: nowrap;
+  justify-content: space-between;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
@@ -188,15 +188,13 @@ export default {
 }
 
 .header__form {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  gap: 15px;
-  margin-left: auto;
+  display: flex;
+  gap: 10px;
 }
 
 .header__form-search {
   text-overflow: ellipsis;
-  padding: 5px 60px 5px 15px;
+  padding: 5px 65px 5px 20px;
   margin: 0;
 }
 
@@ -210,6 +208,24 @@ export default {
   border: none;
   border-radius: 0 9px 9px 0;
   opacity: 0.6;
-  padding: 3px 18px;
+  padding: 2px 18px;
+}
+
+@media screen and (max-width: 767px) {
+  .header__form {
+    flex-direction: column;
+  }
+
+  .header__form-search,
+  .header__form-select {
+    padding: 7px 65px 7px 20px;
+    margin: 0;
+  }
+
+  .header__button-reset {
+    position: absolute;
+    top: 35px;
+    right: 50px;
+  }
 }
 </style>

@@ -104,47 +104,39 @@ export default {
 .main {
   display: grid;
   gap: 10px;
-  grid-template-columns: min-content minmax(auto, 1024px);
-  grid-template-rows: min-content 85vh min-content;
-
-  grid-template-areas:
-    " header header "
-    " bar list "
-    " pagination pagination ";
-
-  max-width: 1024px;
-
+  grid-template-columns: min-content 1fr;
   padding: 17px;
   margin: 0 auto;
 }
 
-.main_header {
-  grid-area: header;
+.main_header,
+.main_pagination {
+  grid-column: 1/-1;
 }
 
 .main_bar {
-  grid-area: bar;
+  grid-column: 1/2;
+  grid-row: 2/4;
 }
 
 .main_list {
-  grid-area: list;
+  grid-column: 2/3;
 }
 
-.main_pagination {
-  grid-area: pagination;
+@media screen and (max-width: 991px) {
+  .main_bar,
+  .main_list {
+    grid-column: 1/-1;
+  }
+
+  .main_bar {
+    grid-row: 2/3;
+  }
 }
 
-@media screen and (max-width: 900px) {
-  .main {
-    grid-template-rows: auto 1fr;
-
-    grid-template-areas:
-      " header  header"
-      " bar  bar"
-      " list list"
-      " pagination pagination ";
-
-    padding: 15px;
+@media screen and (max-width: 767px) {
+  .main_pagination {
+    display: none;
   }
 }
 </style>

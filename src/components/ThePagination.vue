@@ -35,7 +35,7 @@ export default {
 
   border: none;
   border-radius: 10px;
-  padding: 6px 80px;
+  padding: 10px 80px;
   margin: 0;
 }
 

@@ -18,16 +18,14 @@ import ThePopup from "./ThePopup.vue";
       heugth="35"
     />
 
-    <span class="employee__item">
+    <span class="employee__cn">
       {{ employee.cn }}
     </span>
 
-    <span class="employee__item employee__item-email">{{
-      employee.email
-    }}</span>
+    <span class="employee__item-email">{{ employee.email }}</span>
 
     <input
-      class="input-maska input-maska__min"
+      class="employee__item-telephone input-maska"
       type="text"
       aria-label="phone"
       v-model="employee.telephone"
@@ -38,7 +36,7 @@ import ThePopup from "./ThePopup.vue";
     />
 
     <input
-      class="input-maska"
+      class="employee__item-mobile input-maska"
       type="text"
       aria-label="mobile"
       v-model="employee.mobile"
@@ -128,11 +126,10 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: auto minmax(auto, 35%) 21% repeat(4, auto);
-  gap: 15px;
+  grid-template-columns: auto minmax(auto, 30%) 1fr 50px 95px repeat(2, auto);
+  gap: 3%;
 
   align-items: center;
-  list-style: none;
   border-radius: 8px;
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   background-color: var(--vt-c-white-mute);
@@ -140,23 +137,13 @@ export default {
   margin-bottom: 10px;
 }
 
-.employee:last-child {
-  margin: 0;
-}
-
 .input-maska {
-  width: 100px;
   background: inherit;
   box-shadow: none;
-  font-size: inherit;
   font-style: normal;
   outline: none;
   padding: 0;
   margin: 0;
-}
-
-.input-maska__min {
-  width: 50px;
 }
 
 .employee__photo {
@@ -169,20 +156,30 @@ export default {
   margin: 0;
 }
 
-.employee__item {
+.employee__cn,
+.employee__item-email {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
   .employee {
-    grid-template-columns: repeat (6, auto);
-    grid-template-columns: 45% repeat(4, auto);
+    grid-template-columns: minmax(30%, auto) 11% 20% 8% 8%;
   }
 
   .employee__item-email,
   .employee__photo {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .employee {
+    grid-template-columns: 1fr repeat(2, auto);
+  }
+  .employee__item-telephone,
+  .employee__item-mobile {
     display: none;
   }
 }
