@@ -314,6 +314,7 @@ fieldset {
   grid-template-columns: auto 1fr;
   gap: 20px;
 }
+
 @media (max-width: 767px) {
   .card-form {
     border-radius: 0;

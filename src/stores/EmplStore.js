@@ -3,11 +3,14 @@ export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
       employees: new Map(),
+      isAlphabet: false,
     };
   },
   getters: {
     getEmptyStore: (state) =>
       !state.employees ? true : state.employees.size === 0,
+
+    getAlphabet: (state) => state.isAlphabet,
 
     getAllEmployees: (state) => [...state.employees.values()],
 
@@ -42,9 +45,25 @@ export const useEmplStore = defineStore("EmplStore", {
       );
     },
 
+    // onAlphabetToggle() {
+    //   console.log(this.isAlphabet);
+    //   console.log(this.getAllEmployees);
+
+    //   this.employees =
+    //     this.isAlphabet === false
+    //       ? [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn))
+    //       : [...this.getAllEmployees].sort((a, b) => a.cn.localeCompare(b.cn));
+
+    //   this.isAlphabet = !this.isAlphabet;
+    //   console.log(this.employees);
+    //   return this.employees;
+    // },
+
     setMapEmployees(data) {
       this.setGender(data);
       this.setImage(data);
+
+      this.employees = data.sort((a, b) => a.cn.localeCompare(b.cn));
 
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
@@ -72,6 +91,7 @@ export const useEmplStore = defineStore("EmplStore", {
         : "u";
 
       this.employees.set(updatedEmpl.id, updatedEmpl);
+
       return updatedEmpl;
     },
 

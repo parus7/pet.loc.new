@@ -14,7 +14,6 @@ import employeesData from "../data/employeesData.json";
     <TheHeader
       class="main_header"
       @emplFilter="filterData($event)"
-      @resetFilters="onResetFilters"
       @alphabetFilter="onAlphabetToggle"
     >
     </TheHeader>
@@ -36,7 +35,7 @@ export default {
   data() {
     return {
       employees: {},
-      isAlphabet: true,
+      isAlphabet: null,
 
       message: "",
       length: null,
@@ -52,6 +51,9 @@ export default {
       : this.getAllEmployees;
 
     this.totalPage = Math.ceil(this.getAllEmployees.length / this.limitPage);
+    this.isAlphabet = this.getAlphabet;
+
+    console.log(this.isAlphabet);
   },
 
   computed: {
@@ -59,11 +61,16 @@ export default {
       "getEmptyStore",
       "getAllEmployees",
       "delEmployee",
+      "getAlphabet",
     ]),
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees", "onFilterData"]),
+    ...mapActions(useEmplStore, [
+      "setMapEmployees",
+      "onFilterData",
+      "onAlphabetToggle",
+    ]),
 
     filterData(event) {
       this.employees = [...this.getAllEmployees].filter(
@@ -76,25 +83,29 @@ export default {
           : "";
     },
 
-    onResetFilters() {
-      this.employees = this.getAllEmployees;
-    },
-
     onAlphabetToggle() {
-      this.isAlphabet = !this.isAlphabet;
-
       this.employees =
-        this.isAlphabet === true
+        this.isAlphabet === false
           ? [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn))
-          : [...this.getAllEmployees].sort((a, b) => a.cn.localeCompare(b.cn));
+          : [...this.getAllEmployees];
+
+      this.isAlphabet = !this.isAlphabet;
+      return this.employees;
     },
 
     onDeletete(id) {
       this.delEmployee(id);
-      this.employees = this.getAllEmployees;
+      console.log(this.isAlphabet);
 
       this.message =
         this.employees.length === 0 ? "Список сотрудников пуст" : "";
+
+      // //this.employees = this.getAllEmployees;
+      this.isAlphabet = !this.isAlphabet;
+      this.employees = this.onAlphabetToggle();
+      console.log(this.employees);
+
+      console.log(this.employees.length);
     },
   },
 };

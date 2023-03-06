@@ -75,7 +75,7 @@ import ThePopup from "./ThePopup.vue";
         </button>
       </div>
 
-      <button
+      <!-- <button
         type="button"
         class="button-icon header__button-reset"
         aria-label="сброс фильтров"
@@ -84,7 +84,7 @@ import ThePopup from "./ThePopup.vue";
         <span class="hint relative" data-name="сброс фильтров">
           <IconReset />
         </span>
-      </button>
+      </button> -->
     </form>
   </div>
 </template>
@@ -169,9 +169,9 @@ export default {
       this.$emit("alphabetFilter");
     },
 
-    resetFilters() {
-      this.$emit("resetFilters");
-    },
+    // resetFilters() {
+    //   this.$emit("resetFilters");
+    // },
   },
 };
 </script>
