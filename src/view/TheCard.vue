@@ -93,7 +93,7 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="день рождения сотрудника"
             tabindex="6"
             v-model="employee.birthday"
-            v-maska="onMasked"
+            v-maska="maskaBirthday"
             data-maska="##.##"
           />
         </div>
@@ -108,6 +108,8 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="phone"
             tabindex="7"
             v-model="employee.telephone"
+            v-maska="maskaTelephone"
+            data-maska="##-##"
           />
         </div>
 
@@ -119,6 +121,8 @@ import IconClose from "../components/icons/IconClose.vue";
             aria-label="мобильный номер сотрудника"
             tabindex="8"
             v-model="employee.mobile"
+            v-maska="maskaMobile"
+            data-maska="### ###-##-##"
           />
         </div>
 
@@ -222,7 +226,19 @@ export default {
       isEdit: false,
       isOpen: false,
 
-      onMasked: {
+      maskaBirthday: {
+        masked: "",
+        unmasked: "",
+        completed: false,
+      },
+
+      maskaTelephone: {
+        masked: "",
+        unmasked: "",
+        completed: false,
+      },
+
+      maskaMobile: {
         masked: "",
         unmasked: "",
         completed: false,
@@ -247,7 +263,10 @@ export default {
       this.delEmployee(paramsId);
 
       const unmaskedEmployee = { ...this.employee };
-      unmaskedEmployee.birthday = this.onMasked.unmasked;
+
+      unmaskedEmployee.birthday = this.maskaBirthday.unmasked;
+      unmaskedEmployee.telephone = this.maskaTelephone.unmasked;
+      unmaskedEmployee.mobile = this.maskaMobile.unmasked;
 
       this.addEmployee(unmaskedEmployee);
     },

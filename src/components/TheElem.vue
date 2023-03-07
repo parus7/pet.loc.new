@@ -126,7 +126,7 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: auto minmax(auto, 30%) 1fr 50px 95px repeat(2, auto);
+  grid-template-columns: auto minmax(auto, 30%) 1fr 50px 105px repeat(2, auto);
   gap: 3%;
 
   align-items: center;
@@ -165,7 +165,7 @@ export default {
 
 @media screen and (max-width: 767px) {
   .employee {
-    grid-template-columns: minmax(30%, auto) 11% 20% 8% 8%;
+    grid-template-columns: minmax(30%, auto) 10% 22% 8% 8%;
   }
 
   .employee__item-email,

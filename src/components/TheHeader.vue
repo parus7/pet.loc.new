@@ -60,8 +60,8 @@ import ThePopup from "./ThePopup.vue";
           class="header__form-search"
           aria-label="поле поиска"
           placeholder="Поиск..."
-          v-maska="onMasked"
           v-model="inputValue"
+          v-maska="maskaSearch"
           :data-maska="myMask"
         />
 
@@ -100,7 +100,7 @@ export default {
       selected: "",
       inputValue: null,
 
-      onMasked: {
+      maskaSearch: {
         masked: "",
         unmasked: "",
         completed: false,
@@ -154,7 +154,7 @@ export default {
       this.inputValue =
         this.myMask === ""
           ? this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1)
-          : this.onMasked.unmasked;
+          : this.maskaSearch.unmasked;
 
       this.$emit("emplFilter", {
         param: this.category.item,

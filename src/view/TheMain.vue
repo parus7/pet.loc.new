@@ -77,10 +77,16 @@ export default {
         (elem) => elem[event.param] == event.value
       );
 
+      console.log(this.employees.length);
+
       this.message =
         this.employees.length === 0
           ? "Нет сотрудников, соответствующих вашему поиску"
           : "";
+
+      // this.isAlphabet = !this.isAlphabet;
+      // this.employees = this.onAlphabetToggle();
+      // console.log(this.employees);
     },
 
     onAlphabetToggle() {
@@ -101,9 +107,9 @@ export default {
         this.employees.length === 0 ? "Список сотрудников пуст" : "";
 
       // //this.employees = this.getAllEmployees;
-      this.isAlphabet = !this.isAlphabet;
-      this.employees = this.onAlphabetToggle();
-      console.log(this.employees);
+      // this.isAlphabet = !this.isAlphabet;
+      // this.employees = this.onAlphabetToggle();
+      // console.log(this.employees);
 
       console.log(this.employees.length);
     },
