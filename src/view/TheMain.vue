@@ -13,11 +13,16 @@ import employeesData from "../data/employeesData.json";
   <div class="main">
     <TheHeader
       class="main_header"
+      @alphabetFilter="onAlphabet($event)"
       @emplFilter="filterData($event)"
-      @alphabetFilter="onAlphabetToggle"
+      @emplCreate="onCreateEmployee()"
     >
     </TheHeader>
     <TheBar class="main_bar" />
+
+    <!-- {{ message }} -->
+    {{ isAlphabet }}
+
     <TheList
       class="main_list"
       :employees="{ ...employees }"
@@ -53,7 +58,7 @@ export default {
     this.totalPage = Math.ceil(this.getAllEmployees.length / this.limitPage);
     this.isAlphabet = this.getAlphabet;
 
-    console.log(this.isAlphabet);
+    this.onAlphabet();
   },
 
   computed: {
@@ -69,49 +74,60 @@ export default {
     ...mapActions(useEmplStore, [
       "setMapEmployees",
       "onFilterData",
-      "onAlphabetToggle",
+      "createEmployee",
     ]),
 
     filterData(event) {
+      this.onAlphabetToggle();
+
       this.employees = [...this.getAllEmployees].filter(
         (elem) => elem[event.param] == event.value
       );
 
-      console.log(this.employees.length);
+      // console.log(Array.isArray(this.employees));
+      // console.log(this.employees.length);
 
       this.message =
         this.employees.length === 0
           ? "Нет сотрудников, соответствующих вашему поиску"
           : "";
 
-      // this.isAlphabet = !this.isAlphabet;
-      // this.employees = this.onAlphabetToggle();
-      // console.log(this.employees);
+      // console.log(this.message);
     },
 
-    onAlphabetToggle() {
+    onAlphabet() {
       this.employees =
         this.isAlphabet === false
-          ? [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn))
-          : [...this.getAllEmployees];
+          ? [...this.getAllEmployees].sort((a, b) => a.cn.localeCompare(b.cn))
+          : [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn));
 
-      this.isAlphabet = !this.isAlphabet;
+      this.onAlphabetToggle();
       return this.employees;
     },
 
-    onDeletete(id) {
-      this.delEmployee(id);
-      console.log(this.isAlphabet);
+    onAlphabetToggle() {
+      this.isAlphabet = !this.isAlphabet;
+    },
+
+    onDeletete(event) {
+      this.onAlphabetToggle();
+
+      this.delEmployee(event.id);
+      this.employees = [...this.getAllEmployees];
 
       this.message =
         this.employees.length === 0 ? "Список сотрудников пуст" : "";
 
-      // //this.employees = this.getAllEmployees;
-      // this.isAlphabet = !this.isAlphabet;
-      // this.employees = this.onAlphabetToggle();
-      // console.log(this.employees);
+      this.onAlphabet();
+    },
 
-      console.log(this.employees.length);
+    onCreateEmployee() {
+      this.onAlphabetToggle();
+      this.createEmployee();
+
+      this.onAlphabet();
+
+      // console.log(this.isAlphabet);
     },
   },
 };
@@ -138,6 +154,7 @@ export default {
 
 .main_list {
   grid-column: 2/3;
+  /* margin: 0; */
 }
 
 @media screen and (max-width: 991px) {

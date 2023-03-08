@@ -225,6 +225,9 @@ export default {
       paramsId: null,
       isEdit: false,
       isOpen: false,
+      isAlphabet: null,
+
+      isAlphabet: null,
 
       maskaBirthday: {
         masked: "",
@@ -249,10 +252,17 @@ export default {
   created() {
     const paramsId = this.$route.params.id;
     this.employee = { ...this.getEmplById(paramsId) };
+    console.log(this.employee);
+
+    this.isAlphabet = this.getAlphabet;
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmplById", "getAllEmployees"]),
+    ...mapState(useEmplStore, [
+      "getEmplById",
+      "getAllEmployees",
+      "getAlphabet",
+    ]),
   },
 
   methods: {
@@ -260,6 +270,7 @@ export default {
 
     onSaveEmployee(paramsId) {
       this.isEdit = false;
+
       this.delEmployee(paramsId);
 
       const unmaskedEmployee = { ...this.employee };
@@ -268,6 +279,7 @@ export default {
       unmaskedEmployee.telephone = this.maskaTelephone.unmasked;
       unmaskedEmployee.mobile = this.maskaMobile.unmasked;
 
+      console.log(this.isAlphabet);
       this.addEmployee(unmaskedEmployee);
     },
 

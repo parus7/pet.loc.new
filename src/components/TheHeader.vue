@@ -24,7 +24,11 @@ import ThePopup from "./ThePopup.vue";
       </button>
     </span>
 
-    <ThePopup :is-open="isOpen" @close="isOpen = false" @ok="onCreateEmployee">
+    <ThePopup
+      :is-open="isOpen"
+      @close="isOpen = false"
+      @ok="onCreateEmployee($event)"
+    >
       Вы хотите создать нового сотрудника?
     </ThePopup>
 
@@ -63,6 +67,7 @@ import ThePopup from "./ThePopup.vue";
           v-model="inputValue"
           v-maska="maskaSearch"
           :data-maska="myMask"
+          @keyup.enter="onSendButtonClick"
         />
 
         <button
@@ -127,12 +132,15 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["createEmployee"]),
+    ...mapActions(useEmplStore, ["createEmployee", "createNextId"]),
 
     onCreateEmployee() {
-      const id = this.createEmployee();
+      const id = this.createNextId();
       this.$router.push({ name: "form", params: { id: id } });
+
       this.isOpen = false;
+
+      this.$emit("emplCreate", { id: id });
     },
 
     onChangeSelect() {

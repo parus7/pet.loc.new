@@ -104,6 +104,7 @@ select {
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 9px;
   outline-color: var(--vt-c-outline);
+  font-size: inherit;
   color: inherit;
   appearance: none;
   padding: 5px 20px;

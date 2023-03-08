@@ -45,30 +45,16 @@ export const useEmplStore = defineStore("EmplStore", {
       );
     },
 
-    // onAlphabetToggle() {
-    //   console.log(this.isAlphabet);
-    //   console.log(this.getAllEmployees);
-
-    //   this.employees =
-    //     this.isAlphabet === false
-    //       ? [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn))
-    //       : [...this.getAllEmployees].sort((a, b) => a.cn.localeCompare(b.cn));
-
-    //   this.isAlphabet = !this.isAlphabet;
-    //   console.log(this.employees);
-    //   return this.employees;
-    // },
-
     setMapEmployees(data) {
       this.setGender(data);
       this.setImage(data);
 
-      this.employees = data.sort((a, b) => a.cn.localeCompare(b.cn));
+      // this.employees = data.sort((a, b) => a.cn.localeCompare(b.cn));
 
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
 
-      console.log(this.employees);
+      // console.log(this.employees);
       return this.employees;
     },
 
@@ -76,32 +62,19 @@ export const useEmplStore = defineStore("EmplStore", {
       this.employees.delete(id);
     },
 
-    addEmployee(updatedEmpl) {
-      updatedEmpl.cn =
-        updatedEmpl.last_name +
-        " " +
-        updatedEmpl.first_name +
-        " " +
-        updatedEmpl.middle_name;
-
-      updatedEmpl.gender == "Мужской"
-        ? "m"
-        : updatedEmpl.gender == "Женский"
-        ? "f"
-        : "u";
-
-      this.employees.set(updatedEmpl.id, updatedEmpl);
-
-      return updatedEmpl;
-    },
-
-    createEmployee() {
+    createNextId() {
       const idNext = this.getEmptyStore
         ? "1"
         : String(Number(Math.max(...this.employees.keys())) + 1);
 
+      return idNext;
+    },
+
+    createEmployee() {
+      const idEmployee = this.createNextId();
+
       let employee = {
-        id: idNext,
+        id: idEmployee,
         name: "",
         hide: false,
         thumbnail: false,
@@ -120,8 +93,30 @@ export const useEmplStore = defineStore("EmplStore", {
         city: "",
         src: `./src/assets/img/defaultPhoto.jpg`,
       };
-      this.employees.set(idNext, employee);
-      return idNext;
+      this.employees.set(idEmployee, employee);
+
+      // console.log(this.employees);
+      return idEmployee;
+    },
+
+    addEmployee(updatedEmpl) {
+      updatedEmpl.cn =
+        updatedEmpl.last_name +
+        " " +
+        updatedEmpl.first_name +
+        " " +
+        updatedEmpl.middle_name;
+
+      updatedEmpl.gender == "Мужской"
+        ? "m"
+        : updatedEmpl.gender == "Женский"
+        ? "f"
+        : "u";
+
+      this.employees.set(updatedEmpl.id, updatedEmpl);
+      console.log(this.employees);
+      console.log(this.isAlphabet);
+      // return updatedEmpl;
     },
   },
 });

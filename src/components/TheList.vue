@@ -4,12 +4,15 @@ import TheElem from "../components/TheElem.vue";
 
 <template>
   <div class="list">
+    <!-- {{ message }} -->
+    <!-- {{ employees.length }} -->
+
     <template v-if="employees.length !== 0">
       <TheElem
         v-for="employee in employees"
         :key="employee.id"
         :employee="{ ...employee }"
-        @delEmpl="$emit('deleteEmoployee', employee.id)"
+        @deleteEmoployee="$emit('deleteEmoployee', { id: employee.id })"
       />
     </template>
 
@@ -33,9 +36,7 @@ export default {
 .list {
   display: flex;
   flex-direction: column;
-
-  padding: 0;
-  margin: 0;
+  /* padding: 0; */
 }
 .list__message {
   color: var(--vt-c-grey-font);

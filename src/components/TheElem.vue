@@ -116,7 +116,8 @@ export default {
 
   methods: {
     popupDelete() {
-      this.$emit("delEmpl", this.employee.id);
+      // console.log(this.employee.id);
+      this.$emit("deleteEmoployee", { id: this.employee.id });
       this.isOpen = false;
     },
   },
