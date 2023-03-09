@@ -36,7 +36,6 @@ export default {
 .list {
   display: flex;
   flex-direction: column;
-  /* padding: 0; */
 }
 .list__message {
   color: var(--vt-c-grey-font);

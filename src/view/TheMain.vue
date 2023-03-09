@@ -19,10 +19,7 @@ import employeesData from "../data/employeesData.json";
     >
     </TheHeader>
     <TheBar class="main_bar" />
-
     <!-- {{ message }} -->
-    {{ isAlphabet }}
-
     <TheList
       class="main_list"
       :employees="{ ...employees }"
@@ -56,8 +53,8 @@ export default {
       : this.getAllEmployees;
 
     this.totalPage = Math.ceil(this.getAllEmployees.length / this.limitPage);
-    this.isAlphabet = this.getAlphabet;
 
+    this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
   },
 
@@ -75,10 +72,11 @@ export default {
       "setMapEmployees",
       "onFilterData",
       "createEmployee",
+      "alphabetToggle",
     ]),
 
     filterData(event) {
-      this.onAlphabetToggle();
+      this.isAlphabet = this.alphabetToggle();
 
       this.employees = [...this.getAllEmployees].filter(
         (elem) => elem[event.param] == event.value
@@ -96,21 +94,18 @@ export default {
     },
 
     onAlphabet() {
+      this.isAlphabet = this.alphabetToggle();
+
       this.employees =
         this.isAlphabet === false
           ? [...this.getAllEmployees].sort((a, b) => a.cn.localeCompare(b.cn))
           : [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn));
 
-      this.onAlphabetToggle();
       return this.employees;
     },
 
-    onAlphabetToggle() {
-      this.isAlphabet = !this.isAlphabet;
-    },
-
     onDeletete(event) {
-      this.onAlphabetToggle();
+      this.isAlphabet = this.alphabetToggle();
 
       this.delEmployee(event.id);
       this.employees = [...this.getAllEmployees];
@@ -122,12 +117,8 @@ export default {
     },
 
     onCreateEmployee() {
-      this.onAlphabetToggle();
       this.createEmployee();
-
       this.onAlphabet();
-
-      // console.log(this.isAlphabet);
     },
   },
 };
@@ -154,7 +145,6 @@ export default {
 
 .main_list {
   grid-column: 2/3;
-  /* margin: 0; */
 }
 
 @media screen and (max-width: 991px) {

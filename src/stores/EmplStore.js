@@ -3,7 +3,7 @@ export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
       employees: new Map(),
-      isAlphabet: false,
+      isAlphabet: true,
     };
   },
   getters: {
@@ -117,6 +117,10 @@ export const useEmplStore = defineStore("EmplStore", {
       console.log(this.employees);
       console.log(this.isAlphabet);
       // return updatedEmpl;
+    },
+
+    alphabetToggle() {
+      return (this.isAlphabet = !this.isAlphabet);
     },
   },
 });

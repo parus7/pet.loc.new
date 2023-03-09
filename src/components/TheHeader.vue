@@ -1,6 +1,6 @@
 <script setup>
 import { useEmplStore } from ".././stores/EmplStore";
-import { mapActions } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { vMaska } from "maska";
 
 import IconAdd from "./icons/IconAdd.vue";
@@ -105,6 +105,8 @@ export default {
       selected: "",
       inputValue: null,
 
+      isAlphabet: null,
+
       maskaSearch: {
         masked: "",
         unmasked: "",
@@ -132,11 +134,20 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["createEmployee", "createNextId"]),
+    ...mapActions(useEmplStore, [
+      "createEmployee",
+      "createNextId",
+      "alphabetToggle",
+    ]),
 
     onCreateEmployee() {
+      this.isAlphabet = this.alphabetToggle();
+
       const id = this.createNextId();
-      this.$router.push({ name: "form", params: { id: id } });
+      this.$router.push({
+        name: "form",
+        params: { id: id },
+      });
 
       this.isOpen = false;
 

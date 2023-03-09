@@ -252,9 +252,6 @@ export default {
   created() {
     const paramsId = this.$route.params.id;
     this.employee = { ...this.getEmplById(paramsId) };
-    console.log(this.employee);
-
-    this.isAlphabet = this.getAlphabet;
   },
 
   computed: {
@@ -266,20 +263,23 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["delEmployee", "addEmployee"]),
+    ...mapActions(useEmplStore, [
+      "delEmployee",
+      "addEmployee",
+      "alphabetToggle",
+    ]),
 
     onSaveEmployee(paramsId) {
-      this.isEdit = false;
+      this.isAlphabet = this.alphabetToggle();
 
+      this.isEdit = false;
       this.delEmployee(paramsId);
 
       const unmaskedEmployee = { ...this.employee };
-
       unmaskedEmployee.birthday = this.maskaBirthday.unmasked;
       unmaskedEmployee.telephone = this.maskaTelephone.unmasked;
       unmaskedEmployee.mobile = this.maskaMobile.unmasked;
 
-      console.log(this.isAlphabet);
       this.addEmployee(unmaskedEmployee);
     },
 
