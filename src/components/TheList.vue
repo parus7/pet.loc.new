@@ -4,9 +4,6 @@ import TheElem from "../components/TheElem.vue";
 
 <template>
   <div class="list">
-    <!-- {{ message }} -->
-    <!-- {{ employees.length }} -->
-
     <template v-if="employees.length !== 0">
       <TheElem
         v-for="employee in employees"

@@ -79,17 +79,6 @@ import ThePopup from "./ThePopup.vue";
           <IconSearch />
         </button>
       </div>
-
-      <!-- <button
-        type="button"
-        class="button-icon header__button-reset"
-        aria-label="сброс фильтров"
-        @click="resetFilters"
-      >
-        <span class="hint relative" data-name="сброс фильтров">
-          <IconReset />
-        </span>
-      </button> -->
     </form>
   </div>
 </template>
@@ -187,10 +176,6 @@ export default {
     setAlphabetSort() {
       this.$emit("alphabetFilter");
     },
-
-    // resetFilters() {
-    //   this.$emit("resetFilters");
-    // },
   },
 };
 </script>

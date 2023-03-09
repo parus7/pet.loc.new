@@ -22,7 +22,7 @@ import employeesData from "../data/employeesData.json";
     <!-- {{ message }} -->
     <TheList
       class="main_list"
-      :employees="{ ...employees }"
+      :employees="[...employees]"
       :message="message"
       @deleteEmoployee="onDeletete($event)"
     />
@@ -82,15 +82,10 @@ export default {
         (elem) => elem[event.param] == event.value
       );
 
-      // console.log(Array.isArray(this.employees));
-      // console.log(this.employees.length);
-
       this.message =
         this.employees.length === 0
           ? "Нет сотрудников, соответствующих вашему поиску"
           : "";
-
-      // console.log(this.message);
     },
 
     onAlphabet() {
