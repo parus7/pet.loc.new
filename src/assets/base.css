@@ -52,8 +52,10 @@ svg:active path {
 }
 
 .container__button {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   justify-content: end;
+  gap: 45px;
 }
 
 .button-icon {
@@ -74,13 +76,11 @@ svg:active path {
 .button {
   color: var(--vt-c-white);
   text-transform: uppercase;
-  background-color: var(--vt-c-active-9);
+  background-color: var(--vt-c-active-6);
   outline-color: var(--vt-c-outline);
   border: none;
-  box-shadow: 4px 4px 4px 1px var(--vt-c-active-6);
+  box-shadow: 4px 4px 4px 1px var(--vt-c-active-4);
   border-radius: 8px;
-  opacity: 0.6;
-  margin-right: 25px;
   padding: 2px 20px;
 }
 
@@ -107,8 +107,7 @@ select {
   font-size: inherit;
   color: inherit;
   appearance: none;
-  padding: 5px 20px;
-  margin-left: 20px;
+  padding: 5px 15px;
 }
 
 ::placeholder {
@@ -118,11 +117,6 @@ select {
 input:disabled,
 select:disabled {
   font-style: normal;
-}
-
-label {
-  display: grid;
-  align-content: center;
 }
 
 .hint:hover::after {

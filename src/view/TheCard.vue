@@ -11,17 +11,17 @@ import IconClose from "../components/icons/IconClose.vue";
 
 <template>
   <form class="card-form" id="add-employee" @submit.prevent>
-    <fieldset class="card-form__fullname" :disabled="!isEdit">
-      <img
-        class="card-form__photo"
-        :alt="`id: ${employee.id}`"
-        :src="employee.src"
-        width="110"
-        height="110"
-      />
+    <img
+      class="card-form__photo"
+      :alt="`id: ${employee.id}`"
+      :src="employee.src"
+      width="110"
+      height="110"
+    />
 
+    <fieldset class="card-form__fullname" :disabled="!isEdit">
       <div class="card-form__wrapper">
-        <label for="last_name">Фамилия:</label>
+        <label for="last_name">Фамилия</label>
         <input
           id="last_name"
           type="text"
@@ -34,7 +34,7 @@ import IconClose from "../components/icons/IconClose.vue";
       </div>
 
       <div class="card-form__wrapper">
-        <label for="first_name">Имя:</label>
+        <label for="first_name">Имя</label>
         <input
           id="first_name"
           type="text"
@@ -46,7 +46,7 @@ import IconClose from "../components/icons/IconClose.vue";
       </div>
 
       <div class="card-form__wrapper">
-        <label for="middle_name">Отчество :</label>
+        <label for="middle_name">Отчество</label>
         <input
           id="middle_name"
           type="text"
@@ -57,91 +57,89 @@ import IconClose from "../components/icons/IconClose.vue";
       </div>
     </fieldset>
 
-    <fieldset class="card-form__contacts" :disabled="!isEdit">
-      <fieldset>
-        <div class="card-form__wrapper card-form__wrapper-min">
-          <label for="id_employee">ID:</label>
-          <input
-            id="id_employee"
-            type="text"
-            aria-label="id сотрудника"
-            v-model="employee.id"
-            disabled
-          />
-        </div>
+    <fieldset class="card-form__personal" :disabled="!isEdit">
+      <div class="card-form__wrapper">
+        <label for="id_employee">ID</label>
+        <input
+          id="id_employee"
+          type="text"
+          aria-label="id сотрудника"
+          v-model="employee.id"
+          disabled
+        />
+      </div>
 
-        <div class="card-form__wrapper card-form__wrapper-min">
-          <label for="gender">Пол:</label>
-          <select
-            id="gender"
-            aria-label="пол сотрудника"
-            tabindex="5"
-            v-model="employee.gender"
-          >
-            <option selected disabled>Выберите вариант</option>
-            <option>Мужской</option>
-            <option>Женский</option>
-            <option>Неизвестный</option>
-          </select>
-        </div>
+      <div class="card-form__wrapper">
+        <label for="gender">Пол</label>
+        <select
+          id="gender"
+          aria-label="пол сотрудника"
+          tabindex="5"
+          v-model="employee.gender"
+        >
+          <option selected disabled>Выберите вариант</option>
+          <option>Мужской</option>
+          <option>Женский</option>
+          <option>Неизвестный</option>
+        </select>
+      </div>
 
-        <div class="card-form__wrapper card-form__wrapper-min">
-          <label for="born">ДР:</label>
-          <input
-            id="born"
-            type="text"
-            aria-label="день рождения сотрудника"
-            tabindex="6"
-            v-model="employee.birthday"
-            v-maska="maskaBirthday"
-            data-maska="##.##"
-          />
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <div class="card-form__wrapper">
-          <label for="phone">Внутренний:</label>
-          <input
-            id="phone"
-            type="text"
-            aria-label="phone"
-            tabindex="7"
-            v-model="employee.telephone"
-            v-maska="maskaTelephone"
-            data-maska="##-##"
-          />
-        </div>
-
-        <div class="card-form__wrapper">
-          <label for="mobile">Мобильный:</label>
-          <input
-            id="mobile"
-            type="text"
-            aria-label="мобильный номер сотрудника"
-            tabindex="8"
-            v-model="employee.mobile"
-            v-maska="maskaMobile"
-            data-maska="### ###-##-##"
-          />
-        </div>
-
-        <div class="card-form__wrapper">
-          <label for="email">Эл. почта:</label>
-          <input
-            id="email"
-            type="text"
-            aria-label="email сотрудника"
-            tabindex="9"
-            v-model="employee.email"
-          />
-        </div>
-      </fieldset>
+      <div class="card-form__wrapper">
+        <label for="born">ДР</label>
+        <input
+          id="born"
+          type="text"
+          aria-label="день рождения сотрудника"
+          tabindex="6"
+          v-model="employee.birthday"
+          v-maska="maskaBirthday"
+          data-maska="##.##"
+        />
+      </div>
     </fieldset>
 
-    <fieldset :disabled="!isEdit">
+    <fieldset class="card-form__contacts" :disabled="!isEdit">
       <div class="card-form__wrapper">
-        <label for="company">Город:</label>
+        <label for="phone">Вн. тел.</label>
+        <input
+          id="phone"
+          type="text"
+          aria-label="phone"
+          tabindex="7"
+          v-model="employee.telephone"
+          v-maska="maskaTelephone"
+          data-maska="##-##"
+        />
+      </div>
+
+      <div class="card-form__wrapper">
+        <label for="mobile">Моб. тел.</label>
+        <input
+          id="mobile"
+          type="text"
+          aria-label="мобильный номер сотрудника"
+          tabindex="8"
+          v-model="employee.mobile"
+          v-maska="maskaMobile"
+          data-maska="### ###-##-##"
+        />
+      </div>
+
+      <div class="card-form__wrapper">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="text"
+          aria-label="email сотрудника"
+          tabindex="9"
+          v-model="employee.email"
+        />
+      </div>
+    </fieldset>
+
+    <fieldset class="card-form__address" :disabled="!isEdit">
+      <div class="card-form__wrapper">
+        <label for="company">Город</label>
         <input
           id="city"
           type="text"
@@ -152,7 +150,7 @@ import IconClose from "../components/icons/IconClose.vue";
       </div>
 
       <div class="card-form__wrapper">
-        <label for="company">Компания:</label>
+        <label for="company">Компания</label>
         <input
           id="company"
           type="text"
@@ -163,7 +161,7 @@ import IconClose from "../components/icons/IconClose.vue";
       </div>
 
       <div class="card-form__wrapper">
-        <label for="department">Отдел:</label>
+        <label for="department">Отдел</label>
         <input
           id="department"
           type="text"
@@ -174,7 +172,7 @@ import IconClose from "../components/icons/IconClose.vue";
       </div>
 
       <div class="card-form__wrapper">
-        <label for="position">Должность:</label>
+        <label for="position">Должность</label>
         <input
           id="position"
           type="text"
@@ -185,7 +183,7 @@ import IconClose from "../components/icons/IconClose.vue";
       </div>
     </fieldset>
 
-    <div class="container__button">
+    <div class="container__button card-form__buttons">
       <button
         tabindex="0"
         type="button"
@@ -299,57 +297,67 @@ export default {
 <style scoped>
 .card-form {
   display: grid;
+  grid-template-columns: min-content min-content auto;
+  grid-template-rows: repeat(5, auto);
   gap: 20px;
 
+  max-width: 768px;
   background-color: var(--vt-c-white-mute);
   box-shadow: 4px 4px 4px 0 var(--vt-c-active-4);
   border-radius: 20px;
-
-  max-width: 768px;
-  padding: 35px;
+  padding: 30px;
   margin: 30px auto;
 }
 
 fieldset {
-  display: grid;
   border: none;
-  gap: 10px;
-  margin: 0;
 }
 
 .card-form__wrapper {
   display: grid;
-  grid-template-columns: 90px auto;
-  align-content: center;
+  grid-template-columns: 90px 1fr;
+  align-items: center;
+  margin-bottom: 15px;
 }
-
-.card-form__wrapper-min {
-  grid-template-columns: 35px auto;
+.card-form__photo {
+  background-color: var(--vt-c-white-background);
+  border-radius: 20%;
+  border: 3px solid var(--vt-c-active-2);
+  box-shadow: 2px 3px 4px 1px var(--vt-c-active-4);
+  margin: 0 auto;
 }
 
 .card-form__fullname {
-  grid-template-columns: 120px 1fr;
+  grid-column: 2 / 4;
+}
+.card-form__personal {
+  grid-column: 1 / 3;
 }
 
-.card-form__photo {
-  grid-row: 1/4;
-  background-color: var(--vt-c-white-background);
-  border-radius: 20%;
-  border: 5px solid var(--vt-c-active-2);
-  box-shadow: 3px 3px 4px 1px var(--vt-c-active-4);
-  margin-right: 10px;
+.card-form__address {
+  grid-column: 1 / -1;
 }
 
-.card-form__contacts {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 20px;
+.card-form__buttons {
+  grid-column: 3 / 4;
+  padding: 0 15px;
 }
 
 @media (max-width: 767px) {
   .card-form {
+    display: flex;
+    flex-direction: column;
     border-radius: 0;
     margin: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .card-form {
+    padding: 15px;
+  }
+  .card-form__buttons {
+    margin: 0 auto;
   }
 }
 </style>

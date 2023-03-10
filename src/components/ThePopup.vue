@@ -12,7 +12,7 @@
           aria-label="подтверждение действия"
           @click="okPopup"
         >
-          Да
+          &nbsp;Да&nbsp;
         </button>
         <button
           class="button popup__botton"
@@ -54,30 +54,23 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-
   background: var(--vt-c-white-background-confirm);
-  z-index: 10;
 }
 .popup__body {
   position: absolute;
   top: 30%;
-  right: 35%;
+  right: 15%;
 
   display: flex;
   flex-direction: column;
   gap: 20px;
 
-  flex-basis: 300px;
-  height: auto;
   background: var(--vt-c-white);
   border-radius: 20px;
   padding: 20px;
-  z-index: 11;
 }
 
 .popup__botton {
-  width: 68px;
-  padding: 7px 10px;
-  opacity: 0.6;
+  line-height: 1.9;
 }
 </style>

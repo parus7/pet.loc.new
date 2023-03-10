@@ -207,11 +207,10 @@ export default {
   top: 0;
   right: 0;
 
-  background-color: var(--vt-c-active-9);
+  background-color: var(--vt-c-active-6);
   outline-color: var(--vt-c-outline);
   border: none;
   border-radius: 0 9px 9px 0;
-  opacity: 0.6;
   padding: 2px 18px;
 }
 
