@@ -55,11 +55,12 @@ export default {
   right: 0;
   bottom: 0;
   background: var(--vt-c-white-background-confirm);
+  z-index: 111;
 }
 .popup__body {
   position: absolute;
   top: 30%;
-  right: 15%;
+  right:30%;
 
   display: flex;
   flex-direction: column;
@@ -71,6 +72,6 @@ export default {
 }
 
 .popup__botton {
-  line-height: 1.9;
+  line-height: 2;
 }
 </style>

@@ -2,7 +2,6 @@
 import TheHeader from "../components/TheHeader.vue";
 import TheBar from "../components/TheBar.vue";
 import TheList from "../components/TheList.vue";
-import ThePagination from "../components/ThePagination.vue";
 
 import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
@@ -19,20 +18,18 @@ import employeesData from "../data/employeesData.json";
     >
     </TheHeader>
     <TheBar class="main_bar" />
-    <!-- {{ message }} -->
     <TheList
       class="main_list"
       :employees="[...employees]"
       :message="message"
       @deleteEmoployee="onDeletete($event)"
     />
-    <ThePagination class="main_pagination" :totalPage="totalPage" />
   </div>
 </template>
 
 <script>
 export default {
-  components: { TheHeader, TheList, TheBar, ThePagination },
+  components: { TheHeader, TheList, TheBar },
 
   data() {
     return {
@@ -41,9 +38,6 @@ export default {
 
       message: "",
       length: null,
-
-      limitPage: 13,
-      totalPage: 0,
     };
   },
 
@@ -51,8 +45,6 @@ export default {
     this.employees = this.getEmptyStore
       ? this.setMapEmployees(employeesData).values()
       : this.getAllEmployees;
-
-    this.totalPage = Math.ceil(this.getAllEmployees.length / this.limitPage);
 
     this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
@@ -124,6 +116,7 @@ export default {
   display: grid;
   gap: 10px;
   grid-template-columns: min-content 1fr;
+  grid-template-rows: auto 85vh auto;
   padding: 17px;
   margin: 0 auto;
 }
@@ -143,6 +136,10 @@ export default {
 }
 
 @media screen and (max-width: 991px) {
+  .main {
+    grid-template-rows: repeat(3, auto);
+  }
+  
   .main_bar,
   .main_list {
     grid-column: 1/-1;

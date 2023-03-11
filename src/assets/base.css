@@ -65,7 +65,7 @@ svg:active path {
   outline-color: var(--vt-c-outline);
   background: inherit;
   border-radius: 6px;
-  box-shadow: 2px 2px 4px 1px var(--vt-c-active-2);
+  box-shadow: 1px 1px 0 0 var(--vt-c-active-2);
   padding: 0;
 }
 
@@ -79,7 +79,7 @@ svg:active path {
   background-color: var(--vt-c-active-6);
   outline-color: var(--vt-c-outline);
   border: none;
-  box-shadow: 4px 4px 4px 1px var(--vt-c-active-4);
+  box-shadow: 5px 4px 4px 1px var(--vt-c-active-4);
   border-radius: 8px;
   padding: 2px 20px;
 }
@@ -119,19 +119,22 @@ select:disabled {
   font-style: normal;
 }
 
-.hint:hover::after {
+.help:hover::after {
   position: absolute;
-  right: -35px;
-  top: -43px;
+  right: -30px;
+  top: -30px;
 
   content: attr(data-name);
   font-family: inherit;
+  color: var(--vt-c-grey-font);
+  background: var(--vt-c-active-2);
+  border-radius: 6px;
   font-size: 0.7rem;
-  color: var(--vt-c-grey-silver);
+  text-transform: lowercase;
+  opacity: 0.8;
 
-  width: 80px;
   height: auto;
-  padding: 5px;
+  padding: 4px;
 }
 
 @media screen and (max-width: 767px) {

@@ -1,6 +1,7 @@
 import { createMemoryHistory, createRouter } from "vue-router";
 import TheMain from "../view/TheMain.vue";
 import TheCard from "../view/TheCard.vue";
+import TheArchive from "../view/TheArchive.vue";
 import TheFormNewEmpl from "../view/TheFormNewEmpl.vue";
 
 const router = createRouter({
@@ -11,6 +12,11 @@ const router = createRouter({
       path: "/",
       name: "main",
       component: TheMain,
+    },
+    {
+      path: "/archive",
+      name: "archive",
+      component: TheArchive,
     },
     {
       path: "/card/:id",

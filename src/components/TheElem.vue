@@ -53,27 +53,27 @@ import ThePopup from "./ThePopup.vue";
       }"
       tabindex="-1"
     >
+      <div class="help relative" data-name="в&nbsp;профиль">
+        <button
+          type="button"
+          class="button-icon"
+          aria-label="переход в профиль сотрудника"
+        >
+          <IconFullinfo />
+        </button>
+      </div>
+    </RouterLink>
+
+    <div class="help relative" data-name="поместить в архив">
       <button
         type="button"
         class="button-icon"
-        aria-label="переход в профиль сотрудника"
+        aria-label="поместить сотрудника в архив"
+        @click="isOpen = true"
       >
-        <div class="hint relative" data-name="переход в профиль">
-          <IconFullinfo />
-        </div>
-      </button>
-    </RouterLink>
-
-    <button
-      type="button"
-      class="button-icon"
-      aria-label="удаление сотрудника"
-      @click="isOpen = true"
-    >
-      <div class="hint relative" data-name="удаление сотрудника">
         <IconDelete />
-      </div>
-    </button>
+      </button>
+    </div>
 
     <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
       >Вы хотите удалить сотрудника?

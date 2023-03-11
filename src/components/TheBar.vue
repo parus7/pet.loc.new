@@ -5,26 +5,42 @@ import { mapState } from "pinia";
 import IconGift from "./icons/IconGift.vue";
 import IconOtel from "./icons/IconOtel.vue";
 import IconFood from "./icons/IconFood.vue";
+import IconArchive from "./icons/IconArchive.vue";
 </script>
 
 <template>
   <div class="bar relative">
-    <button
-      aria-label="напоминание о сотрудниках, рожденных сегодня"
-      class="button-icon relative"
-    >
-      <IconGift />
-      <span v-if="(visible = getVisibleAlertBirthday())" class="bar__alert">
-        {{ onGetAlertBirthday() }}
-      </span>
-    </button>
+    <div class="help relative" data-name="др сегодня">
+      <button
+        aria-label="напоминание о сотрудниках, рожденных сегодня"
+        class="button-icon relative"
+      >
+        <IconGift />
+        <span v-if="(visible = getVisibleAlertBirthday())" class="bar__alert">
+          {{ onGetAlertBirthday() }}
+        </span>
+      </button>
+    </div>
+    <div class="help relative" data-name="отели и гостиницы">
+      <button aria-label="ближайшие к офису отели" class="button-icon">
+        <IconOtel />
+      </button>
+    </div>
 
-    <button aria-label="ближайшие к офису отели" class="button-icon">
-      <IconOtel />
-    </button>
-    <button aria-label="билжайшие к офису кафе и рестораны" class="button-icon">
-      <IconFood />
-    </button>
+    <div class="help relative" data-name="кафе и рестораны">
+      <button
+        aria-label="билжайшие к офису кафе и рестораны"
+        class="button-icon"
+      >
+        <IconFood />
+      </button>
+    </div>
+
+    <div class="help relative" data-name="архив сотрудников">
+      <button aria-label="архив сотрудников" class="button-icon">
+        <IconArchive />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -68,12 +84,12 @@ export default {
 .bar {
   display: flex;
   flex-direction: column;
-  gap: 100px; /* 15% */
+  gap: 8%;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 75px 10px;
+  padding: 80px 20px;
 }
 
 .bar__alert {

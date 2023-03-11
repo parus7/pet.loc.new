@@ -13,16 +13,16 @@ import ThePopup from "./ThePopup.vue";
 
 <template>
   <div class="header">
-    <span class="hint" data-name="создать сотрудника">
-      <button
-        type="button"
-        class="button"
-        aria-label="создать сотрудника"
-        @click="isOpen = true"
-      >
+    <button
+      type="button"
+      class="button header__button-create relative"
+      aria-label="создать сотрудника"
+      @click="isOpen = true"
+    >
+      <div class="help" data-name="создать&nbsp;карточку">
         <IconAdd />
-      </button>
-    </span>
+      </div>
+    </button>
 
     <ThePopup
       :is-open="isOpen"
@@ -33,17 +33,6 @@ import ThePopup from "./ThePopup.vue";
     </ThePopup>
 
     <form class="header__form" @submit.prevent>
-      <button
-        type="button"
-        class="button-icon"
-        aria-label="алфавитная сортировка"
-        @click="setAlphabetSort"
-      >
-        <span class="hint relative" data-name="алфавитная сортировка">
-          <IconAlphabet />
-        </span>
-      </button>
-
       <select
         id="filter"
         class="header__form-select"
@@ -57,7 +46,7 @@ import ThePopup from "./ThePopup.vue";
         </option>
       </select>
 
-      <div class="container__button relative">
+      <div class="relative">
         <input
           id="search"
           type="text"
@@ -77,6 +66,20 @@ import ThePopup from "./ThePopup.vue";
           @click="onSendButtonClick"
         >
           <IconSearch />
+        </button>
+      </div>
+
+      <div
+        class="help relative"
+        data-name="по&nbsp;алфавиту&nbsp;или&nbsp;сброс"
+      >
+        <button
+          type="button "
+          class="button header__button-alphabet"
+          aria-label="алфавитная сортировка  и сброс фильтра поиска"
+          @click="setAlphabetSort"
+        >
+          <IconAlphabet />
         </button>
       </div>
     </form>
@@ -193,13 +196,13 @@ export default {
 
 .header__form {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
 
+.header__form-select,
 .header__form-search {
-  text-overflow: ellipsis;
-  padding: 5px 65px 5px 20px;
-  margin: 0;
+  color: inherit;
+  padding: 7px 65px 7px 30px;
 }
 
 .header__form-btn {
@@ -207,7 +210,7 @@ export default {
   top: 0;
   right: 0;
 
-  background-color: var(--vt-c-active-6);
+  background-color: inherit;
   outline-color: var(--vt-c-outline);
   border: none;
   border-radius: 0 9px 9px 0;
@@ -215,20 +218,24 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
+  .header,
   .header__form {
     flex-direction: column;
+    gap: 20px;
   }
 
-  .header__form-search,
-  .header__form-select {
-    padding: 7px 65px 7px 20px;
-    margin: 0;
+  .header__form-search {
+    width: 100%;
   }
 
-  .header__button-reset {
+  .header__button-create {
+    max-width: 70px;
+  }
+
+  .header__button-alphabet {
     position: absolute;
-    top: 35px;
-    right: 50px;
+    top: -151px;
+    right: 0;
   }
 }
 </style>
