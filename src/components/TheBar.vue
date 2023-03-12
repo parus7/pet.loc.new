@@ -1,11 +1,14 @@
 <script setup>
 import { useEmplStore } from ".././stores/EmplStore";
 import { mapState } from "pinia";
+import { RouterLink } from "vue-router";
 
 import IconGift from "./icons/IconGift.vue";
 import IconOtel from "./icons/IconOtel.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
+
+import TheArchive from "../view/TheArchive.vue";
 </script>
 
 <template>
@@ -36,11 +39,13 @@ import IconArchive from "./icons/IconArchive.vue";
       </button>
     </div>
 
-    <div class="help relative" data-name="архив сотрудников">
-      <button aria-label="архив сотрудников" class="button-icon">
-        <IconArchive />
-      </button>
-    </div>
+    <RouterLink :to="{ name: 'archive' }" tabindex="-1">
+      <div class="help relative" data-name="архив сотрудников">
+        <button aria-label="архив сотрудников" class="button-icon">
+          <IconArchive />
+        </button>
+      </div>
+    </RouterLink>
   </div>
 </template>
 
