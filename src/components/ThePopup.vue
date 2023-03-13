@@ -1,3 +1,7 @@
+<script setup>
+import TheButton from "./TheButton.vue";
+</script>
+
 <template>
   <div v-if="isOpen" class="popup" @click="closePopup">
     <div class="popup__body" @click.stop>
@@ -7,20 +11,22 @@
       </span>
 
       <div class="container__button">
-        <button
-          class="button popup__botton"
+        <TheButton
+          class="popup__botton"
           aria-label="подтверждение действия"
           @click="okPopup"
         >
           &nbsp;Да&nbsp;
-        </button>
-        <button
-          class="button popup__botton"
+        </TheButton>
+
+        <TheButton
+          type="button"
+          class="popup__botton"
           aria-label="отмены действия"
           @click="closePopup"
         >
           Нет
-        </button>
+        </TheButton>
       </div>
     </div>
   </div>
@@ -28,6 +34,7 @@
 
 <script>
 export default {
+  components: { TheButton },
   props: {
     isOpen: {
       type: Boolean,
@@ -60,7 +67,7 @@ export default {
 .popup__body {
   position: absolute;
   top: 30%;
-  right:30%;
+  right: 30%;
 
   display: flex;
   flex-direction: column;

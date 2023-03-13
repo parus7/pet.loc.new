@@ -3,12 +3,12 @@ export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
       employees: new Map(),
+      archive: new Map(),
       isAlphabet: true,
     };
   },
   getters: {
-    getEmptyStore: (state) =>
-      !state.employees ? true : state.employees.size === 0,
+    getEmptyStore: (state) => (obj) => !state.obj ? true : state.obj.size === 0,
 
     getAlphabet: (state) => state.isAlphabet,
 

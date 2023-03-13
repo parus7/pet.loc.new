@@ -1,45 +1,42 @@
 <script setup>
+// import TheList from "../components/TheList.vue";
+
+import { useEmplStore } from "../stores/EmplStore";
+import { mapState, mapActions } from "pinia";
 import employeesArchive from "../data/employeesArchive.json";
-import { mapActions } from "pinia";
-import { useEmplArchive } from "../stores/ArchiveStore";
 </script>
 
 <template>
-  <div>{{ emplArchive }}</div>
-  <div>{{ Sidr.gender }}</div>
-  <div>{{ Sidr }}</div>
+  <div>{{ archive }}</div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      emplArchive: {},
-      length: null,
-      Sidr: {},
+      archive: {},
+      aLength: null,
+
+      aMessage: "",
     };
   },
 
   created() {
-    this.emplArchive = this.setMapEmployeesArchive(employeesArchive);
-    console.log(this.employeesArchive);
+    this.archive = this.getEmptyStore(this.archive)
+      ? this.setMapEmployees(employeesArchive).values()
+      : this.getAllEmployees(this.archive);
 
-    this.Sidr = this.emplArchive.get("111");
-    console.log(this.Sidr);
+    console.log(this.archive);
+  },
+
+  computed: {
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"]),
   },
 
   methods: {
-    ...mapActions(useEmplArchive, ["setMapEmployeesArchive"]),
+    ...mapActions(useEmplStore, ["setMapEmployees"]),
   },
 };
 </script>
 
-<style scoped>
-div {
-  width: 600px;
-  height: 300px;
-  background: var(--vt-c-active-2);
-  padding: 40px;
-  margin: 0 auto;
-}
-</style>
+<style scoped></style>

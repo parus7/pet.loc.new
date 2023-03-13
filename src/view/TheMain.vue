@@ -42,9 +42,13 @@ export default {
   },
 
   created() {
-    this.employees = this.getEmptyStore
+    // console.log(this.getEmptyStore(this.employees));
+
+    this.employees = this.getEmptyStore(this.employees)
       ? this.setMapEmployees(employeesData).values()
-      : this.getAllEmployees;
+      : this.getAllEmployees(this.employees);
+
+    // this.employees = this.setMapEmployees(employeesData).values();
 
     this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
@@ -139,7 +143,7 @@ export default {
   .main {
     grid-template-rows: repeat(3, auto);
   }
-  
+
   .main_bar,
   .main_list {
     grid-column: 1/-1;

@@ -8,7 +8,7 @@
         "first_name": "Иван",
         "last_name": "Иванов",
         "middle_name": "Иванович",
-        "birthday": "1103",
+        "birthday": "1403",
         "email": "I.Ivanov@ya.ru",
         "cn": "Иванов Иван Иванович",
         "telephone": "1000",
@@ -97,7 +97,7 @@
     {
         "id": "6",
         "name": "O.Borodinov",
-        "hide": false,
+        "hide": true,
         "thumbnail": false,
         "gender": "u",
         "first_name": "Осип",

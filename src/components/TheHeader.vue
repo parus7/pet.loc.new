@@ -9,20 +9,20 @@ import IconSearch from "./icons/IconSearch.vue";
 import IconReset from "./icons/IconReset.vue";
 
 import ThePopup from "./ThePopup.vue";
+import TheButton from "./TheButton.vue";
 </script>
 
 <template>
   <div class="header">
-    <button
-      type="button"
-      class="button header__button-create relative"
+    <TheButton
+      class="header__button-create relative"
       aria-label="создать сотрудника"
       @click="isOpen = true"
     >
       <div class="help" data-name="создать&nbsp;карточку">
         <IconAdd />
       </div>
-    </button>
+    </TheButton>
 
     <ThePopup
       :is-open="isOpen"
@@ -31,6 +31,7 @@ import ThePopup from "./ThePopup.vue";
     >
       Вы хотите создать нового сотрудника?
     </ThePopup>
+
 
     <form class="header__form" @submit.prevent>
       <select
@@ -73,14 +74,13 @@ import ThePopup from "./ThePopup.vue";
         class="help relative"
         data-name="по&nbsp;алфавиту&nbsp;или&nbsp;сброс"
       >
-        <button
-          type="button "
-          class="button header__button-alphabet"
+        <TheButton
+          class="header__button-alphabet"
           aria-label="алфавитная сортировка  и сброс фильтра поиска"
           @click="setAlphabetSort"
         >
           <IconAlphabet />
-        </button>
+        </TheButton>
       </div>
     </form>
   </div>
@@ -88,7 +88,7 @@ import ThePopup from "./ThePopup.vue";
 
 <script>
 export default {
-  components: { ThePopup, IconReset, IconSearch },
+  components: { ThePopup, IconReset, IconSearch, TheButton },
   directives: { maska: vMaska },
 
   data() {

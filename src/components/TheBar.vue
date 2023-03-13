@@ -8,42 +8,40 @@ import IconOtel from "./icons/IconOtel.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
 
-import TheArchive from "../view/TheArchive.vue";
+import TheIconButton from "../components/TheIconButton.vue";
 </script>
 
 <template>
   <div class="bar relative">
     <div class="help relative" data-name="др сегодня">
-      <button
+      <TheIconButton
         aria-label="напоминание о сотрудниках, рожденных сегодня"
-        class="button-icon relative"
+        class="relative"
       >
         <IconGift />
         <span v-if="(visible = getVisibleAlertBirthday())" class="bar__alert">
           {{ onGetAlertBirthday() }}
         </span>
-      </button>
+      </TheIconButton>
     </div>
+
     <div class="help relative" data-name="отели и гостиницы">
-      <button aria-label="ближайшие к офису отели" class="button-icon">
+      <TheIconButton aria-label="ближайшие к офису отели">
         <IconOtel />
-      </button>
+      </TheIconButton>
     </div>
 
     <div class="help relative" data-name="кафе и рестораны">
-      <button
-        aria-label="билжайшие к офису кафе и рестораны"
-        class="button-icon"
-      >
+      <TheIconButton aria-label="билжайшие к офису кафе и рестораны">
         <IconFood />
-      </button>
+      </TheIconButton>
     </div>
 
     <RouterLink :to="{ name: 'archive' }" tabindex="-1">
       <div class="help relative" data-name="архив сотрудников">
-        <button aria-label="архив сотрудников" class="button-icon">
+        <TheIconButton aria-label="архив сотрудников">
           <IconArchive />
-        </button>
+        </TheIconButton>
       </div>
     </RouterLink>
   </div>
@@ -51,7 +49,7 @@ import TheArchive from "../view/TheArchive.vue";
 
 <script>
 export default {
-  components: { IconGift, IconOtel, IconFood },
+  components: { IconGift, IconOtel, IconFood, TheIconButton },
 
   data() {
     return {

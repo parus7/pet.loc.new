@@ -5,6 +5,8 @@ import { mapState, mapActions } from "pinia";
 import { vMaska } from "maska";
 
 import ThePopup from "../components/ThePopup.vue";
+import TheButton from "../components/TheButton.vue";
+
 import IconEdit from "../components/icons/IconEdit.vue";
 import IconClose from "../components/icons/IconClose.vue";
 </script>
@@ -13,6 +15,7 @@ import IconClose from "../components/icons/IconClose.vue";
   <form class="card-form" id="add-employee" @submit.prevent>
     <img
       class="card-form__photo"
+      :class="{ status: employee.hide }"
       :alt="`id: ${employee.id}`"
       :src="employee.src"
       width="110"
@@ -184,26 +187,23 @@ import IconClose from "../components/icons/IconClose.vue";
     </fieldset>
 
     <div class="container__button card-form__buttons">
-      <button
+      <TheButton
         tabindex="0"
-        type="button"
-        class="button"
         aria-label="кнопка редактирования данных сотрудника"
         @click="isOpen = true"
       >
         <IconEdit />
-      </button>
+      </TheButton>
 
       <RouterLink class="link" :to="{ name: 'main' }" tabindex="-1">
-        <button
+        <TheButton
           type="submit"
-          class="button"
           tabindex="14"
           aria-label="кнопка сохранения данных и перехода на главную страницу"
           @click="onSaveEmployee(employee.id)"
         >
           <IconClose />
-        </button>
+        </TheButton>
       </RouterLink>
 
       <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
@@ -215,7 +215,7 @@ import IconClose from "../components/icons/IconClose.vue";
 
 <script>
 export default {
-  components: { ThePopup },
+  components: { ThePopup, TheButton },
 
   data() {
     return {

@@ -4,25 +4,35 @@ import { vMaska } from "maska";
 
 import IconDelete from "./icons/IconDelete.vue";
 import IconFullinfo from "./icons/IconFullinfo.vue";
+
 import ThePopup from "./ThePopup.vue";
+import TheIconButton from "../components/TheIconButton.vue";
 </script>
 
 <template>
   <template class="employee">
     <img
       class="employee__photo"
-      :class="{ employee__status: !employee.hide }"
+      :class="{ status: employee.hide }"
       :alt="`id: ${employee.id}`"
       :src="employee.src"
       width="35"
       heugth="35"
     />
 
-    <span class="employee__cn">
-      {{ employee.cn }}
-    </span>
+    <input
+      class="employee__cn input-maska"
+      v-model="employee.cn"
+      tabindex="-1"
+      readonly
+    />
 
-    <span class="employee__item-email">{{ employee.email }}</span>
+    <input
+      class="employee__item-email input-maska"
+      v-model="employee.email"
+      tabindex="-1"
+      readonly
+    />
 
     <input
       class="employee__item-telephone input-maska"
@@ -54,25 +64,19 @@ import ThePopup from "./ThePopup.vue";
       tabindex="-1"
     >
       <div class="help relative" data-name="в&nbsp;профиль">
-        <button
-          type="button"
-          class="button-icon"
-          aria-label="переход в профиль сотрудника"
-        >
+        <TheIconButton aria-label="переход в профиль сотрудника">
           <IconFullinfo />
-        </button>
+        </TheIconButton>
       </div>
     </RouterLink>
 
     <div class="help relative" data-name="поместить в архив">
-      <button
-        type="button"
-        class="button-icon"
+      <TheIconButton
         aria-label="поместить сотрудника в архив"
         @click="isOpen = true"
       >
         <IconDelete />
-      </button>
+      </TheIconButton>
     </div>
 
     <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
@@ -83,7 +87,7 @@ import ThePopup from "./ThePopup.vue";
 
 <script>
 export default {
-  components: { IconDelete, IconFullinfo, ThePopup },
+  components: { IconDelete, IconFullinfo, ThePopup, TheIconButton },
 
   props: {
     employee: {
