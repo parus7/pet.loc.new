@@ -253,11 +253,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, [
-      "getEmplById",
-      "getAllEmployees",
-      "getAlphabet",
-    ]),
+    ...mapState(useEmplStore, ["getEmplById", "getAlphabet"]),
   },
 
   methods: {

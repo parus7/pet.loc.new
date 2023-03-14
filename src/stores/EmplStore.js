@@ -8,11 +8,14 @@ export const useEmplStore = defineStore("EmplStore", {
     };
   },
   getters: {
-    getEmptyStore: (state) => (obj) => !state.obj ? true : state.obj.size === 0,
+    getEmptyStore: (state) => (key) =>
+      !state[key] ? true : state[key].size === 0,
 
     getAlphabet: (state) => state.isAlphabet,
 
-    getAllEmployees: (state) => [...state.employees.values()],
+    getAll: (state) => (key) => [...state[key]],
+
+    getAllEmployees: (state) => (key) => [...state[key].values()],
 
     getEmplById: (state) => (emplId) => state.employees.get(emplId),
 
@@ -49,7 +52,7 @@ export const useEmplStore = defineStore("EmplStore", {
       this.setGender(data);
       this.setImage(data);
 
-      // this.employees = data.sort((a, b) => a.cn.localeCompare(b.cn));
+      this.employees = data.sort((a, b) => a.cn.localeCompare(b.cn));
 
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
@@ -63,10 +66,9 @@ export const useEmplStore = defineStore("EmplStore", {
     },
 
     createNextId() {
-      const idNext = this.getEmptyStore
+      const idNext = this.getEmptyStore("employees")
         ? "1"
         : String(Number(Math.max(...this.employees.keys())) + 1);
-
       return idNext;
     },
 
@@ -76,7 +78,7 @@ export const useEmplStore = defineStore("EmplStore", {
       let employee = {
         id: idEmployee,
         name: "",
-        hide: false,
+        hide: true,
         thumbnail: false,
         gender: "",
         first_name: "",

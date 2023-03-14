@@ -2,7 +2,7 @@
     {
         "id": "111",
         "name": "S.Sidorov",
-        "hide": false,
+        "hide": true,
         "thumbnail": false,
         "gender": "m",
         "first_name": "Сидр",

@@ -1,8 +1,8 @@
 :root {
   --vt-c-white: rgba(255, 255, 255, 1);
   --vt-c-white-mute: rgba(242, 242, 242, 1);
-  --vt-c-white-background: rgba(255, 250, 250, 1);
-  --vt-c-white-background-confirm: rgba(255, 250, 250, 0.2);
+  --vt-c-white-mute-archive: rgba(267, 247, 247, 1);
+  --vt-c-white-background-confirm: rgba(255, 250, 250, 0.4);
 
   --vt-c-black-basic-font: rgba(0, 0, 0, 1);
   --vt-c-grey-main-font: rgba(71, 74, 81, 1);
@@ -27,7 +27,6 @@ body {
   min-height: 100vh;
   max-width: 1024px;
   color: var(--vt-c-black-basic-font);
-  background-color: var(--vt-c-white-background);
   transition: color 0.5s, background-color 0.5s;
   font-family: Montserrat, Arial, Helvetica, Verdana, sans-serif;
   font-size: 0.86rem;
@@ -62,7 +61,7 @@ input,
 select {
   font-family: inherit;
   font-style: italic;
-  background-color: var(--vt-c-white-background);
+  background: var(--vt-c-white);
   border: none;
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 9px;
@@ -80,6 +79,7 @@ select {
 input:disabled,
 select:disabled {
   font-style: normal;
+  background: none;
 }
 
 .help:hover::after {
@@ -105,5 +105,3 @@ select:disabled {
   border: none;
   box-shadow: none;
 }
-
-

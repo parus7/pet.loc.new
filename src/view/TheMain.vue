@@ -6,6 +6,7 @@ import TheList from "../components/TheList.vue";
 import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesData from "../data/employeesData.json";
+import employeesArchive from "../data/employeesArchive.json";
 </script>
 
 <template>
@@ -34,6 +35,7 @@ export default {
   data() {
     return {
       employees: {},
+      archive: null,
       isAlphabet: null,
 
       message: "",
@@ -42,13 +44,11 @@ export default {
   },
 
   created() {
-    // console.log(this.getEmptyStore(this.employees));
-
-    this.employees = this.getEmptyStore(this.employees)
+    this.employees = this.getEmptyStore("employees")
       ? this.setMapEmployees(employeesData).values()
-      : this.getAllEmployees(this.employees);
+      : this.getAllEmployees("employees");
 
-    // this.employees = this.setMapEmployees(employeesData).values();
+    // console.log(this.employees);
 
     this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
@@ -60,6 +60,7 @@ export default {
       "getAllEmployees",
       "delEmployee",
       "getAlphabet",
+      "getEmplById",
     ]),
   },
 
@@ -74,7 +75,7 @@ export default {
     filterData(event) {
       this.isAlphabet = this.alphabetToggle();
 
-      this.employees = [...this.getAllEmployees].filter(
+      this.employees = [...this.getAllEmployees("employees")].filter(
         (elem) => elem[event.param] == event.value
       );
 
@@ -89,8 +90,12 @@ export default {
 
       this.employees =
         this.isAlphabet === false
-          ? [...this.getAllEmployees].sort((a, b) => a.cn.localeCompare(b.cn))
-          : [...this.getAllEmployees].sort((a, b) => b.cn.localeCompare(a.cn));
+          ? [...this.getAllEmployees("employees")].sort((a, b) =>
+              a.cn.localeCompare(b.cn)
+            )
+          : [...this.getAllEmployees("employees")].sort((a, b) =>
+              b.cn.localeCompare(a.cn)
+            );
 
       return this.employees;
     },
@@ -99,7 +104,7 @@ export default {
       this.isAlphabet = this.alphabetToggle();
 
       this.delEmployee(event.id);
-      this.employees = [...this.getAllEmployees];
+      this.employees = [...this.getAllEmployees("employees")];
 
       this.message =
         this.employees.length === 0 ? "Список сотрудников пуст" : "";

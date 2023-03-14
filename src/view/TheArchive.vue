@@ -7,7 +7,9 @@ import employeesArchive from "../data/employeesArchive.json";
 </script>
 
 <template>
-  <div>{{ archive }}</div>
+  <ul>
+    <li v-for="item in archive" :key="item.id">{{ item }}</li>
+  </ul>
 </template>
 
 <script>
@@ -22,11 +24,9 @@ export default {
   },
 
   created() {
-    this.archive = this.getEmptyStore(this.archive)
-      ? this.setMapEmployees(employeesArchive).values()
-      : this.getAllEmployees(this.archive);
-
-    console.log(this.archive);
+    this.archive = this.getEmptyStore("archive")
+      ? this.setMapEmployees(employeesArchive)
+      : this.getAllEmployees("archive");
   },
 
   computed: {

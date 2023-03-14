@@ -153,7 +153,6 @@ export default {
 .employee__photo {
   width: 35px;
   height: 35px;
-  background-color: var(--vt-c-white-background);
   border: 2px solid var(--vt-c-active-2);
   border-radius: 14%;
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-6);
