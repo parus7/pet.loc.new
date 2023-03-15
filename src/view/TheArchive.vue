@@ -24,9 +24,9 @@ export default {
   },
 
   created() {
-    this.archive = this.getEmptyStore("archive")
-      ? this.setMapEmployees(employeesArchive)
-      : this.getAllEmployees("archive");
+    // this.archive = this.getEmptyStore("archive")
+    //   ? this.setMapArchive(employeesArchive)
+    //   : this.getAllEmployees("archive");
   },
 
   computed: {
@@ -34,7 +34,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees"]),
+    ...mapActions(useEmplStore, ["setMapArchive"]),
   },
 };
 </script>

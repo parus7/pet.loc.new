@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       employees: {},
-      archive: null,
+      archive: {},
       isAlphabet: null,
 
       message: "",
@@ -49,6 +49,7 @@ export default {
       : this.getAllEmployees("employees");
 
     // console.log(this.employees);
+    // this.archive = this.setMapArchive(employeesArchive);
 
     this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
@@ -67,9 +68,9 @@ export default {
   methods: {
     ...mapActions(useEmplStore, [
       "setMapEmployees",
-      "onFilterData",
       "createEmployee",
       "alphabetToggle",
+      "setMapArchive",
     ]),
 
     filterData(event) {
@@ -103,7 +104,14 @@ export default {
     onDeletete(event) {
       this.isAlphabet = this.alphabetToggle();
 
+      // const employee = this.getEmplById(event.id);
+      // console.log(employee);
+
       this.delEmployee(event.id);
+
+      // this.archive.set(event.id, employee);
+      // console.log(this.archive);
+
       this.employees = [...this.getAllEmployees("employees")];
 
       this.message =

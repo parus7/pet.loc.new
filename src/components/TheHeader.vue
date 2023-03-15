@@ -32,7 +32,6 @@ import TheButton from "./TheButton.vue";
       Вы хотите создать нового сотрудника?
     </ThePopup>
 
-
     <form class="header__form" @submit.prevent>
       <select
         id="filter"
@@ -194,6 +193,9 @@ export default {
   padding: 20px;
 }
 
+.header-move {
+  transition: transform 0.8s ease;
+}
 .header__form {
   display: flex;
   gap: 15px;

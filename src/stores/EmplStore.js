@@ -13,8 +13,6 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getAlphabet: (state) => state.isAlphabet,
 
-    getAll: (state) => (key) => [...state[key]],
-
     getAllEmployees: (state) => (key) => [...state[key].values()],
 
     getEmplById: (state) => (emplId) => state.employees.get(emplId),
@@ -52,14 +50,25 @@ export const useEmplStore = defineStore("EmplStore", {
       this.setGender(data);
       this.setImage(data);
 
-      this.employees = data.sort((a, b) => a.cn.localeCompare(b.cn));
-
       this.employees = new Map();
       data.forEach((elem) => this.employees.set(elem.id, elem));
 
       // console.log(this.employees);
       return this.employees;
     },
+
+    // setMapArchive(data) {
+    //   this.setGender(data);
+    //   this.setImage(data);
+
+    //   this.archive = data.sort((a, b) => a.cn.localeCompare(b.cn));
+
+    //   this.archive = new Map();
+    //   data.forEach((elem) => this.archive.set(elem.id, elem));
+
+    //   console.log(this.archive);
+    //   return this.archive;
+    // },
 
     delEmployee(id) {
       this.employees.delete(id);

@@ -5,12 +5,14 @@ import TheElem from "../components/TheElem.vue";
 <template>
   <div class="list">
     <template v-if="employees.length !== 0">
-      <TheElem
-        v-for="employee in employees"
-        :key="employee.id"
-        :employee="{ ...employee }"
-        @deleteEmoployee="$emit('deleteEmoployee', { id: employee.id })"
-      />
+      <transition-group name="list">
+        <TheElem
+          v-for="employee in employees"
+          :key="employee.id"
+          :employee="{ ...employee }"
+          @deleteEmoployee="$emit('deleteEmoployee', { id: employee.id })"
+        />
+      </transition-group>
     </template>
 
     <template v-else>
@@ -34,6 +36,18 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(150px);
+}
+
 .list__message {
   color: var(--vt-c-grey-font);
   text-align: center;
