@@ -1,6 +1,4 @@
 <script setup>
-// import TheList from "../components/TheList.vue";
-
 import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesArchive from "../data/employeesArchive.json";
@@ -17,16 +15,15 @@ export default {
   data() {
     return {
       archive: {},
-      aLength: null,
-
-      aMessage: "",
     };
   },
 
   created() {
-    // this.archive = this.getEmptyStore("archive")
-    //   ? this.setMapArchive(employeesArchive)
-    //   : this.getAllEmployees("archive");
+    this.archive = this.getEmptyStore("archive")
+      ? this.setMapEmployees(employeesArchive)
+      : this.getAllEmployees("archive").sort((a, b) =>
+          a.cn.localeCompare(b.cn)
+        );
   },
 
   computed: {
@@ -34,7 +31,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapArchive"]),
+    ...mapActions(useEmplStore, ["setMapEmployees"]),
   },
 };
 </script>

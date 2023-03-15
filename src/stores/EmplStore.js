@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import employeesArchive from "../data/employeesArchive.json";
+
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
@@ -46,39 +48,31 @@ export const useEmplStore = defineStore("EmplStore", {
       );
     },
 
-    setMapEmployees(data) {
+    setMapEmployees(data, key) {
       this.setGender(data);
       this.setImage(data);
 
-      this.employees = new Map();
-      data.forEach((elem) => this.employees.set(elem.id, elem));
+      this[key] = new Map();
+      data.forEach((elem) => this[key].set(elem.id, elem));
 
-      // console.log(this.employees);
-      return this.employees;
+      return this[key];
     },
 
-    // setMapArchive(data) {
-    //   this.setGender(data);
-    //   this.setImage(data);
-
-    //   this.archive = data.sort((a, b) => a.cn.localeCompare(b.cn));
-
-    //   this.archive = new Map();
-    //   data.forEach((elem) => this.archive.set(elem.id, elem));
-
-    //   console.log(this.archive);
-    //   return this.archive;
-    // },
-
     delEmployee(id) {
+      this.archive = this.getEmptyStore("archive")
+        ? this.setMapEmployees(employeesArchive, "archive")
+        : this.archive;
+
+      let delEmployee = this.getEmplById(id);
+      this.archive.set(id, delEmployee);
+
       this.employees.delete(id);
     },
 
     createNextId() {
-      const idNext = this.getEmptyStore("employees")
+      return this.getEmptyStore("employees")
         ? "1"
         : String(Number(Math.max(...this.employees.keys())) + 1);
-      return idNext;
     },
 
     createEmployee() {
@@ -104,10 +98,8 @@ export const useEmplStore = defineStore("EmplStore", {
         city: "",
         src: `./src/assets/img/defaultPhoto.jpg`,
       };
-      this.employees.set(idEmployee, employee);
 
-      // console.log(this.employees);
-      return idEmployee;
+      return this.employees.set(idEmployee, employee);
     },
 
     addEmployee(updatedEmpl) {
@@ -125,9 +117,6 @@ export const useEmplStore = defineStore("EmplStore", {
         : "u";
 
       this.employees.set(updatedEmpl.id, updatedEmpl);
-      console.log(this.employees);
-      console.log(this.isAlphabet);
-      // return updatedEmpl;
     },
 
     alphabetToggle() {

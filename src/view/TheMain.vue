@@ -6,7 +6,6 @@ import TheList from "../components/TheList.vue";
 import { useEmplStore } from "../stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesData from "../data/employeesData.json";
-import employeesArchive from "../data/employeesArchive.json";
 </script>
 
 <template>
@@ -35,7 +34,6 @@ export default {
   data() {
     return {
       employees: {},
-      archive: {},
       isAlphabet: null,
 
       message: "",
@@ -45,11 +43,8 @@ export default {
 
   created() {
     this.employees = this.getEmptyStore("employees")
-      ? this.setMapEmployees(employeesData).values()
+      ? this.setMapEmployees(employeesData, "employees").values()
       : this.getAllEmployees("employees");
-
-    // console.log(this.employees);
-    // this.archive = this.setMapArchive(employeesArchive);
 
     this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
@@ -61,7 +56,6 @@ export default {
       "getAllEmployees",
       "delEmployee",
       "getAlphabet",
-      "getEmplById",
     ]),
   },
 
@@ -70,7 +64,6 @@ export default {
       "setMapEmployees",
       "createEmployee",
       "alphabetToggle",
-      "setMapArchive",
     ]),
 
     filterData(event) {
@@ -104,13 +97,7 @@ export default {
     onDeletete(event) {
       this.isAlphabet = this.alphabetToggle();
 
-      // const employee = this.getEmplById(event.id);
-      // console.log(employee);
-
       this.delEmployee(event.id);
-
-      // this.archive.set(event.id, employee);
-      // console.log(this.archive);
 
       this.employees = [...this.getAllEmployees("employees")];
 
