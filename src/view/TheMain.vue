@@ -125,8 +125,7 @@ export default {
   margin: 0 auto;
 }
 
-.main_header,
-.main_pagination {
+.main_header {
   grid-column: 1/-1;
 }
 
@@ -151,12 +150,6 @@ export default {
 
   .main_bar {
     grid-row: 2/3;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .main_pagination {
-    display: none;
   }
 }
 </style>
