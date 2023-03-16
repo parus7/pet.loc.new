@@ -10,7 +10,7 @@ import TheElem from "../components/TheElem.vue";
           v-for="employee in employees"
           :key="employee.id"
           :employee="{ ...employee }"
-          @deleteEmoployee="$emit('deleteEmoployee', { id: employee.id })"
+          @deleteEmployee="$emit('deleteEmployee', { id: employee.id })"
         />
       </transition-group>
     </template>

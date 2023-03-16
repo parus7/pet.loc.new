@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 import { vMaska } from "maska";
 
 import IconDelete from "./icons/IconDelete.vue";
-import IconFullinfo from "./icons/IconFullinfo.vue";
+import IconFullInfo from "./icons/IconFullInfo.vue";
 
 import ThePopup from "./ThePopup.vue";
 import TheIconButton from "../components/TheIconButton.vue";
@@ -65,7 +65,7 @@ import TheIconButton from "../components/TheIconButton.vue";
     >
       <div class="help relative" data-name="в&nbsp;профиль">
         <TheIconButton aria-label="переход в профиль сотрудника">
-          <IconFullinfo />
+          <IconFullInfo />
         </TheIconButton>
       </div>
     </RouterLink>
@@ -87,7 +87,7 @@ import TheIconButton from "../components/TheIconButton.vue";
 
 <script>
 export default {
-  components: { IconDelete, IconFullinfo, ThePopup, TheIconButton },
+  components: { IconDelete, IconFullInfo, ThePopup, TheIconButton },
 
   props: {
     employee: {
@@ -120,7 +120,7 @@ export default {
 
   methods: {
     popupDelete() {
-      this.$emit("deleteEmoployee", { id: this.employee.id });
+      this.$emit("deleteEmployee", { id: this.employee.id });
       this.isOpen = false;
     },
   },

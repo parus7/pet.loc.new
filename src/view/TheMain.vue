@@ -22,7 +22,7 @@ import employeesData from "../data/employeesData.json";
       class="main_list"
       :employees="[...employees]"
       :message="message"
-      @deleteEmoployee="onDeletete($event)"
+      @deleteEmployee="onDeletete($event)"
     />
   </div>
 </template>
