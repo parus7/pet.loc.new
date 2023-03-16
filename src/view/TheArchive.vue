@@ -1,5 +1,5 @@
 <script setup>
-import { useEmplStore } from "../stores/EmplStore";
+import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesArchive from "../data/employeesArchive.json";
 </script>
@@ -20,7 +20,7 @@ export default {
 
   created() {
     this.archive = this.getEmptyStore("archive")
-      ? this.setMapEmployees(employeesArchive)
+      ? this.setMapEmployees(employeesArchive, "archive")
       : this.getAllEmployees("archive").sort((a, b) =>
           a.cn.localeCompare(b.cn)
         );

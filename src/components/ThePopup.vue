@@ -5,14 +5,14 @@ import TheButton from "./TheButton.vue";
 <template>
   <div v-if="isOpen" class="popup" @click="closePopup">
     <div class="popup__body" @click.stop>
+      Внимание!
       <span>
-        <p>Внимание!</p>
         <slot></slot>
       </span>
 
       <div class="container__button">
         <TheButton
-          class="popup__botton"
+          class="popup__button"
           aria-label="подтверждение действия"
           @click="okPopup"
         >
@@ -21,7 +21,7 @@ import TheButton from "./TheButton.vue";
 
         <TheButton
           type="button"
-          class="popup__botton"
+          class="popup__button"
           aria-label="отмены действия"
           @click="closePopup"
         >
@@ -34,7 +34,7 @@ import TheButton from "./TheButton.vue";
 
 <script>
 export default {
-  components: { TheButton },
+  // components: { TheButton },
   props: {
     isOpen: {
       type: Boolean,
@@ -78,7 +78,7 @@ export default {
   padding: 20px;
 }
 
-.popup__botton {
+.popup__button {
   line-height: 2;
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import { useEmplStore } from "../stores/EmplStore";
+import { useEmplStore } from "@/stores/EmplStore";
 import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "pinia";
 import { vMaska } from "maska";
@@ -215,7 +215,7 @@ import IconClose from "../components/icons/IconClose.vue";
 
 <script>
 export default {
-  components: { ThePopup, TheButton },
+  // components: { ThePopup, TheButton },
 
   data() {
     return {
@@ -223,8 +223,6 @@ export default {
       paramsId: null,
       isEdit: false,
       isOpen: false,
-      isAlphabet: null,
-
       isAlphabet: null,
 
       maskaBirthday: {

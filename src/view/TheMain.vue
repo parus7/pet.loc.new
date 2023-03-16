@@ -3,7 +3,7 @@ import TheHeader from "../components/TheHeader.vue";
 import TheBar from "../components/TheBar.vue";
 import TheList from "../components/TheList.vue";
 
-import { useEmplStore } from "../stores/EmplStore";
+import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesData from "../data/employeesData.json";
 </script>
@@ -22,14 +22,14 @@ import employeesData from "../data/employeesData.json";
       class="main_list"
       :employees="[...employees]"
       :message="message"
-      @deleteEmployee="onDeletete($event)"
+      @deleteEmployee="onDelete($event)"
     />
   </div>
 </template>
 
 <script>
 export default {
-  components: { TheHeader, TheList, TheBar },
+  // components: { TheHeader, TheList, TheBar },
 
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
       isAlphabet: null,
 
       message: "",
-      length: null,
+      length: null
     };
   },
 
@@ -55,8 +55,8 @@ export default {
       "getEmptyStore",
       "getAllEmployees",
       "delEmployee",
-      "getAlphabet",
-    ]),
+      "getAlphabet"
+    ])
   },
 
   methods: {
@@ -64,13 +64,14 @@ export default {
       "setMapEmployees",
       "createEmployee",
       "alphabetToggle",
+      "saveInArchive"
     ]),
 
     filterData(event) {
       this.isAlphabet = this.alphabetToggle();
 
       this.employees = [...this.getAllEmployees("employees")].filter(
-        (elem) => elem[event.param] == event.value
+        (elem) => elem[event.param] === event.value
       );
 
       this.message =
@@ -85,20 +86,20 @@ export default {
       this.employees =
         this.isAlphabet === false
           ? [...this.getAllEmployees("employees")].sort((a, b) =>
-              a.cn.localeCompare(b.cn)
-            )
+            a.cn.localeCompare(b.cn)
+          )
           : [...this.getAllEmployees("employees")].sort((a, b) =>
-              b.cn.localeCompare(a.cn)
-            );
+            b.cn.localeCompare(a.cn)
+          );
 
       return this.employees;
     },
 
-    onDeletete(event) {
+    onDelete(event) {
       this.isAlphabet = this.alphabetToggle();
 
-      this.delEmployee(event.id);
-
+      this.saveInArchive(event.id);
+      //
       this.employees = [...this.getAllEmployees("employees")];
 
       this.message =
@@ -110,8 +111,8 @@ export default {
     onCreateEmployee() {
       this.createEmployee();
       this.onAlphabet();
-    },
-  },
+    }
+  }
 };
 </script>
 

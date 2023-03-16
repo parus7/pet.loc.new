@@ -6,27 +6,27 @@ export const useEmplStore = defineStore("EmplStore", {
     return {
       employees: new Map(),
       archive: new Map(),
-      isAlphabet: true,
+      isAlphabet: true
     };
   },
   getters: {
     getEmptyStore: (state) => (key) =>
       !state[key] ? true : state[key].size === 0,
 
-    getAlphabet: (state) => state.isAlphabet,
+    getAlphabet: (state) => state["isAlphabet"],
 
     getAllEmployees: (state) => (key) => [...state[key].values()],
 
-    getEmplById: (state) => (emplId) => state.employees.get(emplId),
+    getEmplById: (state) => (emplId) => state["employees"].get(emplId),
 
     getAlertBirthday:
       (state) =>
-      (date, sum = 0) => {
-        [...state.employees.values()].forEach((elem) =>
-          elem.birthday === date ? sum++ : sum
-        );
-        return sum;
-      },
+        (date, sum = 0) => {
+          [...state["employees"].values()].forEach((elem) =>
+            elem.birthday === date ? sum++ : sum
+          );
+          return sum;
+        }
   },
 
   actions: {
@@ -35,14 +35,14 @@ export const useEmplStore = defineStore("EmplStore", {
         elem.gender === "m"
           ? (elem.gender = "Мужской")
           : elem.gender === "f"
-          ? (elem.gender = "Женский")
-          : (elem.gender = "Неизвестный")
+            ? (elem.gender = "Женский")
+            : (elem.gender = "Неизвестный")
       );
     },
 
     setImage(data) {
       data.forEach((elem) =>
-        elem.thumbnail == false
+        elem.thumbnail === false
           ? (elem.src = `./src/assets/img/defaultPhoto.jpg`)
           : (elem.src = `./src/assets/img/${elem.id}.jpg`)
       );
@@ -58,7 +58,7 @@ export const useEmplStore = defineStore("EmplStore", {
       return this[key];
     },
 
-    delEmployee(id) {
+    saveInArchive(id) {
       this.archive = this.getEmptyStore("archive")
         ? this.setMapEmployees(employeesArchive, "archive")
         : this.archive;
@@ -66,8 +66,13 @@ export const useEmplStore = defineStore("EmplStore", {
       let delEmployee = this.getEmplById(id);
       this.archive.set(id, delEmployee);
 
+      this.delEmployee(id);
+    },
+
+    delEmployee(id) {
       this.employees.delete(id);
     },
+
 
     createNextId() {
       return this.getEmptyStore("employees")
@@ -75,7 +80,7 @@ export const useEmplStore = defineStore("EmplStore", {
         : String(Number(Math.max(...this.employees.keys())) + 1);
     },
 
-    createEmployee() {
+    createEmployee: function() {
       const idEmployee = this.createNextId();
 
       let employee = {
@@ -96,10 +101,10 @@ export const useEmplStore = defineStore("EmplStore", {
         department: "",
         company: "",
         city: "",
-        src: `./src/assets/img/defaultPhoto.jpg`,
+        src: `./src/assets/img/defaultPhoto.jpg`
       };
 
-      return this.employees.set(idEmployee, employee);
+      this.employees.set(idEmployee, employee);
     },
 
     addEmployee(updatedEmpl) {
@@ -110,17 +115,17 @@ export const useEmplStore = defineStore("EmplStore", {
         " " +
         updatedEmpl.middle_name;
 
-      updatedEmpl.gender == "Мужской"
+      updatedEmpl.gender = updatedEmpl.gender === "Мужской"
         ? "m"
-        : updatedEmpl.gender == "Женский"
-        ? "f"
-        : "u";
+        : updatedEmpl.gender === "Женский"
+          ? "f"
+          : "u";
 
       this.employees.set(updatedEmpl.id, updatedEmpl);
     },
 
     alphabetToggle() {
-      return (this.isAlphabet = !this.isAlphabet);
-    },
-  },
+     return this.isAlphabet = !this.isAlphabet;
+    }
+  }
 });

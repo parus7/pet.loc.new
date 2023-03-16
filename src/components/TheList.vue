@@ -4,7 +4,7 @@ import TheElem from "../components/TheElem.vue";
 
 <template>
   <div class="list">
-    <template v-if="employees.length !== 0">
+    <template v-if="!(employees.length === 0)">
       <transition-group name="list">
         <TheElem
           v-for="employee in employees"
@@ -23,7 +23,7 @@ import TheElem from "../components/TheElem.vue";
 
 <script>
 export default {
-  components: { TheElem },
+  // components: { TheElem },
   props: {
     employees: Object,
     message: String,

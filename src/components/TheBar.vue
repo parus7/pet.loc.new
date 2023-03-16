@@ -1,10 +1,10 @@
 <script setup>
-import { useEmplStore } from ".././stores/EmplStore";
+import { useEmplStore } from "@/stores/EmplStore";
 import { mapState } from "pinia";
 import { RouterLink } from "vue-router";
 
 import IconGift from "./icons/IconGift.vue";
-import IconOtel from "./icons/IconOtel.vue";
+import IconHotel from "./icons/IconHotel.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
 
@@ -27,7 +27,7 @@ import TheIconButton from "../components/TheIconButton.vue";
 
     <div class="help relative" data-name="отели и гостиницы">
       <TheIconButton aria-label="ближайшие к офису отели">
-        <IconOtel />
+        <IconHotel />
       </TheIconButton>
     </div>
 
@@ -49,21 +49,21 @@ import TheIconButton from "../components/TheIconButton.vue";
 
 <script>
 export default {
-  components: { IconGift, IconOtel, IconFood, TheIconButton },
+  // components: { IconGift, IconHotel, IconFood, TheIconButton },
 
   data() {
     return {
-      visible: false,
+      visible: false
     };
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getAlertBirthday"]),
+    ...mapState(useEmplStore, ["getAlertBirthday"])
   },
 
   methods: {
     getVisibleAlertBirthday() {
-      return this.onGetAlertBirthday() >= 1 ? true : false;
+      return this.onGetAlertBirthday() >= 1;
     },
 
     onGetAlertBirthday() {
@@ -78,8 +78,8 @@ export default {
       month.length === 1 ? (month = "0" + month) : month;
 
       return day + month;
-    },
-  },
+    }
+  }
 };
 </script>
 

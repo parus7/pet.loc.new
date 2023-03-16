@@ -17,25 +17,25 @@ import TheIconButton from "../components/TheIconButton.vue";
       :alt="`id: ${employee.id}`"
       :src="employee.src"
       width="35"
-      heugth="35"
+      height="35"
     />
 
     <input
-      class="employee__cn input-maska"
+      class="employee__cn input-mask"
       v-model="employee.cn"
       tabindex="-1"
       readonly
     />
 
     <input
-      class="employee__item-email input-maska"
+      class="employee__item-email input-mask"
       v-model="employee.email"
       tabindex="-1"
       readonly
     />
 
     <input
-      class="employee__item-telephone input-maska"
+      class="employee__item-telephone input-mask"
       type="text"
       aria-label="phone"
       v-model="employee.telephone"
@@ -46,7 +46,7 @@ import TheIconButton from "../components/TheIconButton.vue";
     />
 
     <input
-      class="employee__item-mobile input-maska"
+      class="employee__item-mobile input-mask"
       type="text"
       aria-label="mobile"
       v-model="employee.mobile"
@@ -80,14 +80,14 @@ import TheIconButton from "../components/TheIconButton.vue";
     </div>
 
     <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
-      >Вы хотите удалить сотрудника?
+    >Вы хотите удалить сотрудника?
     </ThePopup>
   </template>
 </template>
 
 <script>
 export default {
-  components: { IconDelete, IconFullInfo, ThePopup, TheIconButton },
+  // components: { IconDelete, IconFullInfo, ThePopup, TheIconButton },
 
   props: {
     employee: {
@@ -108,13 +108,13 @@ export default {
       department: String,
       company: String,
       city: String,
-      src: String,
-    },
+      src: String
+    }
   },
 
   data() {
     return {
-      isOpen: false,
+      isOpen: false
     };
   },
 
@@ -122,8 +122,8 @@ export default {
     popupDelete() {
       this.$emit("deleteEmployee", { id: this.employee.id });
       this.isOpen = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -141,7 +141,7 @@ export default {
   margin-bottom: 10px;
 }
 
-.input-maska {
+.input-mask {
   background: inherit;
   box-shadow: none;
   font-style: normal;
@@ -181,6 +181,7 @@ export default {
   .employee {
     grid-template-columns: 1fr repeat(2, auto);
   }
+
   .employee__item-telephone,
   .employee__item-mobile {
     display: none;

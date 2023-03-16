@@ -1,5 +1,5 @@
 <script setup>
-import { useEmplStore } from ".././stores/EmplStore";
+import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import { vMaska } from "maska";
 
@@ -54,7 +54,7 @@ import TheButton from "./TheButton.vue";
           aria-label="поле поиска"
           placeholder="Поиск..."
           v-model="inputValue"
-          v-maska="maskaSearch"
+          v-maska="maskSearch"
           :data-maska="myMask"
           @keyup.enter="onSendButtonClick"
         />
@@ -87,8 +87,8 @@ import TheButton from "./TheButton.vue";
 
 <script>
 export default {
-  components: { ThePopup, IconReset, IconSearch, TheButton },
-  directives: { maska: vMaska },
+  // components: { ThePopup, IconReset, IconSearch, TheButton },
+  directives: { mask: vMaska },
 
   data() {
     return {
@@ -98,10 +98,10 @@ export default {
 
       isAlphabet: null,
 
-      maskaSearch: {
+      maskSearch: {
         masked: "",
         unmasked: "",
-        completed: false,
+        completed: false
       },
 
       category: {},
@@ -119,8 +119,8 @@ export default {
         { text: "должность", item: "title" },
         { text: "отдел", item: "department" },
         { text: "компания", item: "company" },
-        { text: "город", item: "city" },
-      ],
+        { text: "город", item: "city" }
+      ]
     };
   },
 
@@ -128,7 +128,7 @@ export default {
     ...mapActions(useEmplStore, [
       "createEmployee",
       "createNextId",
-      "alphabetToggle",
+      "alphabetToggle"
     ]),
 
     onCreateEmployee() {
@@ -137,7 +137,7 @@ export default {
       const id = this.createNextId();
       this.$router.push({
         name: "form",
-        params: { id: id },
+        params: { id: id }
       });
 
       this.isOpen = false;
@@ -147,28 +147,28 @@ export default {
 
     onChangeSelect() {
       this.category = this.categories.find(
-        (elem) => elem.text == this.selected
+        (elem) => elem.text === this.selected
       );
 
       this.myMask =
         this.category.item === "birthday"
           ? "##.##"
           : this.category.item === "telephone"
-          ? "##-##"
-          : this.category.item === "mobile"
-          ? "### ###-##-##"
-          : "";
+            ? "##-##"
+            : this.category.item === "mobile"
+              ? "### ###-##-##"
+              : "";
     },
 
     onSendButtonClick() {
       this.inputValue =
         this.myMask === ""
           ? this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1)
-          : this.maskaSearch.unmasked;
+          : this.maskSearch.unmasked;
 
       this.$emit("emplFilter", {
         param: this.category.item,
-        value: this.inputValue,
+        value: this.inputValue
       });
 
       this.selected = "";
@@ -177,8 +177,8 @@ export default {
 
     setAlphabetSort() {
       this.$emit("alphabetFilter");
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -196,6 +196,7 @@ export default {
 .header-move {
   transition: transform 0.8s ease;
 }
+
 .header__form {
   display: flex;
   gap: 15px;
