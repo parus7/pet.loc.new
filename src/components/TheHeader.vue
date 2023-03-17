@@ -1,17 +1,3 @@
-<script setup>
-import { useEmplStore } from "@/stores/EmplStore";
-import { mapState, mapActions } from "pinia";
-import { vMaska } from "maska";
-
-import IconAdd from "./icons/IconAdd.vue";
-import IconAlphabet from "./icons/IconAlphabet.vue";
-import IconSearch from "./icons/IconSearch.vue";
-import IconReset from "./icons/IconReset.vue";
-
-import ThePopup from "./ThePopup.vue";
-import TheButton from "./TheButton.vue";
-</script>
-
 <template>
   <div class="header">
     <TheButton
@@ -86,9 +72,20 @@ import TheButton from "./TheButton.vue";
 </template>
 
 <script>
+import { useEmplStore } from "@/stores/EmplStore";
+import { mapActions } from "pinia";
+
+import IconAdd from "@/components/icons/IconAdd.vue";
+import IconAlphabet from "@/components/icons/IconAlphabet.vue";
+import IconSearch from "@/components/icons/IconSearch.vue";
+
+import ThePopup from "@/components/ThePopup.vue";
+import TheButton from "@/components/TheButton.vue";
+import { vMaska } from "maska";
+
 export default {
-  // components: { ThePopup, IconReset, IconSearch, TheButton },
-  directives: { mask: vMaska },
+  components: { IconSearch, IconAlphabet, IconAdd, ThePopup, TheButton },
+  directives: { maska: vMaska },
 
   data() {
     return {
@@ -142,7 +139,7 @@ export default {
 
       this.isOpen = false;
 
-      this.$emit("emplCreate", { id: id });
+      this.$emit("employeeCreate", { id: id });
     },
 
     onChangeSelect() {
@@ -166,7 +163,7 @@ export default {
           ? this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1)
           : this.maskSearch.unmasked;
 
-      this.$emit("emplFilter", {
+      this.$emit("employeeFilter", {
         param: this.category.item,
         value: this.inputValue
       });
@@ -193,9 +190,9 @@ export default {
   padding: 20px;
 }
 
-.header-move {
-  transition: transform 0.8s ease;
-}
+/*.header-move {*/
+/*  transition: transform 0.8s ease;*/
+/*}*/
 
 .header__form {
   display: flex;
@@ -205,7 +202,7 @@ export default {
 .header__form-select,
 .header__form-search {
   color: inherit;
-  padding: 7px 65px 7px 30px;
+  padding: 7px 45px 7px 30px;
 }
 
 .header__form-btn {
@@ -217,7 +214,7 @@ export default {
   outline-color: var(--vt-c-outline);
   border: none;
   border-radius: 0 9px 9px 0;
-  padding: 2px 18px;
+  padding: 2px 10px;
 }
 
 @media screen and (max-width: 767px) {

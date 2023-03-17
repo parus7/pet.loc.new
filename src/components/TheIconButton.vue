@@ -1,11 +1,18 @@
 <template>
-  <button type="button" class="button-icon">
+  <button type="button" class="TheIconButton">
     <slot></slot>
   </button>
 </template>
 
+<script>
+export default {
+  name: "TheIconButton"
+};
+</script>
+
+
 <style scoped>
-.button-icon {
+.TheIconButton {
   width: 37px;
   height: 32px;
   border: none;
@@ -16,12 +23,12 @@
   padding: 0;
 }
 
-.button-icon:active {
+.TheIconButton:active {
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-4);
 }
 
 @media screen and (max-width: 767px) {
-  .button-icon {
+  .TheIconButton {
     width: 48px;
   }
 }

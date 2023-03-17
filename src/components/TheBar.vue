@@ -1,16 +1,3 @@
-<script setup>
-import { useEmplStore } from "@/stores/EmplStore";
-import { mapState } from "pinia";
-import { RouterLink } from "vue-router";
-
-import IconGift from "./icons/IconGift.vue";
-import IconHotel from "./icons/IconHotel.vue";
-import IconFood from "./icons/IconFood.vue";
-import IconArchive from "./icons/IconArchive.vue";
-
-import TheIconButton from "../components/TheIconButton.vue";
-</script>
-
 <template>
   <div class="bar relative">
     <div class="help relative" data-name="др сегодня">
@@ -48,8 +35,18 @@ import TheIconButton from "../components/TheIconButton.vue";
 </template>
 
 <script>
+import { useEmplStore } from "@/stores/EmplStore";
+import { mapState } from "pinia";
+
+import IconGift from "./icons/IconGift.vue";
+import IconHotel from "./icons/IconHotel.vue";
+import IconFood from "./icons/IconFood.vue";
+import IconArchive from "./icons/IconArchive.vue";
+
+import TheIconButton from "../components/TheIconButton.vue";
+
 export default {
-  // components: { IconGift, IconHotel, IconFood, TheIconButton },
+  components: { IconGift, IconHotel, IconFood, IconArchive, TheIconButton },
 
   data() {
     return {

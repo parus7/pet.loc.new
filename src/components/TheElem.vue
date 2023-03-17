@@ -1,14 +1,3 @@
-<script setup>
-import { RouterLink } from "vue-router";
-import { vMaska } from "maska";
-
-import IconDelete from "./icons/IconDelete.vue";
-import IconFullInfo from "./icons/IconFullInfo.vue";
-
-import ThePopup from "./ThePopup.vue";
-import TheIconButton from "../components/TheIconButton.vue";
-</script>
-
 <template>
   <template class="employee">
     <img
@@ -86,8 +75,16 @@ import TheIconButton from "../components/TheIconButton.vue";
 </template>
 
 <script>
+import IconDelete from "./icons/IconDelete.vue";
+import IconFullInfo from "./icons/IconFullInfo.vue";
+
+import ThePopup from "./ThePopup.vue";
+import TheIconButton from "../components/TheIconButton.vue";
+import { vMaska } from "maska";
+
 export default {
-  // components: { IconDelete, IconFullInfo, ThePopup, TheIconButton },
+  components: { IconDelete, IconFullInfo, ThePopup, TheIconButton },
+  directives: { maska: vMaska },
 
   props: {
     employee: {

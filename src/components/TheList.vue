@@ -1,10 +1,6 @@
-<script setup>
-import TheElem from "../components/TheElem.vue";
-</script>
-
 <template>
   <div class="list">
-    <template v-if="!(employees.length === 0)">
+    <template v-if="employees.length > 0">
       <transition-group name="list">
         <TheElem
           v-for="employee in employees"
@@ -22,12 +18,15 @@ import TheElem from "../components/TheElem.vue";
 </template>
 
 <script>
+import TheElem from "../components/TheElem.vue";
+
 export default {
-  // components: { TheElem },
+  components: { TheElem },
+
   props: {
     employees: Object,
-    message: String,
-  },
+    message: String
+  }
 };
 </script>
 

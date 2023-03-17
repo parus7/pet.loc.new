@@ -1,7 +1,3 @@
-<script setup>
-import TheButton from "./TheButton.vue";
-</script>
-
 <template>
   <div v-if="isOpen" class="popup" @click="closePopup">
     <div class="popup__body" @click.stop>
@@ -20,7 +16,6 @@ import TheButton from "./TheButton.vue";
         </TheButton>
 
         <TheButton
-          type="button"
           class="popup__button"
           aria-label="отмены действия"
           @click="closePopup"
@@ -33,13 +28,17 @@ import TheButton from "./TheButton.vue";
 </template>
 
 <script>
+import TheButton from "./TheButton.vue";
+
 export default {
-  // components: { TheButton },
+  name: "ThePopup",
+
+  components: { TheButton },
   props: {
     isOpen: {
       type: Boolean,
-      required: true,
-    },
+      required: true
+    }
   },
 
   methods: {
@@ -49,8 +48,8 @@ export default {
 
     okPopup() {
       this.$emit("ok");
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -64,6 +63,7 @@ export default {
   background: var(--vt-c-white-background-confirm);
   z-index: 111;
 }
+
 .popup__body {
   position: absolute;
   top: 30%;

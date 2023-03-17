@@ -1,35 +1,36 @@
-<script setup>
-import TheHeader from "../components/TheHeader.vue";
-import TheBar from "../components/TheBar.vue";
-import TheList from "../components/TheList.vue";
-
-import { useEmplStore } from "@/stores/EmplStore";
-import { mapState, mapActions } from "pinia";
-import employeesData from "../data/employeesData.json";
-</script>
-
 <template>
   <div class="main">
     <TheHeader
       class="main_header"
       @alphabetFilter="onAlphabet($event)"
-      @emplFilter="filterData($event)"
-      @emplCreate="onCreateEmployee()"
+      @employeeFilter="filterData($event)"
+      @employeeCreate="onCreateEmployee()"
     >
     </TheHeader>
+
     <TheBar class="main_bar" />
+
     <TheList
       class="main_list"
       :employees="[...employees]"
       :message="message"
       @deleteEmployee="onDelete($event)"
     />
+
   </div>
 </template>
 
 <script>
+import employeesData from "@/data/employeesData.json";
+import { useEmplStore } from "@/stores/EmplStore";
+import { mapState, mapActions } from "pinia";
+
+import TheHeader from "@/components/TheHeader.vue";
+import TheBar from "@/components/TheBar.vue";
+import TheList from "@/components/TheList.vue";
+
 export default {
-  // components: { TheHeader, TheList, TheBar },
+  components: { TheHeader, TheList, TheBar },
 
   data() {
     return {

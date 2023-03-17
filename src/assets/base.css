@@ -1,107 +1,107 @@
 :root {
-  --vt-c-white: rgba(255, 255, 255, 1);
-  --vt-c-white-mute: rgba(242, 242, 242, 1);
-  --vt-c-white-mute-archive: rgba(267, 247, 247, 1);
-  --vt-c-white-background-confirm: rgba(255, 250, 250, 0.4);
+    --vt-c-white: rgba(255, 255, 255, 1);
+    --vt-c-white-mute: rgba(242, 242, 242, 1);
+    --vt-c-white-mute-archive: rgba(267, 247, 247, 1);
+    --vt-c-white-background-confirm: rgba(255, 250, 250, 0.4);
 
-  --vt-c-black-basic-font: rgba(0, 0, 0, 1);
-  --vt-c-grey-main-font: rgba(71, 74, 81, 1);
-  --vt-c-grey-font: rgba(130, 134, 140, 1);
-  --vt-c-grey-silver: rgba(192, 192, 192, 1);
+    --vt-c-black-basic-font: rgba(0, 0, 0, 1);
+    --vt-c-grey-main-font: rgba(71, 74, 81, 1);
+    --vt-c-grey-font: rgba(130, 134, 140, 1);
+    --vt-c-grey-silver: rgba(192, 192, 192, 1);
 
-  --vt-c-outline: rgba(255, 204, 0, 1);
-  --vt-c-active-2: rgba(95, 158, 160, 0.2);
-  --vt-c-active-4: rgba(95, 158, 160, 0.4);
-  --vt-c-active-6: rgba(95, 158, 160, 0.6);
-  --vt-c-active-9: rgba(95, 158, 160, 0.9);
-  --vt-c-active-10: rgba(95, 158, 160, 1);
+    --vt-c-outline: rgba(255, 204, 0, 1);
+    --vt-c-active-2: rgba(95, 158, 160, 0.2);
+    --vt-c-active-4: rgba(95, 158, 160, 0.4);
+    --vt-c-active-6: rgba(95, 158, 160, 0.6);
+    --vt-c-active-9: rgba(95, 158, 160, 0.9);
+    --vt-c-active-10: rgba(95, 158, 160, 1);
 
-  --vt-c-alert: rgba(205, 92, 92, 0.7);
+    --vt-c-alert: rgba(205, 92, 92, 0.7);
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  min-height: 100vh;
-  max-width: 1024px;
-  color: var(--vt-c-black-basic-font);
-  transition: color 0.5s, background-color 0.5s;
-  font-family: Montserrat, Arial, Helvetica, Verdana, sans-serif;
-  font-size: 0.86rem;
-  text-rendering: optimizeLegibility;
-  margin: 0 auto;
+    min-height: 100vh;
+    max-width: 1024px;
+    color: var(--vt-c-black-basic-font);
+    transition: color 0.5s, background-color 0.5s;
+    font-family: Montserrat, Arial, Helvetica, Verdana, sans-serif;
+    font-size: 0.86rem;
+    text-rendering: optimizeLegibility;
+    margin: 0 auto;
 }
 
 .relative {
-  position: relative;
+    position: relative;
 }
 
 .link {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 svg:hover path {
-  fill: var(--vt-c-grey-silver);
+    fill: var(--vt-c-grey-silver);
 }
 
 svg:active path {
-  opacity: 0.7;
+    opacity: 0.7;
 }
 
 .container__button {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  justify-content: end;
-  gap: 45px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: end;
+    gap: 45px;
 }
 
 input,
 select {
-  font-family: inherit;
-  font-style: italic;
-  background: var(--vt-c-white);
-  border: none;
-  box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
-  border-radius: 9px;
-  outline-color: var(--vt-c-outline);
-  font-size: inherit;
-  color: inherit;
-  appearance: none;
-  padding: 5px 15px;
+    font-family: inherit;
+    font-style: italic;
+    background: var(--vt-c-white);
+    border: none;
+    box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
+    border-radius: 9px;
+    outline-color: var(--vt-c-outline);
+    font-size: inherit;
+    color: inherit;
+    appearance: none;
+    padding: 5px 15px;
 }
 
 ::placeholder {
-  color: inherit;
+    color: inherit;
 }
 
 input:disabled,
 select:disabled {
-  font-style: normal;
-  background: none;
+    font-style: normal;
+    background: none;
 }
 
 .help:hover::after {
-  position: absolute;
-  right: -30px;
-  top: -30px;
+    position: absolute;
+    right: -30px;
+    top: -30px;
 
-  content: attr(data-name);
-  font-family: inherit;
-  color: var(--vt-c-grey-font);
-  background: var(--vt-c-active-2);
-  border-radius: 6px;
-  font-size: 0.7rem;
-  text-transform: lowercase;
-  opacity: 0.8;
+    content: attr(data-name);
+    font-family: inherit;
+    color: var(--vt-c-grey-font);
+    background: var(--vt-c-active-2);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    text-transform: lowercase;
+    opacity: 0.8;
 
-  height: auto;
-  padding: 4px;
+    height: auto;
+    padding: 4px;
 }
 
 .status {
-  opacity: 0.4;
-  border: none;
-  box-shadow: none;
+    opacity: 0.4;
+    border: none;
+    box-shadow: none;
 }

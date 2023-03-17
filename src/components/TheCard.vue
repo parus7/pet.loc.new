@@ -1,16 +1,3 @@
-<script setup>
-import { useEmplStore } from "@/stores/EmplStore";
-import { RouterLink } from "vue-router";
-import { mapState, mapActions } from "pinia";
-import { vMaska } from "maska";
-
-import ThePopup from "../components/ThePopup.vue";
-import TheButton from "../components/TheButton.vue";
-
-import IconEdit from "../components/icons/IconEdit.vue";
-import IconClose from "../components/icons/IconClose.vue";
-</script>
-
 <template>
   <form class="card-form" id="add-employee" @submit.prevent>
     <img
@@ -207,15 +194,26 @@ import IconClose from "../components/icons/IconClose.vue";
       </RouterLink>
 
       <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
-        >Вы хотите изменить данные сотрудника?
+      >Вы хотите изменить данные сотрудника?
       </ThePopup>
     </div>
   </form>
 </template>
 
 <script>
+import { useEmplStore } from "@/stores/EmplStore";
+import { mapState, mapActions } from "pinia";
+import { vMaska } from "maska";
+
+import ThePopup from "@/components/ThePopup.vue";
+import TheButton from "@/components/TheButton.vue";
+
+import IconEdit from "@/components/icons/IconEdit.vue";
+import IconClose from "@/components/icons/IconClose.vue";
+
 export default {
-  // components: { ThePopup, TheButton },
+  components: { ThePopup, TheButton, IconEdit, IconClose },
+  directives: { maska: vMaska },
 
   data() {
     return {
@@ -228,20 +226,20 @@ export default {
       maskaBirthday: {
         masked: "",
         unmasked: "",
-        completed: false,
+        completed: false
       },
 
       maskaTelephone: {
         masked: "",
         unmasked: "",
-        completed: false,
+        completed: false
       },
 
       maskaMobile: {
         masked: "",
         unmasked: "",
-        completed: false,
-      },
+        completed: false
+      }
     };
   },
 
@@ -251,14 +249,14 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmplById", "getAlphabet"]),
+    ...mapState(useEmplStore, ["getEmplById", "getAlphabet"])
   },
 
   methods: {
     ...mapActions(useEmplStore, [
       "delEmployee",
       "addEmployee",
-      "alphabetToggle",
+      "alphabetToggle"
     ]),
 
     onSaveEmployee(paramsId) {
@@ -283,8 +281,8 @@ export default {
       });
 
       this.isEdit = true;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -313,6 +311,7 @@ fieldset {
   align-items: center;
   margin-bottom: 15px;
 }
+
 .card-form__photo {
   background-color: var(--vt-c-white-background);
   border-radius: 20%;
@@ -324,6 +323,7 @@ fieldset {
 .card-form__fullname {
   grid-column: 2 / 4;
 }
+
 .card-form__personal {
   grid-column: 1 / 3;
 }
@@ -350,6 +350,7 @@ fieldset {
   .card-form {
     padding: 15px;
   }
+
   .card-form__buttons {
     margin: 0 auto;
   }
