@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="IconFullInfo"
+    class="icon-full--info"
     width="25"
     height="25"
     viewBox="0 0 24 24"
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-.IconFullInfo {
+.icon-full--info {
   width: 25px;
   fill: var(--vt-c-active-6);
 }

@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="IconAdd"
+    class="icon-add"
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-.IconAdd {
+.icon-add {
   width: 25px;
   fill: var(--vt-c-white);
 }

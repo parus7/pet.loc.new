@@ -245,11 +245,11 @@ export default {
 
   created() {
     const paramsId = this.$route.params.id;
-    this.employee = { ...this.getEmplById(paramsId) };
+    this.employee = { ...this.getEmployeeById(paramsId) };
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmplById", "getAlphabet"])
+    ...mapState(useEmplStore, ["getEmployeeById", "getAlphabet"])
   },
 
   methods: {
@@ -313,7 +313,7 @@ fieldset {
 }
 
 .card-form__photo {
-  background-color: var(--vt-c-white-background);
+  background-color: var(--vt-c-white-background-confirm);
   border-radius: 20%;
   border: 3px solid var(--vt-c-active-2);
   box-shadow: 2px 3px 4px 1px var(--vt-c-active-4);

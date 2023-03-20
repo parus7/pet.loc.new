@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="IconHotel"
+    class="icon-hotel"
     width="25"
     height="25"
     viewBox="0 0 24 24"
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped>
-.IconHotel {
+.icon-hotel {
   width: 25px;
   fill: var(--vt-c-active-6);
 }

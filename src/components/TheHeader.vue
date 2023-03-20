@@ -190,9 +190,6 @@ export default {
   padding: 20px;
 }
 
-/*.header-move {*/
-/*  transition: transform 0.8s ease;*/
-/*}*/
 
 .header__form {
   display: flex;

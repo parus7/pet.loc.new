@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="IconClose"
+    class="icon-close"
     width="25"
     height="25"
     viewBox="0 0 22 22"
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-.IconClose {
+.icon-close {
   width: 25px;
   fill: var(--vt-c-white);
 }

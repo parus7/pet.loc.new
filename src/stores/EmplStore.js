@@ -17,7 +17,7 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getAllEmployees: (state) => (key) => [...state[key].values()],
 
-    getEmplById: (state) => (emplId) => state["employees"].get(emplId),
+    getEmployeeById: (state) => (employeeId) => state["employees"].get(employeeId),
 
     getAlertBirthday:
       (state) =>
@@ -63,7 +63,7 @@ export const useEmplStore = defineStore("EmplStore", {
         ? this.setMapEmployees(employeesArchive, "archive")
         : this.archive;
 
-      let delEmployee = this.getEmplById(id);
+      let delEmployee = this.getEmployeeById(id);
       this.archive.set(id, delEmployee);
 
       this.delEmployee(id);
@@ -115,17 +115,11 @@ export const useEmplStore = defineStore("EmplStore", {
         " " +
         updatedEmpl.middle_name;
 
-      updatedEmpl.gender = updatedEmpl.gender === "Мужской"
-        ? "m"
-        : updatedEmpl.gender === "Женский"
-          ? "f"
-          : "u";
-
       this.employees.set(updatedEmpl.id, updatedEmpl);
     },
 
     alphabetToggle() {
-     return this.isAlphabet = !this.isAlphabet;
+      return this.isAlphabet = !this.isAlphabet;
     }
   }
 });
