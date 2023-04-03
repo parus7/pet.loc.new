@@ -7,11 +7,12 @@
       :src="employee.src"
       width="110"
       height="110"
+      tabindex="1"
     />
 
-    <fieldset class="card-form__fullname" :disabled="!isEdit">
-      <div class="card-form__wrapper">
-        <label for="last_name">Фамилия</label>
+    <fieldset class="card-form__full-name" :disabled="!isEdit">
+
+      <label class="card-form__label">Фамилия
         <input
           id="last_name"
           type="text"
@@ -21,10 +22,9 @@
           v-model="employee.last_name"
           required
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="first_name">Имя</label>
+      <label class="card-form__label">Имя
         <input
           id="first_name"
           type="text"
@@ -33,10 +33,9 @@
           v-model="employee.first_name"
           required
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="middle_name">Отчество</label>
+      <label class="card-form__label">Отчество
         <input
           id="middle_name"
           type="text"
@@ -44,12 +43,11 @@
           tabindex="4"
           v-model="employee.middle_name"
         />
-      </div>
+      </label>
     </fieldset>
 
     <fieldset class="card-form__personal" :disabled="!isEdit">
-      <div class="card-form__wrapper">
-        <label for="id_employee">ID</label>
+      <label class="card-form__label">ID
         <input
           id="id_employee"
           type="text"
@@ -57,10 +55,9 @@
           v-model="employee.id"
           disabled
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="gender">Пол</label>
+      <label class="card-form__label">Пол
         <select
           id="gender"
           aria-label="пол сотрудника"
@@ -72,12 +69,11 @@
           <option>Женский</option>
           <option>Неизвестный</option>
         </select>
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="born">ДР</label>
+      <label class="card-form__label">ДР
         <input
-          id="born"
+          id="birthday"
           type="text"
           aria-label="день рождения сотрудника"
           tabindex="6"
@@ -85,25 +81,23 @@
           v-maska="maskaBirthday"
           data-maska="##.##"
         />
-      </div>
+      </label>
     </fieldset>
 
     <fieldset class="card-form__contacts" :disabled="!isEdit">
-      <div class="card-form__wrapper">
-        <label for="phone">Вн. тел.</label>
+      <label class="card-form__label">Вн. тел.
         <input
-          id="phone"
+          id="telephone"
           type="text"
-          aria-label="phone"
+          aria-label="внутренний номер сотрудника"
           tabindex="7"
           v-model="employee.telephone"
           v-maska="maskaTelephone"
           data-maska="##-##"
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="mobile">Моб. тел.</label>
+      <label class="card-form__label">Моб. тел.
         <input
           id="mobile"
           type="text"
@@ -113,10 +107,9 @@
           v-maska="maskaMobile"
           data-maska="### ###-##-##"
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="email">Email</label>
+      <label class="card-form__label">Email
         <input
           id="email"
           type="text"
@@ -124,12 +117,11 @@
           tabindex="9"
           v-model="employee.email"
         />
-      </div>
+      </label>
     </fieldset>
 
     <fieldset class="card-form__address" :disabled="!isEdit">
-      <div class="card-form__wrapper">
-        <label for="company">Город</label>
+      <label class="card-form__label">Город
         <input
           id="city"
           type="text"
@@ -137,21 +129,19 @@
           tabindex="10"
           v-model="employee.city"
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="company">Компания</label>
+      <label class="card-form__label">Компания
         <input
           id="company"
           type="text"
-          aria-label="город, в котором работает сотрудник"
+          aria-label="компания, в которой работает сотрудник"
           tabindex="11"
           v-model="employee.company"
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="department">Отдел</label>
+      <label class="card-form__label">Отдел
         <input
           id="department"
           type="text"
@@ -159,18 +149,19 @@
           tabindex="12"
           v-model="employee.department"
         />
-      </div>
+      </label>
 
-      <div class="card-form__wrapper">
-        <label for="position">Должность</label>
+      <label class="card-form__label">Должность
         <input
-          id="position"
+          id="title"
           type="text"
           aria-label="должность сотрудника"
           tabindex="13"
           v-model="employee.title"
         />
-      </div>
+      </label>
+
+      <!--  < TheInput/>-->
     </fieldset>
 
     <div class="container__button card-form__buttons">
@@ -197,6 +188,8 @@
       >Вы хотите изменить данные сотрудника?
       </ThePopup>
     </div>
+
+
   </form>
 </template>
 
@@ -206,13 +199,14 @@ import { mapState, mapActions } from "pinia";
 import { vMaska } from "maska";
 
 import ThePopup from "@/components/ThePopup.vue";
-import TheButton from "@/components/TheButton.vue";
+import TheButton from "@/components/UI/TheButton.vue";
+import TheInput from "@/components/UI/TheInput.vue";
 
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconClose from "@/components/icons/IconClose.vue";
 
 export default {
-  components: { ThePopup, TheButton, IconEdit, IconClose },
+  components: { ThePopup, TheButton, TheInput, IconEdit, IconClose },
   directives: { maska: vMaska },
 
   data() {
@@ -222,6 +216,7 @@ export default {
       isEdit: false,
       isOpen: false,
       isAlphabet: null,
+      tabindex: 1,
 
       maskaBirthday: {
         masked: "",
@@ -244,7 +239,7 @@ export default {
   },
 
   created() {
-    const paramsId = this.$route.params.id;
+    let paramsId = this.$route.params.id;
     this.employee = { ...this.getEmployeeById(paramsId) };
   },
 
@@ -305,7 +300,7 @@ fieldset {
   border: none;
 }
 
-.card-form__wrapper {
+.card-form__label {
   display: grid;
   grid-template-columns: 90px 1fr;
   align-items: center;
@@ -320,7 +315,7 @@ fieldset {
   margin: 0 auto;
 }
 
-.card-form__fullname {
+.card-form__full-name {
   grid-column: 2 / 4;
 }
 

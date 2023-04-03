@@ -16,6 +16,7 @@ export default {
   width: 37px;
   height: 32px;
   border: none;
+
   outline-color: var(--vt-c-outline);
   background: inherit;
   border-radius: 6px;

@@ -1,14 +1,14 @@
 <template>
   <div class="header">
-    <TheButton
-      class="header__button-create relative"
-      aria-label="создать сотрудника"
-      @click="isOpen = true"
-    >
-      <div class="help" data-name="создать&nbsp;карточку">
+    <div class="help relative" data-name="создать&nbsp;карточку">
+      <TheButton
+        class="header__button-create relative"
+        aria-label="создать сотрудника"
+        @click="isOpen = true"
+      >
         <IconAdd />
-      </div>
-    </TheButton>
+      </TheButton>
+    </div>
 
     <ThePopup
       :is-open="isOpen"
@@ -32,7 +32,7 @@
         </option>
       </select>
 
-      <div class="relative">
+      <div class="relative header__wrapper">
         <input
           id="search"
           type="text"
@@ -45,29 +45,28 @@
           @keyup.enter="onSendButtonClick"
         />
 
-        <button
-          type="button"
+        <TheButton
           class="header__form-btn"
           aria-label="поиск"
           @click="onSendButtonClick"
         >
           <IconSearch />
-        </button>
-      </div>
-
-      <div
-        class="help relative"
-        data-name="по&nbsp;алфавиту&nbsp;или&nbsp;сброс"
-      >
-        <TheButton
-          class="header__button-alphabet"
-          aria-label="алфавитная сортировка  и сброс фильтра поиска"
-          @click="setAlphabetSort"
-        >
-          <IconAlphabet />
         </TheButton>
       </div>
     </form>
+
+    <span
+      class="help relative"
+      data-name="по&nbsp;алфавиту&nbsp;или сброс фильтра"
+    >
+      <TheButton
+        class="header__button-alphabet"
+        aria-label="алфавитная сортировка  и сброс фильтра поиска"
+        @click="setAlphabetSort"
+      >
+        <IconAlphabet />
+      </TheButton>
+    </span>
   </div>
 </template>
 
@@ -80,7 +79,7 @@ import IconAlphabet from "@/components/icons/IconAlphabet.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 
 import ThePopup from "@/components/ThePopup.vue";
-import TheButton from "@/components/TheButton.vue";
+import TheButton from "@/components/UI/TheButton.vue";
 import { vMaska } from "maska";
 
 export default {
@@ -183,56 +182,60 @@ export default {
 .header {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px;
 }
-
 
 .header__form {
   display: flex;
-  gap: 15px;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .header__form-select,
 .header__form-search {
-  color: inherit;
-  padding: 7px 45px 7px 30px;
+  box-shadow: 4px 4px 4px 1px var(--vt-c-active-2);
+  padding: 7px 40px 7px 15px;
 }
 
 .header__form-btn {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -16px;
+  right: -10px;
 
   background-color: inherit;
-  outline-color: var(--vt-c-outline);
-  border: none;
-  border-radius: 0 9px 9px 0;
-  padding: 2px 10px;
+  box-shadow: none;
+  padding: 20px;
 }
 
-@media screen and (max-width: 767px) {
-  .header,
+.header__wrapper {
+  display: grid;
+}
+
+@media screen and (max-width: 729px) {
   .header__form {
     flex-direction: column;
-    gap: 20px;
+    flex-grow: 1;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .header {
+    flex-direction: column;
   }
 
-  .header__form-search {
-    width: 100%;
-  }
-
-  .header__button-create {
-    max-width: 70px;
-  }
-
+  .header__button-create,
   .header__button-alphabet {
-    position: absolute;
-    top: -151px;
-    right: 0;
+    flex-grow: 1;
+  }
+
+  .header__form {
+    gap: 20px;
   }
 }
 </style>

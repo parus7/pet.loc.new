@@ -1,27 +1,29 @@
 <template>
-  <ul>
-    <li v-for="item in archive" :key="item.id">{{ item }}</li>
-  </ul>
+  <!-- <TheList class="archive_list" :aEmployees="[...aEmployees]" /> -->
+ <ul>
+    <li v-for="item in aEmployees" :key="item.id">{{ item }}</li>
+  </ul> 
 </template>
 
 <script>
 import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesArchive from "@/data/employeesArchive.json";
+// import TheList from "@/components/TheList.vue";
 
 export default {
+  // components: { TheList },
+
   data() {
     return {
-      archive: {}
+      archive: {},
     };
   },
 
   created() {
-    this.archive = this.getEmptyStore("archive")
+    this.aEmployees = this.getEmptyStore("archive")
       ? this.setMapEmployees(employeesArchive, "archive")
-      : this.getAllEmployees("archive").sort((a, b) =>
-        a.cn.localeCompare(b.cn)
-      );
+      : this.getAllEmployees("archive").sort((a, b) => a.cn.localeCompare(b.cn));
   },
 
   computed: {
@@ -29,8 +31,8 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees"])
-  }
+    ...mapActions(useEmplStore, ["setMapEmployees"]),
+  },
 };
 </script>
 

@@ -117,12 +117,12 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 .main {
   display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 5.5vh  94.5vh;
   gap: 10px;
-  grid-template-columns: min-content 1fr;
-  grid-template-rows: auto 85vh auto;
   padding: 17px;
   margin: 0 auto;
 }
@@ -142,16 +142,28 @@ export default {
 
 @media screen and (max-width: 991px) {
   .main {
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: 5.5vh 5.5vh 89vh;
   }
 
-  .main_bar,
   .main_list {
     grid-column: 1/-1;
   }
 
   .main_bar {
-    grid-row: 2/3;
+    grid-row: 1/2;
+    grid-column: 1/-1;
+  }
+}
+
+@media screen and (max-width: 729px) {
+  .main {
+    grid-template-rows: 5.5vh 9vh 85.5vh;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .main {
+    grid-template-rows: 5.5vh 20vh 74.5vh;
   }
 }
 </style>

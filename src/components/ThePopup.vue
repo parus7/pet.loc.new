@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import TheButton from "./TheButton.vue";
+import TheButton from "./UI/TheButton.vue";
 
 export default {
   name: "ThePopup",
@@ -75,7 +75,7 @@ export default {
 
   background: var(--vt-c-white);
   border-radius: 20px;
-  padding: 20px;
+  padding: 25px;
 }
 
 .popup__button {

@@ -25,8 +25,8 @@
     </div>
 
     <RouterLink :to="{ name: 'archive' }" tabindex="-1">
-      <div class="help relative" data-name="архив сотрудников">
-        <TheIconButton aria-label="архив сотрудников">
+      <div class="help relative" data-name="архивный список">
+        <TheIconButton aria-label="архивный список сотрудников">
           <IconArchive />
         </TheIconButton>
       </div>
@@ -43,7 +43,7 @@ import IconHotel from "./icons/IconHotel.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
 
-import TheIconButton from "../components/TheIconButton.vue";
+import TheIconButton from "./UI/TheIconButton.vue";
 
 export default {
   components: { IconGift, IconHotel, IconFood, IconArchive, TheIconButton },
@@ -89,7 +89,7 @@ export default {
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 80px 20px;
+  padding: 80px 12px;
 }
 
 .bar__alert {
@@ -110,7 +110,7 @@ export default {
   .bar {
     flex-direction: row;
     justify-content: center;
-    padding: 5px 0;
+    padding: 15px 0;
   }
 }
 </style>

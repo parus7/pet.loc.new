@@ -9,19 +9,13 @@
       height="35"
     />
 
-    <input
-      class="employee__cn input-mask"
-      v-model="employee.cn"
-      tabindex="-1"
-      readonly
-    />
+    <span
+      class="employee__cn ">{{ employee.cn }}
+    </span>
 
-    <input
-      class="employee__item-email input-mask"
-      v-model="employee.email"
-      tabindex="-1"
-      readonly
-    />
+    <span
+      class="employee__item-email">{{ employee.email }}
+    </span>
 
     <input
       class="employee__item-telephone input-mask"
@@ -79,7 +73,7 @@ import IconDelete from "./icons/IconDelete.vue";
 import IconFullInfo from "./icons/IconFullInfo.vue";
 
 import ThePopup from "./ThePopup.vue";
-import TheIconButton from "../components/TheIconButton.vue";
+import TheIconButton from "./UI/TheIconButton.vue";
 import { vMaska } from "maska";
 
 export default {
@@ -135,7 +129,6 @@ export default {
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   background-color: var(--vt-c-white-mute);
   padding: 10px;
-  margin-bottom: 10px;
 }
 
 .input-mask {
@@ -144,7 +137,6 @@ export default {
   font-style: normal;
   outline: none;
   padding: 0;
-  margin: 0;
 }
 
 .employee__photo {
@@ -153,7 +145,6 @@ export default {
   border: 2px solid var(--vt-c-active-2);
   border-radius: 14%;
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-6);
-  margin: 0;
 }
 
 .employee__cn,
