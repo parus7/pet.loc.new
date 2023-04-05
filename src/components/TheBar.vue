@@ -12,18 +12,6 @@
       </TheIconButton>
     </div>
 
-    <div class="help relative" data-name="отели и гостиницы">
-      <TheIconButton aria-label="ближайшие к офису отели">
-        <IconHotel />
-      </TheIconButton>
-    </div>
-
-    <div class="help relative" data-name="кафе и рестораны">
-      <TheIconButton aria-label="билжайшие к офису кафе и рестораны">
-        <IconFood />
-      </TheIconButton>
-    </div>
-
     <RouterLink :to="{ name: 'archive' }" tabindex="-1">
       <div class="help relative" data-name="архивный список">
         <TheIconButton aria-label="архивный список сотрудников">
@@ -31,6 +19,12 @@
         </TheIconButton>
       </div>
     </RouterLink>
+
+    <div class="help relative" data-name="кафе и рестораны">
+      <TheIconButton aria-label="билжайшие к офису кафе и рестораны">
+        <IconFood />
+      </TheIconButton>
+    </div>
   </div>
 </template>
 
@@ -39,14 +33,13 @@ import { useEmplStore } from "@/stores/EmplStore";
 import { mapState } from "pinia";
 
 import IconGift from "./icons/IconGift.vue";
-import IconHotel from "./icons/IconHotel.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
 
 import TheIconButton from "./UI/TheIconButton.vue";
 
 export default {
-  components: { IconGift, IconHotel, IconFood, IconArchive, TheIconButton },
+  components: { IconGift, IconFood, IconArchive, TheIconButton },
 
   data() {
     return {
@@ -84,7 +77,7 @@ export default {
 .bar {
   display: flex;
   flex-direction: column;
-  gap: 8%;
+  gap: 12%;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
@@ -110,6 +103,7 @@ export default {
   .bar {
     flex-direction: row;
     justify-content: center;
+    gap: 16%;
     padding: 15px 0;
   }
 }

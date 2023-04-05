@@ -6,7 +6,7 @@ export const useEmplStore = defineStore("EmplStore", {
     return {
       employees: new Map(),
       archive: new Map(),
-      isAlphabet: true
+      isAlphabet: true,
     };
   },
   getters: {
@@ -15,18 +15,21 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getAlphabet: (state) => state["isAlphabet"],
 
-    getAllEmployees: (state) => (key) => [...state[key].values()],
+    getAllEmployeesArray: (state) => (key) => state[key].values(),
 
-    getEmployeeById: (state) => (employeeId) => state["employees"].get(employeeId),
+    getAllEmployeesMap: (state) => (key) => state[key],
+
+    getEmployeeById: (state) => (employeeId) =>
+      state["employees"].get(employeeId),
 
     getAlertBirthday:
       (state) =>
-        (date, sum = 0) => {
-          [...state["employees"].values()].forEach((elem) =>
-            elem.birthday === date ? sum++ : sum
-          );
-          return sum;
-        }
+      (date, sum = 0) => {
+        [...state["employees"].values()].forEach((elem) =>
+          elem.birthday === date ? sum++ : sum
+        );
+        return sum;
+      },
   },
 
   actions: {
@@ -35,8 +38,8 @@ export const useEmplStore = defineStore("EmplStore", {
         elem.gender === "m"
           ? (elem.gender = "Мужской")
           : elem.gender === "f"
-            ? (elem.gender = "Женский")
-            : (elem.gender = "Неизвестный")
+          ? (elem.gender = "Женский")
+          : (elem.gender = "Неизвестный")
       );
     },
 
@@ -73,14 +76,13 @@ export const useEmplStore = defineStore("EmplStore", {
       this.employees.delete(id);
     },
 
-
     createNextId() {
       return this.getEmptyStore("employees")
         ? "1"
         : String(Number(Math.max(...this.employees.keys())) + 1);
     },
 
-    createEmployee: function() {
+    createEmployee: function () {
       const idEmployee = this.createNextId();
 
       let employee = {
@@ -101,7 +103,7 @@ export const useEmplStore = defineStore("EmplStore", {
         department: "",
         company: "",
         city: "",
-        src: `./src/assets/img/defaultPhoto.jpg`
+        src: `./src/assets/img/defaultPhoto.jpg`,
       };
 
       this.employees.set(idEmployee, employee);
@@ -119,7 +121,7 @@ export const useEmplStore = defineStore("EmplStore", {
     },
 
     alphabetToggle() {
-      return this.isAlphabet = !this.isAlphabet;
-    }
-  }
+      return (this.isAlphabet = !this.isAlphabet);
+    },
+  },
 });

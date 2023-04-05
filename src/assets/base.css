@@ -9,13 +9,16 @@
     --vt-c-grey-font: rgba(130, 134, 140, 1);
     --vt-c-grey-silver: rgba(192, 192, 192, 1);
 
-    --vt-c-outline: rgba(255, 204, 0, 1);
     --vt-c-active-2: rgba(95, 158, 160, 0.2);
     --vt-c-active-4: rgba(95, 158, 160, 0.4);
     --vt-c-active-6: rgba(95, 158, 160, 0.6);
     --vt-c-active-9: rgba(95, 158, 160, 0.9);
     --vt-c-active-10: rgba(95, 158, 160, 1);
 
+    --vt-c-archive-2: rgba(95, 158, 160, 0.2);
+    --vt-c-archive-5: rgba(95, 158, 160, 0.5);
+
+    --vt-c-outline: rgba(255, 204, 0, 1);
     --vt-c-alert: rgba(205, 92, 92, 0.7);
 }
 

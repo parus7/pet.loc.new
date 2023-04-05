@@ -45,7 +45,7 @@ export default {
   created() {
     this.employees = this.getEmptyStore("employees")
       ? this.setMapEmployees(employeesData, "employees").values()
-      : this.getAllEmployees("employees");
+      : [...this.getAllEmployeesArray("employees")];
 
     this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
@@ -54,7 +54,7 @@ export default {
   computed: {
     ...mapState(useEmplStore, [
       "getEmptyStore",
-      "getAllEmployees",
+      "getAllEmployeesArray",
       "delEmployee",
       "getAlphabet"
     ])
@@ -71,7 +71,7 @@ export default {
     filterData(event) {
       this.isAlphabet = this.alphabetToggle();
 
-      this.employees = [...this.getAllEmployees("employees")].filter(
+      this.employees = [...this.getAllEmployeesArray("employees")].filter(
         (elem) => elem[event.param] === event.value
       );
 
@@ -86,10 +86,10 @@ export default {
 
       this.employees =
         this.isAlphabet === false
-          ? [...this.getAllEmployees("employees")].sort((a, b) =>
+          ? [...this.getAllEmployeesArray("employees")].sort((a, b) =>
             a.cn.localeCompare(b.cn)
           )
-          : [...this.getAllEmployees("employees")].sort((a, b) =>
+          : [...this.getAllEmployeesArray("employees")].sort((a, b) =>
             b.cn.localeCompare(a.cn)
           );
 
@@ -100,8 +100,7 @@ export default {
       this.isAlphabet = this.alphabetToggle();
 
       this.saveInArchive(event.id);
-      //
-      this.employees = [...this.getAllEmployees("employees")];
+      this.employees = [...this.getAllEmployeesArray("employees")];
 
       this.message =
         this.employees.length === 0 ? "Список сотрудников пуст" : "";

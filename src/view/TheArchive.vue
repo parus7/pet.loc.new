@@ -1,39 +1,61 @@
 <template>
-  <!-- <TheList class="archive_list" :aEmployees="[...aEmployees]" /> -->
- <ul>
-    <li v-for="item in aEmployees" :key="item.id">{{ item }}</li>
-  </ul> 
+  <div class="list">
+    <template v-if="aEmployees.length > 0">
+      <TheArchiveElem
+        v-for="aEmployee in aEmployees"
+        :key="aEmployee.id"
+        :aEmployee="{ ...aEmployee }"
+      />
+    </template>
+
+    <template v-else>
+      <h2 class="list__message">Архивный список сотрудников пуст</h2>
+    </template>
+  </div>
+
 </template>
 
 <script>
 import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesArchive from "@/data/employeesArchive.json";
-// import TheList from "@/components/TheList.vue";
+import TheArchiveElem from "@/components/TheArchiveElem.vue";
 
 export default {
-  // components: { TheList },
+  components: { TheArchiveElem },
 
   data() {
     return {
-      archive: {},
+      aEmployees: {}
     };
   },
 
   created() {
     this.aEmployees = this.getEmptyStore("archive")
       ? this.setMapEmployees(employeesArchive, "archive")
-      : this.getAllEmployees("archive").sort((a, b) => a.cn.localeCompare(b.cn));
+      : this.getAllEmployeesMap("archive");
+
+    this.aEmployees = [...this.aEmployees.values()].sort((a, b) => a.cn.localeCompare(b.cn));
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployees"])
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesMap"])
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees"]),
-  },
+    ...mapActions(useEmplStore, ["setMapEmployees"])
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.list {
+  padding: 17px;
+}
+
+.list__message {
+  color: var(--vt-c-grey-font);
+  text-align: center;
+  margin: 40px 0;
+}
+</style>
