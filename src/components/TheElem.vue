@@ -41,7 +41,7 @@
 
     <RouterLink
       :to="{
-        name: 'card',
+        name: 'infoCard',
         params: { id: employee.id },
       }"
       tabindex="-1"

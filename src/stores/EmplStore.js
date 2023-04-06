@@ -19,8 +19,7 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getAllEmployeesMap: (state) => (key) => state[key],
 
-    getEmployeeById: (state) => (employeeId) =>
-      state["employees"].get(employeeId),
+    getEmployeeById: (state) => (key, employeeId) => state[key].get(employeeId),
 
     getAlertBirthday:
       (state) =>

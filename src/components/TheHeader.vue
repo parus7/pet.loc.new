@@ -129,15 +129,14 @@ export default {
 
     onCreateEmployee() {
       this.isAlphabet = this.alphabetToggle();
-
       const id = this.createNextId();
+
       this.$router.push({
-        name: "form",
+        name: "newCard",
         params: { id: id }
       });
 
       this.isOpen = false;
-
       this.$emit("employeeCreate", { id: id });
     },
 
@@ -187,7 +186,7 @@ export default {
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 15px;
+  padding: 13px;
 }
 
 .header__form {

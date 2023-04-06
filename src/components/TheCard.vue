@@ -7,11 +7,9 @@
       :src="employee.src"
       width="110"
       height="110"
-      tabindex="1"
     />
 
     <fieldset class="card-form__full-name" :disabled="!isEdit">
-
       <label class="card-form__label">Фамилия
         <input
           id="last_name"
@@ -160,36 +158,32 @@
           v-model="employee.title"
         />
       </label>
-
-      <!--  < TheInput/>-->
     </fieldset>
 
     <div class="container__button card-form__buttons">
-      <TheButton
-        tabindex="0"
-        aria-label="кнопка редактирования данных сотрудника"
-        @click="isOpen = true"
-      >
-        <IconEdit />
-      </TheButton>
-
-      <RouterLink class="link" :to="{ name: 'main' }" tabindex="-1">
+      <template v-if="visible">
         <TheButton
-          type="submit"
-          tabindex="14"
-          aria-label="кнопка сохранения данных и перехода на главную страницу"
-          @click="onSaveEmployee(employee.id)"
+          tabindex="0"
+          aria-label="кнопка редактирования данных сотрудника"
+          @click="isOpen = true"
         >
-          <IconClose />
+          <IconEdit />
         </TheButton>
-      </RouterLink>
+      </template>
 
       <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
       >Вы хотите изменить данные сотрудника?
       </ThePopup>
+
+      <TheButton
+        tabindex="14"
+        aria-label="кнопка сохранения данных и перехода на главную страницу"
+        @click="onSaveEmployee(employee.id)"
+      >
+        <IconClose />
+      </TheButton>
+
     </div>
-
-
   </form>
 </template>
 
@@ -209,11 +203,17 @@ export default {
   components: { ThePopup, TheButton, TheInput, IconEdit, IconClose },
   directives: { maska: vMaska },
 
+  props: {
+    employee: Object,
+    visible: Boolean,
+    isEdit: Boolean,
+    link: String
+  },
+
   data() {
     return {
-      employee: {},
       paramsId: null,
-      isEdit: false,
+      // isEdit: false,
       isOpen: false,
       isAlphabet: null,
       tabindex: 1,
@@ -238,11 +238,6 @@ export default {
     };
   },
 
-  created() {
-    let paramsId = this.$route.params.id;
-    this.employee = { ...this.getEmployeeById(paramsId) };
-  },
-
   computed: {
     ...mapState(useEmplStore, ["getEmployeeById", "getAlphabet"])
   },
@@ -256,6 +251,10 @@ export default {
 
     onSaveEmployee(paramsId) {
       this.isAlphabet = this.alphabetToggle();
+
+      this.$router.push({
+        name: this.link
+      });
 
       this.isEdit = false;
       this.delEmployee(paramsId);
@@ -296,7 +295,10 @@ export default {
   margin: 30px auto;
 }
 
-fieldset {
+.card-form__full-name,
+.card-form__personal,
+.card-form__contacts,
+.card-form__address {
   border: none;
 }
 

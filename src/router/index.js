@@ -1,8 +1,11 @@
 import { createMemoryHistory, createRouter } from "vue-router";
 import TheMain from "@/view/TheMain.vue";
-import TheCard from "@/view/TheCardEmployee.vue";
+import TheFormNewEmployee from "@/view/TheNewEmployeeCard.vue";
 import TheArchive from "@/view/TheArchive.vue";
-import TheFormNewEmployee from "@/view/TheCardNewEmployee.vue";
+
+import TheEmployeeCard from "@/view/TheEmployeeCard.vue";
+import TheEmployeeArchiveCard from "@/view/TheEmployeeArchiveCard.vue";
+import TheNewEmployeeCard from "@/view/TheNewEmployeeCard.vue";
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,14 +22,19 @@ const router = createRouter({
       component: TheArchive,
     },
     {
-      path: "/card/:id",
-      name: "card",
-      component: TheCard,
+      path: "/TheEmployeeCard/:id",
+      name: "infoCard",
+      component: TheEmployeeCard,
     },
     {
-      path: "/form/:id",
-      name: "form",
-      component: TheFormNewEmployee,
+      path: "/TheEmployeeArchiveCard/:id",
+      name: "archiveCard",
+      component: TheEmployeeArchiveCard,
+    },
+    {
+      path: "/TheNewEmployeeCard/:id",
+      name: "newCard",
+      component: TheNewEmployeeCard,
     },
     // {
     //   path: "/:any(.*)",

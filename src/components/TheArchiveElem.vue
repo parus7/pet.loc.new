@@ -39,19 +39,19 @@
       readonly
     />
 
-    <!--    <RouterLink-->
-    <!--      :to="{-->
-    <!--        name: 'card',-->
-    <!--        params: { id: aEmployee.id },-->
-    <!--      }"-->
-    <!--      tabindex="-1"-->
-    <!--    >-->
-          <div class="help relative" data-name="в&nbsp;профиль">
-            <TheIconButton aria-label="переход в профиль сотрудника в архиве">
-              <IconFullInfo />
-            </TheIconButton>
-          </div>
-    <!--    </RouterLink>-->
+    <RouterLink
+      :to="{
+            name: 'archiveCard',
+            params: { id: aEmployee.id },
+          }"
+      tabindex="-1"
+    >
+      <div class="help relative" data-name="в&nbsp;профиль">
+        <TheIconButton aria-label="переход в профиль сотрудника в архиве">
+          <IconFullInfo />
+        </TheIconButton>
+      </div>
+    </RouterLink>
 
   </template>
 </template>
