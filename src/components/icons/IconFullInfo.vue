@@ -22,7 +22,7 @@ export default {
 <style scoped>
 .icon-full--info {
   width: 25px;
-  fill: var(--vt-c-active-6);
+  fill: var(--vt-c-active-9);
 }
 </style>
 

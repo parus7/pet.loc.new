@@ -25,7 +25,7 @@ export default {
 }
 
 .TheIconButton:active {
-  box-shadow: 2px 2px 4px 1px var(--vt-c-active-4);
+  box-shadow: 2px 2px 4px 1px var(--vt-c-active-5);
 }
 
 @media screen and (max-width: 767px) {

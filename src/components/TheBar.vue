@@ -20,8 +20,8 @@
       </div>
     </RouterLink>
 
-    <div class="help relative" data-name="кафе и рестораны">
-      <TheIconButton aria-label="билжайшие к офису кафе и рестораны">
+    <div class="help relative" data-name="кафе рядом">
+      <TheIconButton aria-label="ближайшие к офису кафе">
         <IconFood />
       </TheIconButton>
     </div>
@@ -57,7 +57,7 @@ export default {
     },
 
     onGetAlertBirthday() {
-      return this.getAlertBirthday(this.getTodayDate());
+      return this.getAlertBirthday("employees", this.getTodayDate());
     },
 
     getTodayDate() {

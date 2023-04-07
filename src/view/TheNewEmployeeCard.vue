@@ -1,9 +1,12 @@
 <template>
-  <TheCard :visible="visible" :is-edit="isEdit" :link="link" />
+  <TheCard
+    :visible="visible"
+    :is-edit="isEdit"
+    :link="link"
+    @editOk="isEdit=true"
+    @editNo="isEdit=false"
+  />
 
-  <!--  <p> visible: {{ visible }}</p>-->
-  <!--  <p> isEdit: {{ isEdit }}</p>-->
-  <!--  <p>new</p>-->
 </template>
 
 <script>

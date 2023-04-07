@@ -10,7 +10,7 @@
     --vt-c-grey-silver: rgba(192, 192, 192, 1);
 
     --vt-c-active-2: rgba(95, 158, 160, 0.2);
-    --vt-c-active-4: rgba(95, 158, 160, 0.4);
+    --vt-c-active-5: rgba(95, 158, 160, 0.5);
     --vt-c-active-6: rgba(95, 158, 160, 0.6);
     --vt-c-active-9: rgba(95, 158, 160, 0.9);
     --vt-c-active-10: rgba(95, 158, 160, 1);
@@ -52,7 +52,7 @@ svg:active path {
 
 .container__button {
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(3, auto);
     justify-content: end;
     gap: 45px;
 }
@@ -93,7 +93,7 @@ select:disabled {
 
 .help:hover::after {
     position: absolute;
-    right: -30px;
+    right: -15px;
     top: -30px;
 
 

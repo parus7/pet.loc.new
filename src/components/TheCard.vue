@@ -2,9 +2,9 @@
   <form class="card-form" id="add-employee" @submit.prevent>
     <img
       class="card-form__photo"
-      :class="{ status: employee.hide }"
-      :alt="`id: ${employee.id}`"
-      :src="employee.src"
+      :class="{ status: employee['hide'] }"
+      :alt="`id: ${employee['id']}`"
+      :src="employee['src']"
       width="110"
       height="110"
     />
@@ -17,7 +17,7 @@
           aria-label="фамилия сотрудника"
           tabindex="2"
           ref="lastName"
-          v-model="employee.last_name"
+          v-model="employee['last_name']"
           required
         />
       </label>
@@ -28,7 +28,7 @@
           type="text"
           aria-label="имя сотрудника"
           tabindex="3"
-          v-model="employee.first_name"
+          v-model="employee['first_name']"
           required
         />
       </label>
@@ -39,7 +39,7 @@
           type="text"
           aria-label="отчество сотрудника"
           tabindex="4"
-          v-model="employee.middle_name"
+          v-model="employee['middle_name']"
         />
       </label>
     </fieldset>
@@ -50,7 +50,7 @@
           id="id_employee"
           type="text"
           aria-label="id сотрудника"
-          v-model="employee.id"
+          v-model="employee['id']"
           disabled
         />
       </label>
@@ -60,7 +60,7 @@
           id="gender"
           aria-label="пол сотрудника"
           tabindex="5"
-          v-model="employee.gender"
+          v-model="employee['gender']"
         >
           <option selected disabled>Выберите вариант</option>
           <option>Мужской</option>
@@ -75,7 +75,7 @@
           type="text"
           aria-label="день рождения сотрудника"
           tabindex="6"
-          v-model="employee.birthday"
+          v-model="employee['birthday']"
           v-maska="maskaBirthday"
           data-maska="##.##"
         />
@@ -89,7 +89,7 @@
           type="text"
           aria-label="внутренний номер сотрудника"
           tabindex="7"
-          v-model="employee.telephone"
+          v-model="employee['telephone']"
           v-maska="maskaTelephone"
           data-maska="##-##"
         />
@@ -101,7 +101,7 @@
           type="text"
           aria-label="мобильный номер сотрудника"
           tabindex="8"
-          v-model="employee.mobile"
+          v-model="employee['mobile']"
           v-maska="maskaMobile"
           data-maska="### ###-##-##"
         />
@@ -113,7 +113,7 @@
           type="text"
           aria-label="email сотрудника"
           tabindex="9"
-          v-model="employee.email"
+          v-model="employee['email']"
         />
       </label>
     </fieldset>
@@ -125,7 +125,7 @@
           type="text"
           aria-label="город проживания сотрудника"
           tabindex="10"
-          v-model="employee.city"
+          v-model="employee['city']"
         />
       </label>
 
@@ -135,7 +135,7 @@
           type="text"
           aria-label="компания, в которой работает сотрудник"
           tabindex="11"
-          v-model="employee.company"
+          v-model="employee['company']"
         />
       </label>
 
@@ -145,7 +145,7 @@
           type="text"
           aria-label="департамент, в котором работает сотрудник"
           tabindex="12"
-          v-model="employee.department"
+          v-model="employee['department']"
         />
       </label>
 
@@ -155,34 +155,48 @@
           type="text"
           aria-label="должность сотрудника"
           tabindex="13"
-          v-model="employee.title"
+          v-model="employee['title']"
         />
       </label>
     </fieldset>
 
     <div class="container__button card-form__buttons">
       <template v-if="visible">
-        <TheButton
-          tabindex="0"
-          aria-label="кнопка редактирования данных сотрудника"
-          @click="isOpen = true"
-        >
-          <IconEdit />
-        </TheButton>
+        <div class="help relative" data-name="редактировать">
+          <TheButton
+            tabindex="0"
+            aria-label="кнопка редактирования данных сотрудника"
+            @click="isOpen = true"
+          >
+            <IconEdit />
+          </TheButton>
+        </div>
+
+        <div class="help relative" data-name="сохранить">
+          <TheButton
+            tabindex="14"
+            aria-label="кнопка сохранения данных сотрудника"
+            @click="onSaveEmployee(employee['id'])"
+          >
+            <IconSave />
+          </TheButton>
+        </div>
+
       </template>
 
       <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
       >Вы хотите изменить данные сотрудника?
       </ThePopup>
 
-      <TheButton
-        tabindex="14"
-        aria-label="кнопка сохранения данных и перехода на главную страницу"
-        @click="onSaveEmployee(employee.id)"
-      >
-        <IconClose />
-      </TheButton>
-
+      <div class="help relative" data-name="выйти">
+        <TheButton
+          tabindex="15"
+          aria-label="кнопка перехода на главную страницу"
+          @click="getOutOfHere"
+        >
+          <IconClose />
+        </TheButton>
+      </div>
     </div>
   </form>
 </template>
@@ -198,9 +212,10 @@ import TheInput from "@/components/UI/TheInput.vue";
 
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconClose from "@/components/icons/IconClose.vue";
+import IconSave from "@/components/icons/IconSave.vue";
 
 export default {
-  components: { ThePopup, TheButton, TheInput, IconEdit, IconClose },
+  components: { ThePopup, TheButton, TheInput, IconEdit, IconClose, IconSave },
   directives: { maska: vMaska },
 
   props: {
@@ -252,11 +267,7 @@ export default {
     onSaveEmployee(paramsId) {
       this.isAlphabet = this.alphabetToggle();
 
-      this.$router.push({
-        name: this.link
-      });
-
-      this.isEdit = false;
+      this.$emit("editNo");
       this.delEmployee(paramsId);
 
       const unmaskedEmployee = { ...this.employee };
@@ -267,6 +278,12 @@ export default {
       this.addEmployee(unmaskedEmployee);
     },
 
+    getOutOfHere() {
+      this.$router.push({
+        name: this.link
+      });
+    },
+
     popupConfirm() {
       this.isOpen = false;
 
@@ -274,7 +291,7 @@ export default {
         this.$refs.lastName.focus();
       });
 
-      this.isEdit = true;
+      this.$emit("editOk");
     }
   }
 };
@@ -289,7 +306,7 @@ export default {
 
   max-width: 768px;
   background-color: var(--vt-c-white-mute);
-  box-shadow: 4px 4px 4px 0 var(--vt-c-active-4);
+  box-shadow: 4px 4px 4px 0 var(--vt-c-active-5);
   border-radius: 20px;
   padding: 30px;
   margin: 30px auto;
@@ -313,7 +330,7 @@ export default {
   background-color: var(--vt-c-white-background-confirm);
   border-radius: 20%;
   border: 3px solid var(--vt-c-active-2);
-  box-shadow: 2px 3px 4px 1px var(--vt-c-active-4);
+  box-shadow: 2px 3px 4px 1px var(--vt-c-active-9);
   margin: 0 auto;
 }
 

@@ -203,7 +203,7 @@ export default {
 
 .header__form-btn {
   position: absolute;
-  top: -16px;
+  top: -15px;
   right: -10px;
 
   background-color: inherit;

@@ -23,8 +23,8 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getAlertBirthday:
       (state) =>
-      (date, sum = 0) => {
-        [...state["employees"].values()].forEach((elem) =>
+      (key, date, sum = 0) => {
+        [...state[key].values()].forEach((elem) =>
           elem.birthday === date ? sum++ : sum
         );
         return sum;

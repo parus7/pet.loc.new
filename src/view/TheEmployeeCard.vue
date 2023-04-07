@@ -3,7 +3,10 @@
     :visible="visible"
     :is-edit="isEdit"
     :employee="employee"
-    :link="link" />
+    :link="link"
+    @editOk="isEdit=true"
+    @editNo="isEdit=false"
+  />
 </template>
 
 <script>
@@ -32,4 +35,5 @@ export default {
     ...mapState(useEmplStore, ["getEmployeeById"])
   }
 };
+
 </script>
