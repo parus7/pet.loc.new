@@ -65,6 +65,8 @@ export const useEmplStore = defineStore("EmplStore", {
         ? this.setMapEmployees(employeesArchive, "archive")
         : this.archive;
 
+      console.log(this.archive);
+
       let delEmployee = this.getEmployeeById(id);
       this.archive.set(id, delEmployee);
 
@@ -83,6 +85,7 @@ export const useEmplStore = defineStore("EmplStore", {
 
     createEmployee: function () {
       const idEmployee = this.createNextId();
+      console.log(idEmployee);
 
       let employee = {
         id: idEmployee,
@@ -105,6 +108,7 @@ export const useEmplStore = defineStore("EmplStore", {
         src: `./src/assets/img/defaultPhoto.jpg`,
       };
 
+      console.log(employee);
       this.employees.set(idEmployee, employee);
     },
 

@@ -1,7 +1,8 @@
 <template>
   <TheCard
-    :visible="visible"
-    :is-edit="isEdit"
+    :employee="employee"
+    :isEdit="isEdit"
+    :isArchive="isArchive"
     :link="link"
     @editOk="isEdit=true"
     @editNo="isEdit=false"
@@ -20,15 +21,17 @@ export default {
   data() {
     return {
       employee: {},
-      visible: false,
       isEdit: true,
+      isArchive: false,
       link: "main"
     };
   },
 
   created() {
     let paramsId = this.$route.params.id;
-    // console.log(paramsId);
+    console.log(paramsId);
+    this.employee = { ...this.getEmployeeById("employees", paramsId) };
+    console.log(this.employee);
   },
 
   computed: {

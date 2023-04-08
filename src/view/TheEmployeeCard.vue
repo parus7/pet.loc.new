@@ -1,8 +1,8 @@
 <template>
   <TheCard
-    :visible="visible"
-    :is-edit="isEdit"
     :employee="employee"
+    :isEdit="isEdit"
+    :isArchive="isArchive"
     :link="link"
     @editOk="isEdit=true"
     @editNo="isEdit=false"
@@ -20,8 +20,8 @@ export default {
   data() {
     return {
       employee: {},
-      visible: true,
       isEdit: false,
+      isArchive: false,
       link: "main"
     };
   },

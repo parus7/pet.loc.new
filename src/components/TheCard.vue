@@ -161,7 +161,7 @@
     </fieldset>
 
     <div class="container__button card-form__buttons">
-      <template v-if="visible">
+      <template v-if="!isArchive">
         <div class="help relative" data-name="редактировать">
           <TheButton
             tabindex="0"
@@ -181,7 +181,6 @@
             <IconSave />
           </TheButton>
         </div>
-
       </template>
 
       <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
@@ -192,7 +191,7 @@
         <TheButton
           tabindex="15"
           aria-label="кнопка перехода на главную страницу"
-          @click="getOutOfHere"
+          @click="leavePage"
         >
           <IconClose />
         </TheButton>
@@ -220,15 +219,14 @@ export default {
 
   props: {
     employee: Object,
-    visible: Boolean,
     isEdit: Boolean,
+    isArchive: Boolean,
     link: String
   },
 
   data() {
     return {
       paramsId: null,
-      // isEdit: false,
       isOpen: false,
       isAlphabet: null,
       tabindex: 1,
@@ -278,7 +276,7 @@ export default {
       this.addEmployee(unmaskedEmployee);
     },
 
-    getOutOfHere() {
+    leavePage() {
       this.$router.push({
         name: this.link
       });

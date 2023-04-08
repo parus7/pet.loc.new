@@ -62,7 +62,10 @@
       </TheIconButton>
     </div>
 
-    <ThePopup :is-open="isOpen" @ok="popupDelete" @close="isOpen = false"
+    <ThePopup
+      :is-open="isOpen"
+      @close="isOpen = false"
+      @ok="popupDelete"
     >Вы хотите удалить сотрудника?
     </ThePopup>
   </template>
