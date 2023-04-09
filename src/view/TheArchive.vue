@@ -1,5 +1,18 @@
 <template>
   <div class="list">
+    <div class="list__header">
+
+      <div class="help relative" data-name="на главную страницу">
+        <TheButton
+          area-label="на главную страницу"
+          tabindex="0"
+          @click="leavePage">
+          <IconGoTo />
+        </TheButton>
+      </div>
+
+    </div>
+
     <template v-if="aEmployees.length > 0">
       <TheArchiveElem
         v-for="aEmployee in aEmployees"
@@ -19,10 +32,13 @@
 import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import employeesArchive from "@/data/employeesArchive.json";
+
 import TheArchiveElem from "@/components/TheArchiveElem.vue";
+import TheButton from "@/components/UI/TheButton.vue";
+import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { TheArchiveElem },
+  components: { TheArchiveElem, TheButton, IconGoTo },
 
   data() {
     return {
@@ -43,7 +59,14 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees"])
+    ...mapActions(useEmplStore, ["setMapEmployees"]),
+
+    leavePage() {
+      this.$router.push({
+        name: "main"
+      });
+    }
+
   }
 };
 </script>
@@ -51,6 +74,19 @@ export default {
 <style scoped>
 .list {
   padding: 17px;
+}
+
+.list__header {
+
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+
+  background-color: var(--vt-c-archive-2);
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-5);
+  border-radius: 8px;
+  padding: 13px;
+  margin-bottom: 10px;
 }
 
 .list__message {

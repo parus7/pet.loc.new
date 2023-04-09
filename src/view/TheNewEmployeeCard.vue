@@ -29,9 +29,7 @@ export default {
 
   created() {
     let paramsId = this.$route.params.id;
-    console.log(paramsId);
     this.employee = { ...this.getEmployeeById("employees", paramsId) };
-    console.log(this.employee);
   },
 
   computed: {

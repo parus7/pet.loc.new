@@ -63,13 +63,10 @@ export const useEmplStore = defineStore("EmplStore", {
     saveInArchive(id) {
       this.archive = this.getEmptyStore("archive")
         ? this.setMapEmployees(employeesArchive, "archive")
-        : this.archive;
+        : this.getAllEmployeesMap("archive");
 
-      console.log(this.archive);
-
-      let delEmployee = this.getEmployeeById(id);
+      let delEmployee = this.getEmployeeById("employees", id);
       this.archive.set(id, delEmployee);
-
       this.delEmployee(id);
     },
 
@@ -80,12 +77,11 @@ export const useEmplStore = defineStore("EmplStore", {
     createNextId() {
       return this.getEmptyStore("employees")
         ? "1"
-        : String(Number(Math.max(...this.employees.keys())) + 1);
+        : String(Number(Math.max(...this.employees.keys())) + 2000);
     },
 
     createEmployee: function () {
       const idEmployee = this.createNextId();
-      console.log(idEmployee);
 
       let employee = {
         id: idEmployee,
@@ -108,7 +104,6 @@ export const useEmplStore = defineStore("EmplStore", {
         src: `./src/assets/img/defaultPhoto.jpg`,
       };
 
-      console.log(employee);
       this.employees.set(idEmployee, employee);
     },
 
