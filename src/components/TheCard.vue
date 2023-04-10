@@ -191,9 +191,9 @@
         <TheButton
           tabindex="15"
           aria-label="кнопка перехода на главную страницу"
-          @click="leavePage"
+          @click="leavePage(link)"
         >
-          <IconClose />
+          <IconGoTo />
         </TheButton>
       </div>
     </div>
@@ -210,11 +210,11 @@ import TheButton from "@/components/UI/TheButton.vue";
 import TheInput from "@/components/UI/TheInput.vue";
 
 import IconEdit from "@/components/icons/IconEdit.vue";
-import IconClose from "@/components/icons/IconClose.vue";
 import IconSave from "@/components/icons/IconSave.vue";
+import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { ThePopup, TheButton, TheInput, IconEdit, IconClose, IconSave },
+  components: { ThePopup, TheButton, TheInput, IconEdit, IconSave, IconGoTo },
   directives: { maska: vMaska },
 
   props: {
@@ -276,12 +276,6 @@ export default {
       this.addEmployee(unmaskedEmployee);
     },
 
-    leavePage() {
-      this.$router.push({
-        name: this.link
-      });
-    },
-
     popupConfirm() {
       this.isOpen = false;
 
@@ -290,6 +284,12 @@ export default {
       });
 
       this.$emit("editOk");
+    },
+
+    leavePage() {
+      this.$router.push({
+        name: this.link
+      });
     }
   }
 };

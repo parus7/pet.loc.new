@@ -85,6 +85,7 @@ input:disabled,
 select:disabled {
     font-style: normal;
     background: none;
+    box-shadow: 3px 3px 2px 1px var(--vt-c-active-2);
 }
 
 .help {

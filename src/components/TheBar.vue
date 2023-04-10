@@ -1,16 +1,19 @@
 <template>
   <div class="bar relative">
-    <div class="help relative" data-name="др сегодня">
-      <TheIconButton
-        aria-label="напоминание о сотрудниках, рожденных сегодня"
-        class="relative"
-      >
-        <IconGift />
-        <span v-if="(visible = getVisibleAlertBirthday())" class="bar__alert">
-          {{ onGetAlertBirthday() }}
+
+    <RouterLink :to="{ name: 'birthday' }" tabindex="-1">
+      <div class="help relative" data-name="др сегодня">
+        <TheIconButton
+          aria-label="напоминание о сотрудниках, рожденных сегодня"
+          class="relative"
+        >
+          <IconGift />
+          <span v-if="onGetAlertBirthday >= 1" class="bar__alert">
+          {{ onGetAlertBirthday }}
         </span>
-      </TheIconButton>
-    </div>
+        </TheIconButton>
+      </div>
+    </RouterLink>
 
     <RouterLink :to="{ name: 'archive' }" tabindex="-1">
       <div class="help relative" data-name="архивный список">
@@ -30,7 +33,7 @@
 
 <script>
 import { useEmplStore } from "@/stores/EmplStore";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 
 import IconGift from "./icons/IconGift.vue";
 import IconFood from "./icons/IconFood.vue";
@@ -41,34 +44,16 @@ import TheIconButton from "./UI/TheIconButton.vue";
 export default {
   components: { IconGift, IconFood, IconArchive, TheIconButton },
 
-  data() {
-    return {
-      visible: false
-    };
-  },
-
   computed: {
-    ...mapState(useEmplStore, ["getAlertBirthday"])
+    ...mapState(useEmplStore, ["getAlertBirthday"]),
+
+    onGetAlertBirthday() {
+      return this.getAlertBirthday("employees", this.getTodayDate()).length;
+    }
   },
 
   methods: {
-    getVisibleAlertBirthday() {
-      return this.onGetAlertBirthday() >= 1;
-    },
-
-    onGetAlertBirthday() {
-      return this.getAlertBirthday("employees", this.getTodayDate());
-    },
-
-    getTodayDate() {
-      let day = String(new Date().getDate());
-      day.length === 1 ? (day = "0" + day) : day;
-
-      let month = String(new Date().getMonth() + 1);
-      month.length === 1 ? (month = "0" + month) : month;
-
-      return day + month;
-    }
+    ...mapActions(useEmplStore, ["getTodayDate"])
   }
 };
 </script>

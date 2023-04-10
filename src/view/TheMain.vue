@@ -1,12 +1,12 @@
 <template>
   <div class="main">
-    <TheHeader
+    <TheMainHeader
       class="main_header"
       @alphabetFilter="onAlphabet($event)"
       @employeeFilter="filterData($event)"
       @employeeCreate="onCreateEmployee()"
     >
-    </TheHeader>
+    </TheMainHeader>
 
     <TheBar class="main_bar" />
 
@@ -25,12 +25,12 @@ import employeesData from "@/data/employeesData.json";
 import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 
-import TheHeader from "@/components/TheHeader.vue";
+import TheMainHeader from "@/components/TheMainHeader.vue";
 import TheBar from "@/components/TheBar.vue";
 import TheList from "@/components/TheList.vue";
 
 export default {
-  components: { TheHeader, TheList, TheBar },
+  components: { TheMainHeader, TheList, TheBar },
 
   data() {
     return {

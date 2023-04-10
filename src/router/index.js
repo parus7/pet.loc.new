@@ -6,6 +6,7 @@ import TheArchive from "@/view/TheArchive.vue";
 import TheEmployeeCard from "@/view/TheEmployeeCard.vue";
 import TheEmployeeArchiveCard from "@/view/TheEmployeeArchiveCard.vue";
 import TheNewEmployeeCard from "@/view/TheNewEmployeeCard.vue";
+import TheBirthdayPeople from "@/view/TheBirthdayPeople.vue";
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/archive",
       name: "archive",
       component: TheArchive,
+    },
+    {
+      path: "/birthday",
+      name: "birthday",
+      component: TheBirthdayPeople,
     },
     {
       path: "/TheEmployeeCard/:id",

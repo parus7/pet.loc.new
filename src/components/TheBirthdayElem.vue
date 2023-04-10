@@ -2,25 +2,25 @@
   <template class="employee">
     <img
       class="employee__photo"
-      :alt="`id: ${aEmployee.id}`"
-      :src="aEmployee.src"
+      :alt="`id: ${bEmployee.id}`"
+      :src="bEmployee.src"
       width="35"
       height="35"
     />
 
     <span
-      class="employee__cn ">{{ aEmployee.cn }}
+      class="employee__cn ">{{ bEmployee.cn }}
     </span>
 
     <span
-      class="employee__item-email">{{ aEmployee.email }}
+      class="employee__item-email">{{ bEmployee.email }}
     </span>
 
     <input
       class="employee__item-telephone input-mask"
       type="text"
       aria-label="phone"
-      v-model="aEmployee.telephone"
+      v-model="bEmployee.telephone"
       v-maska
       data-maska="##-##"
       tabindex="-1"
@@ -31,26 +31,26 @@
       class="employee__item-mobile input-mask"
       type="text"
       aria-label="mobile"
-      v-model="aEmployee.mobile"
+      v-model="bEmployee.mobile"
       v-maska
       data-maska="### ###-##-##"
       tabindex="-1"
       readonly
     />
 
-    <RouterLink
-      :to="{
-            name: 'archiveCard',
-            params: { id: aEmployee.id },
-          }"
-      tabindex="-1"
-    >
-      <div class="help relative" data-name="в&nbsp;профиль">
-        <TheIconButton aria-label="переход в профиль сотрудника в архиве">
-          <IconFullInfo />
-        </TheIconButton>
-      </div>
-    </RouterLink>
+<!--    <RouterLink-->
+<!--      :to="{-->
+<!--            name: 'birthday',-->
+<!--            params: { id: bEmployee.id },-->
+<!--          }"-->
+<!--      tabindex="-1"-->
+<!--    >-->
+<!--      <div class="help relative" data-name="в&nbsp;профиль">-->
+<!--        <TheIconButton aria-label="переход в профиль сотрудника в архиве">-->
+<!--          <IconFullInfo />-->
+<!--        </TheIconButton>-->
+<!--      </div>-->
+<!--    </RouterLink>-->
 
   </template>
 </template>
@@ -65,7 +65,7 @@ export default {
   directives: { maska: vMaska },
 
   props: {
-    aEmployee: {
+    bEmployee: {
       id: String,
       name: String,
       hide: Boolean,
