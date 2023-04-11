@@ -2,7 +2,7 @@
   <div class="list">
     <template v-if="employees.length > 0">
       <transition-group name="list">
-        <TheElem
+        <PageElem
           v-for="employee in employees"
           :key="employee.id"
           :employee="{ ...employee }"
@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import TheElem from "../components/TheElem.vue";
+import PageElem from "../components/PageElem.vue";
 
 export default {
-  components: { TheElem },
+  components: { PageElem },
 
   props: {
     employees: Object,

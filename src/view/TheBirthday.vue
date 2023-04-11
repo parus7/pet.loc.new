@@ -1,6 +1,6 @@
 <template>
-  <TheHeader
-    :link="link" />
+<!--  <TheHeader-->
+<!--    :link="link" />-->
 
   <template v-if="bEmployees.length > 0">
     <TheBirthdayElem
@@ -21,10 +21,10 @@ import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 
 import TheBirthdayElem from "@/components/TheBirthdayElem.vue";
-import TheHeader from "@/components/TheHeader.vue";
+// import TheHeader from "@/components/TheHeader.vue";
 
 export default {
-  components: { TheBirthdayElem, TheHeader },
+  components: { TheBirthdayElem },
 
   data() {
     return {

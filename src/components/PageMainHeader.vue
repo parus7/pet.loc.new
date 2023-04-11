@@ -8,6 +8,7 @@
       >
         <IconAdd />
       </TheButton>
+
     </div>
 
     <ThePopup
@@ -26,6 +27,7 @@
         v-model="selected"
         @change="onChangeSelect"
       >
+
         <option value="" disabled>Выбор категории...</option>
         <option v-for="category in categories" :key="category.text">
           {{ category.text }}
@@ -50,6 +52,7 @@
           aria-label="поиск"
           @click="onSendButtonClick"
         >
+
           <IconSearch />
         </TheButton>
       </div>
@@ -64,6 +67,7 @@
         aria-label="алфавитная сортировка  и сброс фильтра поиска"
         @click="setAlphabetSort"
       >
+
         <IconAlphabet />
       </TheButton>
     </span>

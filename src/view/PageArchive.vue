@@ -1,21 +1,10 @@
 <template>
-  <div class="list">
-<!--    <TheHeader-->
-<!--      :link="link"-->
-<!--    />-->
-
-    <template v-if="aEmployees.length > 0">
-      <TheArchiveElem
-        v-for="aEmployee in aEmployees"
-        :key="aEmployee.id"
-        :aEmployee="{ ...aEmployee }"
-      />
-    </template>
-
-    <template v-else>
-      <h2 class="list__message">Архивный список сотрудников пуст</h2>
-    </template>
-  </div>
+  <Page
+    :employees="employees"
+    :message="message"
+    :length="length"
+    :isMain="isMain"
+  />
 </template>
 
 <script>
@@ -24,24 +13,30 @@ import { mapState, mapActions } from "pinia";
 import employeesArchive from "@/data/employeesArchive.json";
 
 import TheArchiveElem from "@/components/TheArchiveElem.vue";
-// import TheHeader from "@/components/TheHeader.vue";
+import TheHeader from "@/components/TheHeader.vue";
 
 export default {
-  components: { TheArchiveElem },
+  components: { TheArchiveElem, TheHeader },
 
   data() {
     return {
-      aEmployees: {},
-      link: "main"
+      employees: {},
+      isAlphabet: null,
+
+      message: "",
+      length: null,
+
+      isMain: false
     };
   },
 
+
   created() {
-    this.aEmployees = this.getEmptyStore("archive")
+    this.employees = this.getEmptyStore("archive")
       ? this.setMapEmployees(employeesArchive, "archive")
       : this.getAllEmployeesMap("archive");
 
-    this.aEmployees = [...this.aEmployees.values()].sort((a, b) => a.cn.localeCompare(b.cn));
+    this.employees = [...this.employees.values()].sort((a, b) => a.cn.localeCompare(b.cn));
   },
 
   computed: {

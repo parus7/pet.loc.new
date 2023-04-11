@@ -1,22 +1,33 @@
 import { createMemoryHistory, createRouter } from "vue-router";
-import TheMain from "@/view/TheMain.vue";
-import TheFormNewEmployee from "@/view/TheNewEmployeeCard.vue";
+// import TheMain from "@/view/TheMain.vue";
 import TheArchive from "@/view/TheArchive.vue";
+// import PageArchive from "@/view/PageArchive.vue";
+import PageBasic from "@/view/PageBasic.vue";
 
 import TheEmployeeCard from "@/view/TheEmployeeCard.vue";
 import TheEmployeeArchiveCard from "@/view/TheEmployeeArchiveCard.vue";
 import TheNewEmployeeCard from "@/view/TheNewEmployeeCard.vue";
-import TheBirthdayPeople from "@/view/TheBirthdayPeople.vue";
+import TheBirthday from "@/view/TheBirthday.vue";
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
   history: createMemoryHistory(),
   routes: [
+    // {
+    //   path: "/",
+    //   name: "main",
+    //   component: TheMain,
+    // },
     {
       path: "/",
-      name: "main",
-      component: TheMain,
+      name: "basic",
+      component: PageBasic,
     },
+    // {
+    //   path: "/archive",
+    //   name: "archive",
+    //   component: PageArchive,
+    // },
     {
       path: "/archive",
       name: "archive",
@@ -25,7 +36,7 @@ const router = createRouter({
     {
       path: "/birthday",
       name: "birthday",
-      component: TheBirthdayPeople,
+      component: TheBirthday,
     },
     {
       path: "/TheEmployeeCard/:id",
