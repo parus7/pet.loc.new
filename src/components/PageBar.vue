@@ -1,59 +1,51 @@
 <template>
   <div class="bar relative">
 
-    <RouterLink :to="{ name: 'birthday' }" tabindex="-1">
-      <div class="help relative" data-name="др сегодня">
-        <TheIconButton
-          aria-label="напоминание о сотрудниках, рожденных сегодня"
-          class="relative"
-        >
-          <IconGift />
-          <span v-if="onGetAlertBirthday >= 1" class="bar__alert">
-          {{ onGetAlertBirthday }}
-        </span>
-        </TheIconButton>
-      </div>
-    </RouterLink>
+    <div class="help relative" data-name="др сегодня">
+      <PageIconButton
+        aria-label="напоминание о сотрудниках, рожденных сегодня"
+        class="relative"
+      >
+        <IconGift />
+        <span v-if="length >= 1" class="bar__alert">
+                    {{ length }}
+                  </span>
+
+      </PageIconButton>
+    </div>
 
     <RouterLink :to="{ name: 'archive' }" tabindex="-1">
       <div class="help relative" data-name="архивный список">
-        <TheIconButton aria-label="архивный список сотрудников">
+        <PageIconButton aria-label="архивный список сотрудников">
           <IconArchive />
-        </TheIconButton>
+        </PageIconButton>
       </div>
     </RouterLink>
 
-    <div class="help relative" data-name="кафе рядом">
-      <TheIconButton aria-label="ближайшие к офису кафе">
-        <IconFood />
-      </TheIconButton>
-    </div>
+    <RouterLink :to="{ name: 'food' }" tabindex="-1">
+      <div class="help relative" data-name="кафе рядом">
+        <PageIconButton
+          aria-label="ближайшие к офису кафе"
+        >
+          <IconFood />
+        </PageIconButton>
+      </div>
+    </RouterLink>
   </div>
 </template>
 
 <script>
-import { useEmplStore } from "@/stores/EmplStore";
-import { mapState, mapActions } from "pinia";
-
 import IconGift from "./icons/IconGift.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
 
-import TheIconButton from "./UI/TheIconButton.vue";
+import PageIconButton from "./UI/PageIconButton.vue";
 
 export default {
-  components: { IconGift, IconFood, IconArchive, TheIconButton },
+  components: { IconGift, IconFood, IconArchive, PageIconButton },
 
-  computed: {
-    ...mapState(useEmplStore, ["getAlertBirthday"]),
-
-    onGetAlertBirthday() {
-      return this.getAlertBirthday("employees", this.getTodayDate()).length;
-    }
-  },
-
-  methods: {
-    ...mapActions(useEmplStore, ["getTodayDate"])
+  props: {
+    length: Number
   }
 };
 </script>

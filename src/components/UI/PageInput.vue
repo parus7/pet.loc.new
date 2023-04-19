@@ -8,6 +8,7 @@
       :v-model="inputValue"
       :v-maska="vMaska"
       :data-maska="dataMaska"
+      :isMain="isMain"
       :disabled="disabled"
       :required="required"
     />
@@ -16,7 +17,7 @@
 
 <script>
 export default {
-  name: "TheInput",
+  name: "PageInput",
 
   props: {
     labelValue: {
@@ -52,7 +53,9 @@ export default {
     required: {
       type: Boolean,
       default: " false"
-    }
+    },
+
+    isMain: Boolean
   }
 };
 </script>
@@ -85,7 +88,7 @@ export default {
 }
 
 .input-mask {
-  background: inherit;
+  background: none;
   box-shadow: none;
   font-style: normal;
   outline: none;

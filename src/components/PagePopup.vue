@@ -7,33 +7,33 @@
       </span>
 
       <div class="container__button">
-        <TheButton
+        <PageButton
           class="popup__button"
           aria-label="подтверждение действия"
           @click="okPopup"
         >
           &nbsp;Да&nbsp;
-        </TheButton>
+        </PageButton>
 
-        <TheButton
+        <PageButton
           class="popup__button"
           aria-label="отмены действия"
           @click="closePopup"
         >
           Нет
-        </TheButton>
+        </PageButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import TheButton from "./UI/TheButton.vue";
+import PageButton from "./UI/PageButton.vue";
 
 export default {
-  name: "ThePopup",
+  name: "PagePopup",
 
-  components: { TheButton },
+  components: { PageButton },
   props: {
     isOpen: {
       type: Boolean,

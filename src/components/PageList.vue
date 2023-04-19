@@ -6,7 +6,9 @@
           v-for="employee in employees"
           :key="employee.id"
           :employee="{ ...employee }"
-          @deleteEmployee="$emit('deleteEmployee', { id: employee.id })"
+          :message="message"
+          :isMain="isMain"
+          @deleteEmployee="$emit('deleteEmployee',  $event )"
         />
       </transition-group>
     </template>
@@ -25,7 +27,8 @@ export default {
 
   props: {
     employees: Object,
-    message: String
+    message: String,
+    isMain: Boolean
   }
 };
 </script>

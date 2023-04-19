@@ -1,15 +1,14 @@
 <template>
   <Page
     :employees="employees"
-    :isAlphabet="isAlphabet"
     :message="message"
     :length="length"
     :isMain="isMain"
-    @deleteEmployee="onDelete($event)"
+    @deleteEmployee="onDeleteInBasic($event)"
   >
-
+    <!--    :link="link"-->
     <PageMainHeader
-      class="page_header__main"
+      class="page_header__main "
       @alphabetFilter="onAlphabet($event)"
       @employeeFilter="filterData($event)"
       @employeeCreate="onCreateEmployee($event)"
@@ -33,12 +32,10 @@ export default {
   data() {
     return {
       employees: {},
-      isAlphabet: null,
-
       message: "",
       length: null,
-
-      isMain: true
+      isMain: true,
+      link: "basic"
     };
   },
 
@@ -47,8 +44,10 @@ export default {
       ? this.setMapEmployees(employeesData, "employees").values()
       : [...this.getAllEmployeesArray("employees")];
 
-    this.isAlphabet = this.getAlphabet;
     this.onAlphabet();
+
+    const day = this.getTodayDate();
+    this.length = [...this.employees].filter((elem) => elem.birthday === day).length;
   },
 
   computed: {
@@ -67,6 +66,17 @@ export default {
       "alphabetToggle",
       "saveInArchive"
     ]),
+
+    getTodayDate() {
+      let day = String(new Date().getDate());
+      day.length === 1 ? (day = "0" + day) : day;
+
+      let month = String(new Date().getMonth() + 1);
+      month.length === 1 ? (month = "0" + month) : month;
+
+      return day + month;
+    },
+
 
     filterData(event) {
       this.isAlphabet = this.alphabetToggle();
@@ -96,7 +106,7 @@ export default {
       return this.employees;
     },
 
-    onDelete(event) {
+    onDeleteInBasic(event) {
       this.isAlphabet = this.alphabetToggle();
 
       this.saveInArchive(event.id);
@@ -117,5 +127,7 @@ export default {
 </script>
 
 <style>
-
+.page_header__main {
+  grid-column: 1/-1;
+}
 </style>

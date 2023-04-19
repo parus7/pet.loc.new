@@ -20,9 +20,6 @@ export const useEmplStore = defineStore("EmplStore", {
     getAllEmployeesMap: (state) => (key) => state[key],
 
     getEmployeeById: (state) => (key, employeeId) => state[key].get(employeeId),
-
-    getAlertBirthday: (state) => (key, day) =>
-      [...state[key].values()].filter((elem) => elem.birthday === day),
   },
 
   actions: {
@@ -114,16 +111,6 @@ export const useEmplStore = defineStore("EmplStore", {
 
     alphabetToggle() {
       return (this.isAlphabet = !this.isAlphabet);
-    },
-
-    getTodayDate() {
-      let day = String(new Date().getDate());
-      day.length === 1 ? (day = "0" + day) : day;
-
-      let month = String(new Date().getMonth() + 1);
-      month.length === 1 ? (month = "0" + month) : month;
-
-      return day + month;
     },
   },
 });

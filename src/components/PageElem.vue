@@ -1,5 +1,8 @@
 <template>
-  <template class="employee">
+  <template
+    class="employee"
+    :class="{ secondary: !isMain }"
+  >
     <img
       class="employee__photo"
       :class="{ status: employee.hide }"
@@ -41,33 +44,35 @@
 
     <RouterLink
       :to="{
-        name: 'infoCard',
+        name: isMain === true ? 'basicCard' : 'archiveCard',
         params: { id: employee.id },
       }"
       tabindex="-1"
     >
       <div class="help relative" data-name="в&nbsp;профиль">
-        <TheIconButton aria-label="переход в профиль сотрудника">
+        <PageIconButton aria-label="переход в профиль сотрудника">
           <IconFullInfo />
-        </TheIconButton>
+        </PageIconButton>
       </div>
     </RouterLink>
 
-    <div class="help relative" data-name="поместить в архив">
-      <TheIconButton
-        aria-label="поместить сотрудника в архив"
-        @click="isOpen = true"
-      >
-        <IconDelete />
-      </TheIconButton>
-    </div>
+    <template v-if="isMain">
+      <div class="help relative" data-name="поместить в архив">
+        <PageIconButton
+          aria-label="поместить сотрудника в архив"
+          @click="isOpen = true"
+        >
+          <IconDelete />
+        </PageIconButton>
+      </div>
 
-    <ThePopup
-      :is-open="isOpen"
-      @close="isOpen = false"
-      @ok="popupDelete"
-    >Вы хотите удалить сотрудника?
-    </ThePopup>
+      <PagePopup
+        :is-open="isOpen"
+        @close="isOpen = false"
+        @ok="popupDelete"
+      >Вы хотите удалить сотрудника?
+      </PagePopup>
+    </template>
   </template>
 </template>
 
@@ -75,12 +80,12 @@
 import IconDelete from "./icons/IconDelete.vue";
 import IconFullInfo from "./icons/IconFullInfo.vue";
 
-import ThePopup from "./ThePopup.vue";
-import TheIconButton from "./UI/TheIconButton.vue";
+import PagePopup from "./PagePopup.vue";
+import PageIconButton from "./UI/PageIconButton.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { IconDelete, IconFullInfo, ThePopup, TheIconButton },
+  components: { IconDelete, IconFullInfo, PagePopup, PageIconButton },
   directives: { maska: vMaska },
 
   props: {
@@ -103,12 +108,14 @@ export default {
       company: String,
       city: String,
       src: String
-    }
+    },
+    isMain: Boolean
   },
 
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      link: ""
     };
   },
 
@@ -135,11 +142,16 @@ export default {
 }
 
 .input-mask {
-  background: inherit;
+  background: none;
   box-shadow: none;
   font-style: normal;
   outline: none;
   padding: 0;
+}
+
+.secondary {
+  background-color: var(--vt-c-archive-2);
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-5);
 }
 
 .employee__photo {

@@ -161,40 +161,40 @@
     </fieldset>
 
     <div class="container__button card-form__buttons">
-      <template v-if="!isArchive">
+      <template v-if="!isMain">
         <div class="help relative" data-name="редактировать">
-          <TheButton
+          <PageButton
             tabindex="0"
             aria-label="кнопка редактирования данных сотрудника"
             @click="isOpen = true"
           >
             <IconEdit />
-          </TheButton>
+          </PageButton>
         </div>
 
         <div class="help relative" data-name="сохранить">
-          <TheButton
+          <PageButton
             tabindex="14"
             aria-label="кнопка сохранения данных сотрудника"
             @click="onSaveEmployee(employee['id'])"
           >
             <IconSave />
-          </TheButton>
+          </PageButton>
         </div>
       </template>
 
-      <ThePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
+      <PagePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
       >Вы хотите изменить данные сотрудника?
-      </ThePopup>
+      </PagePopup>
 
       <div class="help relative" data-name="выйти">
-        <TheButton
+        <PageButton
           tabindex="15"
-          aria-label="кнопка перехода на главную страницу"
-          @click="leavePage(link)"
+          aria-label="кнопка перехода на  страницу"
+          @click="leavePage"
         >
           <IconGoTo />
-        </TheButton>
+        </PageButton>
       </div>
     </div>
   </form>
@@ -205,23 +205,23 @@ import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
 import { vMaska } from "maska";
 
-import ThePopup from "@/components/ThePopup.vue";
-import TheButton from "@/components/UI/TheButton.vue";
-import TheInput from "@/components/UI/TheInput.vue";
+import PagePopup from "@/components/PagePopup.vue";
+import PageButton from "@/components/UI/PageButton.vue";
+import PageInput from "@/components/UI/PageInput.vue";
 
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconSave from "@/components/icons/IconSave.vue";
 import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { ThePopup, TheButton, TheInput, IconEdit, IconSave, IconGoTo },
+  components: { PagePopup, PageButton, PageInput, IconEdit, IconSave, IconGoTo },
   directives: { maska: vMaska },
 
   props: {
     employee: Object,
     isEdit: Boolean,
-    isArchive: Boolean,
-    link: String
+    link: String,
+    isMain: Boolean
   },
 
   data() {
@@ -252,7 +252,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmployeeById", "getAlphabet"])
+    ...mapState(useEmplStore, ["getEmployeeById"])
   },
 
   methods: {

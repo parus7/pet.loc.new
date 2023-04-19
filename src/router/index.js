@@ -1,57 +1,57 @@
 import { createMemoryHistory, createRouter } from "vue-router";
-// import TheMain from "@/view/TheMain.vue";
-import TheArchive from "@/view/TheArchive.vue";
-// import PageArchive from "@/view/PageArchive.vue";
 import PageBasic from "@/view/PageBasic.vue";
+import PageArchive from "@/view/PageArchive.vue";
+import PageFood from "@/view/PageFood.vue";
 
-import TheEmployeeCard from "@/view/TheEmployeeCard.vue";
-import TheEmployeeArchiveCard from "@/view/TheEmployeeArchiveCard.vue";
-import TheNewEmployeeCard from "@/view/TheNewEmployeeCard.vue";
-import TheBirthday from "@/view/TheBirthday.vue";
+import PageCard from "@/components/PageCard.vue";
+import PageBasicCard from "@/view/PageBasicCard.vue";
+import PageNewCard from "@/view/PageNewCard.vue";
+import PageArchiveCard from "@/view/PageArchiveCard.vue";
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
   history: createMemoryHistory(),
   routes: [
-    // {
-    //   path: "/",
-    //   name: "main",
-    //   component: TheMain,
-    // },
     {
       path: "/",
       name: "basic",
       component: PageBasic,
     },
-    // {
-    //   path: "/archive",
-    //   name: "archive",
-    //   component: PageArchive,
-    // },
     {
       path: "/archive",
       name: "archive",
-      component: TheArchive,
+      component: PageArchive,
+      props: true,
     },
     {
-      path: "/birthday",
-      name: "birthday",
-      component: TheBirthday,
+      path: "/food",
+      name: "food",
+      component: PageFood,
+      props: true,
     },
     {
-      path: "/TheEmployeeCard/:id",
-      name: "infoCard",
-      component: TheEmployeeCard,
+      path: "/card/:id",
+      name: "card",
+      component: PageCard,
+      props: true,
     },
     {
-      path: "/TheEmployeeArchiveCard/:id",
+      path: "/basicCard/:id",
+      name: "basicCard",
+      component: PageBasicCard,
+      props: true,
+    },
+    {
+      path: "/archiveCard/:id",
       name: "archiveCard",
-      component: TheEmployeeArchiveCard,
+      component: PageArchiveCard,
+      props: true,
     },
     {
-      path: "/TheNewEmployeeCard/:id",
+      path: "/newCard/:id",
       name: "newCard",
-      component: TheNewEmployeeCard,
+      component: PageNewCard,
+      props: true,
     },
     // {
     //   path: "/:any(.*)",

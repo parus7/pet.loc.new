@@ -1,8 +1,8 @@
 <template>
-  <TheCard
+  <PageCard
     :employee="employee"
     :isEdit="isEdit"
-    :isArchive="isArchive"
+    :isMain="isMain"
     :link="link"
     @editOk="isEdit=true"
     @editNo="isEdit=false"
@@ -10,25 +10,25 @@
 </template>
 
 <script>
-import TheCard from "@/components/TheCard.vue";
+import PageCard from "@/components/PageCard.vue";
 import { mapState } from "pinia";
 import { useEmplStore } from "@/stores/EmplStore";
 
 export default {
-  components: { TheCard },
+  components: { PageCard },
 
   data() {
     return {
       employee: {},
       isEdit: false,
-      isArchive: false,
-      link: "main"
+      isMain: true,
+      link: "archive"
     };
   },
 
   created() {
-    let paramsId = this.$route.params.id;
-    this.employee = { ...this.getEmployeeById("employees", paramsId) };
+    const paramsId = this.$route.params.id;
+    this.employee = { ...this.getEmployeeById("archive", paramsId) };
   },
 
   computed: {
@@ -36,3 +36,4 @@ export default {
   }
 };
 </script>
+

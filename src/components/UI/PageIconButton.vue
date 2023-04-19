@@ -1,18 +1,18 @@
 <template>
-  <button type="button" class="TheIconButton">
+  <button type="button" class="PageIconButton">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: "TheIconButton"
+  name: "PageIconButton"
 };
 </script>
 
 
 <style scoped>
-.TheIconButton {
+.PageIconButton {
   width: 37px;
   height: 32px;
   border: none;
@@ -24,12 +24,12 @@ export default {
   padding: 0;
 }
 
-.TheIconButton:active {
+.PageIconButton:active {
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-5);
 }
 
 @media screen and (max-width: 767px) {
-  .TheIconButton {
+  .PageIconButton {
     width: 48px;
   }
 }

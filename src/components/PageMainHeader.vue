@@ -1,23 +1,22 @@
 <template>
   <div class="header">
     <div class="help relative" data-name="создать&nbsp;карточку">
-      <TheButton
+      <PageButton
         class="header__button-create relative"
         aria-label="создать сотрудника"
         @click="isOpen = true"
       >
         <IconAdd />
-      </TheButton>
-
+      </PageButton>
     </div>
 
-    <ThePopup
+    <PagePopup
       :is-open="isOpen"
       @close="isOpen = false"
       @ok="onCreateEmployee($event)"
     >
       Вы хотите создать нового сотрудника?
-    </ThePopup>
+    </PagePopup>
 
     <form class="header__form" @submit.prevent>
       <select
@@ -47,14 +46,13 @@
           @keyup.enter="onSendButtonClick"
         />
 
-        <TheButton
+        <PageButton
           class="header__form-btn"
           aria-label="поиск"
           @click="onSendButtonClick"
         >
-
           <IconSearch />
-        </TheButton>
+        </PageButton>
       </div>
     </form>
 
@@ -62,14 +60,14 @@
       class="help relative"
       data-name="по&nbsp;алфавиту&nbsp;или сброс фильтра"
     >
-      <TheButton
+      <PageButton
         class="header__button-alphabet"
         aria-label="алфавитная сортировка  и сброс фильтра поиска"
         @click="setAlphabetSort"
       >
 
         <IconAlphabet />
-      </TheButton>
+      </PageButton>
     </span>
   </div>
 </template>
@@ -82,12 +80,12 @@ import IconAdd from "@/components/icons/IconAdd.vue";
 import IconAlphabet from "@/components/icons/IconAlphabet.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 
-import ThePopup from "@/components/ThePopup.vue";
-import TheButton from "@/components/UI/TheButton.vue";
+import PagePopup from "@/components/PagePopup.vue";
+import PageButton from "@/components/UI/PageButton.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { IconSearch, IconAlphabet, IconAdd, ThePopup, TheButton },
+  components: { IconSearch, IconAlphabet, IconAdd, PagePopup, PageButton },
   directives: { maska: vMaska },
 
   data() {

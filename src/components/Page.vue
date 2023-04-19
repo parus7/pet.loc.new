@@ -4,21 +4,26 @@
     <template v-if="isMain">
       <slot></slot>
 
-      <PageBar class="page_bar" />
+      <PageBar
+        class="page_bar"
+        :length="length"
+      />
     </template>
 
     <template v-else>
-      <PageHeader class="page_header__secondary" />
+      <PageHeader
+        class="page_header__secondary"
+        :isMain="isMain"
+      />
     </template>
 
     <PageList
       class="page_list"
       :employees="[...employees]"
       :message="message"
-      @deleteEmployee="$emit('deleteEmployee', { id: employee.id })"
+      :isMain="isMain"
+      @deleteEmployee="$emit('deleteEmployee',  $event )"
     />
-    <!--    @deleteEmployee="onDelete($event)"-->
-    <!--    this.$emit("employeeCreate", { id: id });-->
   </div>
 </template>
 
@@ -31,17 +36,13 @@ import PageList from "@/components/PageList.vue";
 import { mapActions, mapState } from "pinia";
 import { useEmplStore } from "@/stores/EmplStore";
 
-
 export default {
   components: { PageMainHeader, PageHeader, PageList, PageBar },
 
   props: {
     employees: Object,
-    isAlphabet: Boolean,
-
     message: String,
     length: Number,
-
     isMain: Boolean
   },
 
@@ -60,17 +61,19 @@ export default {
       "createEmployee",
       "alphabetToggle",
       "saveInArchive"
-    ])
+    ]),
 
-    // data() {
-    //   return {
-    //     employees: {},
-    //     isAlphabet: null,
-    //
-    //     message: "",
-    //     length: null
-    //   };
-    // },
+    leavePage() {
+      this.$router.push({
+        name: this.link
+      });
+    }
+
+    // leavePage(link) {
+    //   this.$router.push({
+    //     name: link
+    //   });
+    // }
   }
 };
 </script>
@@ -85,7 +88,6 @@ export default {
   margin: 0 auto;
 }
 
-.page_header__main,
 .page_header__secondary {
   grid-column: 1/-1;
 }
