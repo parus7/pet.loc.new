@@ -160,8 +160,10 @@
         />
       </label>
       <label class="card-form__label">Должность
+
         <!--        <PageInput-->
         <!--          v-model="employee['title']" />-->
+        
       </label>
     </fieldset>
 
