@@ -1,21 +1,24 @@
 <template>
   <div class="page-food">
     <PageHeader
-    :link="link"/>
+      :link="link" />
+
+    <PageCarousel />
   </div>
 </template>
 
 <script>
 import PageHeader from "@/components/PageHeader.vue";
+import PageCarousel from "@/components/PageCarousel.vue";
 
 export default {
   name: "PageFood",
-  components: { PageHeader },
+  components: { PageHeader, PageCarousel },
 
-  data(){
-    return{
-      link:"basic"
-    }
+  data() {
+    return {
+      link: "basic"
+    };
   }
 };
 </script>
