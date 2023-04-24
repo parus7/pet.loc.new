@@ -2,7 +2,6 @@
   <PageCard
     :employee="employee"
     :isEdit="isEdit"
-
     :link="link"
     @editOk="isEdit=true"
     @editNo="isEdit=false"

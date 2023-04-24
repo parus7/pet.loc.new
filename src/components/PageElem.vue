@@ -44,7 +44,7 @@
 
     <RouterLink
       :to="{
-        name: isMain === true ? 'basicCard' : 'archiveCard',
+        name: isMain  ? 'basicCard' : 'archiveCard',
         params: { id: employee.id },
       }"
       tabindex="-1"
@@ -73,6 +73,7 @@
       >Вы хотите удалить сотрудника?
       </PagePopup>
     </template>
+
   </template>
 </template>
 
@@ -114,8 +115,7 @@ export default {
 
   data() {
     return {
-      isOpen: false,
-      link: ""
+      isOpen: false
     };
   },
 
@@ -159,7 +159,7 @@ export default {
   height: 35px;
   border: 2px solid var(--vt-c-active-2);
   border-radius: 14%;
-  box-shadow: 2px 2px 4px 1px var(--vt-c-active-6);
+  box-shadow: 2px 2px 4px 1px var(--vt-c-active-10);
 }
 
 .employee__cn,

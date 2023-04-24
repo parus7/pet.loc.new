@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="PageIconButton">
+  <button type="button" class="icon-button">
     <slot></slot>
   </button>
 </template>
@@ -12,7 +12,7 @@ export default {
 
 
 <style scoped>
-.PageIconButton {
+.icon-button {
   width: 37px;
   height: 32px;
   border: none;
@@ -24,12 +24,12 @@ export default {
   padding: 0;
 }
 
-.PageIconButton:active {
+.icon-button:active {
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-5);
 }
 
 @media screen and (max-width: 767px) {
-  .PageIconButton {
+  .icon-button {
     width: 48px;
   }
 }

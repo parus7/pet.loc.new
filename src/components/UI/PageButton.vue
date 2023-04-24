@@ -19,7 +19,7 @@ export default {
   border: none;
   box-shadow: 5px 4px 4px 1px var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 3px 25px;
+  padding: 5px 25px;
 }
 
 .button:hover {

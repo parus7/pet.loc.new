@@ -50,6 +50,7 @@
           id="id_employee"
           type="text"
           aria-label="id сотрудника"
+          tabindex="-1"
           v-model="employee['id']"
           disabled
         />
@@ -158,9 +159,14 @@
           v-model="employee['title']"
         />
       </label>
+      <label class="card-form__label">Должность
+        <!--        <PageInput-->
+        <!--          v-model="employee['title']" />-->
+      </label>
     </fieldset>
 
-    <div class="container__button card-form__buttons">
+    <div class=" card-form__buttons">
+
       <template v-if="!isMain">
         <div class="help relative" data-name="редактировать">
           <PageButton
@@ -183,14 +189,17 @@
         </div>
       </template>
 
-      <PagePopup :is-open="isOpen" @ok="popupConfirm" @close="isOpen = false"
+      <PagePopup
+        :is-open="isOpen"
+        @ok="popupConfirm"
+        @close="isOpen = false"
       >Вы хотите изменить данные сотрудника?
       </PagePopup>
 
       <div class="help relative" data-name="выйти">
         <PageButton
-          tabindex="15"
-          aria-label="кнопка перехода на  страницу"
+          tabindex="isMain ? '15': '1'"
+          aria-label="кнопка выхода"
           @click="leavePage"
         >
           <IconGoTo />
@@ -207,21 +216,29 @@ import { vMaska } from "maska";
 
 import PagePopup from "@/components/PagePopup.vue";
 import PageButton from "@/components/UI/PageButton.vue";
-import PageInput from "@/components/UI/PageInput.vue";
+// import PageInput from "@/components/UI/PageInput.vue";
 
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconSave from "@/components/icons/IconSave.vue";
 import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { PagePopup, PageButton, PageInput, IconEdit, IconSave, IconGoTo },
+  components: { PagePopup, PageButton, IconEdit, IconSave, IconGoTo },
   directives: { maska: vMaska },
+
+  // PageInput,
 
   props: {
     employee: Object,
     isEdit: Boolean,
     link: String,
-    isMain: Boolean
+    isMain: Boolean,
+
+    id: String,
+    ariaLabel: String,
+    // dataMaska: String,
+    disabled: Boolean,
+    required: Boolean
   },
 
   data() {
@@ -248,6 +265,7 @@ export default {
         unmasked: "",
         completed: false
       }
+
     };
   },
 
@@ -346,6 +364,11 @@ export default {
 
 .card-form__buttons {
   grid-column: 3 / 4;
+
+  display: flex;
+  justify-content: end;
+  gap: 40px;
+  max-width: 500px;
   padding: 0 15px;
 }
 
@@ -356,15 +379,17 @@ export default {
     border-radius: 0;
     margin: 0;
   }
+
+  .card-form__buttons {
+    width: 260px;
+    justify-content: space-around;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 425px) {
   .card-form {
     padding: 15px;
-  }
-
-  .card-form__buttons {
-    margin: 0 auto;
   }
 }
 </style>

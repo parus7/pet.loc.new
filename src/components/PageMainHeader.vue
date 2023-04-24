@@ -41,7 +41,7 @@
           aria-label="поле поиска"
           placeholder="Поиск..."
           v-model="inputValue"
-          v-maska="maskSearch"
+          v-maska="mask"
           :data-maska="myMask"
           @keyup.enter="onSendButtonClick"
         />
@@ -96,7 +96,7 @@ export default {
 
       isAlphabet: null,
 
-      maskSearch: {
+      mask: {
         masked: "",
         unmasked: "",
         completed: false
@@ -161,7 +161,7 @@ export default {
       this.inputValue =
         this.myMask === ""
           ? this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1)
-          : this.maskSearch.unmasked;
+          : this.mask.unmasked;
 
       this.$emit("employeeFilter", {
         param: this.category.item,
@@ -205,12 +205,12 @@ export default {
 
 .header__form-btn {
   position: absolute;
-  top: -15px;
-  right: -10px;
+  top: 0;
+  right: 0;
 
   background-color: inherit;
   box-shadow: none;
-  padding: 20px;
+  padding: 4px;
 }
 
 .header__wrapper {

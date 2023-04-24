@@ -6,7 +6,7 @@
         <slot></slot>
       </span>
 
-      <div class="container__button">
+      <div class="popup__wrapper">
         <PageButton
           class="popup__button"
           aria-label="подтверждение действия"
@@ -71,14 +71,26 @@ export default {
 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 
+  width: 220px;
   background: var(--vt-c-white);
   border-radius: 20px;
-  padding: 25px;
+  padding: 20px;
+}
+
+.popup__wrapper {
+  display: flex;
+  justify-content: space-around;
 }
 
 .popup__button {
   line-height: 2;
+}
+
+@media (max-width: 425px) {
+  .popup__body {
+    right: 15%;
+  }
 }
 </style>

@@ -5,6 +5,7 @@
       <PageIconButton
         aria-label="напоминание о сотрудниках, рожденных сегодня"
         class="relative"
+        tabindex="-1"
       >
         <IconGift />
         <span v-if="length >= 1" class="bar__alert">
