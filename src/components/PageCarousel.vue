@@ -27,6 +27,10 @@
           <td>Телефон:</td>
           <td>{{ slide["phone"] }}</td>
         </tr>
+        <tr>
+          <td>Сайт:</td>
+          <td>{{ slide["site"] }}</td>
+        </tr>
       </table>
 
     </Slide>
@@ -39,6 +43,7 @@
 </template>
 
 <script>
+// https://ismail9k.github.io/vue3-carousel/getting-started.html
 import { defineComponent } from "vue";
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 
@@ -63,27 +68,30 @@ export default defineComponent({
       slides: [
         {
           slide: Cafe1,
-          title: "Pinzeria by Bontempi - 1",
+          title: "Pinzeria by Bontempi на Кропоткинской",
           address: "г. Москва, Волхонка 16",
           weekdays: "11:00 — 23:00 , кухня 11:00 — 22:30",
           weekends: "11:00 - 23:45 , кухня 11:00 — 23:30",
-          phone: " 499 678-30-09"
+          phone: " 499 678-30-09",
+          site: "https://pinzeria.ru/delivery/cropot"
         },
         {
           slide: Cafe2,
-          title: "Pinzeria by Bontempi - 2",
-          address: "г. Москва, Волхонка 17",
-          weekdays: "11:00 — 23:00 , кухня 11:00 — 22:30",
-          weekends: "11:00 - 23:45 , кухня 11:00 — 23:30",
-          phone: " 499 678-30-10"
+          title: "Pinzeria by Bontempi на Шлюзовой",
+          address: "г. Москва, Шлюзовая набережная, 4",
+          weekdays: "12:00 — 23:00 , кухня 11:00 — 22:30",
+          weekends: "12:00 - 23:45 , кухня 11:00 — 23:30",
+          phone: " 495 201-75-50",
+          site: "https://pinzeria.ru/delivery/shluz"
         },
         {
           slide: Cafe3,
-          title: "Pinzeria by Bontempi - 3",
-          address: "г. Москва, Волхонка 18",
-          weekdays: "11:00 — 23:00 , кухня 11:00 — 22:30",
-          weekends: "11:00 - 23:45 , кухня 11:00 — 23:30",
-          phone: " 499 678-30-11"
+          title: "Pinzeria by Bontempi на Усачева",
+          address: "г. Москва, ул. Усачева, д. 26",
+          weekdays: "10:00 — 22:00, кухня до 21:30",
+          weekends: "10:00 - 23:00 , кухня 11:00 — 22:00",
+          phone: " 499  495 201-74-40",
+          site: "https://pinzeria.ru/delivery/usaheva"
         }
       ]
     };
