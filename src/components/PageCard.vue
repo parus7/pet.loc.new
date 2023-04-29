@@ -10,7 +10,7 @@
     />
 
     <fieldset class="card-form__full-name" :disabled="!isEdit">
-      <label class="card-form__label">Фамилия
+      <label class="card-form__label">Фамилия*
         <input
           id="last_name"
           type="text"
@@ -29,7 +29,6 @@
           aria-label="имя сотрудника"
           tabindex="3"
           v-model="employee['first_name']"
-          required
         />
       </label>
 
@@ -111,7 +110,7 @@
       <label class="card-form__label">Email
         <input
           id="email"
-          type="text"
+          type="email"
           aria-label="email сотрудника"
           tabindex="9"
           v-model="employee['email']"
@@ -161,11 +160,12 @@
       </label>
       <label class="card-form__label">Должность
 
-        <!--        <PageInput-->
-        <!--          v-model="employee['title']" />-->
-        
       </label>
     </fieldset>
+
+    <template v-if="!isMain">
+    <p class="card-form__explanations">* обязательное поле для ввода</p>
+    </template>
 
     <div class=" card-form__buttons">
 
@@ -218,7 +218,6 @@ import { vMaska } from "maska";
 
 import PagePopup from "@/components/PagePopup.vue";
 import PageButton from "@/components/UI/PageButton.vue";
-// import PageInput from "@/components/UI/PageInput.vue";
 
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconSave from "@/components/icons/IconSave.vue";
@@ -228,19 +227,11 @@ export default {
   components: { PagePopup, PageButton, IconEdit, IconSave, IconGoTo },
   directives: { maska: vMaska },
 
-  // PageInput,
-
   props: {
     employee: Object,
     isEdit: Boolean,
     link: String,
-    isMain: Boolean,
-
-    id: String,
-    ariaLabel: String,
-    // dataMaska: String,
-    disabled: Boolean,
-    required: Boolean
+    isMain: Boolean
   },
 
   data() {
@@ -267,7 +258,6 @@ export default {
         unmasked: "",
         completed: false
       }
-
     };
   },
 
@@ -324,7 +314,7 @@ export default {
 
   max-width: 768px;
   background-color: var(--vt-c-white-mute);
-  box-shadow: 4px 4px 4px 0 var(--vt-c-active-5);
+  box-shadow: 4px 4px 4px 0 var(--vt-c-active-2);
   border-radius: 20px;
   padding: 30px;
   margin: 30px auto;
@@ -364,8 +354,18 @@ export default {
   grid-column: 1 / -1;
 }
 
+.card-form__explanations {
+  grid-area: 4/1/5/3;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.card-form__full-name label:first-child {
+  font-weight: bold;
+}
+
 .card-form__buttons {
-  grid-column: 3 / 4;
+  grid-area: 4/3/5/4;
 
   display: flex;
   justify-content: end;
@@ -383,7 +383,7 @@ export default {
   }
 
   .card-form__buttons {
-    width: 260px;
+    width: 360px;
     justify-content: space-around;
     margin: 0 auto;
   }
@@ -392,6 +392,10 @@ export default {
 @media (max-width: 425px) {
   .card-form {
     padding: 15px;
+  }
+
+  .card-form__buttons {
+    width: 250px;
   }
 }
 </style>

@@ -25,7 +25,7 @@ export default {
 }
 
 .icon-button:active {
-  box-shadow: 2px 2px 4px 1px var(--vt-c-active-5);
+  box-shadow: 2px 2px 2px 2px var(--vt-c-active-5);
 }
 
 @media screen and (max-width: 767px) {

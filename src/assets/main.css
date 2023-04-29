@@ -17,7 +17,7 @@
     font-display: auto;
     src: local("Montserrat"),
     url("/src/assets/fonts/Montserrat-Italic.woff2") format("woff2"),
-    url("/src/assets/fonts/Montserrat-Regular.woff") format("woff");
+    url("/src/assets/fonts/Montserrat-Italic.woff") format("woff");
 }
 
 @font-face {

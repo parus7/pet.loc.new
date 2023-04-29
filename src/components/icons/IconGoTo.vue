@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="icon-goto"
+    class="icon icon-goto"
     width="25"
     height="25"
     viewBox="0 0 22 22"

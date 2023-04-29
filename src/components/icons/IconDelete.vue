@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="icon-delete"
+    class="icon icon-delete"
     width="25"
     height="25"
     viewBox="0 0 24 24"

@@ -85,7 +85,7 @@ export default {
 }
 
 .popup__button {
-  line-height: 2;
+  line-height: 1.9;
 }
 
 @media (max-width: 425px) {

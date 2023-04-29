@@ -188,7 +188,7 @@ export default {
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 13px;
+  padding: 10px;
 }
 
 .header__form {

@@ -56,6 +56,7 @@ const router = createRouter({
     // {
     //   path: "/:any(.*)",
     //   component: TheError404,
+    //   props: true
     // },
   ],
 });

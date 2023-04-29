@@ -4,7 +4,7 @@
     <div class="help relative" data-name="др сегодня">
       <PageIconButton
         aria-label="напоминание о сотрудниках, рожденных сегодня"
-        class="relative"
+        class=" not-active"
         tabindex="-1"
       >
         <IconGift />
@@ -75,6 +75,11 @@ export default {
 
   background-color: var(--vt-c-alert);
   border-radius: 50%;
+}
+
+.not-active:hover,
+.not-active:active {
+  box-shadow: 1px 1px 0 0 var(--vt-c-active-2);
 }
 
 @media screen and (max-width: 991px) {

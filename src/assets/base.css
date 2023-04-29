@@ -11,7 +11,6 @@
 
     --vt-c-active-2: rgba(95, 158, 160, 0.2);
     --vt-c-active-5: rgba(95, 158, 160, 0.5);
-    --vt-c-active-6: rgba(95, 158, 160, 0.6);
     --vt-c-active-9: rgba(95, 158, 160, 0.9);
     --vt-c-active-10: rgba(95, 158, 160, 1);
 
@@ -42,12 +41,14 @@ body {
     text-decoration: none;
 }
 
-svg:hover path {
-    fill: var(--vt-c-grey-silver);
+.icon:hover path {
+    fill: var(--vt-c-active-10);
+    transform: scale(1.1);
 }
 
-svg:active path {
-    opacity: 0.7;
+.icon:active path {
+    fill: var(--vt-c-active-10);
+    transform: scale(1.05);
 }
 
 input,

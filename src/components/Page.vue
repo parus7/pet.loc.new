@@ -68,12 +68,6 @@ export default {
         name: this.link
       });
     }
-
-    // leavePage(link) {
-    //   this.$router.push({
-    //     name: link
-    //   });
-    // }
   }
 };
 </script>
@@ -82,7 +76,7 @@ export default {
 .page {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 5.5vh  94.5vh;
+  grid-template-rows: 55px  calc(100vh - 55px);
   gap: 10px;
   padding: 17px;
   margin: 0 auto;
@@ -103,7 +97,7 @@ export default {
 
 @media screen and (max-width: 991px) {
   .page {
-    grid-template-rows: 5.5vh 5.5vh 89vh;
+    grid-template-rows: 55px 55px calc(100vh - 110px);
   }
 
   .page_list {
@@ -118,13 +112,13 @@ export default {
 
 @media screen and (max-width: 729px) {
   .page {
-    grid-template-rows: 5.5vh 9vh 85.5vh;
+    grid-template-rows: 55px 9vh calc(91vh - 55px);
   }
 }
 
 @media screen and (max-width: 499px) {
   .page {
-    grid-template-rows: 5.5vh 20vh 74.5vh;
+    grid-template-rows: 55px 20vh calc(80vh - 55px);
   }
 }
 </style>

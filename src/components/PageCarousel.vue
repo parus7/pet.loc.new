@@ -8,7 +8,7 @@
       <h1>{{ slide["title"] }}</h1>
       <img class="carousel__item"
            :src="slide['slide']"
-           alt="">
+           :alt="slide['title'] ">
 
       <table>
         <tr>
@@ -111,6 +111,7 @@ td {
   flex-direction: column;
   background-color: var(--vt-c-archive-2);
   border-radius: 8px;
+  padding: 25px 0;
 }
 
 .carousel__item {
@@ -120,15 +121,13 @@ td {
   padding: 25px;
 }
 
-.carousel__slide {
-  padding: 20px;
-}
-
 .carousel__prev,
 .carousel__next {
   top: 45%;
-  box-sizing: content-box;
-  background-color: var(--vt-c-archive-2);
   border: 5px solid var(--vt-c-white);
+}
+
+.carousel__icon {
+  fill: var(--vt-c-white);
 }
 </style>

@@ -6,7 +6,6 @@
     :isMain="isMain"
     @deleteEmployee="onDeleteInBasic($event)"
   >
-    <!--    :link="link"-->
     <PageMainHeader
       class="page_header__main "
       @alphabetFilter="onAlphabet($event)"

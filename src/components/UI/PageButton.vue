@@ -23,13 +23,13 @@ export default {
 }
 
 .button:hover {
-  opacity: 0.8;
+  opacity: 0.5;
   transition: opacity 0.5s;
 }
 
 .button:active {
-  opacity: 0.5;
+  opacity: 0.9;
   transition: opacity 0.5s;
-  box-shadow: 2px 2px 4px 1px var(--vt-c-active-2);
+  box-shadow: 3px 3px 4px 1px var(--vt-c-active-9);
 }
 </style>
