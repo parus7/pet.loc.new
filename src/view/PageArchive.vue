@@ -48,7 +48,6 @@ export default {
     filterArchiveData(event) {
       const valueSearch = event.param.slice(0, 1).toUpperCase() + event.param.slice(1);
       console.log(valueSearch);
-      //  тут сортировка будет
     }
   }
 };
