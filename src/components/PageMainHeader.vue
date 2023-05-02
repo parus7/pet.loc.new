@@ -93,7 +93,6 @@ export default {
       isOpen: false,
       selected: "",
       inputValue: null,
-
       isAlphabet: null,
 
       mask: {

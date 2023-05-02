@@ -2,7 +2,9 @@
   <div class="page">
 
     <template v-if="isMain">
-      <slot></slot>
+      <slot>
+        <!--  PageMainHeader -->
+      </slot>
 
       <PageBar
         class="page_bar"
@@ -11,10 +13,9 @@
     </template>
 
     <template v-else>
-      <PageHeader
-        class="page_header__secondary"
-        :isMain="isMain"
-      />
+      <slot>
+        <!--  PageHeader -->
+      </slot>
     </template>
 
     <PageList
@@ -80,10 +81,6 @@ export default {
   gap: 10px;
   padding: 17px;
   margin: 0 auto;
-}
-
-.page_header__secondary {
-  grid-column: 1/-1;
 }
 
 .page_bar {

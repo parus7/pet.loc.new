@@ -76,7 +76,6 @@ export default {
       return day + month;
     },
 
-
     filterData(event) {
       this.isAlphabet = this.alphabetToggle();
 

@@ -1,9 +1,12 @@
 <template>
   <div class="page-food">
-    <PageHeader
-      :link="link" />
 
+    <PageHeader
+      class="page-food_header"
+      :link="link"
+    />
     <PageCarousel />
+
   </div>
 </template>
 
@@ -26,6 +29,9 @@ export default {
 <style scoped>
 .page-food {
   padding: 17px;
-  margin: 0 auto;
+}
+
+.page-food_header {
+  margin-bottom: 10px;
 }
 </style>

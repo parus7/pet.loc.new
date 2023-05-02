@@ -87,7 +87,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     gap: 16%;
-    padding: 15px 0;
+    padding: 10px 0;
   }
 }
 </style>
