@@ -112,5 +112,17 @@ export const useEmplStore = defineStore("EmplStore", {
     alphabetToggle() {
       return (this.isAlphabet = !this.isAlphabet);
     },
+
+    alphabetFilterStart(key) {
+      return [...this.getAllEmployeesArray(key)].sort((a, b) =>
+        a.cn.localeCompare(b.cn)
+      );
+    },
+
+    alphabetFilterEnd(key) {
+      return [...this.getAllEmployeesArray(key)].sort((a, b) =>
+        b.cn.localeCompare(a.cn)
+      );
+    },
   },
 });

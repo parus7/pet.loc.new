@@ -32,14 +32,11 @@
 </template>
 
 <script>
-import IconGoTo from "@/components/icons/IconGoTo.vue";
 import PageButton from "@/components/UI/PageButton.vue";
-
-import { vMaska } from "maska";
+import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
   components: { PageButton, IconGoTo },
-  directives: { maska: vMaska },
 
   props: {
     isArchive: Boolean
@@ -58,5 +55,15 @@ export default {
   box-shadow: 2px 2px 0 0 var(--vt-c-active-5);
   border-radius: 8px;
   padding: 10px;
+}
+
+.header__form-search {
+  width: 60%;
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    column-gap: 20px;
+  }
 }
 </style>

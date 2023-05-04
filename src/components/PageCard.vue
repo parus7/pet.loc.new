@@ -164,7 +164,7 @@
     </fieldset>
 
     <template v-if="!isMain">
-    <p class="card-form__explanations">* обязательное поле для ввода</p>
+      <p class="card-form__explanations">* обязательное поле для ввода</p>
     </template>
 
     <div class=" card-form__buttons">

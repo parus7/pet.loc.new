@@ -63,7 +63,9 @@ export default {
       "setMapEmployees",
       "createEmployee",
       "alphabetToggle",
-      "saveInArchive"
+      "saveInArchive",
+      "alphabetFilterStart",
+      "alphabetFilterEnd"
     ]),
 
     getTodayDate() {
@@ -94,12 +96,8 @@ export default {
 
       this.employees =
         this.isAlphabet === false
-          ? [...this.getAllEmployeesArray("employees")].sort((a, b) =>
-            a.cn.localeCompare(b.cn)
-          )
-          : [...this.getAllEmployeesArray("employees")].sort((a, b) =>
-            b.cn.localeCompare(a.cn)
-          );
+          ? this.alphabetFilterStart("employees")
+          : this.alphabetFilterEnd("employees");
 
       return this.employees;
     },

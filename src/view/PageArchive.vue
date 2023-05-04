@@ -8,6 +8,7 @@
       :isArchive="isArchive"
       @searchArchiveEmpl="filterArchiveData($event)"
     />
+
   </Page>
 </template>
 
@@ -35,25 +36,23 @@ export default {
       ? this.setMapEmployees(employeesArchive, "archive")
       : this.getAllEmployeesMap("archive");
 
-    this.employees = [...this.employees.values()].sort((a, b) => a.cn.localeCompare(b.cn));
+    this.employees = this.alphabetFilterStart("archive");
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesMap"])
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesMap", "getAllEmployeesArray"])
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees"]),
+    ...mapActions(useEmplStore, ["setMapEmployees", "alphabetFilterStart"]),
 
     filterArchiveData(event) {
       const valueSearch = event.param.slice(0, 1).toUpperCase() + event.param.slice(1);
-      console.log(valueSearch);
+
+      this.employees = valueSearch === "" ?
+        this.alphabetFilterStart("archive")
+        : [...this.employees.values()].filter((elem) => elem["last_name"].startsWith(valueSearch));
     }
   }
 };
 </script>
-
-<style scoped>
-
-</style>
-
