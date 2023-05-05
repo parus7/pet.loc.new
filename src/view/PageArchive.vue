@@ -51,7 +51,8 @@ export default {
 
       this.employees = valueSearch === "" ?
         this.alphabetFilterStart("archive")
-        : [...this.employees.values()].filter((elem) => elem["last_name"].startsWith(valueSearch));
+        : [...this.getAllEmployeesArray("archive")].filter((elem) => elem["last_name"].startsWith(valueSearch));
+
     }
   }
 };
