@@ -8,7 +8,8 @@
         class="header__form-search"
         aria-label="поле поиска"
         placeholder="Поиск..."
-        @input="$emit('searchArchiveEmpl', { param: $event.target.value})"
+        v-model="inputValue"
+        @input="onFilterBasicData($event)"
       />
     </template>
 
@@ -40,6 +41,27 @@ export default {
 
   props: {
     isArchive: Boolean
+  },
+
+  data() {
+    return {
+      inputValue: ""
+    };
+  },
+
+  created() {
+    this.inputValue = this.$route.query.value;
+  },
+
+  methods: {
+    onFilterBasicData(event) {
+      const eventInSearch = event.target.value;
+
+      this.$emit("searchArchiveEmpl",
+        { params: eventInSearch });
+
+      this.$router.push({ name: "archive", query: { value: eventInSearch } });
+    }
   }
 };
 </script>

@@ -158,9 +158,6 @@
           v-model="employee['title']"
         />
       </label>
-      <label class="card-form__label">Должность
-
-      </label>
     </fieldset>
 
     <template v-if="!isMain">
@@ -189,20 +186,20 @@
             <IconSave />
           </PageButton>
         </div>
-      </template>
 
-      <PagePopup
-        :is-open="isOpen"
-        @ok="popupConfirm"
-        @close="isOpen = false"
-      >Вы хотите изменить данные сотрудника?
-      </PagePopup>
+        <PagePopup
+          :is-open="isOpen"
+          @ok="popupConfirm"
+          @close="isOpen = false"
+        >Вы хотите изменить данные сотрудника?
+        </PagePopup>
+      </template>
 
       <div class="help relative" data-name="выйти">
         <PageButton
           tabindex="isMain ? '15': '1'"
           aria-label="кнопка выхода"
-          @click="leavePage"
+          @click=" this.$router.go(-1)"
         >
           <IconGoTo />
         </PageButton>
@@ -230,7 +227,6 @@ export default {
   props: {
     employee: Object,
     isEdit: Boolean,
-    link: String,
     isMain: Boolean
   },
 
@@ -294,12 +290,6 @@ export default {
       });
 
       this.$emit("editOk");
-    },
-
-    leavePage() {
-      this.$router.push({
-        name: this.link
-      });
     }
   }
 };

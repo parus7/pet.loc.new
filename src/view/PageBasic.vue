@@ -9,7 +9,7 @@
     <PageMainHeader
       class="page_header__main "
       @alphabetFilter="onAlphabet($event)"
-      @employeeFilter="filterData($event)"
+      @employeeFilter="filterBasicData($event)"
       @employeeCreate="onCreateEmployee($event)"
     >
     </PageMainHeader>
@@ -78,7 +78,7 @@ export default {
       return day + month;
     },
 
-    filterData(event) {
+    filterBasicData(event) {
       this.isAlphabet = this.alphabetToggle();
 
       this.employees = [...this.getAllEmployeesArray("employees")].filter(

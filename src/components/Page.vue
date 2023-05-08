@@ -34,9 +34,6 @@ import PageHeader from "@/components/PageHeader.vue";
 import PageBar from "@/components/PageBar.vue";
 import PageList from "@/components/PageList.vue";
 
-import { mapActions, mapState } from "pinia";
-import { useEmplStore } from "@/stores/EmplStore";
-
 export default {
   components: { PageMainHeader, PageHeader, PageList, PageBar },
 
@@ -45,30 +42,6 @@ export default {
     message: String,
     length: Number,
     isMain: Boolean
-  },
-
-  computed: {
-    ...mapState(useEmplStore, [
-      "getEmptyStore",
-      "getAllEmployeesArray",
-      "delEmployee",
-      "getAlphabet"
-    ])
-  },
-
-  methods: {
-    ...mapActions(useEmplStore, [
-      "setMapEmployees",
-      "createEmployee",
-      "alphabetToggle",
-      "saveInArchive"
-    ]),
-
-    leavePage() {
-      this.$router.push({
-        name: this.link
-      });
-    }
   }
 };
 </script>

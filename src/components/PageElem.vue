@@ -5,26 +5,25 @@
   >
     <img
       class="employee__photo"
-      :class="{ status: employee.hide }"
-      :alt="`id: ${employee.id}`"
-      :src="employee.src"
+      :class="{ status: employee['hide'] }"
+      :alt="`id: ${employee['id']}`"
+      :src="employee['src']"
       width="35"
       height="35"
     />
-
     <span
-      class="employee__cn ">{{ employee.cn }}
+      class="employee__cn ">{{ employee["cn"] }}
     </span>
 
     <span
-      class="employee__item-email">{{ employee.email }}
+      class="employee__item-email">{{ employee["email"] }}
     </span>
 
     <input
       class="employee__item-telephone input-mask"
       type="text"
       aria-label="phone"
-      v-model="employee.telephone"
+      v-model="employee['telephone']"
       v-maska
       data-maska="##-##"
       tabindex="-1"
@@ -35,7 +34,7 @@
       class="employee__item-mobile input-mask"
       type="text"
       aria-label="mobile"
-      v-model="employee.mobile"
+      v-model="employee['mobile']"
       v-maska
       data-maska="### ###-##-##"
       tabindex="-1"
@@ -45,7 +44,7 @@
     <RouterLink
       :to="{
         name: isMain  ? 'basicCard' : 'archiveCard',
-        params: { id: employee.id },
+        params: { id: employee['id'] }
       }"
       tabindex="-1"
     >

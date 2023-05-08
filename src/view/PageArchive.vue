@@ -1,7 +1,6 @@
 <template>
   <Page
     :employees="employees"
-    :link="link"
   >
 
     <PageHeader
@@ -25,34 +24,47 @@ export default {
 
   data() {
     return {
-      employees: {},
+      employees: [],
       isArchive: true,
-      link: "basic"
+      queryRout: ""
     };
   },
 
-  created() {
-    this.employees = this.getEmptyStore("archive")
-      ? this.setMapEmployees(employeesArchive, "archive")
-      : this.getAllEmployeesMap("archive");
+  mounted() {
+    this.queryRout = this.$route.query.value;
+    let empl;
 
-    this.employees = this.alphabetFilterStart("archive");
+    if (this.getEmptyStore("archive")) {
+      this.setMapEmployees(employeesArchive, "archive");
+    }
+
+    empl = this.alphabetFilterStart("archive");
+
+    if (this.queryRout) {
+      this.employees = empl.filter((elem) => {
+        return elem["last_name"].toLowerCase().startsWith(this.queryRout.toLowerCase());
+      });
+
+    } else {
+      this.employees = empl;
+    }
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesMap", "getAllEmployeesArray"])
+    ...mapState(useEmplStore, [
+      "getEmptyStore",
+      "getAllEmployeesMap",
+      "getAllEmployeesArray"])
   },
 
   methods: {
     ...mapActions(useEmplStore, ["setMapEmployees", "alphabetFilterStart"]),
 
     filterArchiveData(event) {
-      const valueSearch = event.param.slice(0, 1).toUpperCase() + event.param.slice(1);
-
-      this.employees = valueSearch === "" ?
-        this.alphabetFilterStart("archive")
-        : [...this.getAllEmployeesArray("archive")].filter((elem) => elem["last_name"].startsWith(valueSearch));
-
+      this.employees = event.params === "" ?
+        [...this.getAllEmployeesArray("archive")]
+        : [...this.getAllEmployeesArray("archive")].filter((elem) =>
+          elem["last_name"].toLowerCase().startsWith(event.params.toLowerCase()));
     }
   }
 };
