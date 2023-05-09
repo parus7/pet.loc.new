@@ -2,7 +2,6 @@
   <PageCard
     :employee="employee"
     :isEdit="isEdit"
-    :link="link"
     @editOk="isEdit=true"
     @editNo="isEdit=false"
   />
@@ -19,8 +18,7 @@ export default {
   data() {
     return {
       employee: {},
-      isEdit: true,
-      link: "basic"
+      isEdit: true
     };
   },
 

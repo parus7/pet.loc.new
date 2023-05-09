@@ -2,7 +2,7 @@
   <Page
     :employees="employees"
     :message="message"
-    :length="length"
+    :length="getTodayBirthday()"
     :isMain="isMain"
     @deleteEmployee="onDeleteInBasic($event)"
   >
@@ -24,6 +24,7 @@ import PageMainHeader from "@/components/PageMainHeader.vue";
 import { mapState, mapActions } from "pinia";
 import { useEmplStore } from "@/stores/EmplStore";
 import employeesData from "@/data/employeesData.json";
+import employeesArchive from "@/data/employeesArchive.json";
 
 export default {
   components: { Page, PageMainHeader },
@@ -34,19 +35,32 @@ export default {
       message: "",
       length: null,
       isMain: true,
-      link: "basic"
+
+      queryRoutValue: "",
+      queryRoutParam: ""
     };
   },
 
   created() {
-    this.employees = this.getEmptyStore("employees")
-      ? this.setMapEmployees(employeesData, "employees").values()
-      : [...this.getAllEmployeesArray("employees")];
+    this.queryRoutValue = this.$route.query.value;
+    this.queryRoutParam = this.$route.query.param;
 
-    this.onAlphabet();
+    let empl;
 
-    const day = this.getTodayDate();
-    this.length = [...this.employees].filter((elem) => elem.birthday === day).length;
+    if (this.getEmptyStore("employees")) {
+      this.setMapEmployees(employeesData, "employees").values();
+    }
+
+    empl = this.alphabetFilterStart("employees");
+    console.log(empl);
+
+    if (this.queryRoutValue && this.queryRoutParam) {
+      this.employees = empl.filter(
+        (elem) => elem[this.queryRoutParam] === this.queryRoutValue
+      );
+    } else {
+      this.employees = empl;
+    }
   },
 
   computed: {
@@ -78,12 +92,21 @@ export default {
       return day + month;
     },
 
+    getTodayBirthday() {
+      const day = this.getTodayDate();
+      this.length = [...this.employees].filter((elem) => elem["birthday"] === day).length;
+      return this.length;
+    },
+
     filterBasicData(event) {
       this.isAlphabet = this.alphabetToggle();
 
-      this.employees = [...this.getAllEmployeesArray("employees")].filter(
-        (elem) => elem[event.param] === event.value
-      );
+      this.employees = this.queryRoutValue === "" && this.queryRoutParam === "" ?
+        [...this.getAllEmployeesArray("employees")]
+
+        : [...this.getAllEmployeesArray("employees")].filter(
+          (elem) => elem[event.param] === event.value
+        );
 
       this.message =
         this.employees.length === 0

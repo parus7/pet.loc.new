@@ -167,8 +167,10 @@ export default {
         value: this.inputValue
       });
 
-      this.selected = "";
-      this.inputValue = "";
+      this.$router.push({
+        name: "basic",
+        query: { param: this.category.item, value: this.inputValue }
+      });
     },
 
     setAlphabetSort() {

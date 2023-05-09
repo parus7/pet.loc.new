@@ -30,7 +30,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.queryRout = this.$route.query.value;
     let empl;
 

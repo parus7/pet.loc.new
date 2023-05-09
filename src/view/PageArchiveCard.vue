@@ -3,7 +3,6 @@
     :employee="employee"
     :isEdit="isEdit"
     :isMain="isMain"
-    :link="link"
     @editOk="isEdit=true"
     @editNo="isEdit=false"
   />
@@ -22,7 +21,6 @@ export default {
       employee: {},
       isEdit: false,
       isMain: true,
-      link: "archive"
     };
   },
 
