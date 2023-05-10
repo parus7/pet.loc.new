@@ -175,6 +175,10 @@ export default {
 
     setAlphabetSort() {
       this.$emit("alphabetFilter");
+
+      this.$router.push({
+        query: {}
+      });
     }
   }
 };

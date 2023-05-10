@@ -52,7 +52,6 @@ export default {
     }
 
     empl = this.alphabetFilterStart("employees");
-    console.log(empl);
 
     if (this.queryRoutValue && this.queryRoutParam) {
       this.employees = empl.filter(
