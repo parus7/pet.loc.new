@@ -179,6 +179,9 @@ export default {
       this.$router.push({
         query: {}
       });
+
+      this.inputValue = "";
+      this.selected = "";
     }
   }
 };
