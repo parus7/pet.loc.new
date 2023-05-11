@@ -6,6 +6,7 @@
         id="search"
         type="text"
         class="header__form-search"
+        ref="archiveSearch"
         aria-label="поле поиска"
         placeholder="Поиск..."
         v-model="inputValue"
@@ -45,12 +46,18 @@ export default {
 
   data() {
     return {
-      inputValue: ""
+      inputValue: "",
+      focused: true
     };
   },
 
   created() {
     this.inputValue = this.$route.query.value;
+  },
+
+  mounted() {
+    const archiveSearch = this.$refs.archiveSearch;
+    archiveSearch.focus();
   },
 
   methods: {
