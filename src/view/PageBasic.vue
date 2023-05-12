@@ -45,20 +45,20 @@ export default {
     this.queryRoutValue = this.$route.query.value;
     this.queryRoutParam = this.$route.query.param;
 
-    let empl;
+    let employeeBasic;
 
     if (this.getEmptyStore("employees")) {
       this.setMapEmployees(employeesData, "employees").values();
     }
 
-    empl = this.alphabetFilterStart("employees");
+    employeeBasic = this.alphabetFilterStart("employees");
 
     if (this.queryRoutValue && this.queryRoutParam) {
-      this.employees = empl.filter(
+      this.employees = employeeBasic.filter(
         (elem) => elem[this.queryRoutParam] === this.queryRoutValue
       );
     } else {
-      this.employees = empl;
+      this.employees = employeeBasic;
     }
   },
 

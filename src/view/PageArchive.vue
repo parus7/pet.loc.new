@@ -3,10 +3,18 @@
     :employees="employees"
   >
 
-    <PageHeader
-      :isArchive="isArchive"
-      @searchArchiveEmpl="filterArchiveData($event)"
-    />
+    <PageHeader>
+      <input
+        id="search"
+        type="text"
+        class="header__form-search"
+        ref="archiveSearch"
+        aria-label="поле поиска"
+        placeholder="Поиск..."
+        v-model="inputValue"
+        @input="filterArchiveData"
+      />
+    </PageHeader>
 
   </Page>
 </template>
@@ -25,29 +33,33 @@ export default {
   data() {
     return {
       employees: [],
-      isArchive: true,
-      queryRout: ""
+      inputValue: ""
     };
   },
 
   created() {
-    this.queryRout = this.$route.query.value;
-    let empl;
+    this.inputValue = this.$route.query.value;
+
+    let employeeArchive;
 
     if (this.getEmptyStore("archive")) {
       this.setMapEmployees(employeesArchive, "archive");
     }
 
-    empl = this.alphabetFilterStart("archive");
+    employeeArchive = this.alphabetFilterStart("archive");
 
-    if (this.queryRout) {
-      this.employees = empl.filter((elem) => {
-        return elem["last_name"].toLowerCase().startsWith(this.queryRout.toLowerCase());
+    if (this.inputValue) {
+      this.employees = employeeArchive.filter((elem) => {
+        return elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase());
       });
 
     } else {
-      this.employees = empl;
+      this.employees = employeeArchive;
     }
+  },
+
+  mounted() {
+    this.$refs.archiveSearch.focus();
   },
 
   computed: {
@@ -60,12 +72,20 @@ export default {
   methods: {
     ...mapActions(useEmplStore, ["setMapEmployees", "alphabetFilterStart"]),
 
-    filterArchiveData(event) {
-      this.employees = event.params === "" ?
+    filterArchiveData() {
+      this.employees = this.inputValue === "" ?
         [...this.getAllEmployeesArray("archive")]
         : [...this.getAllEmployeesArray("archive")].filter((elem) =>
-          elem["last_name"].toLowerCase().startsWith(event.params.toLowerCase()));
+          elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase()));
+
+      this.$router.push({ name: "archive", query: { value: this.inputValue } });
     }
   }
 };
 </script>
+
+<style scoped>
+#search {
+  width: 60%;
+}
+</style>

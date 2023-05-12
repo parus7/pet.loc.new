@@ -1,8 +1,8 @@
 <template>
-  <div class="header">
+  <div class="main-header">
     <div class="help relative" data-name="создать&nbsp;карточку">
       <PageButton
-        class="header__button-create relative"
+        class="main-header__button-create relative"
         aria-label="создать сотрудника"
         @click="isOpen = true"
       >
@@ -18,10 +18,10 @@
       Вы хотите создать нового сотрудника?
     </PagePopup>
 
-    <form class="header__form" @submit.prevent>
+    <form class="main-header__form" @submit.prevent>
       <select
         id="filter"
-        class="header__form-select"
+        class="main-header__form-select"
         aria-label="поле выбора категории для поиска"
         v-model="selected"
         @change="onChangeSelect"
@@ -33,11 +33,11 @@
         </option>
       </select>
 
-      <div class="relative header__wrapper">
+      <div class="relative main-header__wrapper">
         <input
           id="search"
           type="text"
-          class="header__form-search"
+          class="main-header__form-search"
           aria-label="поле поиска"
           placeholder="Поиск..."
           v-model="inputValue"
@@ -47,7 +47,7 @@
         />
 
         <PageButton
-          class="header__form-btn"
+          class="main-header__form-btn"
           aria-label="поиск"
           @click="onSendButtonClick"
         >
@@ -61,7 +61,7 @@
       data-name="по&nbsp;алфавиту&nbsp;или сброс фильтра"
     >
       <PageButton
-        class="header__button-alphabet"
+        class="main-header__button-alphabet"
         aria-label="алфавитная сортировка  и сброс фильтра поиска"
         @click="setAlphabetSort"
       >
@@ -169,7 +169,7 @@ export default {
 
       this.$router.push({
         name: "basic",
-        query: { param: this.category.item, value: this.inputValue }
+        query: { name: "basic", param: this.category.item, value: this.inputValue }
       });
     },
 
@@ -188,7 +188,7 @@ export default {
 </script>
 
 <style scoped>
-.header {
+.main-header {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -199,19 +199,19 @@ export default {
   padding: 10px;
 }
 
-.header__form {
+.main-header__form {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
 
-.header__form-select,
-.header__form-search {
+.main-header__form-select,
+.main-header__form-search {
   box-shadow: 4px 4px 4px 1px var(--vt-c-active-2);
   padding: 7px 40px 7px 15px;
 }
 
-.header__form-btn {
+.main-header__form-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -221,12 +221,12 @@ export default {
   padding: 4px;
 }
 
-.header__wrapper {
+.main-header__wrapper {
   display: grid;
 }
 
 @media screen and (max-width: 729px) {
-  .header__form {
+  .main-header__form {
     flex-direction: column;
     flex-grow: 1;
     gap: 10px;
@@ -234,16 +234,16 @@ export default {
 }
 
 @media screen and (max-width: 499px) {
-  .header {
+  .main-header {
     flex-direction: column;
   }
 
-  .header__button-create,
-  .header__button-alphabet {
+  .main-header__button-create,
+  .main-header__button-alphabet {
     flex-grow: 1;
   }
 
-  .header__form {
+  .main-header__form {
     gap: 20px;
   }
 }
