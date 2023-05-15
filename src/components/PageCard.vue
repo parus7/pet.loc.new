@@ -257,6 +257,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.$refs.lastName.focus();
+  },
+
   computed: {
     ...mapState(useEmplStore, ["getEmployeeById"])
   },
