@@ -80,15 +80,15 @@ export default {
   }
 }
 
-@media screen and (max-width: 729px) {
+@media screen and (max-width: 767px) {
   .page {
     grid-template-rows: 55px 9vh calc(91vh - 55px);
   }
 }
 
-@media screen and (max-width: 499px) {
+@media screen and (max-width: 560px) {
   .page {
-    grid-template-rows: 55px 20vh calc(80vh - 55px);
+    grid-template-rows: 55px 22vh calc(78vh - 55px);
   }
 }
 </style>

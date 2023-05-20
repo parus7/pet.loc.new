@@ -8,9 +8,10 @@
   >
     <PageMainHeader
       class="page_header__main "
-      @alphabetFilter="onAlphabet($event)"
-      @employeeFilter="filterBasicData($event)"
       @employeeCreate="onCreateEmployee($event)"
+      @filterEmployee="filterBasicData($event)"
+      @resetFilter="onResetFilter"
+      @alphabetSort="alphabet"
     >
     </PageMainHeader>
 
@@ -24,7 +25,6 @@ import PageMainHeader from "@/components/PageMainHeader.vue";
 import { mapState, mapActions } from "pinia";
 import { useEmplStore } from "@/stores/EmplStore";
 import employeesData from "@/data/employeesData.json";
-import employeesArchive from "@/data/employeesArchive.json";
 
 export default {
   components: { Page, PageMainHeader },
@@ -35,6 +35,8 @@ export default {
       message: "",
       length: null,
       isMain: true,
+      isAlphabet: false,
+      employeeBasic: {},
 
       queryRoutValue: "",
       queryRoutParam: ""
@@ -45,29 +47,27 @@ export default {
     this.queryRoutValue = this.$route.query.value;
     this.queryRoutParam = this.$route.query.param;
 
-    let employeeBasic;
-
     if (this.getEmptyStore("employees")) {
       this.setMapEmployees(employeesData, "employees").values();
     }
 
-    employeeBasic = this.alphabetFilterStart("employees");
+    this.employeeBasic = this.alphabetFilterStart([...this.getAllEmployeesArray("employees")]);
 
     if (this.queryRoutValue && this.queryRoutParam) {
-      this.employees = employeeBasic.filter(
+      this.employees = this.employeeBasic.filter(
         (elem) => elem[this.queryRoutParam] === this.queryRoutValue
       );
     } else {
-      this.employees = employeeBasic;
+      this.employees = this.employeeBasic;
     }
+    console.log(this.isAlphabet, "created");
   },
 
   computed: {
     ...mapState(useEmplStore, [
       "getEmptyStore",
       "getAllEmployeesArray",
-      "delEmployee",
-      "getAlphabet"
+      "delEmployee"
     ])
   },
 
@@ -78,7 +78,8 @@ export default {
       "alphabetToggle",
       "saveInArchive",
       "alphabetFilterStart",
-      "alphabetFilterEnd"
+      "alphabetFilterEnd",
+      "createNextId"
     ]),
 
     getTodayDate() {
@@ -98,8 +99,6 @@ export default {
     },
 
     filterBasicData(event) {
-      this.isAlphabet = this.alphabetToggle();
-
       this.employees = this.queryRoutValue === "" && this.queryRoutParam === "" ?
         [...this.getAllEmployeesArray("employees")]
 
@@ -107,38 +106,56 @@ export default {
           (elem) => elem[event.param] === event.value
         );
 
+      this.employees = this.alphabetFilterStart(this.employees);
+
       this.message =
         this.employees.length === 0
           ? "Нет сотрудников, соответствующих вашему поиску"
           : "";
+      console.log(this.isAlphabet, "filterBasicData");
     },
 
     onAlphabet() {
-      this.isAlphabet = this.alphabetToggle();
-
       this.employees =
         this.isAlphabet === false
-          ? this.alphabetFilterStart("employees")
-          : this.alphabetFilterEnd("employees");
+          ? this.alphabetFilterStart([...this.getAllEmployeesArray("employees")])
+          : this.alphabetFilterEnd([...this.getAllEmployeesArray("employees")]);
 
-      return this.employees;
+      console.log(this.isAlphabet, "onAlphabet");
+    },
+
+    alphabet() {
+      this.isAlphabet = this.alphabetToggle();
+      this.onAlphabet();
+    },
+
+    onResetFilter() {
+      return this.employees =
+        this.isAlphabet === false
+          ? this.alphabetFilterStart([...this.getAllEmployeesArray("employees")])
+          : this.alphabetFilterEnd([...this.getAllEmployeesArray("employees")]);
+      // console.log(this.isAlphabet, "onResetFilter");
     },
 
     onDeleteInBasic(event) {
-      this.isAlphabet = this.alphabetToggle();
-
+      // console.log(this.isAlphabet, "delete");
       this.saveInArchive(event.id);
-      this.employees = [...this.getAllEmployeesArray("employees")];
+      this.onAlphabet();
 
       this.message =
         this.employees.length === 0 ? "Список сотрудников пуст" : "";
-
-      this.onAlphabet();
     },
 
     onCreateEmployee() {
+      const id = this.createNextId();
+
+      this.$router.push({
+        name: "newCard",
+        params: { id: id }
+      });
+
       this.createEmployee();
-      this.onAlphabet();
+      console.log(this.isAlphabet, "onCreateEmployee");
     }
   }
 };

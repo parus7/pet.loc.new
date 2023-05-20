@@ -56,9 +56,9 @@
     </RouterLink>
 
     <template v-if="isMain">
-      <div class="help relative" data-name="поместить в архив">
+      <div class="help relative" data-name="удалить&nbsp;в&nbsp;архив">
         <PageIconButton
-          aria-label="поместить сотрудника в архив"
+          aria-label="удалить сотрудника в архив"
           @click="isOpen = true"
         >
           <IconDelete />

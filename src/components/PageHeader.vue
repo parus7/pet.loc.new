@@ -10,7 +10,7 @@
       tabindex="-1">
 
       <div
-        class=" help " data-name="на главную страницу">
+        class="help relative" data-name="на главную страницу">
         <PageButton
           area-label="на главную страницу"
           tabindex="0"
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-.secondary-header{
+.secondary-header {
   display: flex;
   justify-content: end;
   column-gap: 30px;
@@ -48,7 +48,7 @@ export default {
 }
 
 @media screen and (max-width: 425px) {
-  .secondary-header{
+  .secondary-header {
     column-gap: 20px;
   }
 }

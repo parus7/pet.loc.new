@@ -210,7 +210,7 @@
 
 <script>
 import { useEmplStore } from "@/stores/EmplStore";
-import { mapState, mapActions } from "pinia";
+import { mapActions } from "pinia";
 import { vMaska } from "maska";
 
 import PagePopup from "@/components/PagePopup.vue";
@@ -234,7 +234,6 @@ export default {
     return {
       paramsId: null,
       isOpen: false,
-      isAlphabet: null,
       tabindex: 1,
 
       maskaBirthday: {
@@ -261,20 +260,13 @@ export default {
     this.$refs.lastName.focus();
   },
 
-  computed: {
-    ...mapState(useEmplStore, ["getEmployeeById"])
-  },
-
   methods: {
     ...mapActions(useEmplStore, [
       "delEmployee",
-      "addEmployee",
-      "alphabetToggle"
+      "addEmployee"
     ]),
 
     onSaveEmployee(paramsId) {
-      this.isAlphabet = this.alphabetToggle();
-
       this.$emit("editNo");
       this.delEmployee(paramsId);
 

@@ -10,26 +10,26 @@
            :src="slide['slide']"
            :alt="slide['title'] ">
 
-      <table>
+      <table class="carousel__table">
         <tr>
-          <td>Адрес:</td>
-          <td>{{ slide["address"] }}</td>
+          <td class="carousel__cell">Адрес:</td>
+          <td class="carousel__cell">{{ slide["address"] }}</td>
         </tr>
         <tr>
-          <td>Пн-Пт:</td>
-          <td>{{ slide["weekdays"] }}</td>
+          <td class="carousel__cell">Пн-Пт:</td>
+          <td class="carousel__cell">{{ slide["weekdays"] }}</td>
         </tr>
         <tr>
-          <td>Сб-Вс:</td>
-          <td>{{ slide["weekends"] }}</td>
+          <td class="carousel__cell">Сб-Вс:</td>
+          <td class="carousel__cell">{{ slide["weekends"] }}</td>
         </tr>
         <tr>
-          <td>Телефон:</td>
-          <td>{{ slide["phone"] }}</td>
+          <td class="carousel__cell">Телефон:</td>
+          <td class="carousel__cell">{{ slide["phone"] }}</td>
         </tr>
         <tr>
-          <td>Сайт:</td>
-          <td>{{ slide["site"] }}</td>
+          <td class="carousel__cell">Сайт:</td>
+          <td class="carousel__cell">{{ slide["site"] }}</td>
         </tr>
       </table>
 
@@ -100,12 +100,6 @@ export default defineComponent({
 </script>
 
 <style>
-td {
-  min-width: 150px;
-  text-align: start;
-  padding: 10px;
-}
-
 .carousel__box {
   display: flex;
   flex-direction: column;
@@ -130,4 +124,20 @@ td {
 .carousel__icon {
   fill: var(--vt-c-white);
 }
+
+.carousel__table {
+  margin: 0 auto;
+}
+
+.carousel__cell {
+  text-align: start;
+  padding: 10px;
+}
+
+@media screen and (max-width: 560px) {
+  .carousel__box {
+    font-size: 0.7rem;
+  }
+}
+
 </style>

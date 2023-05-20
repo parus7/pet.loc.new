@@ -6,14 +6,12 @@ export const useEmplStore = defineStore("EmplStore", {
     return {
       employees: new Map(),
       archive: new Map(),
-      isAlphabet: true,
     };
   },
+
   getters: {
     getEmptyStore: (state) => (key) =>
       !state[key] ? true : state[key].size === 0,
-
-    getAlphabet: (state) => state["isAlphabet"],
 
     getAllEmployeesArray: (state) => (key) => state[key].values(),
 
@@ -68,7 +66,7 @@ export const useEmplStore = defineStore("EmplStore", {
     createNextId() {
       return this.getEmptyStore("employees")
         ? "1"
-        : String(Number(Math.max(...this.employees.keys())) + 2000);
+        : String(Number(Math.max(...this.employees.keys())) + 200);
     },
 
     createEmployee: function () {
@@ -96,6 +94,8 @@ export const useEmplStore = defineStore("EmplStore", {
       };
 
       this.employees.set(idEmployee, employee);
+      // console.log(idEmployee);
+      // return idEmployee;
     },
 
     addEmployee(updatedEmpl) {
@@ -113,16 +113,25 @@ export const useEmplStore = defineStore("EmplStore", {
       return (this.isAlphabet = !this.isAlphabet);
     },
 
-    alphabetFilterStart(key) {
-      return [...this.getAllEmployeesArray(key)].sort((a, b) =>
-        a.cn.localeCompare(b.cn)
-      );
+    alphabetFilterStart(a) {
+      return a.sort((a, b) => a.cn.localeCompare(b.cn));
     },
 
-    alphabetFilterEnd(key) {
-      return [...this.getAllEmployeesArray(key)].sort((a, b) =>
-        b.cn.localeCompare(a.cn)
-      );
+    alphabetFilterEnd(a) {
+      return a.sort((a, b) => b.cn.localeCompare(a.cn));
     },
   },
+
+  //   alphabetFilterStart(key) {
+  //     return [...this.getAllEmployeesArray(key)].sort((a, b) =>
+  //       a.cn.localeCompare(b.cn)
+  //     );
+  //   },
+  //
+  //   alphabetFilterEnd(key) {
+  //     return [...this.getAllEmployeesArray(key)].sort((a, b) =>
+  //       b.cn.localeCompare(a.cn)
+  //     );
+  //   },
+  // },
 });

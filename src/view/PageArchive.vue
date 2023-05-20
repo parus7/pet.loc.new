@@ -46,7 +46,7 @@ export default {
       this.setMapEmployees(employeesArchive, "archive");
     }
 
-    employeeArchive = this.alphabetFilterStart("archive");
+    employeeArchive = this.alphabetFilterStart([...this.getAllEmployeesArray("archive")]);
 
     if (this.inputValue) {
       this.employees = employeeArchive.filter((elem) => {

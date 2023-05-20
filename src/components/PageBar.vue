@@ -3,7 +3,7 @@
 
     <div class="help relative" data-name="др сегодня">
       <PageIconButton
-        aria-label="напоминание о сотрудниках, рожденных сегодня"
+        aria-label="др сегодня"
         class=" not-active"
         tabindex="-1"
       >
@@ -16,8 +16,8 @@
     </div>
 
     <RouterLink :to="{ name: 'archive' }" tabindex="-1">
-      <div class="help relative" data-name="архивный список">
-        <PageIconButton aria-label="архивный список сотрудников">
+      <div class="help relative" data-name="перейти в&nbsp;архив">
+        <PageIconButton aria-label="перейти в архив">
           <IconArchive />
         </PageIconButton>
       </div>
@@ -26,7 +26,7 @@
     <RouterLink :to="{ name: 'food' }" tabindex="-1">
       <div class="help relative" data-name="кафе рядом">
         <PageIconButton
-          aria-label="ближайшие к офису кафе"
+          aria-label="кафе рядом"
         >
           <IconFood />
         </PageIconButton>
