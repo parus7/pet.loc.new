@@ -1,6 +1,7 @@
 <template>
   <button type="button" class="icon-button">
     <slot></slot>
+    <!--    <slot name="iconInButton"></slot>-->
   </button>
 </template>
 

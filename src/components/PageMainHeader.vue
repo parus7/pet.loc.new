@@ -193,7 +193,7 @@ export default {
 
       this.$router.push({
         name: "basic",
-        query: { flag: true }
+        query: { flag: "alphabetYes" }
       });
     }
   }
@@ -205,6 +205,7 @@ export default {
   display: flex;
   justify-content: space-evenly;
   gap: 3%;
+  grid-column: 1/3;
 
   box-sizing: border-box;
   background-color: var(--vt-c-white-mute);
@@ -218,14 +219,14 @@ export default {
   justify-content: space-evenly;
   gap: 3%;
 
-  width: 70%;
+  width: 95%;
 }
 
 .main-header__fieldset {
   display: flex;
   gap: 15px;
 
-  width: 100%;
+  width: 70%;
   border: none;
   padding: 0;
 }

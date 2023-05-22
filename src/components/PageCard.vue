@@ -306,12 +306,12 @@ export default {
   margin: 30px auto;
 }
 
-.card-form__full-name,
-.card-form__personal,
-.card-form__contacts,
-.card-form__address {
-  border: none;
-}
+/*.card-form__full-name,*/
+/*.card-form__personal,*/
+/*.card-form__contacts,*/
+/*.card-form__address {*/
+/*  border: none;*/
+/*}*/
 
 .card-form__label {
   display: grid;

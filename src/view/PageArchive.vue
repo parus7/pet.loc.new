@@ -46,7 +46,7 @@ export default {
       this.setMapEmployees(employeesArchive, "archive");
     }
 
-    employeeArchive = this.alphabetFilterStart([...this.getAllEmployeesArray("archive")]);
+    employeeArchive = this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
 
     if (this.inputValue) {
       this.employees = employeeArchive.filter((elem) => {
@@ -63,14 +63,11 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, [
-      "getEmptyStore",
-      "getAllEmployeesMap",
-      "getAllEmployeesArray"])
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesMap", "getAllEmployeesArray"])
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees", "alphabetFilterStart"]),
+    ...mapActions(useEmplStore, ["setMapEmployees", "alphabetSortStart"]),
 
     filterArchiveData() {
       this.employees = this.inputValue === "" ?

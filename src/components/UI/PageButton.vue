@@ -6,6 +6,7 @@
     <slot>
       <!-- icon -->
     </slot>
+    <!--    <slot name="textInButton"></slot>-->
 
   </button>
 </template>

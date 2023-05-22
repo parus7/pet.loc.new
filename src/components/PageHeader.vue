@@ -4,6 +4,7 @@
     <slot>
       <!--   input  archiveSearch in PageArchive-->
     </slot>
+    <!--    <slot name="inputArchiveSearchInPageArchive"></slot>-->
 
     <RouterLink
       :to="{ name: 'basic' }"

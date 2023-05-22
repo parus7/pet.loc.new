@@ -94,8 +94,6 @@ export const useEmplStore = defineStore("EmplStore", {
       };
 
       this.employees.set(idEmployee, employee);
-      // console.log(idEmployee);
-      // return idEmployee;
     },
 
     addEmployee(updatedEmpl) {
@@ -113,25 +111,12 @@ export const useEmplStore = defineStore("EmplStore", {
       return (this.isAlphabet = !this.isAlphabet);
     },
 
-    alphabetFilterStart(a) {
-      return a.sort((a, b) => a.cn.localeCompare(b.cn));
+    alphabetSortStart(obj) {
+      return obj.sort((a, b) => a.cn.localeCompare(b.cn));
     },
 
-    alphabetFilterEnd(a) {
-      return a.sort((a, b) => b.cn.localeCompare(a.cn));
+    alphabetSortEnd(obj) {
+      return obj.sort((a, b) => b.cn.localeCompare(a.cn));
     },
   },
-
-  //   alphabetFilterStart(key) {
-  //     return [...this.getAllEmployeesArray(key)].sort((a, b) =>
-  //       a.cn.localeCompare(b.cn)
-  //     );
-  //   },
-  //
-  //   alphabetFilterEnd(key) {
-  //     return [...this.getAllEmployeesArray(key)].sort((a, b) =>
-  //       b.cn.localeCompare(a.cn)
-  //     );
-  //   },
-  // },
 });

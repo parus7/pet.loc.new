@@ -82,6 +82,10 @@ select:disabled {
     box-shadow: 3px 3px 2px 1px var(--vt-c-active-2);
 }
 
+fieldset {
+    border: none;
+}
+
 .help {
     display: flex;
 }

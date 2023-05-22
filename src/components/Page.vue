@@ -2,9 +2,8 @@
   <div class="page">
 
     <template v-if="isMain">
-      <slot>
-        <!--  PageMainHeader -->
-      </slot>
+      <slot><!--  PageMainHeader --></slot>
+      <!--  <slot name="pageMainHeader"></slot>-->
 
       <PageBar
         class="page_bar"
@@ -13,9 +12,8 @@
     </template>
 
     <template v-else>
-      <slot>
-        <!--  PageHeader -->
-      </slot>
+      <slot><!--  PageHeader --></slot>
+      <!--      <slot name="pageHeader"></slot>-->
     </template>
 
     <PageList

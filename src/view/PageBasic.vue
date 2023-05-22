@@ -9,9 +9,9 @@
     <PageMainHeader
       class="page_header__main "
       @employeeCreate="onCreateEmployee($event)"
-      @filterEmployee="filterBasicData($event)"
+      @filterEmployee="onFilterBasicData($event)"
       @resetFilter="onResetFilter"
-      @alphabetSort="alphabet"
+      @alphabetSort="onAlphabetSort"
     >
     </PageMainHeader>
 
@@ -36,10 +36,10 @@ export default {
       length: null,
       isMain: true,
       isAlphabet: false,
-      employeeBasic: {},
+      filteredEmployees: {},
 
-      queryRoutValue: "",
-      queryRoutParam: ""
+      queryRoutValue: null,
+      queryRoutParam: null
     };
   },
 
@@ -51,23 +51,21 @@ export default {
       this.setMapEmployees(employeesData, "employees").values();
     }
 
-    this.employeeBasic = this.alphabetFilterStart([...this.getAllEmployeesArray("employees")]);
+    let employeeBasic = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
 
     if (this.queryRoutValue && this.queryRoutParam) {
-      this.employees = this.employeeBasic.filter(
+      this.employees = employeeBasic.filter(
         (elem) => elem[this.queryRoutParam] === this.queryRoutValue
       );
     } else {
-      this.employees = this.employeeBasic;
+      this.employees = employeeBasic;
     }
-    console.log(this.isAlphabet, "created");
   },
 
   computed: {
     ...mapState(useEmplStore, [
       "getEmptyStore",
-      "getAllEmployeesArray",
-      "delEmployee"
+      "getAllEmployeesArray"
     ])
   },
 
@@ -77,8 +75,8 @@ export default {
       "createEmployee",
       "alphabetToggle",
       "saveInArchive",
-      "alphabetFilterStart",
-      "alphabetFilterEnd",
+      "alphabetSortStart",
+      "alphabetSortEnd",
       "createNextId"
     ]),
 
@@ -98,49 +96,44 @@ export default {
       return this.length;
     },
 
-    filterBasicData(event) {
-      this.employees = this.queryRoutValue === "" && this.queryRoutParam === "" ?
+    onFilterBasicData(event) {
+      this.employees = this.queryRoutValue === null && this.queryRoutParam === null ?
         [...this.getAllEmployeesArray("employees")]
 
         : [...this.getAllEmployeesArray("employees")].filter(
           (elem) => elem[event.param] === event.value
         );
 
-      this.employees = this.alphabetFilterStart(this.employees);
+      this.employees = this.alphabetSortStart(this.employees);
 
       this.message =
         this.employees.length === 0
           ? "Нет сотрудников, соответствующих вашему поиску"
           : "";
-      console.log(this.isAlphabet, "filterBasicData");
     },
 
-    onAlphabet() {
+    sortingAlphabet() {
       this.employees =
         this.isAlphabet === false
-          ? this.alphabetFilterStart([...this.getAllEmployeesArray("employees")])
-          : this.alphabetFilterEnd([...this.getAllEmployeesArray("employees")]);
-
-      console.log(this.isAlphabet, "onAlphabet");
+          ? this.alphabetSortStart([...this.getAllEmployeesArray("employees")])
+          : this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
     },
 
-    alphabet() {
+    onAlphabetSort() {
       this.isAlphabet = this.alphabetToggle();
-      this.onAlphabet();
+      this.sortingAlphabet();
     },
 
     onResetFilter() {
       return this.employees =
         this.isAlphabet === false
-          ? this.alphabetFilterStart([...this.getAllEmployeesArray("employees")])
-          : this.alphabetFilterEnd([...this.getAllEmployeesArray("employees")]);
-      // console.log(this.isAlphabet, "onResetFilter");
+          ? this.alphabetSortStart([...this.getAllEmployeesArray("employees")])
+          : this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
     },
 
     onDeleteInBasic(event) {
-      // console.log(this.isAlphabet, "delete");
       this.saveInArchive(event.id);
-      this.onAlphabet();
+      this.sortingAlphabet();
 
       this.message =
         this.employees.length === 0 ? "Список сотрудников пуст" : "";
@@ -155,7 +148,6 @@ export default {
       });
 
       this.createEmployee();
-      console.log(this.isAlphabet, "onCreateEmployee");
     }
   }
 };

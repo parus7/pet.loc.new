@@ -4,6 +4,7 @@
       Внимание!
       <span>
         <slot></slot>
+        <!--  <slot name="popupText"></slot>-->
       </span>
 
       <div class="popup__wrapper">
