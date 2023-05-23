@@ -71,8 +71,14 @@
         aria-label=" сброс фильтра"
         @click="resetFilter"
       >
+        <template v-if="this.$route.query.value">
+         <IconFilter />
+          </template>
 
-        <IconReset />
+        <template v-else>
+        <IconFilterReset />
+          </template>
+
       </PageColorButton>
     </span>
 
@@ -98,14 +104,15 @@
 import IconAdd from "@/components/icons/IconAdd.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import IconAlphabet from "@/components/icons/IconAlphabet.vue";
-import IconReset from "@/components/icons/IconReset.vue";
+import IconFilterReset from "@/components/icons/IconFilterReset.vue";
+import IconFilter from "@/components/icons/IconFilter.vue";
 
 import PagePopup from "@/components/PagePopup.vue";
 import PageColorButton from "@/components/UI/PageColorButton.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { IconAdd, IconSearch, IconAlphabet, IconReset, PagePopup, PageColorButton },
+  components: { IconAdd, IconSearch, IconAlphabet, IconFilterReset, IconFilter, PagePopup, PageColorButton },
   directives: { maska: vMaska },
 
   created() {

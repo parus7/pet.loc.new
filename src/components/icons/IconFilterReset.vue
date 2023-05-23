@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "IconReset"
+  name: "IconFilterReset"
 };
 </script>
 
