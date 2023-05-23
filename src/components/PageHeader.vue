@@ -1,10 +1,7 @@
 <template>
   <div class="secondary-header">
 
-    <slot>
-      <!--   input  archiveSearch in PageArchive-->
-    </slot>
-    <!--    <slot name="inputArchiveSearchInPageArchive"></slot>-->
+    <slot name="inputArchiveSearch"></slot>
 
     <RouterLink
       :to="{ name: 'basic' }"
@@ -12,12 +9,12 @@
 
       <div
         class="help relative" data-name="на главную страницу">
-        <PageButton
+        <PageColorButton
           area-label="на главную страницу"
           tabindex="0"
         >
           <IconGoTo />
-        </PageButton>
+        </PageColorButton>
       </div>
 
     </RouterLink>
@@ -26,11 +23,11 @@
 </template>
 
 <script>
-import PageButton from "@/components/UI/PageButton.vue";
+import PageColorButton from "@/components/UI/PageColorButton.vue";
 import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { PageButton, IconGoTo }
+  components: { PageColorButton, IconGoTo }
 };
 
 </script>

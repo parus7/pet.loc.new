@@ -3,18 +3,24 @@
     :employees="employees"
   >
 
-    <PageHeader>
-      <input
-        id="search"
-        type="text"
-        class="header__form-search"
-        ref="archiveSearch"
-        aria-label="поле поиска"
-        placeholder="Поиск..."
-        v-model="inputValue"
-        @input="filterArchiveData"
-      />
-    </PageHeader>
+    <template #pageHeader>
+      <PageHeader>
+
+        <template #inputArchiveSearch>
+          <input
+            id="search"
+            type="text"
+            class="header__form-search"
+            ref="archiveSearch"
+            aria-label="поле поиска"
+            placeholder="Поиск..."
+            v-model="inputValue"
+            @input="filterArchiveData"
+          />
+        </template>
+
+      </PageHeader>
+    </template>
 
   </Page>
 </template>

@@ -69,7 +69,11 @@
         :is-open="isOpen"
         @close="isOpen = false"
         @ok="popupDelete"
-      >Вы хотите удалить сотрудника?
+      >
+        <template #popupText>
+          Вы хотите удалить сотрудника?
+        </template>
+
       </PagePopup>
     </template>
 

@@ -1,19 +1,14 @@
 <template>
-  <button
-    type="button"
-    class="button">
 
-    <slot>
-      <!-- icon -->
-    </slot>
-    <!--    <slot name="textInButton"></slot>-->
-
+  <button type="button" class="button">
+    <slot><!-- color - icon --></slot>
   </button>
+
 </template>
 
 <script>
 export default {
-  name: "PageButton"
+  name: "PageColorButton"
 };
 </script>
 

@@ -3,7 +3,9 @@
     <div class="login-field">
       <h1
         :title="title"
-        class="login-field__title">{{ title }}</h1>
+        class="login-field__title">
+        {{ title }}
+      </h1>
 
       <template v-if="!isRegistration">
 
@@ -24,32 +26,30 @@
             />
           </template>
 
-          <PageButton
+          <PageColorButton
             type="submit"
             class="login-form__button">
             {{ buttonTitle }}
-          </PageButton>
+          </PageColorButton>
 
         </form>
       </template>
 
       <template v-else>
-        <!--  form registration-->
+        <slot name="formRegistration"></slot>
       </template>
 
-      <slot>
-        <!-- link recovery /  link registration-->
-      </slot>
+      <slot name="linkRecoveryAndRegistration"></slot>
 
     </div>
   </div>
 </template>
 
 <script>
-import PageButton from "@/components/UI/PageButton.vue";
+import PageColorButton from "@/components/UI/PageColorButton.vue";
 
 export default {
-  components: { PageButton },
+  components: { PageColorButton },
   name: "PageEntrance",
 
   props: {

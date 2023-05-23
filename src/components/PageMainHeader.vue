@@ -2,20 +2,24 @@
   <div class="main-header">
     <form class="main-header__form" @submit.prevent>
       <div class="help relative" data-name="создать&nbsp;карточку">
-        <PageButton
+
+        <PageColorButton
           class="main-header__button-create relative"
           aria-label="создать сотрудника"
           @click="isOpen = true"
         >
           <IconAdd />
-        </PageButton>
+        </PageColorButton>
 
         <PagePopup
           :is-open="isOpen"
           @close="isOpen = false"
           @ok="employeeCreate($event)"
         >
-          Вы хотите создать нового сотрудника?
+          <template #popupText>
+            Вы хотите создать нового сотрудника?
+          </template>
+
         </PagePopup>
       </div>
 
@@ -47,13 +51,13 @@
             @keyup.enter="filterEmployee"
           />
 
-          <PageButton
+          <PageColorButton
             class="main-header__form-btn"
             aria-label="поиск"
             @click="filterEmployee"
           >
             <IconSearch />
-          </PageButton>
+          </PageColorButton>
         </div>
       </fieldset>
     </form>
@@ -62,31 +66,32 @@
       class="help relative"
       data-name="сброс&nbsp;фильтра"
     >
-      <PageButton
+      <PageColorButton
         class="main-header__button-reset"
         aria-label=" сброс фильтра"
         @click="resetFilter"
       >
 
         <IconReset />
-      </PageButton>
+      </PageColorButton>
     </span>
 
     <span
       class="help relative"
       data-name="алфавитная&nbsp;сортировка"
     >
-      <PageButton
+      <PageColorButton
         class="main-header__button-alphabet"
         aria-label="алфавитная сортировка"
         @click="alphabetSort"
       >
 
         <IconAlphabet />
-      </PageButton>
+      </PageColorButton>
     </span>
 
   </div>
+
 </template>
 
 <script>
@@ -96,11 +101,11 @@ import IconAlphabet from "@/components/icons/IconAlphabet.vue";
 import IconReset from "@/components/icons/IconReset.vue";
 
 import PagePopup from "@/components/PagePopup.vue";
-import PageButton from "@/components/UI/PageButton.vue";
+import PageColorButton from "@/components/UI/PageColorButton.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { IconAdd, IconSearch, IconAlphabet, IconReset, PagePopup, PageButton },
+  components: { IconAdd, IconSearch, IconAlphabet, IconReset, PagePopup, PageColorButton },
   directives: { maska: vMaska },
 
   created() {

@@ -6,14 +6,16 @@
     :isMain="isMain"
     @deleteEmployee="onDeleteInBasic($event)"
   >
-    <PageMainHeader
-      class="page_header__main "
-      @employeeCreate="onCreateEmployee($event)"
-      @filterEmployee="onFilterBasicData($event)"
-      @resetFilter="onResetFilter"
-      @alphabetSort="onAlphabetSort"
-    >
-    </PageMainHeader>
+    <template #pageMainHeader>
+      <PageMainHeader
+        class="page_header__main "
+        @employeeCreate="onCreateEmployee($event)"
+        @filterEmployee="onFilterBasicData($event)"
+        @resetFilter="onResetFilter"
+        @alphabetSort="onAlphabetSort"
+      >
+      </PageMainHeader>
+    </template>
 
   </Page>
 </template>

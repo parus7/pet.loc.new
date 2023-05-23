@@ -11,10 +11,10 @@
 
 <script>
 import PageEntrance from "@/components/PageEntrance.vue";
-import PageButton from "@/components/UI/PageButton.vue";
+import PageColorButton from "@/components/UI/PageColorButton.vue";
 
 export default {
-  components: { PageButton, PageEntrance },
+  components: { PageColorButton, PageEntrance },
   name: "passwordRecovery",
 
   data() {

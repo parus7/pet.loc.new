@@ -3,38 +3,37 @@
     <div class="popup__body" @click.stop>
       Внимание!
       <span>
-        <slot></slot>
-        <!--  <slot name="popupText"></slot>-->
+          <slot name="popupText"></slot>
       </span>
 
       <div class="popup__wrapper">
-        <PageButton
+        <PageColorButton
           class="popup__button"
           aria-label="подтверждение действия"
           @click="okPopup"
         >
           &nbsp;Да&nbsp;
-        </PageButton>
+        </PageColorButton>
 
-        <PageButton
+        <PageColorButton
           class="popup__button"
           aria-label="отмены действия"
           @click="closePopup"
         >
           Нет
-        </PageButton>
+        </PageColorButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import PageButton from "./UI/PageButton.vue";
+import PageColorButton from "./UI/PageColorButton.vue";
 
 export default {
   name: "PagePopup",
 
-  components: { PageButton },
+  components: { PageColorButton },
   props: {
     isOpen: {
       type: Boolean,

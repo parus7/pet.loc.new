@@ -168,41 +168,45 @@
 
       <template v-if="!isMain">
         <div class="help relative" data-name="редактировать">
-          <PageButton
+          <PageColorButton
             tabindex="0"
             aria-label="кнопка редактирования данных сотрудника"
             @click="isOpen = true"
           >
             <IconEdit />
-          </PageButton>
+          </PageColorButton>
         </div>
 
         <div class="help relative" data-name="сохранить">
-          <PageButton
+          <PageColorButton
             tabindex="14"
             aria-label="кнопка сохранения данных сотрудника"
             @click="onSaveEmployee(employee['id'])"
           >
             <IconSave />
-          </PageButton>
+          </PageColorButton>
         </div>
 
         <PagePopup
           :is-open="isOpen"
           @ok="popupConfirm"
           @close="isOpen = false"
-        >Вы хотите изменить данные сотрудника?
+        >
+          <template #popupText>
+            Вы хотите изменить данные сотрудника?
+          </template>
+
         </PagePopup>
       </template>
 
       <div class="help relative" data-name="выйти">
-        <PageButton
+        <PageColorButton
           tabindex="isMain ? '15': '1'"
           aria-label="кнопка выхода"
           @click=" this.$router.go(-1)"
         >
           <IconGoTo />
-        </PageButton>
+        </PageColorButton>
       </div>
     </div>
   </form>
@@ -214,14 +218,14 @@ import { mapActions } from "pinia";
 import { vMaska } from "maska";
 
 import PagePopup from "@/components/PagePopup.vue";
-import PageButton from "@/components/UI/PageButton.vue";
+import PageColorButton from "@/components/UI/PageColorButton.vue";
 
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconSave from "@/components/icons/IconSave.vue";
 import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { PagePopup, PageButton, IconEdit, IconSave, IconGoTo },
+  components: { PagePopup, PageColorButton, IconEdit, IconSave, IconGoTo },
   directives: { maska: vMaska },
 
   props: {

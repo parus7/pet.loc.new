@@ -5,59 +5,61 @@
     :isRecovery="isRecovery"
     :buttonTitle="buttonTitle"
   >
+    <template v-slot:formRegistration>
+      <form class="registration-form">
+        <input
+          name="last_name"
+          type="text"
+          aria-label="Фамилия"
+          placeholder="Фамилия"
+        />
 
-    <form class="registration-form">
-      <input
-        name="last_name"
-        type="text"
-        aria-label="Фамилия"
-        placeholder="Фамилия"
-      />
+        <input
+          name="first_name"
+          type="text"
+          aria-label="Имя"
+          placeholder="Имя"
+        />
 
-      <input
-        name="first_name"
-        type="text"
-        aria-label="Имя"
-        placeholder="Имя"
-      />
+        <input
+          name="middle_name"
+          type="text"
+          aria-label="Отчество"
+          placeholder="Отчество"
+        />
 
-      <input
-        name="middle_name"
-        type="text"
-        aria-label="Отчество"
-        placeholder="Отчество"
-      />
+        <input
+          name="login"
+          type="email"
+          aria-label="Логин"
+          placeholder="Логин / E-mail"
+        />
 
-      <input
-        name="login"
-        type="email"
-        aria-label="Логин"
-        placeholder="Логин / E-mail"
-      />
+        <input
+          name="password"
+          type="text"
+          aria-label="Пароль"
+          placeholder="Пароль"
+        />
 
-      <input
-        name="password"
-        type="text"
-        aria-label="Пароль"
-        placeholder="Пароль"
-      />
+        <PageColorButton
+          type="submit"
+          class="registration-form__button">
+          {{ buttonTitle }}
+        </PageColorButton>
 
-      <PageButton
-        type="submit"
-        class="registration-form__button">
-        {{ buttonTitle }}
-      </PageButton>
+      </form>
+    </template>
 
-    </form>
   </PageEntrance>
 </template>
 
 <script>
 import PageEntrance from "@/components/PageEntrance.vue";
-import PageButton from "@/components/UI/PageButton.vue";
+import PageColorButton from "@/components/UI/PageColorButton.vue";
 
 export default {
-  components: { PageButton, PageEntrance },
+  components: { PageColorButton, PageEntrance },
   name: "PageRegistration",
 
   data() {
