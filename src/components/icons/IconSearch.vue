@@ -22,6 +22,6 @@ export default {
 <style scoped>
 .icon-search {
   width: 25px;
-  fill: var(--vt-c-active-9);
+  fill: var(--vt-c-white);
 }
 </style>

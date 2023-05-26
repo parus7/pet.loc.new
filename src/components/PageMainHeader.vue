@@ -1,7 +1,7 @@
 <template>
   <div class="main-header">
     <form class="main-header__form" @submit.prevent>
-      <div class="help relative" data-name="создать&nbsp;карточку">
+      <div class="help relative" data-name="создать&nbsp;карточку ">
 
         <PageColorButton
           class="main-header__button-create relative"
@@ -17,7 +17,7 @@
           @ok="employeeCreate($event)"
         >
           <template #popupText>
-            Вы хотите создать нового сотрудника?
+            Вы хотите создать карточку нового сотрудника?
           </template>
 
         </PagePopup>
@@ -38,30 +38,37 @@
           </option>
         </select>
 
-        <div class="relative main-header__wrapper">
-          <input
-            id="search"
-            type="text"
-            class="main-header__form-search"
-            aria-label="поле поиска"
-            placeholder="Поиск..."
-            v-model="inputValue"
-            v-maska="mask"
-            :data-maska="myMask"
-            @keyup.enter="filterEmployee"
-          />
+        <input
+          id="search"
+          type="text"
+          class="main-header__form-search"
+          aria-label="поле поиска"
+          placeholder="Поле поиска..."
+          v-model="inputValue"
+          v-maska="mask"
+          :data-maska="myMask"
+          @keyup.enter="filterEmployee"
+        />
 
-          <PageColorButton
-            class="main-header__form-btn"
-            aria-label="поиск"
-            @click="filterEmployee"
-          >
-            <IconSearch />
-          </PageColorButton>
-        </div>
       </fieldset>
     </form>
 
+    <template v-if="changeButtonRole()">
+      <span class=" help relative" data-name="поиск">
+
+    <PageColorButton
+      class="main-header__button-search"
+      :disabled="buttonForMissingParams()"
+      aria-label=" поиск"
+      @click="filterEmployee"
+    >
+      <IconSearch />
+    </PageColorButton>
+
+    </span>
+    </template>
+
+    <template v-else>
     <span
       class="help relative"
       data-name="сброс&nbsp;фильтра"
@@ -71,58 +78,70 @@
         aria-label=" сброс фильтра"
         @click="resetFilter"
       >
-        <template v-if="this.$route.query.value">
-         <IconFilter />
-          </template>
-
-        <template v-else>
         <IconFilterReset />
-          </template>
-
       </PageColorButton>
     </span>
+    </template>
 
     <span
       class="help relative"
       data-name="алфавитная&nbsp;сортировка"
     >
+       <template v-if="isAlphabet">
       <PageColorButton
         class="main-header__button-alphabet"
-        aria-label="алфавитная сортировка"
+        aria-label="алфавитная сортировка от А до Я"
         @click="alphabetSort"
       >
+          а&nbsp;-&nbsp;я
+         </PageColorButton>
 
-        <IconAlphabet />
-      </PageColorButton>
-    </span>
+       </template>
+
+        <template v-else>
+      <PageColorButton
+        class="main-header__button-alphabet"
+        aria-label="алфавитная сортировка от Я до А"
+        @click="alphabetSort"
+      >
+        я&nbsp;-&nbsp;а
+         </PageColorButton>
+
+    </template>
+       </span>
 
   </div>
-
 </template>
 
 <script>
 import IconAdd from "@/components/icons/IconAdd.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
-import IconAlphabet from "@/components/icons/IconAlphabet.vue";
 import IconFilterReset from "@/components/icons/IconFilterReset.vue";
-import IconFilter from "@/components/icons/IconFilter.vue";
 
 import PagePopup from "@/components/PagePopup.vue";
 import PageColorButton from "@/components/UI/PageColorButton.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { IconAdd, IconSearch, IconAlphabet, IconFilterReset, IconFilter, PagePopup, PageColorButton },
+  components: { IconAdd, IconSearch, IconFilterReset, PagePopup, PageColorButton },
   directives: { maska: vMaska },
+  name: "PageMainHeader",
 
   created() {
-    this.$route.query.flag ? this.alphabetSort() : "";
+    this.inputValue = this.$route.query.value;
+    this.selected = this.$route.query.param || "";
+
+    this.$route.query.flag === "alphabetYes" ? this.alphabetSort() : "";
+  },
+
+  props: {
+    isAlphabet: Boolean
   },
 
   data() {
     return {
       isOpen: false,
-      selected: "",
+      selected: null,
       inputValue: null,
 
       mask: {
@@ -178,26 +197,31 @@ export default {
           ? this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1)
           : this.mask.unmasked;
 
+      this.$router.push({
+        name: "basic",
+        query: {
+          param: this.category.item,
+          value: this.inputValue
+        }
+      });
+
       this.$emit("filterEmployee", {
         param: this.category.item,
         value: this.inputValue
-      });
-
-      this.$router.push({
-        name: "basic",
-        query: { name: "basic", param: this.category.item, value: this.inputValue }
       });
     },
 
     resetFilter() {
       this.$emit("resetFilter");
 
-      this.$router.push({
-        query: {}
-      });
-
       this.inputValue = "";
       this.selected = "";
+      this.category = "";
+
+      this.$router.push({
+        name: "basic",
+        query: {}
+      });
     },
 
     alphabetSort() {
@@ -207,6 +231,14 @@ export default {
         name: "basic",
         query: { flag: "alphabetYes" }
       });
+    },
+
+    changeButtonRole() {
+      return !(this.$route.query && this.$route.query.value && this.$route.query.param);
+    },
+
+    buttonForMissingParams() {
+      return !(this.inputValue && this.category && this.selected);
     }
   }
 };
@@ -250,19 +282,9 @@ export default {
   padding: 7px 40px 7px 15px;
 }
 
-.main-header__form-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  background-color: inherit;
-  box-shadow: none;
-  padding: 4px;
-}
-
-.main-header__wrapper {
-  display: grid;
-  flex-grow: 1;
+.main-header__button-alphabet {
+  font-size: 0.9rem;
+  letter-spacing: -1.5px;
 }
 
 @media screen and (max-width: 767px) {
@@ -286,6 +308,7 @@ export default {
 
   .main-header__button-create,
   .main-header__button-reset,
+  .main-header__button-search,
   .main-header__button-alphabet {
     flex-grow: 1;
   }

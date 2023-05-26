@@ -9,6 +9,7 @@
     <template #pageMainHeader>
       <PageMainHeader
         class="page_header__main "
+        :isAlphabet="isAlphabet"
         @employeeCreate="onCreateEmployee($event)"
         @filterEmployee="onFilterBasicData($event)"
         @resetFilter="onResetFilter"

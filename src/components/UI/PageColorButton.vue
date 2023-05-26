@@ -1,6 +1,10 @@
 <template>
 
-  <button type="button" class="button">
+  <button
+    type="button"
+    class="button"
+    :disabled="disabled"
+  >
     <slot><!-- color - icon --></slot>
   </button>
 
@@ -8,7 +12,11 @@
 
 <script>
 export default {
-  name: "PageColorButton"
+  name: "PageColorButton",
+
+  props: {
+    disabled: Boolean
+  }
 };
 </script>
 
