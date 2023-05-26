@@ -2,10 +2,10 @@
 
   <button
     type="button"
-    class="button"
+    class="color-button"
     :disabled="disabled"
   >
-    <slot><!-- color - icon --></slot>
+    <slot><!-- icon || text --></slot>
   </button>
 
 </template>
@@ -21,25 +21,25 @@ export default {
 </script>
 
 <style scoped>
-.button {
+.color-button {
   color: var(--vt-c-white);
   text-transform: uppercase;
-  background-color: var(--vt-c-active-5);
+  background-color: var(--vt-c-active-4);
   outline-color: var(--vt-c-outline);
   border: none;
-  box-shadow: 5px 4px 4px 1px var(--vt-c-active-2);
+  box-shadow: 4px 3px 3px 1px var(--vt-c-active-2);
   border-radius: 8px;
   padding: 5px 25px;
 }
 
-.button:hover {
-  opacity: 0.5;
-  transition: opacity 0.5s;
+.color-button:hover {
+  transform: scale(1.03);
+  box-shadow: 5px 5px 5px 2px var(--vt-c-active-2);
 }
 
-.button:active {
-  opacity: 0.9;
-  transition: opacity 0.5s;
-  box-shadow: 3px 3px 4px 1px var(--vt-c-active-9);
+.color-button:active {
+  transform: scale(1);
+  box-shadow: none;
+  opacity: 1;
 }
 </style>

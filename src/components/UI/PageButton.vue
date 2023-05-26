@@ -1,6 +1,6 @@
 <template>
 
-  <button type="button" class="icon-button">
+  <button type="button" class="button">
     <slot><!--  icon --></slot>
   </button>
 
@@ -8,13 +8,13 @@
 
 <script>
 export default {
-  name: "PageIconButton"
+  name: "PageButton"
 };
 </script>
 
 
 <style scoped>
-.icon-button {
+.button {
   width: 37px;
   height: 32px;
   border: none;
@@ -26,12 +26,16 @@ export default {
   padding: 0;
 }
 
-.icon-button:active {
-  box-shadow: 2px 2px 2px 2px var(--vt-c-active-5);
+.button:hover {
+  box-shadow: 2px 2px 1px 1px var(--vt-c-active-2);
+}
+
+.button:active {
+  box-shadow: 1px 0 0 0 var(--vt-c-active-2);
 }
 
 @media screen and (max-width: 767px) {
-  .icon-button {
+  .button {
     width: 48px;
   }
 }

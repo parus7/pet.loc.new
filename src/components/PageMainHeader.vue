@@ -1,10 +1,10 @@
 <template>
   <div class="main-header">
     <form class="main-header__form" @submit.prevent>
-      <div class="help relative" data-name="создать&nbsp;карточку ">
+      <span class="tooltip tooltip-position" data-name="создать&nbsp;карточку ">
 
         <PageColorButton
-          class="main-header__button-create relative"
+          class="main-header__button-create"
           aria-label="создать сотрудника"
           @click="isOpen = true"
         >
@@ -21,7 +21,7 @@
           </template>
 
         </PagePopup>
-      </div>
+      </span>
 
       <fieldset class="main-header__fieldset">
         <select
@@ -54,7 +54,7 @@
     </form>
 
     <template v-if="changeButtonRole()">
-      <span class=" help relative" data-name="поиск">
+      <span class=" tooltip tooltip-position" data-name="поиск">
 
     <PageColorButton
       class="main-header__button-search"
@@ -70,12 +70,12 @@
 
     <template v-else>
     <span
-      class="help relative"
+      class="tooltip tooltip-position"
       data-name="сброс&nbsp;фильтра"
     >
       <PageColorButton
         class="main-header__button-reset"
-        aria-label=" сброс фильтра"
+        aria-label=" сброс&nbsp;фильтра"
         @click="resetFilter"
       >
         <IconFilterReset />
@@ -84,8 +84,8 @@
     </template>
 
     <span
-      class="help relative"
-      data-name="алфавитная&nbsp;сортировка"
+      class="tooltip tooltip-position"
+      data-name="по&nbsp;алфавиту"
     >
        <template v-if="isAlphabet">
       <PageColorButton
@@ -262,7 +262,6 @@ export default {
   display: flex;
   justify-content: space-evenly;
   gap: 3%;
-
   width: 95%;
 }
 
@@ -285,6 +284,14 @@ export default {
 .main-header__button-alphabet {
   font-size: 0.9rem;
   letter-spacing: -1.5px;
+}
+
+.main-header__button-alphabet:hover {
+  transform: scale(1.03);
+}
+
+.tooltip-position:hover::after {
+  left: 0;
 }
 
 @media screen and (max-width: 767px) {
@@ -311,6 +318,10 @@ export default {
   .main-header__button-search,
   .main-header__button-alphabet {
     flex-grow: 1;
+  }
+
+  .main-header__button-alphabet {
+    padding: 15px 25px;
   }
 }
 </style>

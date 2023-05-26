@@ -3,6 +3,7 @@
     class="employee"
     :class="{ secondary: !isMain }"
   >
+    <!-- class "status " for the field  "hide" in employee (employeeData.json)-->
     <img
       class="employee__photo"
       :class="{ status: employee['hide'] }"
@@ -48,22 +49,22 @@
       }"
       tabindex="-1"
     >
-      <div class="help relative" data-name="в&nbsp;профиль">
-        <PageIconButton aria-label="переход в профиль сотрудника">
+      <span class="tooltip tooltip-position" data-name="в&nbsp;профиль">
+        <PageButton aria-label="переход в профиль сотрудника">
           <IconFullInfo />
-        </PageIconButton>
-      </div>
+        </PageButton>
+      </span>
     </RouterLink>
 
     <template v-if="isMain">
-      <div class="help relative" data-name="удалить&nbsp;в&nbsp;архив">
-        <PageIconButton
+      <span class="tooltip tooltip-position" data-name="удалить&nbsp;в&nbsp;архив">
+        <PageButton
           aria-label="удалить сотрудника в архив"
           @click="isOpen = true"
         >
           <IconDelete />
-        </PageIconButton>
-      </div>
+        </PageButton>
+      </span>
 
       <PagePopup
         :is-open="isOpen"
@@ -85,11 +86,11 @@ import IconDelete from "./icons/IconDelete.vue";
 import IconFullInfo from "./icons/IconFullInfo.vue";
 
 import PagePopup from "./PagePopup.vue";
-import PageIconButton from "./UI/PageIconButton.vue";
+import PageButton from "./UI/PageButton.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { IconDelete, IconFullInfo, PagePopup, PageIconButton },
+  components: { IconDelete, IconFullInfo, PagePopup, PageButton },
   directives: { maska: vMaska },
 
   props: {
@@ -170,6 +171,10 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.tooltip-position:hover::after {
+  right: 0;
 }
 
 @media screen and (max-width: 767px) {

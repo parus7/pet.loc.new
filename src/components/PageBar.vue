@@ -1,9 +1,9 @@
 <template>
   <div class="bar relative">
 
-    <div class="help relative" data-name="др сегодня">
-      <PageIconButton
-        aria-label="др сегодня"
+    <span class="tooltip tooltip-position" data-name="напоминание&nbsp;о&nbsp;др&nbsp;сегодня">
+      <PageButton
+        aria-label="напоминание о др сегодня"
         class=" not-active"
         tabindex="-1"
       >
@@ -12,25 +12,25 @@
                     {{ length }}
                   </span>
 
-      </PageIconButton>
-    </div>
+      </PageButton>
+    </span>
 
     <RouterLink :to="{ name: 'archive' }" tabindex="-1">
-      <div class="help relative" data-name="перейти в&nbsp;архив">
-        <PageIconButton aria-label="перейти в архив">
+      <span class="tooltip tooltip-position" data-name="перейти&nbsp;в&nbsp;архив">
+        <PageButton aria-label="перейти в архив">
           <IconArchive />
-        </PageIconButton>
-      </div>
+        </PageButton>
+      </span>
     </RouterLink>
 
     <RouterLink :to="{ name: 'food' }" tabindex="-1">
-      <div class="help relative" data-name="кафе рядом">
-        <PageIconButton
+      <span class="tooltip tooltip-position" data-name="кафе&nbsp;рядом">
+        <PageButton
           aria-label="кафе рядом"
         >
           <IconFood />
-        </PageIconButton>
-      </div>
+        </PageButton>
+      </span>
     </RouterLink>
   </div>
 </template>
@@ -40,10 +40,10 @@ import IconGift from "./icons/IconGift.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
 
-import PageIconButton from "./UI/PageIconButton.vue";
+import PageButton from "./UI/PageButton.vue";
 
 export default {
-  components: { IconGift, IconFood, IconArchive, PageIconButton },
+  components: { IconGift, IconFood, IconArchive, PageButton },
 
   props: {
     length: Number
@@ -55,7 +55,7 @@ export default {
 .bar {
   display: flex;
   flex-direction: column;
-  gap: 12%;
+  gap: 11%;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
@@ -80,6 +80,10 @@ export default {
 .not-active:hover,
 .not-active:active {
   box-shadow: 1px 1px 0 0 var(--vt-c-active-2);
+}
+
+.tooltip-position:hover::after {
+  left: 0;
 }
 
 @media screen and (max-width: 991px) {

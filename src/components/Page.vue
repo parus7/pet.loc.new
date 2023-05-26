@@ -48,7 +48,7 @@ export default {
   grid-template-columns: auto 1fr;
   grid-template-rows: 55px  calc(100vh - 55px);
   gap: 10px;
-  padding: 17px;
+  padding: 30px;
   margin: 0 auto;
 }
 

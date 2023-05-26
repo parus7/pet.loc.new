@@ -8,7 +8,7 @@
       tabindex="-1">
 
       <div
-        class="help relative" data-name="на главную страницу">
+        class="tooltip  tooltip-position" data-name="на&nbsp;главную&nbsp;страницу">
         <PageColorButton
           area-label="на главную страницу"
           tabindex="0"
@@ -43,6 +43,10 @@ export default {
   box-shadow: 2px 2px 0 0 var(--vt-c-active-5);
   border-radius: 8px;
   padding: 10px;
+}
+
+.tooltip-position:hover::after {
+  right: 0;
 }
 
 @media screen and (max-width: 425px) {

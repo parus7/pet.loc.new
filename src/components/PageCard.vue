@@ -1,5 +1,6 @@
 <template>
   <form class="card-form" id="add-employee" @submit.prevent>
+    <!-- class "status " for the field  "hide" in employee (employeeData.json)-->
     <img
       class="card-form__photo"
       :class="{ status: employee['hide'] }"
@@ -167,7 +168,7 @@
     <div class=" card-form__buttons">
 
       <template v-if="!isMain">
-        <div class="help relative" data-name="редактировать">
+        <span class="tooltip tooltip-position" data-name="редактировать">
           <PageColorButton
             tabindex="0"
             aria-label="кнопка редактирования данных сотрудника"
@@ -175,9 +176,9 @@
           >
             <IconEdit />
           </PageColorButton>
-        </div>
+        </span>
 
-        <div class="help relative" data-name="сохранить">
+        <span class="tooltip tooltip-position" data-name="сохранить">
           <PageColorButton
             tabindex="14"
             aria-label="кнопка сохранения данных сотрудника"
@@ -185,7 +186,7 @@
           >
             <IconSave />
           </PageColorButton>
-        </div>
+        </span>
 
         <PagePopup
           :is-open="isOpen"
@@ -199,7 +200,7 @@
         </PagePopup>
       </template>
 
-      <div class="help relative" data-name="выйти">
+      <span class="tooltip tooltip-position" data-name="выйти">
         <PageColorButton
           tabindex="isMain ? '15': '1'"
           aria-label="кнопка выхода"
@@ -207,7 +208,7 @@
         >
           <IconGoTo />
         </PageColorButton>
-      </div>
+      </span>
     </div>
   </form>
 </template>
@@ -355,6 +356,10 @@ export default {
   gap: 40px;
   max-width: 500px;
   padding: 0 15px;
+}
+
+.tooltip-position:hover::after {
+  left: 0;
 }
 
 @media (max-width: 767px) {
