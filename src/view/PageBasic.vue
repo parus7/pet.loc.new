@@ -58,7 +58,7 @@ export default {
 
     if (this.queryRoutValue && this.queryRoutParam) {
       this.employees = employeeBasic.filter(
-        (elem) => elem[this.queryRoutParam] === this.queryRoutValue
+        (elem) => elem[this.queryRoutParam].toLowerCase() === this.queryRoutValue
       );
     } else {
       this.employees = employeeBasic;
@@ -104,7 +104,7 @@ export default {
         [...this.getAllEmployeesArray("employees")]
 
         : [...this.getAllEmployeesArray("employees")].filter(
-          (elem) => elem[event.param] === event.value
+          (elem) => elem[event.param].toLowerCase() === event.value
         );
 
       this.employees = this.alphabetSortStart(this.employees);

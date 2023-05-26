@@ -24,10 +24,10 @@ export const useEmplStore = defineStore("EmplStore", {
     setGender(data) {
       data.forEach((elem) =>
         elem.gender === "m"
-          ? (elem.gender = "Мужской")
+          ? (elem.gender = "мужской")
           : elem.gender === "f"
-          ? (elem.gender = "Женский")
-          : (elem.gender = "Неизвестный")
+          ? (elem.gender = "женский")
+          : (elem.gender = "неизвестный")
       );
     },
 

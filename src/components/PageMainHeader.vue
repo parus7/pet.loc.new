@@ -194,7 +194,7 @@ export default {
     filterEmployee() {
       this.inputValue =
         this.myMask === ""
-          ? this.inputValue.slice(0, 1).toUpperCase() + this.inputValue.slice(1)
+          ? this.inputValue.toLowerCase()
           : this.mask.unmasked;
 
       this.$router.push({

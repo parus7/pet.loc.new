@@ -63,9 +63,9 @@
           v-model="employee['gender']"
         >
           <option selected disabled>Выберите вариант</option>
-          <option>Мужской</option>
-          <option>Женский</option>
-          <option>Неизвестный</option>
+          <option>мужской</option>
+          <option>женский</option>
+          <option>неизвестный</option>
         </select>
       </label>
 
@@ -309,13 +309,6 @@ export default {
   padding: 30px;
   margin: 30px auto;
 }
-
-/*.card-form__full-name,*/
-/*.card-form__personal,*/
-/*.card-form__contacts,*/
-/*.card-form__address {*/
-/*  border: none;*/
-/*}*/
 
 .card-form__label {
   display: grid;
