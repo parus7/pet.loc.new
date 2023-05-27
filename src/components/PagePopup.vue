@@ -86,6 +86,9 @@ export default {
 
 .popup__button {
   line-height: 1.9;
+
+  /*for  Safari */
+  font-size: 0.86rem;
 }
 
 @media (max-width: 425px) {

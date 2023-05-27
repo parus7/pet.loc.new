@@ -303,14 +303,23 @@ export default {
     flex-direction: column;
     width: 100%;
   }
+
+  .tooltip-position:hover::after {
+    bottom: 95px;
+  }
 }
 
 @media screen and (max-width: 560px) {
   .main-header,
   .main-header__form {
     flex-direction: column;
-    gap: 10px;
+    gap: 18px;
     width: 100%;
+  }
+
+  .main-header__form-select,
+  .main-header__form-search {
+    padding: 11px 40px 11px 15px;
   }
 
   .main-header__button-create,
@@ -321,7 +330,11 @@ export default {
   }
 
   .main-header__button-alphabet {
-    padding: 15px 25px;
+    padding: 11px 25px;
+  }
+
+  .tooltip-position:hover::after {
+    bottom: 40px;
   }
 }
 </style>

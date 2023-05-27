@@ -84,7 +84,7 @@ export default {
 
 @media screen and (max-width: 560px) {
   .page {
-    grid-template-rows: 55px 22vh calc(78vh - 55px);
+    grid-template-rows: 55px 26vh calc(74vh - 55px);
   }
 }
 </style>

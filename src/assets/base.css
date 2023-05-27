@@ -89,11 +89,19 @@ fieldset {
 
 .tooltip:hover::after {
     position: absolute;
-    bottom: 43px;
+    bottom: 42px;
 
     content: attr(data-name);
-    color: var(--vt-c-grey-main-font);
+    background: var(--vt-c-active-2);
+    border-radius: 6px;
+
+    /* tooltip in Firefox && Safari*/
+    color: var(--vt-c-black-basic-font);
+
     font-size: 0.7rem;
+    text-transform: lowercase;
+    opacity: 0.5;
+    padding: 5px;
 }
 
 /*class "status " for the field  "hide" in employee (employeeData.json)*/
