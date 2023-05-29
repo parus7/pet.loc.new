@@ -10,6 +10,8 @@
       <PageMainHeader
         class="page_header__main "
         :isAlphabet="isAlphabet"
+        :filteredEmployees="filteredEmployees"
+        :message="message"
         @employeeCreate="onCreateEmployee($event)"
         @filterEmployee="onFilterBasicData($event)"
         @resetFilter="onResetFilter"
@@ -36,10 +38,10 @@ export default {
     return {
       employees: {},
       message: "",
-      length: null,
+      lengthBirthday: null,
       isMain: true,
       isAlphabet: false,
-      filteredEmployees: {},
+      filteredEmployees: [],
 
       queryRoutValue: null,
       queryRoutParam: null
@@ -95,8 +97,9 @@ export default {
 
     getTodayBirthday() {
       const day = this.getTodayDate();
-      this.length = [...this.employees].filter((elem) => elem["birthday"] === day).length;
-      return this.length;
+      this.lengthBirthday = [...this.employees].filter((elem) => elem["birthday"] === day).length;
+
+      return this.lengthBirthday;
     },
 
     onFilterBasicData(event) {
@@ -104,22 +107,37 @@ export default {
         [...this.getAllEmployeesArray("employees")]
 
         : [...this.getAllEmployeesArray("employees")].filter(
-          (elem) => elem[event.param].toLowerCase() === event.value
+          (elem) => elem[event.param] === event.value
         );
 
-      this.employees = this.alphabetSortStart(this.employees);
+      this.employees = this.isAlphabet === false
+        ? this.alphabetSortStart(this.employees)
+        : this.alphabetSortEnd(this.employees);
+
+      this.filteredEmployees = this.employees;
 
       this.message =
-        this.employees.length === 0
+        this.employees.length === 0 || this.filteredEmployees.length === 0
           ? "Нет сотрудников, соответствующих вашему поиску"
           : "";
     },
 
     sortingAlphabet() {
-      this.employees =
-        this.isAlphabet === false
-          ? this.alphabetSortStart([...this.getAllEmployeesArray("employees")])
-          : this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
+      if (this.isAlphabet === false && this.filteredEmployees.length === 0) {
+        this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
+
+      } else if (this.isAlphabet === true && this.filteredEmployees.length === 0) {
+        this.employees = this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
+
+      } else if (this.isAlphabet === false && this.filteredEmployees.length > 0) {
+        this.employees = this.alphabetSortStart(this.filteredEmployees);
+
+      } else if (this.isAlphabet === true && this.filteredEmployees.length > 0) {
+        this.employees = this.alphabetSortEnd(this.filteredEmployees);
+      } else {
+        this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
+      }
+      return this.employees;
     },
 
     onAlphabetSort() {
@@ -128,14 +146,17 @@ export default {
     },
 
     onResetFilter() {
-      return this.employees =
-        this.isAlphabet === false
-          ? this.alphabetSortStart([...this.getAllEmployeesArray("employees")])
-          : this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
+      this.filteredEmployees = [];
+      this.message = "";
+
+      this.employees = this.isAlphabet === false
+        ? this.alphabetSortStart([...this.getAllEmployeesArray("employees")])
+        : this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
     },
 
     onDeleteInBasic(event) {
       this.saveInArchive(event.id);
+      // this.onFilterBasicData(event);
       this.sortingAlphabet();
 
       this.message =

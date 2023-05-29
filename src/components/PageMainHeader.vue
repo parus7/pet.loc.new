@@ -58,7 +58,7 @@
 
     <PageColorButton
       class="main-header__button-search"
-      :disabled="buttonForMissingParams()"
+      :disabled=" blockWithMissingParams()"
       aria-label=" поиск"
       @click="filterEmployee"
     >
@@ -91,6 +91,7 @@
       <PageColorButton
         class="main-header__button-alphabet"
         aria-label="алфавитная сортировка от А до Я"
+        :disabled="blockAlphabetButton()"
         @click="alphabetSort"
       >
           а&nbsp;-&nbsp;я
@@ -102,6 +103,7 @@
       <PageColorButton
         class="main-header__button-alphabet"
         aria-label="алфавитная сортировка от Я до А"
+        :disabled="blockAlphabetButton()"
         @click="alphabetSort"
       >
         я&nbsp;-&nbsp;а
@@ -130,12 +132,12 @@ export default {
   created() {
     this.inputValue = this.$route.query.value;
     this.selected = this.$route.query.param || "";
-
-    this.$route.query.flag === "alphabetYes" ? this.alphabetSort() : "";
   },
 
   props: {
-    isAlphabet: Boolean
+    isAlphabet: Boolean,
+    filteredEmployees: Object,
+    message: String
   },
 
   data() {
@@ -226,18 +228,21 @@ export default {
 
     alphabetSort() {
       this.$emit("alphabetSort");
-
-      this.$router.push({
-        name: "basic",
-        query: { flag: "alphabetYes" }
-      });
     },
 
     changeButtonRole() {
-      return !(this.$route.query && this.$route.query.value && this.$route.query.param);
+      return !(this.$route.query
+        && this.$route.query.value
+        && this.$route.query.param
+      );
     },
 
-    buttonForMissingParams() {
+    blockAlphabetButton() {
+      return this.message === "Нет сотрудников, соответствующих вашему поиску"
+        || this.message === "Список сотрудников пуст";
+    },
+
+    blockWithMissingParams() {
       return !(this.inputValue && this.category && this.selected);
     }
   }
