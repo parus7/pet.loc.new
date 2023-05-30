@@ -1,6 +1,7 @@
 <template>
   <Page
     :employees="employees"
+    :message="message"
   >
 
     <template #pageHeader>
@@ -39,47 +40,46 @@ export default {
   data() {
     return {
       employees: [],
-      inputValue: ""
+      inputValue: "",
+      message: ""
     };
   },
 
   created() {
     this.inputValue = this.$route.query.value;
 
-    let employeeArchive;
-
-    if (this.getEmptyStore("archive")) {
-      this.setMapEmployees(employeesArchive, "archive");
-    }
-
-    employeeArchive = this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
-
-    if (this.inputValue) {
-      this.employees = employeeArchive.filter((elem) => {
-        return elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase());
-      });
-
-    } else {
-      this.employees = employeeArchive;
-    }
+    this.getEmptyStore("archive")
+      ? this.setMapEmployees(employeesArchive, "archive")
+      : [];
   },
 
   mounted() {
     this.$refs.archiveSearch.focus();
+
+    this.filterArchiveData();
+
+    this.message =
+      this.employees.length !== 0 && this.inputValue !== ""
+        ? "Нет сотрудников, соответствующих вашему поиску"
+
+        : this.employees.length === 0
+          ? "Архивный список сотрудников пуст"
+          : "";
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesMap", "getAllEmployeesArray"])
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesArray"])
   },
 
   methods: {
     ...mapActions(useEmplStore, ["setMapEmployees", "alphabetSortStart"]),
 
     filterArchiveData() {
-      this.employees = this.inputValue === "" ?
-        [...this.getAllEmployeesArray("archive")]
-        : [...this.getAllEmployeesArray("archive")].filter((elem) =>
-          elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase()));
+      this.employees = this.inputValue ?
+        this.alphabetSortStart([...this.getAllEmployeesArray("archive")].filter((elem) =>
+          elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase())))
+
+        : this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
 
       this.$router.push({ name: "archive", query: { value: this.inputValue } });
     }

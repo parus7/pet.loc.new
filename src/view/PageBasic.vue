@@ -2,7 +2,7 @@
   <Page
     :employees="employees"
     :message="message"
-    :length="getTodayBirthday()"
+    :length="getTodayBirthday"
     :isMain="isMain"
     @deleteEmployee="onDeleteInBasic($event)"
   >
@@ -71,7 +71,17 @@ export default {
     ...mapState(useEmplStore, [
       "getEmptyStore",
       "getAllEmployeesArray"
-    ])
+    ]),
+
+    getTodayBirthday() {
+      let day = String(new Date().getDate());
+      day.length === 1 ? (day = "0" + day) : day;
+
+      let month = String(new Date().getMonth() + 1);
+      month.length === 1 ? (month = "0" + month) : month;
+
+      return ([...this.employees].filter((elem) => elem["birthday"] === day + month).length);
+    }
   },
 
   methods: {
@@ -84,23 +94,6 @@ export default {
       "alphabetSortEnd",
       "createNextId"
     ]),
-
-    getTodayDate() {
-      let day = String(new Date().getDate());
-      day.length === 1 ? (day = "0" + day) : day;
-
-      let month = String(new Date().getMonth() + 1);
-      month.length === 1 ? (month = "0" + month) : month;
-
-      return day + month;
-    },
-
-    getTodayBirthday() {
-      const day = this.getTodayDate();
-      this.lengthBirthday = [...this.employees].filter((elem) => elem["birthday"] === day).length;
-
-      return this.lengthBirthday;
-    },
 
     onFilterBasicData(event) {
       this.employees = this.queryRoutValue === null && this.queryRoutParam === null ?
@@ -124,20 +117,20 @@ export default {
 
     sortingAlphabet() {
       if (this.isAlphabet === false && this.filteredEmployees.length === 0) {
-        this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
+        return this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
 
       } else if (this.isAlphabet === true && this.filteredEmployees.length === 0) {
-        this.employees = this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
+        return this.employees = this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
 
       } else if (this.isAlphabet === false && this.filteredEmployees.length > 0) {
-        this.employees = this.alphabetSortStart(this.filteredEmployees);
+        return this.employees = this.alphabetSortStart(this.filteredEmployees);
 
       } else if (this.isAlphabet === true && this.filteredEmployees.length > 0) {
-        this.employees = this.alphabetSortEnd(this.filteredEmployees);
+        return this.employees = this.alphabetSortEnd(this.filteredEmployees);
+
       } else {
-        this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
+        return this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
       }
-      return this.employees;
     },
 
     onAlphabetSort() {
@@ -156,7 +149,6 @@ export default {
 
     onDeleteInBasic(event) {
       this.saveInArchive(event.id);
-      // this.onFilterBasicData(event);
       this.sortingAlphabet();
 
       this.message =

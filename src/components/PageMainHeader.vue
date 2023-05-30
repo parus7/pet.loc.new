@@ -44,7 +44,7 @@
           class="main-header__form-search"
           aria-label="поле поиска"
           placeholder="Поле поиска..."
-          v-model="inputValue"
+          v-model.lazy="inputValue"
           v-maska="mask"
           :data-maska="myMask"
           @keyup.enter="filterEmployee"
@@ -265,7 +265,7 @@ export default {
 
 .main-header__form {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 3%;
   width: 95%;
 }

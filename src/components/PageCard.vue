@@ -18,7 +18,7 @@
           aria-label="фамилия сотрудника"
           tabindex="2"
           ref="lastName"
-          v-model="employee['last_name']"
+          v-model.trim="employee['last_name']"
           required
         />
       </label>
@@ -29,7 +29,7 @@
           type="text"
           aria-label="имя сотрудника"
           tabindex="3"
-          v-model="employee['first_name']"
+          v-model.trim="employee['first_name']"
         />
       </label>
 
@@ -39,7 +39,7 @@
           type="text"
           aria-label="отчество сотрудника"
           tabindex="4"
-          v-model="employee['middle_name']"
+          v-model.trim="employee['middle_name']"
         />
       </label>
     </fieldset>
@@ -51,7 +51,7 @@
           type="text"
           aria-label="id сотрудника"
           tabindex="-1"
-          v-model="employee['id']"
+          v-model.trim="employee['id']"
           disabled
         />
       </label>
@@ -61,7 +61,7 @@
           id="gender"
           aria-label="пол сотрудника"
           tabindex="5"
-          v-model="employee['gender']"
+          v-model.trim="employee['gender']"
         >
           <option selected disabled>Выберите вариант</option>
           <option>мужской</option>
@@ -76,7 +76,7 @@
           type="text"
           aria-label="день рождения сотрудника"
           tabindex="6"
-          v-model="employee['birthday']"
+          v-model.trim="employee['birthday']"
           v-maska="maskaBirthday"
           data-maska="##.##"
         />
@@ -90,7 +90,7 @@
           type="text"
           aria-label="внутренний номер сотрудника"
           tabindex="7"
-          v-model="employee['telephone']"
+          v-model.trim="employee['telephone']"
           v-maska="maskaTelephone"
           data-maska="##-##"
         />
@@ -102,7 +102,7 @@
           type="text"
           aria-label="мобильный номер сотрудника"
           tabindex="8"
-          v-model="employee['mobile']"
+          v-model.trim="employee['mobile']"
           v-maska="maskaMobile"
           data-maska="### ###-##-##"
         />
@@ -114,7 +114,7 @@
           type="email"
           aria-label="email сотрудника"
           tabindex="9"
-          v-model="employee['email']"
+          v-model.trim="employee['email']"
         />
       </label>
     </fieldset>
@@ -126,7 +126,7 @@
           type="text"
           aria-label="город проживания сотрудника"
           tabindex="10"
-          v-model="employee['city']"
+          v-model.trim="employee['city']"
         />
       </label>
 
@@ -136,7 +136,7 @@
           type="text"
           aria-label="компания, в которой работает сотрудник"
           tabindex="11"
-          v-model="employee['company']"
+          v-model.trim="employee['company']"
         />
       </label>
 
@@ -146,7 +146,7 @@
           type="text"
           aria-label="департамент, в котором работает сотрудник"
           tabindex="12"
-          v-model="employee['department']"
+          v-model.trim="employee['department']"
         />
       </label>
 
@@ -156,7 +156,7 @@
           type="text"
           aria-label="должность сотрудника"
           tabindex="13"
-          v-model="employee['title']"
+          v-model.trim="employee['title']"
         />
       </label>
     </fieldset>
