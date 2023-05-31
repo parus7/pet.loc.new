@@ -6,6 +6,7 @@
         <PageColorButton
           class="main-header__button-create"
           aria-label="создать сотрудника"
+          tabindex="1"
           @click="isOpen = true"
         >
           <IconAdd />
@@ -28,10 +29,11 @@
           id="filter"
           class="main-header__form-select"
           aria-label="поле выбора категории для поиска"
+          tabindex="2"
+          ref="basicSearch"
           v-model="selected"
           @change="onChangeSelect"
         >
-
           <option value="" disabled>Выбор категории...</option>
           <option v-for="category in categories" :key="category.text">
             {{ category.text }}
@@ -44,6 +46,7 @@
           class="main-header__form-search"
           aria-label="поле поиска"
           placeholder="Поле поиска..."
+          tabindex="3"
           v-model.lazy="inputValue"
           v-maska="mask"
           :data-maska="myMask"
@@ -54,7 +57,7 @@
     </form>
 
     <template v-if="changeButtonRole()">
-      <span class=" tooltip tooltip-position" data-name="поиск">
+      <span class=" tooltip tooltip-position" data-name="поиск" tabindex="4">
 
     <PageColorButton
       class="main-header__button-search"
@@ -91,6 +94,7 @@
       <PageColorButton
         class="main-header__button-alphabet"
         aria-label="алфавитная сортировка от А до Я"
+        tabindex="5"
         :disabled="blockAlphabetButton()"
         @click="alphabetSort"
       >
@@ -132,6 +136,10 @@ export default {
   created() {
     this.inputValue = this.$route.query.value;
     this.selected = this.$route.query.param || "";
+  },
+
+  mounted() {
+    this.$refs.basicSearch.focus();
   },
 
   props: {

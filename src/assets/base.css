@@ -85,6 +85,7 @@ fieldset {
 .tooltip {
     position: relative;
     display: flex;
+    outline-color: var(--vt-c-outline);
 }
 
 .tooltip:hover::after {
