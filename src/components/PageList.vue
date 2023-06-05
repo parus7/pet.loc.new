@@ -6,10 +6,11 @@
           v-for="employee in employees"
           :key="employee.id"
           :employee="{ ...employee }"
-          :message="message"
           :isMain="isMain"
           @deleteEmployee="$emit('deleteEmployee',  $event )"
         />
+        <!--        :message="message"-->
+
       </transition-group>
     </template>
 

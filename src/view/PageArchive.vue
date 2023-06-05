@@ -51,10 +51,6 @@ export default {
     this.getEmptyStore("archive")
       ? this.setMapEmployees(employeesArchive, "archive")
       : [];
-  },
-
-  mounted() {
-    this.$refs.archiveSearch.focus();
 
     this.filterArchiveData();
 
@@ -67,6 +63,10 @@ export default {
           : "";
   },
 
+  mounted() {
+    this.$refs.archiveSearch.focus();
+  },
+
   computed: {
     ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesArray"])
   },
@@ -75,11 +75,13 @@ export default {
     ...mapActions(useEmplStore, ["setMapEmployees", "alphabetSortStart"]),
 
     filterArchiveData() {
-      this.employees = this.inputValue ?
-        this.alphabetSortStart([...this.getAllEmployeesArray("archive")].filter((elem) =>
-          elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase())))
+      let archiveEmployees =  this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
 
-        : this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
+      this.employees = this.inputValue ?
+        archiveEmployees.filter((elem) =>
+          elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase()))
+
+        : archiveEmployees;
 
       this.$router.push({ name: "archive", query: { value: this.inputValue } });
     }

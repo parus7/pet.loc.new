@@ -2,7 +2,7 @@
   <Page
     :employees="employees"
     :message="message"
-    :length="getTodayBirthday"
+    :amountBirthdays="getTodayBirthday"
     :isMain="isMain"
     @deleteEmployee="onDeleteInBasic($event)"
   >
@@ -10,13 +10,14 @@
       <PageMainHeader
         class="page_header__main "
         :isAlphabet="isAlphabet"
-        :filteredEmployees="filteredEmployees"
+        :employeesLength="employees.length"
         :message="message"
         @employeeCreate="onCreateEmployee($event)"
         @filterEmployee="onFilterBasicData($event)"
         @resetFilter="onResetFilter"
         @alphabetSort="onAlphabetSort"
       >
+
       </PageMainHeader>
     </template>
 
@@ -38,33 +39,33 @@ export default {
     return {
       employees: {},
       message: "",
-      lengthBirthday: null,
+      amountBirthdays: null,
       isMain: true,
       isAlphabet: false,
       filteredEmployees: [],
+      employeesLength: null,
 
       queryRoutValue: null,
-      queryRoutParam: null
+      queryRoutCategory: null
     };
   },
 
   created() {
     this.queryRoutValue = this.$route.query.value;
-    this.queryRoutParam = this.$route.query.param;
+    this.queryRoutCategory = this.$route.query.category;
 
     if (this.getEmptyStore("employees")) {
-      this.setMapEmployees(employeesData, "employees").values();
+      this.setMapEmployees(employeesData, "employees");
     }
 
     let employeeBasic = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
 
-    if (this.queryRoutValue && this.queryRoutParam) {
-      this.employees = employeeBasic.filter(
-        (elem) => elem[this.queryRoutParam].toLowerCase() === this.queryRoutValue
-      );
-    } else {
-      this.employees = employeeBasic;
-    }
+    this.employees = this.queryRoutValue && this.queryRoutCategory
+      ? employeeBasic.filter(
+        (elem) => elem[this.queryRoutCategory].toLowerCase() === this.queryRoutValue)
+      : this.employees = employeeBasic;
+
+    this.message = this.employees.length === 0 ? "Список сотрудников пуст" : "";
   },
 
   computed: {
@@ -80,7 +81,8 @@ export default {
       let month = String(new Date().getMonth() + 1);
       month.length === 1 ? (month = "0" + month) : month;
 
-      return ([...this.employees].filter((elem) => elem["birthday"] === day + month).length);
+      return this.amountBirthdays = ([...this.employees].filter(
+        (elem) => elem["birthday"] === day + month).length);
     }
   },
 
@@ -96,16 +98,10 @@ export default {
     ]),
 
     onFilterBasicData(event) {
-      this.employees = this.queryRoutValue === null && this.queryRoutParam === null ?
-        [...this.getAllEmployeesArray("employees")]
-
-        : [...this.getAllEmployeesArray("employees")].filter(
-          (elem) => elem[event.param] === event.value
-        );
-
-      this.employees = this.isAlphabet === false
-        ? this.alphabetSortStart(this.employees)
-        : this.alphabetSortEnd(this.employees);
+      this.employees = event.category && event.value
+        ? this.employees.filter(
+          (elem) => elem[event.category].toLowerCase() === event.value)
+        : this.employees;
 
       this.filteredEmployees = this.employees;
 
@@ -117,19 +113,16 @@ export default {
 
     sortingAlphabet() {
       if (this.isAlphabet === false && this.filteredEmployees.length === 0) {
-        return this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
+        return this.employees = this.alphabetSortStart(this.employees);
 
       } else if (this.isAlphabet === true && this.filteredEmployees.length === 0) {
-        return this.employees = this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
+        return this.employees = this.alphabetSortEnd(this.employees);
 
       } else if (this.isAlphabet === false && this.filteredEmployees.length > 0) {
         return this.employees = this.alphabetSortStart(this.filteredEmployees);
 
       } else if (this.isAlphabet === true && this.filteredEmployees.length > 0) {
         return this.employees = this.alphabetSortEnd(this.filteredEmployees);
-
-      } else {
-        return this.employees = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
       }
     },
 

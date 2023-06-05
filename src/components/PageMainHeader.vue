@@ -32,7 +32,7 @@
           tabindex="2"
           ref="basicSearch"
           v-model="selected"
-          @change="onChangeSelect"
+          @change="onMask"
         >
           <option value="" disabled>Выбор категории...</option>
           <option v-for="category in categories" :key="category.text">
@@ -133,26 +133,20 @@ export default {
   directives: { maska: vMaska },
   name: "PageMainHeader",
 
-  created() {
-    this.inputValue = this.$route.query.value;
-    this.selected = this.$route.query.param || "";
-  },
-
   mounted() {
     this.$refs.basicSearch.focus();
   },
 
   props: {
     isAlphabet: Boolean,
-    filteredEmployees: Object,
+    employeesLength: Number,
     message: String
   },
 
   data() {
     return {
       isOpen: false,
-      selected: null,
-      inputValue: null,
+      myMask: "",
 
       mask: {
         masked: "",
@@ -160,8 +154,9 @@ export default {
         completed: false
       },
 
+      selected: "",
       category: {},
-      myMask: "",
+      inputValue: "",
 
       categories: [
         { text: "id", item: "id" },
@@ -186,10 +181,14 @@ export default {
       this.$emit("employeeCreate");
     },
 
-    onChangeSelect() {
-      this.category = this.categories.find(
+    transformCategory() {
+      return this.categories.find(
         (elem) => elem.text === this.selected
       );
+    },
+
+    onMask() {
+      this.category = this.transformCategory();
 
       this.myMask =
         this.category.item === "birthday"
@@ -207,17 +206,18 @@ export default {
           ? this.inputValue.toLowerCase()
           : this.mask.unmasked;
 
+      this.$emit("filterEmployee", {
+        category: this.category.item,
+        value: this.inputValue
+      });
+
       this.$router.push({
         name: "basic",
         query: {
-          param: this.category.item,
+          selected: this.selected,
+          category: this.category.item,
           value: this.inputValue
         }
-      });
-
-      this.$emit("filterEmployee", {
-        param: this.category.item,
-        value: this.inputValue
       });
     },
 
@@ -225,8 +225,8 @@ export default {
       this.$emit("resetFilter");
 
       this.inputValue = "";
+      this.category.item = "";
       this.selected = "";
-      this.category = "";
 
       this.$router.push({
         name: "basic",
@@ -241,17 +241,18 @@ export default {
     changeButtonRole() {
       return !(this.$route.query
         && this.$route.query.value
-        && this.$route.query.param
+        && this.$route.query.category
       );
     },
 
     blockAlphabetButton() {
-      return this.message === "Нет сотрудников, соответствующих вашему поиску"
-        || this.message === "Список сотрудников пуст";
+      return this.employeesLength === 0;
     },
 
     blockWithMissingParams() {
-      return !(this.inputValue && this.category && this.selected);
+      return !(this.inputValue
+        && this.category.item
+        && this.selected);
     }
   }
 };
@@ -310,6 +311,7 @@ export default {
 @media screen and (max-width: 767px) {
   .main-header {
     justify-content: space-evenly;
+    flex-wrap: nowrap;
   }
 
   .main-header__fieldset {

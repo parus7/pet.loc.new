@@ -54,7 +54,7 @@ export default {
 }
 
 .login-field__prompt:hover {
-  color: var(--vt-c-active-5);
+  color: var(--vt-c-active-4);
   font-size: 0.97rem;
 }
 

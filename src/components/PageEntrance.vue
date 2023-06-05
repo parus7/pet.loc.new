@@ -78,7 +78,7 @@ export default {
   height: 37vh;
   color: var(--vt-c-grey-font);
   background-color: var(--vt-c-active-2);
-  box-shadow: 2px 2px 0 0 var(--vt-c-active-5);
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
   border-radius: 8px;
   padding: 50px 30px;
 }

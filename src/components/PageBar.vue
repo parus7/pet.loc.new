@@ -8,8 +8,8 @@
         tabindex="-1"
       >
         <IconGift />
-        <span v-if="length >= 1" class="bar__alert">
-                    {{ length }}
+        <span v-if="amountBirthdays >= 1" class="bar__alert">
+                    {{ amountBirthdays }}
                   </span>
 
       </PageButton>
@@ -46,7 +46,7 @@ export default {
   components: { IconGift, IconFood, IconArchive, PageButton },
 
   props: {
-    length: Number
+    amountBirthdays: Number
   }
 };
 </script>

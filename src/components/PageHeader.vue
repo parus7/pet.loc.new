@@ -40,7 +40,7 @@ export default {
   grid-column: 1/-1;
 
   background-color: var(--vt-c-archive-2);
-  box-shadow: 2px 2px 0 0 var(--vt-c-active-5);
+  box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
   border-radius: 8px;
   padding: 10px;
 }

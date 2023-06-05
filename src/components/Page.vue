@@ -6,7 +6,7 @@
 
       <PageBar
         class="page_bar"
-        :length="length"
+        :amountBirthdays="amountBirthdays"
       />
     </template>
 
@@ -36,7 +36,7 @@ export default {
   props: {
     employees: Object,
     message: String,
-    length: Number,
+    amountBirthdays: Number,
     isMain: Boolean
   }
 };
