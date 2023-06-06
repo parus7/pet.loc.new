@@ -225,7 +225,6 @@ export default {
       this.$emit("resetFilter");
 
       this.inputValue = "";
-      this.category.item = "";
       this.selected = "";
 
       this.$router.push({
