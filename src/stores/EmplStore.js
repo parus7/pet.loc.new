@@ -45,8 +45,14 @@ export const useEmplStore = defineStore("EmplStore", {
 
       this[key] = new Map();
       data.forEach((elem) => this[key].set(elem.id, elem));
-
       return this[key];
+    },
+
+    setMessage(key) {
+      return (this.message =
+        this.getAllEmployeesMap(key).size === 0
+          ? "Список сотрудников пуст"
+          : "Нет сотрудников, соответствующих вашему поиску");
     },
 
     saveInArchive(id) {
@@ -56,6 +62,7 @@ export const useEmplStore = defineStore("EmplStore", {
 
       let delEmployee = this.getEmployeeById("employees", id);
       this.archive.set(id, delEmployee);
+
       this.delEmployee(id);
     },
 

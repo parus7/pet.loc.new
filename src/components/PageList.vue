@@ -9,7 +9,6 @@
           :isMain="isMain"
           @deleteEmployee="$emit('deleteEmployee',  $event )"
         />
-        <!--        :message="message"-->
 
       </transition-group>
     </template>

@@ -48,19 +48,16 @@ export default {
   created() {
     this.inputValue = this.$route.query.value;
 
+    // this.getEmptyStore("archive")
+    //   ? this.setMapEmployees(employeesArchive, "archive")
+    //   : this.message = "Архивный список сотрудников пуст";
+    //
     this.getEmptyStore("archive")
       ? this.setMapEmployees(employeesArchive, "archive")
-      : [];
+      : this.message = this.setMessage("archive");
 
     this.filterArchiveData();
 
-    this.message =
-      this.employees.length !== 0 && this.inputValue !== ""
-        ? "Нет сотрудников, соответствующих вашему поиску"
-
-        : this.employees.length === 0
-          ? "Архивный список сотрудников пуст"
-          : "";
   },
 
   mounted() {
@@ -72,18 +69,18 @@ export default {
   },
 
   methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees", "alphabetSortStart"]),
+    ...mapActions(useEmplStore, ["setMapEmployees", "alphabetSortStart", "setMessage"]),
 
     filterArchiveData() {
-      let archiveEmployees =  this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
+      let archiveEmployees = this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
 
       this.employees = this.inputValue ?
         archiveEmployees.filter((elem) =>
           elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase()))
-
         : archiveEmployees;
 
       this.$router.push({ name: "archive", query: { value: this.inputValue } });
+      this.message = this.setMessage("archive");
     }
   }
 };

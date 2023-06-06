@@ -65,7 +65,7 @@ export default {
         (elem) => elem[this.queryRoutCategory].toLowerCase() === this.queryRoutValue)
       : this.employees = employeeBasic;
 
-    this.message = this.employees.length === 0 ? "Список сотрудников пуст" : "";
+    this.message = this.setMessage("employees");
   },
 
   computed: {
@@ -94,7 +94,8 @@ export default {
       "saveInArchive",
       "alphabetSortStart",
       "alphabetSortEnd",
-      "createNextId"
+      "createNextId",
+      "setMessage"
     ]),
 
     onFilterBasicData(event) {
@@ -103,25 +104,22 @@ export default {
           (elem) => elem[event.category].toLowerCase() === event.value)
         : this.employees;
 
-      this.filteredEmployees = this.employees;
+      this.message = this.setMessage("employees");
 
-      this.message =
-        this.employees.length === 0 || this.filteredEmployees.length === 0
-          ? "Нет сотрудников, соответствующих вашему поиску"
-          : "";
+      this.filteredEmployees = this.employees;
     },
 
     sortingAlphabet() {
-      if (this.isAlphabet === false && this.filteredEmployees.length === 0) {
+      if (!this.isAlphabet && !this.filteredEmployees.length) {
         return this.employees = this.alphabetSortStart(this.employees);
 
-      } else if (this.isAlphabet === true && this.filteredEmployees.length === 0) {
+      } else if (this.isAlphabet && !this.filteredEmployees.length) {
         return this.employees = this.alphabetSortEnd(this.employees);
 
-      } else if (this.isAlphabet === false && this.filteredEmployees.length > 0) {
+      } else if (!this.isAlphabet && this.filteredEmployees.length) {
         return this.employees = this.alphabetSortStart(this.filteredEmployees);
 
-      } else if (this.isAlphabet === true && this.filteredEmployees.length > 0) {
+      } else if (this.isAlphabet && this.filteredEmployees.length) {
         return this.employees = this.alphabetSortEnd(this.filteredEmployees);
       }
     },

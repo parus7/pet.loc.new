@@ -246,7 +246,7 @@ export default {
     },
 
     blockAlphabetButton() {
-      return this.employeesLength === 0;
+      return this.employeesLength <= 2;
     },
 
     blockWithMissingParams() {
