@@ -13,7 +13,7 @@
         :employeesLength="employees.length"
         :message="message"
         @employeeCreate="onCreateEmployee($event)"
-        @filterEmployee="onFilterBasicData($event)"
+        @filterEmployee="onFilterBasicData($event, this.employees)"
         @resetFilter="onResetFilter"
         @alphabetSort="onAlphabetSort"
       >
@@ -69,10 +69,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, [
-      "getEmptyStore",
-      "getAllEmployeesArray"
-    ]),
+    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesArray"]),
 
     getTodayBirthday() {
       let day = String(new Date().getDate());
@@ -95,13 +92,13 @@ export default {
       "alphabetSortStart",
       "alphabetSortEnd",
       "createNextId",
-      "setMessage"
+      "setMessage",
+      "delEmployee"
     ]),
 
     onFilterBasicData(event) {
       this.employees = event.category && event.value
-        ? this.employees.filter(
-          (elem) => elem[event.category].toLowerCase() === event.value)
+        ? this.employees.filter((elem) => elem[event.category].toLowerCase() === event.value)
         : this.employees;
 
       this.message = this.setMessage("employees");
@@ -109,12 +106,12 @@ export default {
       this.filteredEmployees = this.employees;
     },
 
-    sortingAlphabet() {
+    sortingAlphabet(obj) {
       if (!this.isAlphabet && !this.filteredEmployees.length) {
-        return this.employees = this.alphabetSortStart(this.employees);
+        return this.employees = this.alphabetSortStart(obj);
 
       } else if (this.isAlphabet && !this.filteredEmployees.length) {
-        return this.employees = this.alphabetSortEnd(this.employees);
+        return this.employees = this.alphabetSortEnd(obj);
 
       } else if (!this.isAlphabet && this.filteredEmployees.length) {
         return this.employees = this.alphabetSortStart(this.filteredEmployees);
@@ -126,24 +123,27 @@ export default {
 
     onAlphabetSort() {
       this.isAlphabet = this.alphabetToggle();
-      this.sortingAlphabet();
+      this.sortingAlphabet(this.employees);
     },
 
     onResetFilter() {
       this.filteredEmployees = [];
-      this.message = "";
-
-      this.employees = this.isAlphabet === false
-        ? this.alphabetSortStart([...this.getAllEmployeesArray("employees")])
-        : this.alphabetSortEnd([...this.getAllEmployeesArray("employees")]);
+      this.employees = this.sortingAlphabet([...this.getAllEmployeesArray("employees")]);
     },
+
 
     onDeleteInBasic(event) {
       this.saveInArchive(event.id);
-      this.sortingAlphabet();
+      this.delEmployee(event.id);
 
-      this.message =
-        this.employees.length === 0 ? "Список сотрудников пуст" : "";
+      this.filteredEmployees.length
+        ? this.filteredEmployees.splice(
+          this.filteredEmployees.indexOf(
+            this.employees.find(elem => elem.id === event.id)), 1)
+
+        : this.employees = this.employees.filter(elem => elem.id !== event.id);
+
+      this.message = "";
     },
 
     onCreateEmployee() {
@@ -157,7 +157,8 @@ export default {
       this.createEmployee();
     }
   }
-};
+}
+;
 </script>
 
 <style>

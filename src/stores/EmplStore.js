@@ -62,8 +62,6 @@ export const useEmplStore = defineStore("EmplStore", {
 
       let delEmployee = this.getEmployeeById("employees", id);
       this.archive.set(id, delEmployee);
-
-      this.delEmployee(id);
     },
 
     delEmployee(id) {

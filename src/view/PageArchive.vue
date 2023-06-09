@@ -48,16 +48,11 @@ export default {
   created() {
     this.inputValue = this.$route.query.value;
 
-    // this.getEmptyStore("archive")
-    //   ? this.setMapEmployees(employeesArchive, "archive")
-    //   : this.message = "Архивный список сотрудников пуст";
-    //
     this.getEmptyStore("archive")
       ? this.setMapEmployees(employeesArchive, "archive")
       : this.message = this.setMessage("archive");
 
     this.filterArchiveData();
-
   },
 
   mounted() {
