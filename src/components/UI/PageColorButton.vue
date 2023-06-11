@@ -42,4 +42,8 @@ export default {
   box-shadow: none;
   opacity: 1;
 }
+
+.color-button:disabled {
+  opacity: 0.55;
+}
 </style>

@@ -1,6 +1,13 @@
 <template>
-  <form class="card-form" id="add-employee" @submit.prevent>
-    <!-- class "status " for the field  "hide" in employee (employeeData.json)-->
+  <form
+    class="card-form"
+    id="add-employee"
+    @submit.prevent="sendForm"
+    action=""
+    method="post"
+    autocomplete="on"
+  >
+
     <img
       class="card-form__photo"
       :class="{ status: employee['hide'] }"
@@ -11,7 +18,8 @@
     />
 
     <fieldset class="card-form__full-name" :disabled="!isEdit">
-      <label class="card-form__label">Фамилия*
+      <label class="card-form__label card-form__label-required"
+      >Фамилия*
         <input
           id="last_name"
           type="text"
@@ -19,16 +27,16 @@
           tabindex="2"
           ref="lastName"
           v-model.trim="employee['last_name']"
-          required
         />
       </label>
 
-      <label class="card-form__label">Имя
+      <label class="card-form__label card-form__label-required">Имя*
         <input
           id="first_name"
           type="text"
           aria-label="имя сотрудника"
           tabindex="3"
+          ref="firstName"
           v-model.trim="employee['first_name']"
         />
       </label>
@@ -120,13 +128,15 @@
     </fieldset>
 
     <fieldset class="card-form__address" :disabled="!isEdit">
-      <label class="card-form__label">Город
+      <label class="card-form__label card-form__label-required">Город*
         <input
           id="city"
           type="text"
           aria-label="город проживания сотрудника"
           tabindex="10"
+          ref="city"
           v-model.trim="employee['city']"
+          required
         />
       </label>
 
@@ -168,7 +178,11 @@
     <div class=" card-form__buttons">
 
       <template v-if="!isMain">
-        <span class="tooltip tooltip-position" data-name="редактировать">
+        <span
+          class="tooltip tooltip-position"
+          data-name="редактировать"
+        >
+
           <PageColorButton
             tabindex="0"
             aria-label="кнопка редактирования данных сотрудника"
@@ -182,7 +196,7 @@
           <PageColorButton
             tabindex="14"
             aria-label="кнопка сохранения данных сотрудника"
-            @click="onSaveEmployee(employee['id'])"
+            @click="setRequiredField(), onSaveEmployee(employee['id'])"
           >
             <IconSave />
           </PageColorButton>
@@ -204,6 +218,7 @@
         <PageColorButton
           tabindex="isMain ? '15': '1'"
           aria-label="кнопка выхода"
+          :disabled="!sendForm"
           @click=" this.$router.go(-1)"
         >
           <IconGoTo />
@@ -265,22 +280,37 @@ export default {
     this.$refs.lastName.focus();
   },
 
+  computed: {
+    sendForm() {
+      return (this.employee.last_name && this.employee.first_name && this.employee.city);
+    }
+  },
+
   methods: {
     ...mapActions(useEmplStore, [
       "delEmployee",
       "addEmployee"
     ]),
 
-    onSaveEmployee(paramsId) {
-      this.$emit("editNo");
-      this.delEmployee(paramsId);
+    setRequiredField(paramsId) {
+      [this.$refs.lastName, this.$refs.firstName, this.$refs.city].map(elem => !elem.value
+        ? elem.style.border = "2px solid var(--vt-c-alert)"
+        : elem.style.border = "none");
+    },
 
+    getUnmaskedEmployee() {
       const unmaskedEmployee = { ...this.employee };
       unmaskedEmployee.birthday = this.maskaBirthday.unmasked;
       unmaskedEmployee.telephone = this.maskaTelephone.unmasked;
       unmaskedEmployee.mobile = this.maskaMobile.unmasked;
+      return unmaskedEmployee;
+    },
 
-      this.addEmployee(unmaskedEmployee);
+    onSaveEmployee(paramsId) {
+      this.$emit("editNo");
+      this.delEmployee(paramsId);
+
+      this.addEmployee(this.getUnmaskedEmployee());
     },
 
     popupConfirm() {
@@ -318,6 +348,10 @@ export default {
   margin-bottom: 15px;
 }
 
+.card-form__label-required {
+  font-weight: bold;
+}
+
 .card-form__photo {
   background-color: var(--vt-c-white-background-confirm);
   border-radius: 20%;
@@ -342,10 +376,6 @@ export default {
   grid-area: 4/1/5/3;
   font-weight: bold;
   margin: 10px;
-}
-
-.card-form__full-name label:first-child {
-  font-weight: bold;
 }
 
 .card-form__buttons {
