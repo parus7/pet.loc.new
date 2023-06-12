@@ -24,7 +24,7 @@
     </RouterLink>
 
     <RouterLink :to="{ name: 'food' }" tabindex="-1">
-      <span class="tooltip tooltip-position" data-name="кафе&nbsp;рядом">
+      <span class="tooltip tooltip-position" data-name="посмотреть&nbsp;кафе&nbsp;рядом">
         <PageButton
           aria-label="кафе рядом"
         >

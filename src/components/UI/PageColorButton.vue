@@ -46,4 +46,9 @@ export default {
 .color-button:disabled {
   opacity: 0.55;
 }
+
+.color-button:disabled:hover {
+  box-shadow: 4px 3px 3px 1px var(--vt-c-active-2);
+  transform: none;
+}
 </style>
