@@ -103,7 +103,7 @@ export default defineComponent({
 .carousel__box {
   display: flex;
   flex-direction: column;
-  background-color: var(--vt-c-archive-2);
+  background-color: var(--vt-c-active-2);
   border-radius: 8px;
   padding: 25px 0;
 }

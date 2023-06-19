@@ -1,63 +1,68 @@
 <template>
   <div class="main-header">
-    <form class="main-header__form" @submit.prevent>
-      <span class="tooltip tooltip-position" data-name="создать&nbsp;карточку ">
+    <span
+      class="tooltip tooltip-position"
+      data-name="сбросить&nbsp;цветные&nbsp;ярлыки "
+    >
+      <PageButton
+        class="main-header__reset-tags"
+        @click="resetTags"
+      >
+          <IconTagsReset />
+      </PageButton>
+    </span>
 
+    <span
+      class="tooltip tooltip-position"
+      data-name="создать&nbsp;карточку "
+    >
         <PageColorButton
           class="main-header__button-create"
           aria-label="создать сотрудника"
-          tabindex="1"
           @click="isOpen = true"
         >
           <IconAdd />
         </PageColorButton>
 
-        <PagePopup
-          :is-open="isOpen"
-          @close="isOpen = false"
-          @ok="employeeCreate($event)"
-        >
-          <template #popupText>
-            Вы хотите создать карточку нового сотрудника?
-          </template>
+         <PagePopup
+           :is-open="isOpen"
+           @close="isOpen = false"
+           @ok="employeeCreate($event)"
+         >
+            <template #popupText>
+              Вы хотите создать карточку нового сотрудника?
+            </template>
 
-        </PagePopup>
+          </PagePopup>
       </span>
 
-      <fieldset class="main-header__fieldset">
-        <select
-          id="filter"
-          class="main-header__form-select"
-          aria-label="поле выбора категории для поиска"
-          tabindex="2"
-          ref="basicSearch"
-          v-model="selected"
-          @change="onMask"
-        >
-          <option value="" disabled>Выбор категории...</option>
-          <option v-for="category in categories" :key="category.text">
-            {{ category.text }}
-          </option>
-        </select>
+    <div class="main-header__wrap">
+      <select
+        class="main-header__form-select"
+        aria-label="поле выбора категории для поиска"
+        ref="basicSearch"
+        v-model="selected"
+        @change="onMask"
+      >
+        <option value="" disabled>Выбор категории...</option>
+        <option v-for="category in categories" :key="category.text">
+          {{ category.text }}
+        </option>
+      </select>
 
-        <input
-          id="search"
-          type="text"
-          class="main-header__form-search"
-          aria-label="поле поиска"
-          placeholder="Поле поиска..."
-          tabindex="3"
-          v-model.lazy="inputValue"
-          v-maska="mask"
-          :data-maska="myMask"
-          @keyup.enter="filterEmployee"
-        />
-
-      </fieldset>
-    </form>
+      <input
+        class="main-header__form-search"
+        aria-label="поле поиска"
+        placeholder="Поле поиска..."
+        v-model.lazy="inputValue"
+        v-maska="mask"
+        :data-maska="myMask"
+        @keyup.enter="filterEmployee"
+      />
+    </div>
 
     <template v-if="changeButtonRole()">
-      <span class=" tooltip tooltip-position" data-name="поиск" tabindex="4">
+      <span class=" tooltip tooltip-position" data-name="поиск">
 
     <PageColorButton
       class="main-header__button-search"
@@ -120,22 +125,25 @@
 </template>
 
 <script>
+import PageButton from "./UI/PageButton.vue";
+import IconTagsReset from "@/components/icons/IconTagsReset.vue";
+
+import PageColorButton from "@/components/UI/PageColorButton.vue";
 import IconAdd from "@/components/icons/IconAdd.vue";
 import IconSearch from "@/components/icons/IconSearch.vue";
 import IconFilterReset from "@/components/icons/IconFilterReset.vue";
 
 import PagePopup from "@/components/PagePopup.vue";
-import PageColorButton from "@/components/UI/PageColorButton.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { IconAdd, IconSearch, IconFilterReset, PagePopup, PageColorButton },
+  components: { PageButton, IconTagsReset, PageColorButton, IconAdd, IconSearch, IconFilterReset, PagePopup },
   directives: { maska: vMaska },
   name: "PageMainHeader",
 
-  mounted() {
-    this.$refs.basicSearch.focus();
-  },
+  // mounted() {
+  //   this.$refs.basicSearch.focus();
+  // },
 
   props: {
     isAlphabet: Boolean,
@@ -154,6 +162,7 @@ export default {
         completed: false
       },
 
+      checked: null,
       selected: "",
       category: {},
       inputValue: "",
@@ -176,6 +185,11 @@ export default {
   },
 
   methods: {
+    resetTags() {
+      this.checked = true;
+      this.$emit("resetTags", { check: this.checked });
+    },
+
     employeeCreate() {
       this.isOpen = false;
       this.$emit("employeeCreate");
@@ -259,39 +273,27 @@ export default {
 
 <style scoped>
 .main-header {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 3%;
-  grid-column: 1/3;
+  display: grid;
+  grid-template-columns:  repeat(5, auto);
 
-  box-sizing: border-box;
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 10px;
+  padding: 10px 10px 10px 70px;
 }
 
-.main-header__form {
-  display: flex;
-  justify-content: space-between;
-  gap: 3%;
-  width: 95%;
+.main-header__reset-tags {
+  align-self: center;
 }
 
-.main-header__fieldset {
+.main-header__wrap {
   display: flex;
-  gap: 15px;
-
-  width: 70%;
-  border: none;
-  padding: 0;
+  gap: 35px;
 }
 
 .main-header__form-select,
 .main-header__form-search {
-  flex-grow: 1;
-  box-shadow: 4px 4px 4px 1px var(--vt-c-active-2);
-  padding: 7px 40px 7px 15px;
+  padding: 11px 10px 11px 20px;
 }
 
 .main-header__button-alphabet {
@@ -307,15 +309,21 @@ export default {
   left: 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   .main-header {
-    justify-content: space-evenly;
-    flex-wrap: nowrap;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main-header {
+    grid-template-columns:auto auto 1fr auto auto;
+    gap: 10px;
   }
 
-  .main-header__fieldset {
+  .main-header__wrap {
     flex-direction: column;
-    width: 100%;
+    gap: 15px;
   }
 
   .tooltip-position:hover::after {
@@ -323,24 +331,18 @@ export default {
   }
 }
 
-@media screen and (max-width: 560px) {
-  .main-header,
-  .main-header__form {
-    flex-direction: column;
-    gap: 18px;
-    width: 100%;
+@media screen and (max-width: 620px) {
+  .main-header {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 
-  .main-header__form-select,
-  .main-header__form-search {
-    padding: 11px 40px 11px 15px;
-  }
-
+  .main-header__reset-tags,
   .main-header__button-create,
   .main-header__button-reset,
   .main-header__button-search,
   .main-header__button-alphabet {
-    flex-grow: 1;
+    width: 100%;
   }
 
   .main-header__button-alphabet {

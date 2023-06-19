@@ -73,7 +73,7 @@ export default {
   font-size: 0.6rem;
   color: var(--vt-c-white);
 
-  background-color: var(--vt-c-alert);
+  background-color: var(--vt-c-alert-7);
   border-radius: 50%;
 }
 

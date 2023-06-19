@@ -25,7 +25,7 @@ export default {
   color: var(--vt-c-white);
   text-transform: uppercase;
   background-color: var(--vt-c-active-4);
-  outline-color: var(--vt-c-outline);
+  outline-color: var(--vt-c-outline-10);
   border: none;
   box-shadow: 4px 3px 3px 1px var(--vt-c-active-2);
   border-radius: 8px;

@@ -7,9 +7,9 @@
           :key="employee.id"
           :employee="{ ...employee }"
           :isMain="isMain"
+          :isChecked="isChecked"
           @deleteEmployee="$emit('deleteEmployee',  $event )"
         />
-
       </transition-group>
     </template>
 
@@ -28,7 +28,8 @@ export default {
   props: {
     employees: Object,
     message: String,
-    isMain: Boolean
+    isMain: Boolean,
+    isChecked: Boolean
   }
 };
 </script>

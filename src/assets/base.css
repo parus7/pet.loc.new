@@ -14,11 +14,11 @@
     --vt-c-active-9: rgba(95, 158, 160, 0.9);
     --vt-c-active-10: rgba(95, 158, 160, 1);
 
-    --vt-c-archive-2: rgba(95, 158, 160, 0.2);
-    --vt-c-archive-5: rgba(95, 158, 160, 0.5);
+    --vt-c-outline-2: rgba(255, 204, 0, 0.2);
+    --vt-c-outline-10: rgba(255, 204, 0, 1);
 
-    --vt-c-outline: rgba(255, 204, 0, 1);
-    --vt-c-alert: rgba(205, 92, 92, 0.7);
+    --vt-c-alert-2: rgba(205, 92, 92, 0.2);
+    --vt-c-alert-7: rgba(205, 92, 92, 0.7);
 }
 
 body {
@@ -55,11 +55,14 @@ input {
     border: none;
     box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
     border-radius: 9px;
-    outline-color: var(--vt-c-outline);
+    outline-color: var(--vt-c-outline-10);
     font-size: inherit;
     color: inherit;
-    appearance: none;
     padding: 5px 15px;
+}
+
+select {
+    appearance: none;
 }
 
 ::placeholder {
@@ -80,18 +83,18 @@ select:disabled {
 
 fieldset {
     border: none;
+    margin: 0;
 }
 
 .tooltip {
     position: relative;
     display: flex;
-    outline-color: var(--vt-c-outline);
+    outline-color: var(--vt-c-outline-10);
 }
 
 .tooltip:hover::after {
     position: absolute;
     bottom: 42px;
-
     content: attr(data-name);
     background: var(--vt-c-active-2);
     border-radius: 6px;
@@ -110,4 +113,8 @@ fieldset {
     opacity: 0.4;
     border: none;
     box-shadow: none;
+}
+
+.hidden {
+    visibility: hidden;
 }

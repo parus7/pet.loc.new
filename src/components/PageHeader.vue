@@ -1,8 +1,6 @@
 <template>
   <div class="secondary-header">
-
     <slot name="inputArchiveSearch"></slot>
-
     <RouterLink
       :to="{ name: 'basic' }"
       tabindex="-1">
@@ -39,7 +37,7 @@ export default {
   column-gap: 30px;
   grid-column: 1/-1;
 
-  background-color: var(--vt-c-archive-2);
+  background-color: var(--vt-c-active-2);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
   border-radius: 8px;
   padding: 10px;

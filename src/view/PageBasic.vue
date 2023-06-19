@@ -4,8 +4,10 @@
     :message="message"
     :amountBirthdays="getTodayBirthday"
     :isMain="isMain"
+    :isChecked="isChecked"
     @deleteEmployee="onDeleteInBasic($event)"
   >
+
     <template #pageMainHeader>
       <PageMainHeader
         class="page_header__main "
@@ -16,8 +18,8 @@
         @filterEmployee="onFilterBasicData($event, this.employees)"
         @resetFilter="onResetFilter"
         @alphabetSort="onAlphabetSort"
+        @resetTags="resetColorTags($event)"
       >
-
       </PageMainHeader>
     </template>
 
@@ -42,6 +44,7 @@ export default {
       amountBirthdays: null,
       isMain: true,
       isAlphabet: false,
+      isChecked: null,
       filteredEmployees: [],
       employeesLength: null,
 
@@ -96,6 +99,11 @@ export default {
       "delEmployee"
     ]),
 
+    resetColorTags(event) {
+      this.isChecked = event.check;
+      console.log(this.isChecked);
+    },
+
     onFilterBasicData(event) {
       this.employees = event.category && event.value
         ? this.employees.filter((elem) => elem[event.category].toLowerCase() === event.value)
@@ -130,7 +138,6 @@ export default {
       this.filteredEmployees = [];
       this.employees = this.sortingAlphabet([...this.getAllEmployeesArray("employees")]);
     },
-
 
     onDeleteInBasic(event) {
       this.saveInArchive(event.id);

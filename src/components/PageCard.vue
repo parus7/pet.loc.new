@@ -128,7 +128,7 @@
     </fieldset>
 
     <fieldset class="card-form__address" :disabled="!isEdit">
-      <label class="card-form__label card-form__label-required">Город*
+      <label class="card-form__label">Город
         <input
           id="city"
           type="text"
@@ -282,7 +282,7 @@ export default {
 
   computed: {
     sendForm() {
-      return (this.employee.last_name && this.employee.first_name && this.employee.city);
+      return (this.employee.last_name && this.employee.first_name);
     }
   },
 
@@ -292,8 +292,8 @@ export default {
       "addEmployee"
     ]),
 
-    setRequiredField(paramsId) {
-      [this.$refs.lastName, this.$refs.firstName, this.$refs.city].map(elem => !elem.value
+    setRequiredField() {
+      [this.$refs.lastName, this.$refs.firstName].map(elem => !elem.value
         ? elem.style.border = "2px solid var(--vt-c-alert)"
         : elem.style.border = "none");
     },

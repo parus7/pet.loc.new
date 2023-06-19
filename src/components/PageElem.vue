@@ -3,6 +3,15 @@
     class="employee"
     :class="{ secondary: !isMain }"
   >
+
+    <span
+      class="employee__color-check"
+      :class="{ hidden: !isMain }"
+      ref="colorCheck"
+      @click="setTag($event)"
+    >
+    </span>
+
     <!-- class "status " for the field  "hide" in employee (employeeData.json)-->
     <img
       class="employee__photo"
@@ -56,8 +65,11 @@
       </span>
     </RouterLink>
 
-    <template v-if="isMain">
-      <span class="tooltip tooltip-position" data-name="удалить&nbsp;в&nbsp;архив">
+    <span
+      class="tooltip tooltip-position"
+      :class="{ hidden: !isMain }"
+      data-name="удалить&nbsp;в&nbsp;архив"
+    >
         <PageButton
           aria-label="удалить сотрудника в архив"
           @click="isOpen = true"
@@ -66,19 +78,18 @@
         </PageButton>
       </span>
 
-      <PagePopup
-        :is-open="isOpen"
-        @close="isOpen = false"
-        @ok="popupDelete"
-      >
-        <template #popupText>
-          Вы хотите удалить сотрудника?
-        </template>
+    <PagePopup
+      :is-open="isOpen"
+      @close="isOpen = false"
+      @ok="popupDelete"
+    >
+      <template #popupText>
+        Вы хотите удалить сотрудника?
+      </template>
 
-      </PagePopup>
-    </template>
-
+    </PagePopup>
   </template>
+
 </template>
 
 <script>
@@ -114,19 +125,43 @@ export default {
       city: String,
       src: String
     },
-    isMain: Boolean
+    isMain: Boolean,
+    isChecked: Boolean
   },
 
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      clicks: 0
     };
+  },
+
+  watch: {
+    isChecked(value) {
+      if (value) {
+        this.$refs.colorCheck.style.background = "var( --vt-c-white)";
+      }
+    }
   },
 
   methods: {
     popupDelete() {
       this.$emit("deleteEmployee", { id: this.employee.id });
       this.isOpen = false;
+    },
+
+    setTag(event) {
+      this.clicks += event.detail;
+      if (this.clicks === 1) {
+        this.$refs.colorCheck.style.background = "var( --vt-c-outline-2)";
+      } else if (this.clicks === 2) {
+        this.$refs.colorCheck.style.background = "var(  --vt-c-alert-2)";
+      } else if (this.clicks === 3) {
+        this.$refs.colorCheck.style.background = "var( --vt-c-active-2)";
+      } else {
+        this.clicks = 0;
+        this.$refs.colorCheck.style.background = "var( --vt-c-white)";
+      }
     }
   }
 };
@@ -135,7 +170,7 @@ export default {
 <style scoped>
 .employee {
   display: grid;
-  grid-template-columns: auto minmax(auto, 30%) 1fr 50px 105px repeat(2, auto);
+  grid-template-columns: min-content auto minmax(auto, 30%) 1fr 50px 105px repeat(2, auto);
   gap: 3%;
 
   align-items: center;
@@ -154,7 +189,7 @@ export default {
 }
 
 .secondary {
-  background-color: var(--vt-c-archive-2);
+  background-color: var(--vt-c-active-2);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
 }
 
@@ -164,6 +199,15 @@ export default {
   border: 2px solid var(--vt-c-active-2);
   border-radius: 14%;
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-10);
+}
+
+.employee__color-check {
+  border-radius: 24%;
+  border: 2px solid var(--vt-c-active-4);
+  background: var(--vt-c-white);
+  box-shadow: none;
+  padding: 7px;
+  margin: 0;
 }
 
 .employee__cn,
@@ -179,18 +223,22 @@ export default {
 
 @media screen and (max-width: 767px) {
   .employee {
-    grid-template-columns: minmax(30%, auto) 10% 22% 8% 8%;
+    grid-template-columns: min-content minmax(30%, auto) 10% 22% 8% 8%;
   }
 
   .employee__item-email,
   .employee__photo {
     display: none;
   }
+
+  .employee__color-check {
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 540px) {
   .employee {
-    grid-template-columns: 1fr repeat(2, auto);
+    grid-template-columns: min-content 1fr repeat(2, auto);
   }
 
   .employee__item-telephone,

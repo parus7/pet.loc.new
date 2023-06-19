@@ -8,7 +8,7 @@
     "first_name": "Иван",
     "last_name": "Иванов",
     "middle_name": "Иванович",
-    "birthday": "0106",
+    "birthday": "1306",
     "email": "I.Ivanov@ya.ru",
     "cn": "Иванов Иван Иванович",
     "telephone": "1000",
@@ -16,7 +16,9 @@
     "title": "Старший специалист службы персонала",
     "department": "Служба персонала",
     "company": "Копыта ОАО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "2",
@@ -27,7 +29,7 @@
     "first_name": "Клеопатра",
     "last_name": "Романова",
     "middle_name": "Ивановна ",
-    "birthday": "0206",
+    "birthday": "1406",
     "email": "K.Romanova@ya.ru",
     "cn": "Романова Клеопатра Ивановна",
     "telephone": "2000",
@@ -35,7 +37,9 @@
     "title": "Ведущий инженер",
     "department": "Служба инженерных технологий",
     "company": "Рога АНО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "3",
@@ -46,7 +50,7 @@
     "first_name": "Иванна",
     "last_name": "Петрова",
     "middle_name": "Ильинична",
-    "birthday": "0306",
+    "birthday": "1506",
     "email": "I.Petrova@ya.ru",
     "cn": "Петрова Иванна Ильинична",
     "telephone": "3000",
@@ -54,7 +58,9 @@
     "title": "Главный финансовый менеджер",
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "4",
@@ -65,7 +71,7 @@
     "first_name": "Иван",
     "last_name": "Пупкин",
     "middle_name": "Мандельштанович",
-    "birthday": "0406",
+    "birthday": "1606",
     "email": "I.Pupkin@ya.ru",
     "cn": "Пупкин Иван Мандельштанович",
     "telephone": "4000",
@@ -73,7 +79,9 @@
     "title": "Менеджер по обучению и развитию",
     "department": "Служба персонала",
     "company": "Рога и копыта ООО",
-    "city": "Санкт-Петербург"
+    "city": "Санкт-Петербург",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "5",
@@ -84,7 +92,7 @@
     "first_name": "Анна",
     "last_name": "Васильева",
     "middle_name": "Ильинична",
-    "birthday": "0506",
+    "birthday": "1706",
     "email": "А.Vasilieva@ya.ru",
     "cn": "Васильева Анна Ильинична",
     "telephone": "5000",
@@ -92,7 +100,9 @@
     "title": "Главный бухгалтер",
     "department": "Отдел продаж",
     "company": "Рога и копыта ООО",
-    "city": "Псков"
+    "city": "Псков",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "6",
@@ -103,7 +113,7 @@
     "first_name": "Осип",
     "last_name": "Бородинов",
     "middle_name": "Иванович",
-    "birthday": "0606",
+    "birthday": "1806",
     "email": "S.Borodinov@ya.ru",
     "cn": "Бородинов Осип Иванович",
     "telephone": "6000",
@@ -111,7 +121,9 @@
     "title": "Бухгалтер",
     "department": "Служба персонала",
     "company": "Рога и копыта ООО",
-    "city": "Псков"
+    "city": "Псков",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "7",
@@ -122,7 +134,7 @@
     "first_name": "Зинаида",
     "last_name": "Петрова",
     "middle_name": "Ильинична",
-    "birthday": "0706",
+    "birthday": "1906",
     "email": "PetrovaZinaida@ya.ru",
     "cn": "Петрова Зинаида Ильинична",
     "telephone": "7000",
@@ -130,7 +142,9 @@
     "title": "Финансовый менеджер",
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "8",
@@ -149,7 +163,9 @@
     "title": "Управляющий",
     "department": "Отдел финансового планирования и анализа",
     "company": "Чистая компания ООО",
-    "city": "Осло"
+    "city": "Осло",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "9",
@@ -160,7 +176,7 @@
     "first_name": "Илья",
     "last_name": "Кропоткин",
     "middle_name": "Владимирович",
-    "birthday": "0806",
+    "birthday": "2006",
     "email": "I.Kropotkin@ya.ru",
     "cn": "Кропоткин Илья Владимирович",
     "telephone": "9000",
@@ -168,7 +184,9 @@
     "title": "Финансовый менеджер",
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "10",
@@ -179,7 +197,7 @@
     "first_name": "Зоя",
     "last_name": "Осинкина",
     "middle_name": "Ильинична",
-    "birthday": "0906",
+    "birthday": "2106",
     "email": "Z.Osinkina@ya.ru",
     "cn": "Осинкина Зоя Ильинична",
     "telephone": "1001",
@@ -187,7 +205,9 @@
     "title": "Финансовый менеджер",
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
-    "city": "Псков"
+    "city": "Псков",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "11",
@@ -198,7 +218,7 @@
     "first_name": "Василий",
     "last_name": "Каренин",
     "middle_name": "Павлович",
-    "birthday": "1006",
+    "birthday": "2206",
     "email": "V.Karenin@ya.ru",
     "cn": "Каренин Василий Павлович ",
     "telephone": "1100",
@@ -206,7 +226,9 @@
     "title": "Главный финансовый менеджер",
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "12",
@@ -217,7 +239,7 @@
     "first_name": "Андрей",
     "last_name": "Андреев",
     "middle_name": "Андреевич",
-    "birthday": "1106",
+    "birthday": "2306",
     "email": "A.Andreev@ya.ru",
     "cn": "Андреев Андрей Андреевич",
     "telephone": "1200",
@@ -225,7 +247,9 @@
     "title": "Бухгалтер",
     "department": "Служба персонала",
     "company": "Рога и копыта ООО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "13",
@@ -236,7 +260,7 @@
     "first_name": "Ангелина",
     "last_name": "Краюшкина",
     "middle_name": "Венидиктовна",
-    "birthday": "1206",
+    "birthday": "2406",
     "email": "A.Krayushkina@ya.ru",
     "cn": "Краюшкина Ангелина Венидиктовна",
     "telephone": "1300",
@@ -244,7 +268,9 @@
     "title": "Старший специалист службы персонала",
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
-    "city": "Москва"
+    "city": "Москва",
+    "colorTag": false,
+    "hashtag": ""
   },
   {
     "id": "14",
@@ -255,7 +281,7 @@
     "first_name": "Илья",
     "last_name": "Ильин",
     "middle_name": "Юрьевич",
-    "birthday": "3105",
+    "birthday": "2506",
     "email": "I.Ilyin@ya.ru",
     "cn": "Ильин Илья Юрьевич ",
     "telephone": "1400",
@@ -263,6 +289,8 @@
     "title": "Бухгалтер",
     "department": "Служба персонала",
     "company": "Рога ООО",
-    "city": "Оренбург"
+    "city": "Оренбург",
+    "colorTag": false,
+    "hashtag": ""
   }
 ]
