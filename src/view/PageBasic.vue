@@ -4,7 +4,7 @@
     :message="message"
     :amountBirthdays="getTodayBirthday"
     :isMain="isMain"
-    :isChecked="isChecked"
+    :isMarked="isMarked"
     @deleteEmployee="onDeleteInBasic($event)"
   >
 
@@ -18,7 +18,7 @@
         @filterEmployee="onFilterBasicData($event, this.employees)"
         @resetFilter="onResetFilter"
         @alphabetSort="onAlphabetSort"
-        @resetTags="resetColorTags($event)"
+        @resetMarks="resetColorMarks($event)"
       >
       </PageMainHeader>
     </template>
@@ -44,7 +44,7 @@ export default {
       amountBirthdays: null,
       isMain: true,
       isAlphabet: false,
-      isChecked: null,
+      isMarked: null,
       filteredEmployees: [],
       employeesLength: null,
 
@@ -99,9 +99,9 @@ export default {
       "delEmployee"
     ]),
 
-    resetColorTags(event) {
-      this.isChecked = event.check;
-      console.log(this.isChecked);
+    resetColorMarks(event) {
+      this.isMarked = event.mark;
+      // console.log(this.isMarked);
     },
 
     onFilterBasicData(event) {

@@ -5,10 +5,10 @@
   >
 
     <span
-      class="employee__color-check"
+      class="employee__color-mark"
       :class="{ hidden: !isMain }"
-      ref="colorCheck"
-      @click="setTag($event)"
+      ref="colorMark"
+      @click="setMark($event)"
     >
     </span>
 
@@ -126,7 +126,7 @@ export default {
       src: String
     },
     isMain: Boolean,
-    isChecked: Boolean
+    isMarked: Boolean
   },
 
   data() {
@@ -137,9 +137,9 @@ export default {
   },
 
   watch: {
-    isChecked(value) {
+    isMarked(value) {
       if (value) {
-        this.$refs.colorCheck.style.background = "var( --vt-c-white)";
+        this.$refs.colorMark.style.background = "var( --vt-c-white)";
       }
     }
   },
@@ -150,17 +150,21 @@ export default {
       this.isOpen = false;
     },
 
-    setTag(event) {
+    setMark(event) {
       this.clicks += event.detail;
+
       if (this.clicks === 1) {
-        this.$refs.colorCheck.style.background = "var( --vt-c-outline-2)";
+        this.$refs.colorMark.style.background = "var( --vt-c-outline-2)";
+
       } else if (this.clicks === 2) {
-        this.$refs.colorCheck.style.background = "var(  --vt-c-alert-2)";
+        this.$refs.colorMark.style.background = "var(  --vt-c-alert-2)";
+
       } else if (this.clicks === 3) {
-        this.$refs.colorCheck.style.background = "var( --vt-c-active-2)";
+        this.$refs.colorMark.style.background = "var( --vt-c-active-2)";
+
       } else {
         this.clicks = 0;
-        this.$refs.colorCheck.style.background = "var( --vt-c-white)";
+        this.$refs.colorMark.style.background = "var( --vt-c-white)";
       }
     }
   }
@@ -201,7 +205,7 @@ export default {
   box-shadow: 2px 2px 4px 1px var(--vt-c-active-10);
 }
 
-.employee__color-check {
+.employee__color-mark {
   border-radius: 24%;
   border: 2px solid var(--vt-c-active-4);
   background: var(--vt-c-white);
@@ -231,7 +235,7 @@ export default {
     display: none;
   }
 
-  .employee__color-check {
+  .employee__color-mark {
     padding: 10px;
   }
 }

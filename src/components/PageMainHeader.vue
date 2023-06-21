@@ -5,10 +5,10 @@
       data-name="сбросить&nbsp;цветные&nbsp;ярлыки "
     >
       <PageButton
-        class="main-header__reset-tags"
-        @click="resetTags"
+        class="main-header__reset-marks"
+        @click="resetColorMarks"
       >
-          <IconTagsReset />
+          <IconMarksReset />
       </PageButton>
     </span>
 
@@ -125,7 +125,7 @@
 
 <script>
 import PageButton from "./UI/PageButton.vue";
-import IconTagsReset from "@/components/icons/IconTagsReset.vue";
+import IconMarksReset from "@/components/icons/IconMarksReset.vue";
 
 import PageColorButton from "@/components/UI/PageColorButton.vue";
 import IconAdd from "@/components/icons/IconAdd.vue";
@@ -136,10 +136,10 @@ import PagePopup from "@/components/PagePopup.vue";
 import { vMaska } from "maska";
 
 export default {
-  components: { PageButton, IconTagsReset, PageColorButton, IconAdd, IconSearch, IconFilterReset, PagePopup },
+  components: { PageButton, IconMarksReset, PageColorButton, IconAdd, IconSearch, IconFilterReset, PagePopup },
   directives: { maska: vMaska },
   name: "PageMainHeader",
-  
+
   props: {
     isAlphabet: Boolean,
     employeesLength: Number,
@@ -148,17 +148,17 @@ export default {
 
   data() {
     return {
-      isOpen: false,
       myMask: "",
-
       mask: {
         masked: "",
         unmasked: "",
         completed: false
       },
 
-      checked: null,
+      marked: false,
       selected: "",
+      isOpen: false,
+
       category: {},
       inputValue: "",
 
@@ -181,9 +181,11 @@ export default {
   },
 
   methods: {
-    resetTags() {
-      this.checked = true;
-      this.$emit("resetTags", { check: this.checked });
+    resetColorMarks() {
+      this.marked = true;
+      this.$emit("resetMarks", { mark: this.marked });
+      this.marked = false;
+      // console.log(this.marked);
     },
 
     employeeCreate() {
@@ -266,7 +268,7 @@ export default {
   padding: 10px 10px 10px 75px;
 }
 
-.main-header__reset-tags {
+.main-header__reset-marks {
   align-self: center;
 }
 
@@ -321,7 +323,7 @@ export default {
     gap: 15px;
   }
 
-  .main-header__reset-tags,
+  .main-header__reset-marks,
   .main-header__button-create,
   .main-header__button-reset,
   .main-header__button-search,

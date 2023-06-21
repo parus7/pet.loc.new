@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="icon-tags-reset"
+    class="icon-marks-reset"
     width="20"
     height="20"
     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -11,11 +11,11 @@
 </template>
 <script>
 export default {
-  name: "IconTagsReset"
+  name: "IconMarksReset"
 };
 </script>
 <style scoped>
-.icon-tags-reset {
+.icon-marks-reset {
   width: 20px;
   fill: var(--vt-c-active-10);
 }

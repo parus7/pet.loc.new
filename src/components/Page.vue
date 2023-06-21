@@ -19,7 +19,7 @@
       :employees="[...employees]"
       :message="message"
       :isMain="isMain"
-      :isChecked="isChecked"
+      :isMarked="isMarked"
       @deleteEmployee="$emit('deleteEmployee',  $event )"
     />
   </div>
@@ -39,7 +39,7 @@ export default {
     message: String,
     amountBirthdays: Number,
     isMain: Boolean,
-    isChecked: Boolean
+    isMarked: Boolean
   }
 };
 </script>
