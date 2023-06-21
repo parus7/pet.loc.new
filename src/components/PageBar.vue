@@ -55,12 +55,12 @@ export default {
 .bar {
   display: flex;
   flex-direction: column;
-  gap: 11%;
+  gap: 110px;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 80px 12px;
+  padding: 110px 12px;
 }
 
 .bar__alert {

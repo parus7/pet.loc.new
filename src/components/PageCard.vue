@@ -169,6 +169,17 @@
           v-model.trim="employee['title']"
         />
       </label>
+
+      <label class="card-form__label">Хэштег
+        <input
+          id="hashtag"
+          type="text"
+          aria-label="хэштег"
+          class="card-form__hashtag"
+          tabindex="14"
+          v-model.trim="employee['hashtag']"
+        />
+      </label>
     </fieldset>
 
     <template v-if="!isMain">
@@ -176,13 +187,11 @@
     </template>
 
     <div class=" card-form__buttons">
-
       <template v-if="!isMain">
         <span
           class="tooltip tooltip-position"
           data-name="редактировать"
         >
-
           <PageColorButton
             tabindex="0"
             aria-label="кнопка редактирования данных сотрудника"
@@ -194,7 +203,7 @@
 
         <span class="tooltip tooltip-position" data-name="сохранить">
           <PageColorButton
-            tabindex="14"
+            tabindex="15"
             aria-label="кнопка сохранения данных сотрудника"
             @click="setRequiredField(), onSaveEmployee(employee['id'])"
           >
@@ -216,7 +225,7 @@
 
       <span class="tooltip tooltip-position" data-name="выйти">
         <PageColorButton
-          tabindex="isMain ? '15': '1'"
+          tabindex="isMain ? '16': '1'"
           aria-label="кнопка выхода"
           :disabled="!sendForm"
           @click=" this.$router.go(-1)"
@@ -370,6 +379,10 @@ export default {
 
 .card-form__address {
   grid-column: 1 / -1;
+}
+
+.card-form__hashtag {
+  width: 23%;
 }
 
 .card-form__explanations {

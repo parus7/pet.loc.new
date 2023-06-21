@@ -179,7 +179,8 @@ export default {
         { text: "должность", item: "title" },
         { text: "отдел", item: "department" },
         { text: "компания", item: "company" },
-        { text: "город", item: "city" }
+        { text: "город", item: "city" },
+        { text: "хэштег", item: "hashtag" }
       ]
     };
   },
@@ -196,29 +197,22 @@ export default {
     },
 
     transformCategory() {
-      return this.categories.find(
-        (elem) => elem.text === this.selected
-      );
+      return this.categories.find((elem) => elem.text === this.selected);
     },
 
     onMask() {
       this.category = this.transformCategory();
 
       this.myMask =
-        this.category.item === "birthday"
-          ? "##.##"
-          : this.category.item === "telephone"
-            ? "##-##"
-            : this.category.item === "mobile"
-              ? "### ###-##-##"
+        this.category.item === "birthday" ? "##.##"
+          : this.category.item === "telephone" ? "##-##"
+            : this.category.item === "mobile" ? "### ###-##-##"
               : "";
     },
 
     filterEmployee() {
       this.inputValue =
-        this.myMask === ""
-          ? this.inputValue.toLowerCase()
-          : this.mask.unmasked;
+        this.myMask === "" ? this.inputValue.toLowerCase() : this.mask.unmasked;
 
       this.$emit("filterEmployee", {
         category: this.category.item,
@@ -252,10 +246,7 @@ export default {
     },
 
     changeButtonRole() {
-      return !(this.$route.query
-        && this.$route.query.value
-        && this.$route.query.category
-      );
+      return !(this.$route.query && this.$route.query.value && this.$route.query.category);
     },
 
     blockAlphabetButton() {
@@ -263,9 +254,7 @@ export default {
     },
 
     blockWithMissingParams() {
-      return !(this.inputValue
-        && this.category.item
-        && this.selected);
+      return !(this.inputValue && this.category.item && this.selected);
     }
   }
 };
@@ -279,7 +268,7 @@ export default {
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 10px 10px 10px 70px;
+  padding: 10px 10px 10px 75px;
 }
 
 .main-header__reset-tags {
@@ -293,7 +282,7 @@ export default {
 
 .main-header__form-select,
 .main-header__form-search {
-  padding: 11px 10px 11px 20px;
+  padding: 5px 15px;
 }
 
 .main-header__button-alphabet {

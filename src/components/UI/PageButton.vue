@@ -22,7 +22,7 @@ export default {
   outline-color: var(--vt-c-outline-10);
   background: inherit;
   border-radius: 6px;
-  box-shadow: 1px 1px 0 0 var(--vt-c-active-2);
+  box-shadow: 1px 2px 0 0 var(--vt-c-active-2);
   padding: 0;
 }
 

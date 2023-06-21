@@ -17,7 +17,7 @@
     "department": "Служба персонала",
     "company": "Копыта ОАО",
     "city": "Москва",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -38,8 +38,8 @@
     "department": "Служба инженерных технологий",
     "company": "Рога АНО",
     "city": "Москва",
-    "colorTag": false,
-    "hashtag": ""
+    "colorMark": "white",
+    "hashtag": "#bye"
   },
   {
     "id": "3",
@@ -59,7 +59,7 @@
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
     "city": "Москва",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -80,7 +80,7 @@
     "department": "Служба персонала",
     "company": "Рога и копыта ООО",
     "city": "Санкт-Петербург",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -101,7 +101,7 @@
     "department": "Отдел продаж",
     "company": "Рога и копыта ООО",
     "city": "Псков",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -122,7 +122,7 @@
     "department": "Служба персонала",
     "company": "Рога и копыта ООО",
     "city": "Псков",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -143,8 +143,8 @@
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
     "city": "Москва",
-    "colorTag": false,
-    "hashtag": ""
+    "colorMark": "white",
+    "hashtag": "#hi"
   },
   {
     "id": "8",
@@ -164,7 +164,7 @@
     "department": "Отдел финансового планирования и анализа",
     "company": "Чистая компания ООО",
     "city": "Осло",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -185,8 +185,8 @@
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
     "city": "Москва",
-    "colorTag": false,
-    "hashtag": ""
+    "colorMark": "white",
+    "hashtag": "#bye"
   },
   {
     "id": "10",
@@ -206,7 +206,7 @@
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
     "city": "Псков",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -227,8 +227,8 @@
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
     "city": "Москва",
-    "colorTag": false,
-    "hashtag": ""
+    "colorMark": "white",
+    "hashtag": "#bye"
   },
   {
     "id": "12",
@@ -248,7 +248,7 @@
     "department": "Служба персонала",
     "company": "Рога и копыта ООО",
     "city": "Москва",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   },
   {
@@ -269,8 +269,8 @@
     "department": "Отдел финансового планирования и анализа",
     "company": "Рога и копыта ООО",
     "city": "Москва",
-    "colorTag": false,
-    "hashtag": ""
+    "colorMark": "white",
+    "hashtag": "#hi"
   },
   {
     "id": "14",
@@ -290,7 +290,7 @@
     "department": "Служба персонала",
     "company": "Рога ООО",
     "city": "Оренбург",
-    "colorTag": false,
+    "colorMark": "white",
     "hashtag": ""
   }
 ]

@@ -7,7 +7,7 @@
           :key="employee.id"
           :employee="{ ...employee }"
           :isMain="isMain"
-          :isChecked="isChecked"
+          :isUnmarked="isUnmarked"
           @deleteEmployee="$emit('deleteEmployee',  $event )"
         />
       </transition-group>
@@ -29,7 +29,7 @@ export default {
     employees: Object,
     message: String,
     isMain: Boolean,
-    isChecked: Boolean
+    isUnmarked: String
   }
 };
 </script>
