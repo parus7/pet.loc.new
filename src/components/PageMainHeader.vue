@@ -40,7 +40,6 @@
       <select
         class="main-header__form-select"
         aria-label="поле выбора категории для поиска"
-        ref="basicSearch"
         v-model="selected"
         @change="onMask"
       >
@@ -140,11 +139,7 @@ export default {
   components: { PageButton, IconTagsReset, PageColorButton, IconAdd, IconSearch, IconFilterReset, PagePopup },
   directives: { maska: vMaska },
   name: "PageMainHeader",
-
-  // mounted() {
-  //   this.$refs.basicSearch.focus();
-  // },
-
+  
   props: {
     isAlphabet: Boolean,
     employeesLength: Number,
