@@ -6,10 +6,18 @@
     >
       <PageButton
         class="main-header__reset-marks"
-        @click="resetColorMarks"
+        @click="isOpenMark = true"
       >
           <IconMarksReset />
       </PageButton>
+
+      <PagePopup
+        :is-open="isOpenMark"
+        @close="isOpenMark = false"
+        @ok="resetColorMarks()"
+      >
+         Вы хотите сбросить цветные ярлыки?
+      </PagePopup>
     </span>
 
     <span
@@ -19,21 +27,18 @@
         <PageColorButton
           class="main-header__button-create"
           aria-label="создать сотрудника"
-          @click="isOpen = true"
+          @click="isOpenCreate = true"
         >
           <IconAdd />
         </PageColorButton>
 
-         <PagePopup
-           :is-open="isOpen"
-           @close="isOpen = false"
-           @ok="employeeCreate($event)"
-         >
-            <template #popupText>
-              Вы хотите создать карточку нового сотрудника?
-            </template>
-
-          </PagePopup>
+               <PagePopup
+                 :is-open="isOpenCreate"
+                 @close="isOpenCreate = false"
+                 @ok="employeeCreate()"
+               >
+             Вы хотите создать карточку нового сотрудника?
+                </PagePopup>
       </span>
 
     <div class="main-header__wrap">
@@ -155,9 +160,10 @@ export default {
         completed: false
       },
 
-      marked: false,
+      isMark: false,
       selected: "",
-      isOpen: false,
+      isOpenCreate: false,
+      isOpenMark: false,
 
       category: {},
       inputValue: "",
@@ -182,15 +188,14 @@ export default {
 
   methods: {
     resetColorMarks() {
-      this.marked = true;
-      this.$emit("resetMarks", { mark: this.marked });
-      this.marked = false;
-      // console.log(this.marked);
+      this.isMark = !this.isMark;
+      this.$emit("resetMarks", { mark: this.isMark });
+      this.isOpenMark = false;
     },
 
     employeeCreate() {
-      this.isOpen = false;
-      this.$emit("employeeCreate");
+      this.$emit("employeeCreate", { create: true });
+      this.isOpenCreate = false;
     },
 
     transformCategory() {

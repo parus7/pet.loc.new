@@ -1,9 +1,11 @@
 <template>
   <div v-if="isOpen" class="popup" @click="closePopup">
+
     <div class="popup__body" @click.stop>
       Внимание!
+
       <span>
-          <slot name="popupText"></slot>
+        <slot></slot>
       </span>
 
       <div class="popup__wrapper">

@@ -81,7 +81,7 @@ export default {
       let month = String(new Date().getMonth() + 1);
       month.length === 1 ? (month = "0" + month) : month;
 
-      return this.amountBirthdays = ([...this.employees].filter(
+      return this.amountBirthdays = ([...this.getAllEmployeesArray("employees")].filter(
         (elem) => elem["birthday"] === day + month).length);
     }
   },
@@ -101,7 +101,6 @@ export default {
 
     resetColorMarks(event) {
       this.isMarked = event.mark;
-      // console.log(this.isMarked);
     },
 
     onFilterBasicData(event) {

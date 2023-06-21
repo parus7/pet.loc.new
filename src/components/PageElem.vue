@@ -138,9 +138,8 @@ export default {
 
   watch: {
     isMarked(value) {
-      if (value) {
-        this.$refs.colorMark.style.background = "var( --vt-c-white)";
-      }
+      this.$refs.colorMark.style.background = "var( --vt-c-white)";
+      this.employee.colorMark = "white";
     }
   },
 
@@ -155,16 +154,20 @@ export default {
 
       if (this.clicks === 1) {
         this.$refs.colorMark.style.background = "var( --vt-c-outline-2)";
+        this.employee.colorMark = "yellow";
 
       } else if (this.clicks === 2) {
         this.$refs.colorMark.style.background = "var(  --vt-c-alert-2)";
+        this.employee.colorMark = "red";
 
       } else if (this.clicks === 3) {
         this.$refs.colorMark.style.background = "var( --vt-c-active-2)";
+        this.employee.colorMark = "blue";
 
       } else {
         this.clicks = 0;
         this.$refs.colorMark.style.background = "var( --vt-c-white)";
+        this.employee.colorMark = "white";
       }
     }
   }
