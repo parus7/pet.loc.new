@@ -1,4 +1,7 @@
 <template>
+
+  <PageSpinner v-if="isReset" />
+
   <Page
     :employees="employees"
     :message="message"
@@ -29,13 +32,14 @@
 <script>
 import Page from "@/components/Page.vue";
 import PageMainHeader from "@/components/PageMainHeader.vue";
+import PageSpinner from "@/components/PageSpinner.vue";
 
 import { mapState, mapActions } from "pinia";
 import { useEmplStore } from "@/stores/EmplStore";
 import employeesData from "@/data/employeesData.json";
 
 export default {
-  components: { Page, PageMainHeader },
+  components: { Page, PageMainHeader, PageSpinner },
 
   data() {
     return {
@@ -45,6 +49,7 @@ export default {
       isMain: true,
       isAlphabet: false,
       isMarked: null,
+      isReset: false,
       filteredEmployees: [],
       employeesLength: null,
 
@@ -100,7 +105,10 @@ export default {
     ]),
 
     resetColorMarks(event) {
-      this.isMarked = event.mark;
+      setTimeout(() => {
+        this.isReset = true;
+        this.isMarked = event.mark;
+      }, 4444);
     },
 
     onFilterBasicData(event) {
