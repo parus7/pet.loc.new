@@ -23,7 +23,7 @@ export default {
 
 .spinner__body {
   position: absolute;
-  bottom: 50%;
+  bottom: 30%;
   right: 50%;
   width: 16px;
   height: 16px;
