@@ -72,20 +72,18 @@
     >
         <PageButton
           aria-label="удалить сотрудника в архив"
-          @click="isOpen = true"
+          @click="isOpenDelete = true"
         >
           <IconDelete />
         </PageButton>
       </span>
 
     <PagePopup
-      :is-open="isOpen"
-      @close="isOpen = false"
+      :is-open="isOpenDelete"
+      @close="isOpenDelete = false"
       @ok="popupDelete"
     >
-      <template #popupText>
-        Вы хотите удалить сотрудника?
-      </template>
+      Вы хотите удалить сотрудника?
 
     </PagePopup>
   </template>
@@ -131,7 +129,7 @@ export default {
 
   data() {
     return {
-      isOpen: false,
+      isOpenDelete: false,
       clicks: 0
     };
   },
@@ -146,7 +144,7 @@ export default {
   methods: {
     popupDelete() {
       this.$emit("deleteEmployee", { id: this.employee.id });
-      this.isOpen = false;
+      this.isOpenDelete = false;
     },
 
     setMark(event) {

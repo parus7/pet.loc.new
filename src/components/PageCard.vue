@@ -195,7 +195,7 @@
           <PageColorButton
             tabindex="0"
             aria-label="кнопка редактирования данных сотрудника"
-            @click="isOpen = true"
+            @click="isOpenEdit = true"
           >
             <IconEdit />
           </PageColorButton>
@@ -212,13 +212,11 @@
         </span>
 
         <PagePopup
-          :is-open="isOpen"
+          :is-open="isOpenEdit"
           @ok="popupConfirm"
-          @close="isOpen = false"
+          @close="isOpenEdit = false"
         >
-          <template #popupText>
-            Вы хотите изменить данные сотрудника?
-          </template>
+          Вы хотите изменить данные сотрудника?
 
         </PagePopup>
       </template>
@@ -262,7 +260,7 @@ export default {
   data() {
     return {
       paramsId: null,
-      isOpen: false,
+      isOpenEdit: false,
       tabindex: 1,
 
       maskaBirthday: {
@@ -323,7 +321,7 @@ export default {
     },
 
     popupConfirm() {
-      this.isOpen = false;
+      this.isOpenEdit = false;
 
       this.$nextTick(() => {
         this.$refs.lastName.focus();
