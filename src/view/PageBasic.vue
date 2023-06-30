@@ -171,12 +171,5 @@ export default {
       this.createEmployee();
     }
   }
-}
-;
+};
 </script>
-
-<style>
-.page_header__main {
-  grid-column: 1/-1;
-}
-</style>

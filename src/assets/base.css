@@ -106,7 +106,7 @@ fieldset {
     font-size: 0.7rem;
     text-transform: lowercase;
     opacity: 0.5;
-    padding: 5px;
+    padding: 0 5px;
 }
 
 /*class "status " for the field  "hide" in employee (employeeData.json)*/

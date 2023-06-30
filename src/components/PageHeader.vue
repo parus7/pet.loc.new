@@ -34,9 +34,7 @@ export default {
 .secondary-header {
   display: flex;
   justify-content: end;
-  column-gap: 30px;
-  grid-column: 1/-1;
-
+  column-gap: 5%;
   background-color: var(--vt-c-active-2);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
   border-radius: 8px;
@@ -45,11 +43,5 @@ export default {
 
 .tooltip-position:hover::after {
   right: 0;
-}
-
-@media screen and (max-width: 425px) {
-  .secondary-header {
-    column-gap: 20px;
-  }
 }
 </style>

@@ -54,13 +54,13 @@ export default {
 <style scoped>
 .bar {
   display: flex;
-  flex-direction: column;
-  gap: 110px;
+  justify-content: center;
+  gap: 16%;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 110px 12px;
+  padding: 10px;
 }
 
 .bar__alert {
@@ -84,14 +84,5 @@ export default {
 
 .tooltip-position:hover::after {
   left: 0;
-}
-
-@media screen and (max-width: 991px) {
-  .bar {
-    flex-direction: row;
-    justify-content: center;
-    gap: 16%;
-    padding: 10px 0;
-  }
 }
 </style>

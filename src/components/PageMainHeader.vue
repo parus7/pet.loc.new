@@ -265,12 +265,14 @@ export default {
 <style scoped>
 .main-header {
   display: grid;
-  grid-template-columns:  repeat(5, auto);
+  grid-template-columns:auto auto 50% auto auto;
+  justify-content: space-between;
+  column-gap: 2%;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 10px 10px 10px 75px;
+  padding: 10px;
 }
 
 .main-header__reset-marks {
@@ -279,12 +281,12 @@ export default {
 
 .main-header__wrap {
   display: flex;
-  gap: 35px;
+  column-gap: 7%;
 }
 
 .main-header__form-select,
 .main-header__form-search {
-  padding: 5px 15px;
+  padding: 11px 15px;
 }
 
 .main-header__button-alphabet {
@@ -297,24 +299,13 @@ export default {
 }
 
 .tooltip-position:hover::after {
-  left: 0;
+  bottom: 50px;
 }
 
-@media screen and (max-width: 991px) {
-  .main-header {
-    padding: 10px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .main-header {
-    grid-template-columns:auto auto 1fr auto auto;
-    gap: 10px;
-  }
-
+@media screen and (max-width: 900px) {
   .main-header__wrap {
     flex-direction: column;
-    gap: 15px;
+    row-gap: 10px;
   }
 
   .tooltip-position:hover::after {
@@ -322,10 +313,10 @@ export default {
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 767px) {
   .main-header {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 13px;
   }
 
   .main-header__reset-marks,

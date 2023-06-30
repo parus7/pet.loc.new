@@ -241,7 +241,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 600px) {
   .employee {
     grid-template-columns: min-content 1fr repeat(2, auto);
   }

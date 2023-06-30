@@ -11,7 +11,6 @@
           <input
             id="search"
             type="text"
-            class="header__form-search"
             ref="archiveSearch"
             aria-label="поле поиска"
             placeholder="Поиск..."
