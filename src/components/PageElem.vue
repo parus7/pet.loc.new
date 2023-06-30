@@ -180,7 +180,7 @@ export default {
 
   align-items: center;
   border-radius: 8px;
-  box-shadow: 2px 2px 0 0 var(--vt-c-active-2);
+  box-shadow: 0 2px 0 0 var(--vt-c-active-2);
   background-color: var(--vt-c-white-mute);
   padding: 10px;
 }
@@ -195,7 +195,7 @@ export default {
 
 .secondary {
   background-color: var(--vt-c-active-2);
-  box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
+  box-shadow: 0 2px 0 0 var(--vt-c-active-4);
 }
 
 .employee__photo {
