@@ -134,7 +134,7 @@ export default defineComponent({
   padding: 10px;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 425px) {
   .carousel__box {
     font-size: 0.7rem;
   }
