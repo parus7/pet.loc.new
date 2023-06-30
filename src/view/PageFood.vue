@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
 .page-food {
-  padding: 17px;
+  padding: 30px;
 }
 
 .page-food_header {
