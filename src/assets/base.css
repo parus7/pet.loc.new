@@ -32,7 +32,7 @@ body {
     text-rendering: optimizeLegibility;
     box-sizing: border-box;
     overflow-y: scroll;
-    /*scrollbar-color:   var(--vt-c-active-6) var(--vt-c-white-mute) ;*/
+    /*scrollbar-color:   var(--vt-c-active-6) var(--vt-c-white-mute) ; doesn't work*/
     margin: 0 auto;
 }
 
@@ -110,7 +110,7 @@ fieldset {
 
 .tooltip:hover::after {
     position: absolute;
-    bottom: 42px;
+    bottom: -25px;
     content: attr(data-name);
     background: var(--vt-c-active-2);
     border-radius: 6px;

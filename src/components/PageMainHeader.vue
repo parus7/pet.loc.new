@@ -298,25 +298,17 @@ export default {
   transform: scale(1.03);
 }
 
-.tooltip-position:hover::after {
-  bottom: 50px;
-}
-
 @media screen and (max-width: 900px) {
   .main-header__wrap {
     flex-direction: column;
     row-gap: 10px;
-  }
-
-  .tooltip-position:hover::after {
-    bottom: 95px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .main-header {
     grid-template-columns: 1fr;
-    gap: 13px;
+    gap: 20px;
   }
 
   .main-header__reset-marks,
@@ -332,7 +324,7 @@ export default {
   }
 
   .tooltip-position:hover::after {
-    bottom: 40px;
+    bottom: -15px;
   }
 }
 </style>
