@@ -31,7 +31,22 @@ body {
     font-size: 0.86rem;
     text-rendering: optimizeLegibility;
     box-sizing: border-box;
+    overflow-y: scroll;
+    /*scrollbar-color:   var(--vt-c-active-6) var(--vt-c-white-mute) ;*/
     margin: 0 auto;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: var(--vt-c-white-mute);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--vt-c-active-6);
+    border-radius: 8px;
 }
 
 .link {
