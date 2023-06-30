@@ -30,7 +30,7 @@ export default {
   flex-direction: column;
   align-items: center;
 
-  width: 25vh;
+  width: 20vw;
   height: 37vh;
   color: var(--vt-c-grey-font);
   background-color: var(--vt-c-active-2);
