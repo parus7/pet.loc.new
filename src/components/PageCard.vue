@@ -8,14 +8,36 @@
     autocomplete="on"
   >
 
-    <img
-      class="card-form__photo"
-      :class="{ status: employee['hide'] }"
-      :alt="`id: ${employee['id']}`"
-      :src="employee['src']"
-      width="110"
-      height="110"
-    />
+    <div
+      class="card-form__uploader"
+      @mouseover="upload = true && isEdit"
+      @mouseleave="upload = false"
+    >
+
+      <label v-if="upload ">
+        <IconCamera
+          class="card-form__uploader-icon"
+          @click="uploadPhoto"
+        />
+
+        <input
+          type="file"
+          id="uploaderInput"
+          ref="uploaderInput"
+          @change="uploadPhoto"
+        />
+      </label>
+
+      <img
+        class="card-form__photo"
+        :class="{ status: employee['hide'] }"
+        :alt="`id: ${employee['id']}`"
+        :src="employee['src']"
+        width="128"
+        height="128"
+      />
+
+    </div>
 
     <fieldset class="card-form__full-name" :disabled="!isEdit">
       <label class="card-form__label card-form__label-required"
@@ -243,12 +265,13 @@ import { vMaska } from "maska";
 import PagePopup from "@/components/PagePopup.vue";
 import PageColorButton from "@/components/UI/PageColorButton.vue";
 
+import IconCamera from "@/components/icons/IconCamera.vue";
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconSave from "@/components/icons/IconSave.vue";
 import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { PagePopup, PageColorButton, IconEdit, IconSave, IconGoTo },
+  components: { PagePopup, PageColorButton, IconCamera, IconEdit, IconSave, IconGoTo },
   directives: { maska: vMaska },
 
   props: {
@@ -279,7 +302,10 @@ export default {
         masked: "",
         unmasked: "",
         completed: false
-      }
+      },
+
+      upload: null,
+      employeePhoto: ""
     };
   },
 
@@ -298,6 +324,10 @@ export default {
       "delEmployee",
       "addEmployee"
     ]),
+
+    uploadPhoto() {
+      this.employeePhoto = this.$refs.uploaderInput.files[0];
+    },
 
     setRequiredField() {
       [this.$refs.lastName, this.$refs.firstName].map(elem => !elem.value
@@ -336,8 +366,7 @@ export default {
 <style scoped>
 .card-form {
   display: grid;
-  grid-template-columns: min-content min-content auto;
-  grid-template-rows: repeat(5, auto);
+  grid-template-columns: 120px min-content auto;
   gap: 20px;
 
   max-width: 768px;
@@ -359,12 +388,39 @@ export default {
   font-weight: bold;
 }
 
+.card-form__uploader {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  align-self: center;
+}
+
+input[type="file"] {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  width: 50px;
+  height: 60px;
+  opacity: 0;
+  z-index: 997;
+}
+
+.card-form__uploader-icon {
+  position: absolute;
+  top: 45%;
+  left: 40%;
+  z-index: 998;
+}
+
 .card-form__photo {
+  width: 100%;
+  height: 100%;
   background-color: var(--vt-c-white-background-confirm);
+  box-sizing: border-box;
   border-radius: 20%;
   border: 3px solid var(--vt-c-active-2);
   box-shadow: 2px 3px 4px 1px var(--vt-c-active-9);
-  margin: 0 auto;
+  z-index: 996;
 }
 
 .card-form__full-name {

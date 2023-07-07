@@ -31,8 +31,7 @@ body {
     font-size: 0.86rem;
     text-rendering: optimizeLegibility;
     box-sizing: border-box;
-    overflow-y: scroll;
-    /*scrollbar-color:   var(--vt-c-active-6) var(--vt-c-white-mute) ; doesn't work*/
+    scrollbar-color: var(--vt-c-active-6) var(--vt-c-white-mute); /*doesn't work for Firefox */
     margin: 0 auto;
 }
 
