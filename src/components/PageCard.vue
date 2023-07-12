@@ -14,10 +14,9 @@
       @mouseleave="upload = false"
     >
 
-      <label v-if="upload ">
-        <IconCamera
+      <label v-if='upload && employeePhoto === ""'>
+        <IconUpload
           class="card-form__uploader-icon"
-          @click="uploadPhoto"
         />
 
         <input
@@ -265,13 +264,13 @@ import { vMaska } from "maska";
 import PagePopup from "@/components/PagePopup.vue";
 import PageColorButton from "@/components/UI/PageColorButton.vue";
 
-import IconCamera from "@/components/icons/IconCamera.vue";
+import IconUpload from "@/components/icons/IconUpload.vue";
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconSave from "@/components/icons/IconSave.vue";
 import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { PagePopup, PageColorButton, IconCamera, IconEdit, IconSave, IconGoTo },
+  components: { PagePopup, PageColorButton, IconUpload, IconEdit, IconSave, IconGoTo },
   directives: { maska: vMaska },
 
   props: {
