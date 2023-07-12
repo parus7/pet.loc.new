@@ -226,7 +226,7 @@
           <PageColorButton
             tabindex="15"
             aria-label="кнопка сохранения данных сотрудника"
-            @click="setRequiredField(), onSaveEmployee(employee['id'])"
+            @click="onSaveEmployee(employee['id'])"
           >
             <IconSave />
           </PageColorButton>
@@ -330,7 +330,7 @@ export default {
 
     setRequiredField() {
       [this.$refs.lastName, this.$refs.firstName].map(elem => !elem.value
-        ? elem.style.border = "2px solid var(--vt-c-alert)"
+        ? elem.style.border = "2px solid var(--vt-c-alert-7)"
         : elem.style.border = "none");
     },
 
@@ -343,6 +343,8 @@ export default {
     },
 
     onSaveEmployee(paramsId) {
+      this.setRequiredField();
+
       this.$emit("editNo");
       this.delEmployee(paramsId);
 
