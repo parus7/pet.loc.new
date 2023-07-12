@@ -32,8 +32,8 @@
         :class="{ status: employee['hide'] }"
         :alt="`id: ${employee['id']}`"
         :src="employee['src']"
-        width="128"
-        height="128"
+        width="110"
+        height="110"
       />
 
     </div>
@@ -367,22 +367,21 @@ export default {
 <style scoped>
 .card-form {
   display: grid;
-  grid-template-columns: 120px min-content auto;
-  gap: 20px;
+  grid-template-columns: min-content min-content auto;
+  gap: 30px;
 
   max-width: 768px;
   background-color: var(--vt-c-white-mute);
   box-shadow: 4px 4px 4px 0 var(--vt-c-active-2);
   border-radius: 20px;
-  padding: 30px;
+  padding: 5%;
   margin: 30px auto;
 }
 
 .card-form__label {
   display: grid;
-  grid-template-columns: 90px 1fr;
+  grid-template-columns: 85px 1fr;
   align-items: center;
-  margin-bottom: 15px;
 }
 
 .card-form__label-required {
@@ -391,37 +390,31 @@ export default {
 
 .card-form__uploader {
   position: relative;
-  width: 120px;
-  height: 120px;
-  align-self: center;
+  margin: 0 auto;
 }
 
 input[type="file"] {
   position: absolute;
-  top: 25px;
-  left: 25px;
-  width: 50px;
-  height: 60px;
+  top: 10px;
+  left: 5px;
+  width: 70px;
+  height: 80px;
   opacity: 0;
-  z-index: 997;
 }
 
 .card-form__uploader-icon {
   position: absolute;
-  top: 45%;
-  left: 40%;
-  z-index: 998;
+  top: calc(50% - 13px);
+  left: calc(50% - 13px);
+  z-index: 999;
 }
 
 .card-form__photo {
-  width: 100%;
-  height: 100%;
   background-color: var(--vt-c-white-background-confirm);
   box-sizing: border-box;
   border-radius: 20%;
   border: 3px solid var(--vt-c-active-2);
   box-shadow: 2px 3px 4px 1px var(--vt-c-active-9);
-  z-index: 996;
 }
 
 .card-form__full-name {
@@ -451,8 +444,7 @@ input[type="file"] {
 
   display: flex;
   justify-content: end;
-  gap: 40px;
-  max-width: 500px;
+  column-gap: 10%;
   padding: 0 15px;
 }
 
@@ -469,19 +461,8 @@ input[type="file"] {
   }
 
   .card-form__buttons {
-    width: 360px;
     justify-content: space-around;
     margin: 0 auto;
-  }
-}
-
-@media (max-width: 425px) {
-  .card-form {
-    padding: 15px;
-  }
-
-  .card-form__buttons {
-    width: 250px;
   }
 }
 </style>
