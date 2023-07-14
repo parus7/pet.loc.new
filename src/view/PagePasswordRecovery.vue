@@ -1,7 +1,6 @@
 <template>
   <PageEntrance
     :title="title"
-    :isRegistration="isRegistration"
     :isRecovery="isRecovery"
     :buttonTitle="buttonTitle"
   >
@@ -20,10 +19,13 @@ export default {
   data() {
     return {
       title: "Восстановить пароль",
-      isRegistration: false,
       isRecovery: true,
-      buttonTitle: "Отправить"
+      buttonTitle: "Отправить код"
     };
+  },
+
+  methods:{
+
   }
 };
 </script>

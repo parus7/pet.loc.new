@@ -7,39 +7,47 @@
         {{ title }}
       </h1>
 
-      <template v-if="!isRegistration">
+      <form
+        class="login-form"
+        @submit.prevent>
 
-        <form class="login-form">
+        <input
+          name="login"
+          type="email"
+          aria-label="E-mail"
+          placeholder="Логин / E-mail"
+          v-model="login"
+        />
+
+        <template v-if="isRecovery">
+          <div class="login-form__message">
+            Введите e-mail, на него будет выслан проверочный код
+          </div>
+        </template>
+
+        <template v-else>
           <input
-            name="login"
-            type="email"
-            aria-label="E-mail"
-            placeholder="Логин / E-mail"
+            name="password"
+            type="text"
+            aria-label="Пароль"
+            placeholder="Пароль"
+            v-model="password"
+            @keyup.enter="getEntrance"
           />
+        </template>
 
-          <template v-if="!isRecovery">
-            <input
-              name="password"
-              type="text"
-              aria-label="Пароль"
-              placeholder="Пароль"
-            />
-          </template>
+        <div class="login-form__message">{{ errorMessage }}</div>
 
-          <PageColorButton
-            type="submit"
-            class="login-form__button">
-            {{ buttonTitle }}
-          </PageColorButton>
+        <PageColorButton
+          class="login-form__button"
+          @click="getEntrance"
+        >
+          {{ buttonTitle }}
+        </PageColorButton>
 
-        </form>
-      </template>
+      </form>
 
-      <template v-else>
-        <slot name="formRegistration"></slot>
-      </template>
-
-      <slot name="linkRecoveryAndRegistration"></slot>
+      <slot name="linkRecovery"></slot>
 
     </div>
   </div>
@@ -54,9 +62,22 @@ export default {
 
   props: {
     title: String,
-    isRegistration: Boolean,
     isRecovery: Boolean,
-    buttonTitle: String
+    buttonTitle: String,
+    errorMessage: String
+  },
+
+  data() {
+    return {
+      login: "",
+      password: ""
+    };
+  },
+
+  methods: {
+    getEntrance() {
+      this.$emit("getEntrance", { login: this.login, password: this.password });
+    }
   }
 };
 </script>
@@ -74,8 +95,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 20vw;
-  height: 37vh;
+  width: 250px;
+  height: 450px;
   color: var(--vt-c-grey-font);
   background-color: var(--vt-c-active-2);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
@@ -91,11 +112,18 @@ export default {
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
+  width: 100%;
 }
 
 .login-form__button {
   padding: 20px;
-  margin-top: 20px;
+}
+
+.login-form__message {
+  height: 30px;
+  align-self: center;
+  text-align: center;
+  color: var(--vt-c-alert-7);
 }
 </style>

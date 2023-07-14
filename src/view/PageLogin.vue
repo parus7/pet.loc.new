@@ -3,9 +3,11 @@
     :title="title"
     :isRecovery="isRecovery"
     :buttonTitle="buttonTitle"
+    :errorMessage="errorMessage"
+    @getEntrance="requestEntry($event)"
   >
 
-    <template v-slot:linkRecoveryAndRegistration>
+    <template v-slot:linkRecovery>
       <RouterLink
         class="login-field__prompt"
         :to="{
@@ -14,13 +16,6 @@
       >Забыли пароль?
       </RouterLink>
 
-      <RouterLink
-        class="login-field__prompt"
-        :to="{
-        name: 'registration',
-      }"
-      >Создать аккаунт
-      </RouterLink>
     </template>
 
   </PageEntrance>
@@ -29,6 +24,7 @@
 <script>
 import PageEntrance from "@/components/PageEntrance.vue";
 import PageColorButton from "@/components/UI/PageColorButton.vue";
+import axios from "axios";
 
 export default {
   components: { PageColorButton, PageEntrance },
@@ -39,8 +35,20 @@ export default {
       title: "Вход",
       isRegistration: false,
       isRecovery: false,
-      buttonTitle: "Войти"
+      buttonTitle: "Войти",
+      errorMessage: ""
     };
+  },
+
+  methods: {
+    requestEntry(event) {
+      axios.post('http://saa.44321.ru/', {
+        login: event.login,
+        password: event.password
+      })
+        .then(response => this.$router.push({ name: "basic" }))
+        .catch(error => (this.errorMessage = "Неверный логин или пароль"));
+    }
   }
 };
 </script>
@@ -56,10 +64,5 @@ export default {
 .login-field__prompt:hover {
   color: var(--vt-c-active-4);
   font-size: 0.97rem;
-}
-
-.login-field__prompt:active {
-  color: var(--vt-c-active-10);
-  font-size: 1rem;
 }
 </style>
