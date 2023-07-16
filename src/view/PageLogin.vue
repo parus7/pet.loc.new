@@ -42,12 +42,12 @@ export default {
 
   methods: {
     requestEntry(event) {
-      axios.post('http://saa.44321.ru/', {
+      axios.post("http://saa.44321.ru/", {
         login: event.login,
         password: event.password
       })
         .then(response => this.$router.push({ name: "basic" }))
-        .catch(error => (this.errorMessage = "Неверный логин или пароль"));
+        .catch(error => (this.errorMessage = "Неверный логин  или пароль"));
     }
   }
 };

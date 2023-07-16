@@ -33,7 +33,7 @@ export default {
 }
 
 .color-button:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   box-shadow: 5px 5px 5px 2px var(--vt-c-active-2);
 }
 

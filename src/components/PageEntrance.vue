@@ -36,7 +36,7 @@
           />
         </template>
 
-        <div class="login-form__message">{{ errorMessage }}</div>
+        <div class="login-form__error-message">{{ errorMessage }}</div>
 
         <PageColorButton
           class="login-form__button"
@@ -64,7 +64,8 @@ export default {
     title: String,
     isRecovery: Boolean,
     buttonTitle: String,
-    errorMessage: String
+    errorMessage: String,
+    recoveryLogin: String
   },
 
   data() {
@@ -76,7 +77,9 @@ export default {
 
   methods: {
     getEntrance() {
-      this.$emit("getEntrance", { login: this.login, password: this.password });
+      this.isRecovery
+        ? this.$emit("getRecovery", { login: this.login || this.recoveryLogin })
+        : this.$emit("getEntrance", { login: this.login, password: this.password });
     }
   }
 };
@@ -120,10 +123,13 @@ export default {
   padding: 20px;
 }
 
-.login-form__message {
+.login-form__error-message {
   height: 30px;
   align-self: center;
-  text-align: center;
   color: var(--vt-c-alert-7);
+}
+
+.login-form__message {
+  text-align: center;
 }
 </style>
