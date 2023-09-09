@@ -28,7 +28,6 @@
 <script>
 import { useEmplStore } from "@/stores/EmplStore";
 import { mapState, mapActions } from "pinia";
-import employeesArchive from "@/data/employeesArchive.json";
 
 import Page from "@/components/Page.vue";
 import PageHeader from "@/components/PageHeader.vue";
@@ -48,7 +47,7 @@ export default {
     this.inputValue = this.$route.query.value;
 
     this.getEmptyStore("archive")
-      ? this.setMapEmployees(employeesArchive, "archive")
+      ? this.getEmployeesBackend("archive")
       : this.message = this.setMessage("archive");
 
     this.filterArchiveData();
@@ -59,7 +58,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesArray"])
+    ...mapState(useEmplStore, ["getEmptyStore", "getEmployeesBackend", "getAllEmployeesArray"])
   },
 
   methods: {

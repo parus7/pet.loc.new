@@ -36,7 +36,6 @@ import PageSpinner from "@/components/PageSpinner.vue";
 
 import { mapState, mapActions } from "pinia";
 import { useEmplStore } from "@/stores/EmplStore";
-import employeesData from "@/data/employeesData.json";
 
 export default {
   components: { Page, PageMainHeader, PageSpinner },
@@ -63,7 +62,7 @@ export default {
     this.queryRoutCategory = this.$route.query.category;
 
     if (this.getEmptyStore("employees")) {
-      this.setMapEmployees(employeesData, "employees");
+      this.getEmployeesBackend("employees");
     }
 
     let employeeBasic = this.alphabetSortStart([...this.getAllEmployeesArray("employees")]);
@@ -93,6 +92,7 @@ export default {
 
   methods: {
     ...mapActions(useEmplStore, [
+      "getEmployeesBackend",
       "setMapEmployees",
       "createEmployee",
       "alphabetToggle",

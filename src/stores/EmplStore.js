@@ -21,8 +21,19 @@ export const useEmplStore = defineStore("EmplStore", {
   },
 
   actions: {
-    setGender(data) {
-      data.forEach((elem) =>
+    async getEmployeesBackend(key) {
+      let response = await fetch("https://44321.ru/get.php", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      this[key] = await response.json();
+    },
+
+    setGender(key) {
+      console.log(this[key]);
+
+      this[key].forEach((elem) =>
         elem.gender === "m"
           ? (elem.gender = "мужской")
           : elem.gender === "f"
@@ -31,19 +42,20 @@ export const useEmplStore = defineStore("EmplStore", {
       );
     },
 
-    setImage(data) {
-      data.forEach((elem) =>
+    setImage(key) {
+      this[key].forEach((elem) =>
         elem.thumbnail === false
           ? (elem.src = `/src/assets/img/defaultPhoto.jpg`)
           : (elem.src = `/src/assets/img/${elem.id}.jpg`)
       );
     },
 
-    setMapEmployees(data, key) {
-      this.setGender(data);
-      this.setImage(data);
+    setMapEmployees(key) {
+      this.setGender(this[key]);
+      this.setImage(this[key]);
 
       this[key] = new Map();
+      console.log(this);
       data.forEach((elem) => this[key].set(elem.id, elem));
       return this[key];
     },
