@@ -15,13 +15,13 @@
       </PageButton>
     </span>
 
-    <RouterLink :to="{ name: 'archive' }" tabindex="-1">
-      <span class="tooltip tooltip-position" data-name="перейти&nbsp;в&nbsp;архив">
-        <PageButton aria-label="перейти в архив">
-          <IconArchive />
-        </PageButton>
-      </span>
-    </RouterLink>
+    <!--        <RouterLink :to="{ name: 'archive' }" tabindex="-1">-->
+    <span class="tooltip tooltip-position" data-name="перейти&nbsp;в&nbsp;архив">
+            <PageButton aria-label="перейти в архив">
+              <IconArchive />
+            </PageButton>
+          </span>
+    <!--        </RouterLink>-->
 
     <RouterLink :to="{ name: 'food' }" tabindex="-1">
       <span class="tooltip tooltip-position" data-name="посмотреть&nbsp;кафе&nbsp;рядом">

@@ -1,12 +1,11 @@
 import { defineStore } from "pinia";
-import employeesArchive from "@/data/employeesArchive.json";
 
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
       employees: new Map(),
-      archive: new Map(),
     };
+    // archive: new Map(),
   },
 
   getters: {
@@ -21,43 +20,43 @@ export const useEmplStore = defineStore("EmplStore", {
   },
 
   actions: {
-    async getEmployeesBackend(key) {
+    async setEmployeesBackend(key) {
       let response = await fetch("https://44321.ru/get.php", {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      this[key] = await response.json();
-    },
 
-    setGender(key) {
-      console.log(this[key]);
+      // проверяла при   data = [] (если придет пустой массив),
+      // то в функции getEmplFromStore на странице PageBasic
+      // this.message = "Список сотрудников пуст" работает
+      // let data = [];
 
-      this[key].forEach((elem) =>
+      let data = await response.json();
+      // console.log(data);
+
+      data.forEach((elem) =>
         elem.gender === "m"
           ? (elem.gender = "мужской")
           : elem.gender === "f"
           ? (elem.gender = "женский")
           : (elem.gender = "неизвестный")
       );
-    },
+      // console.log(data);
 
-    setImage(key) {
-      this[key].forEach((elem) =>
+      //  !!! тут нужно подумать откуда тянуть картинки,
+      // решили из облака типа Google диска
+      //  пока  тяну картинки из папки img в проекте
+      data.forEach((elem) =>
         elem.thumbnail === false
           ? (elem.src = `/src/assets/img/defaultPhoto.jpg`)
           : (elem.src = `/src/assets/img/${elem.id}.jpg`)
       );
-    },
-
-    setMapEmployees(key) {
-      this.setGender(this[key]);
-      this.setImage(this[key]);
+      // console.log(data);
 
       this[key] = new Map();
-      console.log(this);
       data.forEach((elem) => this[key].set(elem.id, elem));
-      return this[key];
+      // console.log(this[key]);
     },
 
     setMessage(key) {
@@ -67,23 +66,26 @@ export const useEmplStore = defineStore("EmplStore", {
           : "Нет сотрудников, соответствующих вашему поиску");
     },
 
-    saveInArchive(id) {
-      this.archive = this.getEmptyStore("archive")
-        ? this.setMapEmployees(employeesArchive, "archive")
-        : this.getAllEmployeesMap("archive");
-
-      let delEmployee = this.getEmployeeById("employees", id);
-      this.archive.set(id, delEmployee);
-    },
+    // !!! тут нужно подумать как будет храниться второй json
+    // с архивными сотрудниками
+    // saveInArchive(id) {
+    //   this.archive = this.getEmptyStore("archive")
+    //     ? this.setMapEmployees(employeesArchive, "archive")
+    //     : this.getAllEmployeesMap("archive");
+    //
+    //   let delEmployee = this.getEmployeeById("employees", id);
+    //   this.archive.set(id, delEmployee);
+    // },
 
     delEmployee(id) {
       this.employees.delete(id);
     },
 
+    // !!! тут нужно подумать как буде формироваться ID сотрудника
     createNextId() {
       return this.getEmptyStore("employees")
         ? "1"
-        : String(Number(Math.max(...this.employees.keys())) + 200);
+        : String(Number(Math.max(...this.employees.keys())) + 200); // пока +200 к последнему  ID
     },
 
     createEmployee: function () {

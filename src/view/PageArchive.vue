@@ -1,28 +1,28 @@
 <template>
-  <Page
-    :employees="employees"
-    :message="message"
-  >
+<!--  <Page-->
+<!--    :employees="employees"-->
+<!--    :message="message"-->
+<!--  >-->
 
-    <template #pageHeader>
-      <PageHeader>
+<!--    <template #pageHeader>-->
+<!--      <PageHeader>-->
 
-        <template #inputArchiveSearch>
-          <input
-            id="search"
-            type="text"
-            ref="archiveSearch"
-            aria-label="поле поиска"
-            placeholder="Поиск..."
-            v-model="inputValue"
-            @input="filterArchiveData"
-          />
-        </template>
+<!--        <template #inputArchiveSearch>-->
+<!--          <input-->
+<!--            id="search"-->
+<!--            type="text"-->
+<!--            ref="archiveSearch"-->
+<!--            aria-label="поле поиска"-->
+<!--            placeholder="Поиск..."-->
+<!--            v-model="inputValue"-->
+<!--            @input="filterArchiveData"-->
+<!--          />-->
+<!--        </template>-->
 
-      </PageHeader>
-    </template>
+<!--      </PageHeader>-->
+<!--    </template>-->
 
-  </Page>
+<!--  </Page>-->
 </template>
 
 <script>
@@ -32,55 +32,55 @@ import { mapState, mapActions } from "pinia";
 import Page from "@/components/Page.vue";
 import PageHeader from "@/components/PageHeader.vue";
 
-export default {
-  components: { Page, PageHeader },
+// export default {
+  // components: { Page, PageHeader },
 
-  data() {
-    return {
-      employees: [],
-      inputValue: "",
-      message: ""
-    };
-  },
+  // data() {
+  //   return {
+  //     employees: [],
+  //     inputValue: "",
+  //     message: ""
+  //   };
+  // },
 
-  created() {
-    this.inputValue = this.$route.query.value;
+  // created() {
+    // this.inputValue = this.$route.query.value;
+    //
+    // this.getEmptyStore("archive")
+    //   ? this.setEmployeesBackend("archive")
+    //   : this.message = this.setMessage("archive");
+    //
+    // this.filterArchiveData();
+  // },
 
-    this.getEmptyStore("archive")
-      ? this.getEmployeesBackend("archive")
-      : this.message = this.setMessage("archive");
-
-    this.filterArchiveData();
-  },
-
-  mounted() {
-    this.$refs.archiveSearch.focus();
-  },
-
-  computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getEmployeesBackend", "getAllEmployeesArray"])
-  },
-
-  methods: {
-    ...mapActions(useEmplStore, ["setMapEmployees", "alphabetSortStart", "setMessage"]),
-
-    filterArchiveData() {
-      let archiveEmployees = this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
-
-      this.employees = this.inputValue ?
-        archiveEmployees.filter((elem) =>
-          elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase()))
-        : archiveEmployees;
-
-      this.$router.push({ name: "archive", query: { value: this.inputValue } });
-      this.message = this.setMessage("archive");
-    }
-  }
-};
+  // mounted() {
+  //   this.$refs.archiveSearch.focus();
+  // },
+  //
+  // computed: {
+  //   ...mapState(useEmplStore, ["getEmptyStore", "setEmployeesBackend", "getAllEmployeesArray"])
+  // },
+  //
+  // methods: {
+  //   ...mapActions(useEmplStore, ["setMapEmployees", "alphabetSortStart", "setMessage"]),
+  //
+  //   filterArchiveData() {
+  //     let archiveEmployees = this.alphabetSortStart([...this.getAllEmployeesArray("archive")]);
+  //
+  //     this.employees = this.inputValue ?
+  //       archiveEmployees.filter((elem) =>
+  //         elem["last_name"].toLowerCase().startsWith(this.inputValue.toLowerCase()))
+  //       : archiveEmployees;
+  //
+  //     this.$router.push({ name: "archive", query: { value: this.inputValue } });
+  //     this.message = this.setMessage("archive");
+  //   }
+//   }
+// };
 </script>
 
 <style scoped>
-#search {
-  width: 60%;
-}
+/*#search {*/
+/*  width: 60%;*/
+/*}*/
 </style>
