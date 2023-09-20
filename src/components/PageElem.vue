@@ -17,7 +17,7 @@
       class="employee__photo"
       :class="{ status: employee['hide'] }"
       :alt="`id: ${employee['id']}`"
-      :src="employee['src']"
+      :src="employee['thumbnail']"
       width="35"
       height="35"
     />
@@ -107,7 +107,7 @@ export default {
       id: String,
       name: String,
       hide: Boolean,
-      thumbnail: Boolean,
+      thumbnail: String,
       gender: String,
       first_name: String,
       last_name: String,
@@ -135,7 +135,7 @@ export default {
   },
 
   watch: {
-    isMarked(value) {
+    isMarked() {
       this.$refs.colorMark.style.background = "var( --vt-c-white)";
       this.employee.colorMark = "white";
     }

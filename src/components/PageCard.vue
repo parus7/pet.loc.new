@@ -31,7 +31,7 @@
         class="card-form__photo"
         :class="{ status: employee['hide'] }"
         :alt="`id: ${employee['id']}`"
-        :src="employee['src']"
+        :src="employee['thumbnail']"
         width="110"
         height="110"
       />

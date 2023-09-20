@@ -60,6 +60,7 @@ export default {
 
   created() {
     this.getEmplFromStore();
+    // this.sendEmployeesBackend("employees");
 
     this.queryRoutValue = this.$route.query.value;
     this.queryRoutCategory = this.$route.query.category;
@@ -71,7 +72,12 @@ export default {
   },
 
   computed: {
-    ...mapState(useEmplStore, ["getEmptyStore", "getAllEmployeesArray"]),
+    ...mapState(useEmplStore, [
+      "getEmptyStore",
+      "getAllEmployeesArray",
+      "formattingEmplData",
+      "sendEmployeesBackend"
+    ]),
 
     // для выяснения сегодняшней даты
     // в опреденном формате для функции getTodayBirthday
@@ -102,28 +108,24 @@ export default {
 
     // для получения данных с сервера, их форматирование и сортировка для отрисовки (нужно в Page)
     async getEmplFromStore() {
-      if (this.getEmptyStore("employees")) {
-        await this.setEmployeesBackend("employees");
+      try {
+        if (this.getEmptyStore("employees")) {
+          await this.setEmployeesBackend("employees");
+        }
+        this.employees = this.formattingEmplData("employees");
 
-        this.employees = this.formattingEmplData();
-        // console.log(this.employees);
-      } else {
-        this.employees = this.formattingEmplData();
+        this.message = this.setMessage("employees");
+      } catch (error) {
+        this.message = `Ошибка  ${error}`;
+        // console.error(error);
       }
-
-      this.message = this.setMessage("employees");
     },
 
-    // для выяснения количества именинников на сегодняшнюю дату (нужно в PageBar на строке 12)
+    // для выяснения количества именинников на сегодняшнюю дату
+    // (нужно в PageBar на строке 12)
     getTodayBirthday() {
       return this.amountBirthdays = ([...this.getAllEmployeesArray("employees")].filter(
         (elem) => elem["birthday"] === this.todayDate).length);
-    },
-
-    // для получения отформатированных данных из стора и их алфавитная сортировка
-    formattingEmplData() {
-      return this.employees = this.alphabetSortStart(
-        [...this.getAllEmployeesArray("employees")]);
     },
 
     // для проверки работы спиннера без сервера

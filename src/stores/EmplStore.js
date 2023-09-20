@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 
+export const imageUrl = `/src/assets/img`;
+export const serverUrl = `https://saa.44321.ru`;
+
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
@@ -16,47 +19,62 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getAllEmployeesMap: (state) => (key) => state[key],
 
-    getEmployeeById: (state) => (key, employeeId) => state[key].get(employeeId),
+    getEmployeeById: (state) => (key, id) => state[key].get(id),
   },
 
   actions: {
     async setEmployeesBackend(key) {
-      let response = await fetch("https://44321.ru/get.php", {
+      let response = await fetch(serverUrl + `/get.php`, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      // проверяла при   data = [] (если придет пустой массив),
-      // то в функции getEmplFromStore на странице PageBasic
-      // this.message = "Список сотрудников пуст" работает
-      // let data = [];
-
       let data = await response.json();
-      // console.log(data);
 
-      data.forEach((elem) =>
+      for (let elem of data) {
         elem.gender === "m"
           ? (elem.gender = "мужской")
           : elem.gender === "f"
           ? (elem.gender = "женский")
-          : (elem.gender = "неизвестный")
-      );
-      // console.log(data);
+          : (elem.gender = "неизвестный");
 
-      //  !!! тут нужно подумать откуда тянуть картинки,
-      // решили из облака типа Google диска
-      //  пока  тяну картинки из папки img в проекте
-      data.forEach((elem) =>
         elem.thumbnail === false
-          ? (elem.src = `/src/assets/img/defaultPhoto.jpg`)
-          : (elem.src = `/src/assets/img/${elem.id}.jpg`)
-      );
-      // console.log(data);
+          ? (elem.thumbnail = imageUrl + `/defaultPhoto.jpg`)
+          : (elem.thumbnail = imageUrl + `/${elem.id}.jpg`);
+      }
 
       this[key] = new Map();
       data.forEach((elem) => this[key].set(elem.id, elem));
-      // console.log(this[key]);
+      console.log(this[key]);
+    },
+
+    async sendEmployeesBackend(key) {
+      let arr = [...(await this.getAllEmployeesArray(key))];
+
+      for (let elem of arr) {
+        elem.gender === "мужской"
+          ? (elem.gender = "m")
+          : elem.gender === "женский"
+          ? (elem.gender = "f")
+          : (elem.gender = "u");
+
+        elem.thumbnail = elem.thumbnail !== imageUrl + "/defaultPhoto.jpg ";
+      }
+
+      // let promise = await fetch(serverUrl + `/put.php`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   credentials: "include",
+      //   body: JSON.stringify(arr),
+      // });
+    },
+
+    // для получения отформатированных данных из стора и их алфавитная сортировка А - Я
+    formattingEmplData(key) {
+      return this.alphabetSortStart([...this.getAllEmployeesArray(key)]);
     },
 
     setMessage(key) {
@@ -95,7 +113,6 @@ export const useEmplStore = defineStore("EmplStore", {
         id: idEmployee,
         name: "",
         hide: true,
-        thumbnail: false,
         gender: "",
         first_name: "",
         last_name: "",
@@ -109,7 +126,7 @@ export const useEmplStore = defineStore("EmplStore", {
         department: "",
         company: "",
         city: "",
-        src: `/src/assets/img/defaultPhoto.jpg`,
+        thumbnail: imageUrl + `/defaultPhoto.jpg`,
       };
 
       this.employees.set(idEmployee, employee);
