@@ -59,8 +59,7 @@ export default {
   },
 
   created() {
-    this.getEmplFromStore();
-    // this.sendEmployeesBackend("employees");
+    this.dataToStore();
 
     this.queryRoutValue = this.$route.query.value;
     this.queryRoutCategory = this.$route.query.category;
@@ -74,13 +73,10 @@ export default {
   computed: {
     ...mapState(useEmplStore, [
       "getEmptyStore",
-      "getAllEmployeesArray",
-      "formattingEmplData",
-      "sendEmployeesBackend"
+      "getAllEmployeesArray"
     ]),
 
-    // для выяснения сегодняшней даты
-    // в опреденном формате для функции getTodayBirthday
+    // для выяснения сегодняшней даты в опреденном формате
     giveTodayDate() {
       let day = String(new Date().getDate());
       day.length === 1 ? (day = "0" + day) : day;
@@ -95,7 +91,9 @@ export default {
 
   methods: {
     ...mapActions(useEmplStore, [
-      "setEmployeesBackend",
+      "formatStoreData",
+      "dataPutBackend",
+      "dataGetBackend",
       "createEmployee",
       "alphabetToggle",
       "saveInArchive",
@@ -106,23 +104,21 @@ export default {
       "delEmployee"
     ]),
 
-    // для получения данных с сервера, их форматирование и сортировка для отрисовки (нужно в Page)
-    async getEmplFromStore() {
+    // для форматирование данных с сервера и их сортировка  (нужно в Page)
+    async dataToStore() {
       try {
         if (this.getEmptyStore("employees")) {
-          await this.setEmployeesBackend("employees");
+          await this.dataGetBackend("employees");
         }
-        this.employees = this.formattingEmplData("employees");
+        this.employees = this.formatStoreData("employees");
 
         this.message = this.setMessage("employees");
       } catch (error) {
         this.message = `Ошибка  ${error}`;
-        // console.error(error);
       }
     },
 
-    // для выяснения количества именинников на сегодняшнюю дату
-    // (нужно в PageBar на строке 12)
+    // для  кол-ва именинников на сегодняшнюю дату (PageBar стр. 12)
     getTodayBirthday() {
       return this.amountBirthdays = ([...this.getAllEmployeesArray("employees")].filter(
         (elem) => elem["birthday"] === this.todayDate).length);
@@ -136,7 +132,7 @@ export default {
       }, 4444);
     },
 
-    // для сортировки данных по категории в PageMainHeader
+    // для сортировки данных по категории (PageMainHeader)
     onFilterBasicData(event) {
       this.employees = event.category && event.value
         ? this.employees.filter((elem) => elem[event.category].toLowerCase() === event.value)
@@ -147,7 +143,7 @@ export default {
       this.filteredEmployees = this.employees;
     },
 
-    // для алфавитной сортировки данных сотрудников
+    // для алфавитной сортировки данных
     sortingAlphabet(obj) {
       if (!this.isAlphabet && !this.filteredEmployees.length) {
         return this.employees = this.alphabetSortStart(obj);
@@ -163,7 +159,7 @@ export default {
       }
     },
 
-    // переключение сортировки от А-Я  в  Я-А и наоборот
+    // переключение сортировки от А-Я  в  Я-А
     onAlphabetSort() {
       this.isAlphabet = this.alphabetToggle();
       this.sortingAlphabet(this.employees);
@@ -175,10 +171,9 @@ export default {
       this.employees = this.sortingAlphabet([...this.getAllEmployeesArray("employees")]);
     },
 
-    // удаление сотрудника и перенос его в архив
-    // тут еще будут переделки из-за архива и сервера
-    onDeleteInBasic(event) {
-      this.saveInArchive(event.id);
+    // удаление сотрудника без переноса его в архив
+    async onDeleteInBasic(event) {
+      // this.saveInArchive(event.id); // ПОКА НЕТ АРХИВА
       this.delEmployee(event.id);
 
       this.filteredEmployees.length
@@ -189,10 +184,13 @@ export default {
         : this.employees = this.employees.filter(elem => elem.id !== event.id);
 
       this.message = "";
+      // отправляю на сервер
+      await this.dataPutBackend("employees");
+      // обновляю с сервера в сторе
+      await this.dataGetBackend("employees");
     },
 
     // создание нового сотрудника
-    // тут еще будут переделки из-за сервера
     onCreateEmployee() {
       const id = this.createNextId();
 

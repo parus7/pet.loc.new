@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 
-export const imageUrl = `/src/assets/img`;
-export const serverUrl = `https://saa.44321.ru`;
-
 export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
       employees: new Map(),
+      slidersCarousel: [],
+      imageUrl: ` https://saa.44321.ru/assets/img/`,
+      serverUrl: "https://saa.44321.ru/",
     };
     // archive: new Map(),
   },
@@ -17,41 +17,59 @@ export const useEmplStore = defineStore("EmplStore", {
 
     getAllEmployeesArray: (state) => (key) => state[key].values(),
 
-    getAllEmployeesMap: (state) => (key) => state[key],
+    getKeyInStore: (state) => (key) => state[key],
 
     getEmployeeById: (state) => (key, id) => state[key].get(id),
   },
 
   actions: {
-    async setEmployeesBackend(key) {
-      let response = await fetch(serverUrl + `/get.php`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    // взять с сервера
+    async dataGetBackend(key) {
+      try {
+        let response = await fetch(
+          this.getKeyInStore("serverUrl") + `get.php`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "multipart/form-data",
+            },
+          }
+        );
 
-      let data = await response.json();
+        console.log(response);
+        let data = await response.json();
 
-      for (let elem of data) {
-        elem.gender === "m"
-          ? (elem.gender = "мужской")
-          : elem.gender === "f"
-          ? (elem.gender = "женский")
-          : (elem.gender = "неизвестный");
+        for (let elem of data) {
+          elem.gender === "m"
+            ? (elem.gender = "мужской")
+            : elem.gender === "f"
+            ? (elem.gender = "женский")
+            : (elem.gender = "неизвестный");
 
-        elem.thumbnail === false
-          ? (elem.thumbnail = imageUrl + `/defaultPhoto.jpg`)
-          : (elem.thumbnail = imageUrl + `/${elem.id}.jpg`);
+          elem.thumbnail =
+            elem.thumbnail === false
+              ? (await this.getKeyInStore("imageUrl")) + `defaultPhoto.jpg`
+              : (await this.getKeyInStore("imageUrl")) + `${elem.id}.jpg`;
+
+          // console.log(elem.thumbnail);
+        }
+        console.log(data);
+
+        this[key] = new Map();
+        data.forEach((elem) => this[key].set(elem.id, elem));
+        // console.log(this[key]);
+      } catch (error) {
+        console.error(error);
       }
-
-      this[key] = new Map();
-      data.forEach((elem) => this[key].set(elem.id, elem));
-      console.log(this[key]);
     },
 
-    async sendEmployeesBackend(key) {
+    // отправить на сервер
+    async dataPutBackend(key) {
+      // тяну из  state массив сотрудников
       let arr = [...(await this.getAllEmployeesArray(key))];
+      console.log(arr);
 
+      // возвращаю в нужный формат поле "пол" сотрудника
       for (let elem of arr) {
         elem.gender === "мужской"
           ? (elem.gender = "m")
@@ -59,27 +77,39 @@ export const useEmplStore = defineStore("EmplStore", {
           ? (elem.gender = "f")
           : (elem.gender = "u");
 
-        elem.thumbnail = elem.thumbnail !== imageUrl + "/defaultPhoto.jpg ";
+        // возвращаю в нужный формат поле "миниатюра(фото)" сотрудника
+        //ЕСЛИ ТУТ ЗАКОММЕНТИРОВАТЬ - ГРУЗИТСЯ ПРИ УДАЛЕНИИ СОТРУДНИКА ВСЁ КАРТИНКАМИ
+        elem.thumbnail =
+          elem.thumbnail !==
+          this.getKeyInStore("imageUrl") + `defaultPhoto.jpg`;
+        // console.log(elem.thumbnail);
       }
 
-      // let promise = await fetch(serverUrl + `/put.php`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   credentials: "include",
-      //   body: JSON.stringify(arr),
-      // });
+      // массив в json
+      let data = JSON.stringify(arr);
+      console.log(data);
+
+      try {
+        let promise = await fetch(this.getKeyInStore("serverUrl") + `put.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: data,
+        });
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     // для получения отформатированных данных из стора и их алфавитная сортировка А - Я
-    formattingEmplData(key) {
+    formatStoreData(key) {
       return this.alphabetSortStart([...this.getAllEmployeesArray(key)]);
     },
 
     setMessage(key) {
       return (this.message =
-        this.getAllEmployeesMap(key).size === 0
+        this.getKeyInStore(key).size === 0
           ? "Список сотрудников пуст"
           : "Нет сотрудников, соответствующих вашему поиску");
     },
@@ -89,7 +119,7 @@ export const useEmplStore = defineStore("EmplStore", {
     // saveInArchive(id) {
     //   this.archive = this.getEmptyStore("archive")
     //     ? this.setMapEmployees(employeesArchive, "archive")
-    //     : this.getAllEmployeesMap("archive");
+    //     : this.getKeyInStore("archive");
     //
     //   let delEmployee = this.getEmployeeById("employees", id);
     //   this.archive.set(id, delEmployee);
@@ -126,7 +156,7 @@ export const useEmplStore = defineStore("EmplStore", {
         department: "",
         company: "",
         city: "",
-        thumbnail: imageUrl + `/defaultPhoto.jpg`,
+        thumbnail: this.getKeyInStore("imageUrl") + `defaultPhoto.jpg`,
       };
 
       this.employees.set(idEmployee, employee);

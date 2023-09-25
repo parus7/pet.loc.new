@@ -47,7 +47,7 @@ import PageHeader from "@/components/PageHeader.vue";
     // this.inputValue = this.$route.query.value;
     //
     // this.getEmptyStore("archive")
-    //   ? this.setEmployeesBackend("archive")
+    //   ? this.dataGetBackend("archive")
     //   : this.message = this.setMessage("archive");
     //
     // this.filterArchiveData();
@@ -58,7 +58,7 @@ import PageHeader from "@/components/PageHeader.vue";
   // },
   //
   // computed: {
-  //   ...mapState(useEmplStore, ["getEmptyStore", "setEmployeesBackend", "getAllEmployeesArray"])
+  //   ...mapState(useEmplStore, ["getEmptyStore", "dataGetBackend", "getAllEmployeesArray"])
   // },
   //
   // methods: {
