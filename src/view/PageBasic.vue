@@ -42,7 +42,6 @@ export default {
 
   data() {
     return {
-      todayDate: "",
       employees: [],
       message: "",
       amountBirthdays: null,
@@ -74,23 +73,12 @@ export default {
     ...mapState(useEmplStore, [
       "getEmptyStore",
       "getAllEmployeesArray"
-    ]),
-
-    // для выяснения сегодняшней даты в опреденном формате
-    giveTodayDate() {
-      let day = String(new Date().getDate());
-      day.length === 1 ? (day = "0" + day) : day;
-
-      let month = String(new Date().getMonth() + 1);
-      month.length === 1 ? (month = "0" + month) : month;
-
-      this.todayDate = day + month;
-      console.log(this.todayDate);
-    }
+    ])
   },
 
   methods: {
     ...mapActions(useEmplStore, [
+      "giveTodayDate",
       "formatStoreData",
       "dataPutBackend",
       "dataGetBackend",
@@ -120,8 +108,9 @@ export default {
 
     // для  кол-ва именинников на сегодняшнюю дату (PageBar стр. 12)
     getTodayBirthday() {
+      let todayDate = this.giveTodayDate();
       return this.amountBirthdays = ([...this.getAllEmployeesArray("employees")].filter(
-        (elem) => elem["birthday"] === this.todayDate).length);
+        (elem) => elem["birthday"] === todayDate).length);
     },
 
     // для проверки работы спиннера без сервера

@@ -23,6 +23,19 @@ export const useEmplStore = defineStore("EmplStore", {
   },
 
   actions: {
+    // для выяснения сегодняшней даты в опреденном формате
+    giveTodayDate() {
+      let day = String(new Date().getDate());
+      day.length === 1 ? (day = "0" + day) : day;
+
+      let month = String(new Date().getMonth() + 1);
+      month.length === 1 ? (month = "0" + month) : month;
+
+      return day + month;
+      // this.todayDate = day + month;
+      // console.log(this.todayDate);
+    },
+
     // взять с сервера
     async dataGetBackend(key) {
       try {
