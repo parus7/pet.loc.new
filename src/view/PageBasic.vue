@@ -96,7 +96,7 @@ export default {
     async dataToStore() {
       try {
         if (this.getEmptyStore("employees")) {
-          await this.dataGetBackend("employees");
+          await this.dataGetBackend("employees", "getBasicUrl");
         }
         this.employees = this.formatStoreData("employees");
 
@@ -174,10 +174,10 @@ export default {
       this.message = "";
 
       // отправляю на сервер
-      await this.dataPutBackend("employees");
+      await this.dataPutBackend("employees", "putBasicUrl");
 
       // обновляю с сервера в сторе
-      await this.dataGetBackend("employees");
+      await this.dataGetBackend("employees", "getBasicUrl");
 
       // забираю массив сотрудников из стора (state) в алфавитном порядке
       this.employees = this.formatStoreData("employees");

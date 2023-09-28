@@ -7,6 +7,10 @@ export const useEmplStore = defineStore("EmplStore", {
       slidersCarousel: [],
       imageUrl: ` https://saa.44321.ru/assets/img/`,
       serverUrl: "https://saa.44321.ru/",
+      getBasicUrl: "get.php",
+      putBasicUrl: "put.php",
+      getArchiveUrl: "get_arch.php",
+      putArchiveUrl: "put_arch.php",
     };
     // archive: new Map(),
   },
@@ -23,7 +27,6 @@ export const useEmplStore = defineStore("EmplStore", {
   },
 
   actions: {
-    // для выяснения сегодняшней даты в опреденном формате
     giveTodayDate() {
       let day = String(new Date().getDate());
       day.length === 1 ? (day = "0" + day) : day;
@@ -32,24 +35,20 @@ export const useEmplStore = defineStore("EmplStore", {
       month.length === 1 ? (month = "0" + month) : month;
 
       return day + month;
-      // this.todayDate = day + month;
-      // console.log(this.todayDate);
     },
 
     // взять с сервера
-    async dataGetBackend(key) {
+    async dataGetBackend(key, url) {
       try {
         let response = await fetch(
-          this.getKeyInStore("serverUrl") + `get.php`,
+          this.getKeyInStore("serverUrl") + this.getKeyInStore(url),
           {
             headers: {
               "Content-Type": "application/json",
-              // "Content-Type": "multipart/form-data",
             },
           }
         );
 
-        console.log(response);
         let data = await response.json();
 
         for (let elem of data) {
@@ -63,24 +62,18 @@ export const useEmplStore = defineStore("EmplStore", {
             elem.thumbnail === false
               ? (await this.getKeyInStore("imageUrl")) + `defaultPhoto.jpg`
               : (await this.getKeyInStore("imageUrl")) + `${elem.id}.jpg`;
-
-          // console.log(elem.thumbnail);
         }
-        console.log(data);
-
         this[key] = new Map();
         data.forEach((elem) => this[key].set(elem.id, elem));
-        // console.log(this[key]);
       } catch (error) {
         console.error(error);
       }
     },
 
     // отправить на сервер
-    async dataPutBackend(key) {
+    async dataPutBackend(key, url) {
       // тяну из  state массив сотрудников
       let arr = [...(await this.getAllEmployeesArray(key))];
-      console.log(arr);
 
       // возвращаю в нужный формат поле "пол" сотрудника
       for (let elem of arr) {
@@ -91,25 +84,22 @@ export const useEmplStore = defineStore("EmplStore", {
           : (elem.gender = "u");
 
         // возвращаю в нужный формат поле "миниатюра(фото)" сотрудника
-        //ЕСЛИ ТУТ ЗАКОММЕНТИРОВАТЬ - ГРУЗИТСЯ ПРИ УДАЛЕНИИ СОТРУДНИКА ВСЁ КАРТИНКАМИ
         elem.thumbnail =
           elem.thumbnail !==
           this.getKeyInStore("imageUrl") + `defaultPhoto.jpg`;
-        // console.log(elem.thumbnail);
       }
 
-      // массив в json
-      let data = JSON.stringify(arr);
-      console.log(data);
-
       try {
-        let promise = await fetch(this.getKeyInStore("serverUrl") + `put.php`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: data,
-        });
+        let promise = await fetch(
+          this.getKeyInStore("serverUrl") + this.getKeyInStore(url),
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            body: JSON.stringify(arr),
+          }
+        );
       } catch (error) {
         console.error(error);
       }
