@@ -128,7 +128,6 @@ export default {
         : this.employees;
 
       this.message = this.setMessage("employees");
-
       this.filteredEmployees = this.employees;
     },
 
@@ -173,10 +172,15 @@ export default {
         : this.employees = this.employees.filter(elem => elem.id !== event.id);
 
       this.message = "";
+
       // отправляю на сервер
       await this.dataPutBackend("employees");
+
       // обновляю с сервера в сторе
       await this.dataGetBackend("employees");
+
+      // забираю массив сотрудников из стора (state) в алфавитном порядке
+      this.employees = this.formatStoreData("employees");
     },
 
     // создание нового сотрудника
