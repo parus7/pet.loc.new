@@ -6,7 +6,7 @@ export const useEmplStore = defineStore("EmplStore", {
       employees: new Map(),
       archive: new Map(),
       slidersCarousel: [],
-      imageUrl: ` https://saa.44321.ru/assets/img/`,
+      imageUrl: "https://saa.44321.ru/assets/img/",
       serverUrl: "https://saa.44321.ru/",
       getBasicUrl: "get.php",
       putBasicUrl: "put.php",

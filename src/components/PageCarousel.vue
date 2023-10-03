@@ -46,12 +46,10 @@
 // https://ismail9k.github.io/vue3-carousel/getting-started.html
 import { defineComponent } from "vue";
 import { Carousel, Navigation, Slide } from "vue3-carousel";
-
-import Cafe1 from "@/assets/img/cafe1.jpeg";
-import Cafe2 from "@/assets/img/cafe2.jpeg";
-import Cafe3 from "@/assets/img/cafe3.jpeg";
-
 import "vue3-carousel/dist/carousel.css";
+
+import { useEmplStore } from "@/stores/EmplStore";
+import { mapState } from "pinia";
 import Page from "@/components/Page.vue";
 
 export default defineComponent({
@@ -67,7 +65,7 @@ export default defineComponent({
     return {
       slides: [
         {
-          slide: Cafe1,
+          slide: "",
           title: "Pinzeria by Bontempi на Кропоткинской",
           address: "г. Москва, Волхонка 16",
           weekdays: "11:00 — 23:00 , кухня 11:00 — 22:30",
@@ -76,7 +74,7 @@ export default defineComponent({
           site: "https://pinzeria.ru/delivery/cropot"
         },
         {
-          slide: Cafe2,
+          slide: "",
           title: "Pinzeria by Bontempi на Шлюзовой",
           address: "г. Москва, Шлюзовая набережная, 4",
           weekdays: "12:00 — 23:00 , кухня 11:00 — 22:30",
@@ -85,7 +83,7 @@ export default defineComponent({
           site: "https://pinzeria.ru/delivery/shluz"
         },
         {
-          slide: Cafe3,
+          slide: "",
           title: "Pinzeria by Bontempi на Усачева",
           address: "г. Москва, ул. Усачева, д. 26",
           weekdays: "10:00 — 22:00, кухня до 21:30",
@@ -95,6 +93,25 @@ export default defineComponent({
         }
       ]
     };
+  },
+
+  created() {
+    this.setSlidesLink();
+  },
+
+  computed: {
+    ...mapState(useEmplStore, ["getKeyInStore"])
+  },
+
+  methods: {
+    setSlidesLink() {
+      try {
+        this.slides.map((elem, index) =>
+          elem.slide = this.getKeyInStore("imageUrl") + `cafe${index + 1}.jpeg`);
+      } catch (error) {
+        this.message = `Ошибка  ${error}`;
+      }
+    }
   }
 });
 </script>
