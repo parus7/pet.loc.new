@@ -63,6 +63,9 @@ export const useEmplStore = defineStore("EmplStore", {
               elem.thumbnail === false
                 ? (await this.getKeyInStore("imageUrl")) + `defaultPhoto.jpg`
                 : (await this.getKeyInStore("imageUrl")) + `${elem.id}.jpg`;
+          } else {
+            elem.thumbnail =
+              (await this.getKeyInStore("imageUrl")) + `defaultPhoto.jpg`;
           }
         }
         this[key] = new Map();
@@ -131,10 +134,18 @@ export const useEmplStore = defineStore("EmplStore", {
       } catch (error) {
         this.message = `Ошибка  ${error}`;
       }
-
+      // нахожу удаляемого в архив сотрудника
       let delEmployee = this.getEmployeeById("employees", id);
+
+      // меняю его фото на дефолтное и делаю неактивным ( поле hide)
+      delEmployee.thumbnail =
+        this.getKeyInStore("imageUrl") + `defaultPhoto.jpg`;
+      delEmployee.hide = true;
+
+      // добавляю его в архив
       await this.getKeyInStore("archive").set(id, delEmployee);
 
+      // отправляю инфу на сервер об удаляемом в архив сотруднике
       await this.dataPutBackend("archive", "putArchiveUrl");
     },
 

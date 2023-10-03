@@ -3,9 +3,6 @@
     class="card-form"
     id="add-employee"
     @submit.prevent="sendForm"
-    action=""
-    method="post"
-    autocomplete="on"
   >
 
     <div
