@@ -58,7 +58,7 @@ export default {
   },
 
   created() {
-    this.dataToStore();
+    this.basicDataToStore();
 
     this.queryRoutValue = this.$route.query.value;
     this.queryRoutCategory = this.$route.query.category;
@@ -72,7 +72,7 @@ export default {
   computed: {
     ...mapState(useEmplStore, [
       "getEmptyStore",
-      "getAllEmployeesArray"
+      "getKeyInStore"
     ])
   },
 
@@ -93,7 +93,7 @@ export default {
     ]),
 
     // для форматирование данных с сервера и их сортировка  (нужно в Page)
-    async dataToStore() {
+    async basicDataToStore() {
       try {
         if (this.getEmptyStore("employees")) {
           await this.dataGetBackend("employees", "getBasicUrl");
@@ -109,7 +109,7 @@ export default {
     // для  кол-ва именинников на сегодняшнюю дату (PageBar стр. 12)
     getTodayBirthday() {
       let todayDate = this.giveTodayDate();
-      return this.amountBirthdays = ([...this.getAllEmployeesArray("employees")].filter(
+      return this.amountBirthdays = ([...this.getKeyInStore("employees").values()].filter(
         (elem) => elem["birthday"] === todayDate).length);
     },
 
@@ -156,13 +156,14 @@ export default {
     // сброс фильтра по категории
     onResetFilter() {
       this.filteredEmployees = [];
-      this.employees = this.sortingAlphabet([...this.getAllEmployeesArray("employees")]);
+      this.employees = this.sortingAlphabet([...this.getKeyInStore("employees").values()]);
     },
 
-    // удаление сотрудника без переноса его в архив
+    // удаление сотрудника в архив
     async onDeleteInBasic(event) {
-      // this.saveInArchive(event.id); // ПОКА НЕТ АРХИВА
-      this.delEmployee(event.id);
+      await this.saveInArchive(event.id);
+
+      await this.delEmployee(event.id);
 
       this.filteredEmployees.length
         ? this.filteredEmployees.splice(

@@ -4,7 +4,7 @@ import PagePasswordRecovery from "@/view/PagePasswordRecovery.vue";
 // import TheError404 from "@/view/TheError404.vue";
 
 import PageBasic from "@/view/PageBasic.vue";
-// import PageArchive from "@/view/PageArchive.vue";
+import PageArchive from "@/view/PageArchive.vue";
 import PageFood from "@/view/PageFood.vue";
 
 import PageCard from "@/components/PageCard.vue";
@@ -31,11 +31,11 @@ const router = createRouter({
     //   name: "basic",
     //   component: PageBasic,
     // },
-    // {
-    //   path: "/archive",
-    //   name: "archive",
-    //   component: PageArchive,
-    // },
+    {
+      path: "/archive",
+      name: "archive",
+      component: PageArchive,
+    },
     {
       path: "/food",
       name: "food",

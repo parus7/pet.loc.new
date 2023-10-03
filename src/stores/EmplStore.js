@@ -4,6 +4,7 @@ export const useEmplStore = defineStore("EmplStore", {
   state: () => {
     return {
       employees: new Map(),
+      archive: new Map(),
       slidersCarousel: [],
       imageUrl: ` https://saa.44321.ru/assets/img/`,
       serverUrl: "https://saa.44321.ru/",
@@ -12,7 +13,6 @@ export const useEmplStore = defineStore("EmplStore", {
       getArchiveUrl: "get_arch.php",
       putArchiveUrl: "put_arch.php",
     };
-    // archive: new Map(),
   },
 
   getters: {
@@ -58,10 +58,12 @@ export const useEmplStore = defineStore("EmplStore", {
             ? (elem.gender = "женский")
             : (elem.gender = "неизвестный");
 
-          elem.thumbnail =
-            elem.thumbnail === false
-              ? (await this.getKeyInStore("imageUrl")) + `defaultPhoto.jpg`
-              : (await this.getKeyInStore("imageUrl")) + `${elem.id}.jpg`;
+          if (key === "employees") {
+            elem.thumbnail =
+              elem.thumbnail === false
+                ? (await this.getKeyInStore("imageUrl")) + `defaultPhoto.jpg`
+                : (await this.getKeyInStore("imageUrl")) + `${elem.id}.jpg`;
+          }
         }
         this[key] = new Map();
         data.forEach((elem) => this[key].set(elem.id, elem));
@@ -73,7 +75,7 @@ export const useEmplStore = defineStore("EmplStore", {
     // отправить на сервер
     async dataPutBackend(key, url) {
       // тяну из  state массив сотрудников
-      let arr = [...(await this.getAllEmployeesArray(key))];
+      let arr = [...(await this.getKeyInStore(key).values())];
 
       // возвращаю в нужный формат поле "пол" сотрудника
       for (let elem of arr) {
@@ -84,9 +86,11 @@ export const useEmplStore = defineStore("EmplStore", {
           : (elem.gender = "u");
 
         // возвращаю в нужный формат поле "миниатюра(фото)" сотрудника
-        elem.thumbnail =
-          elem.thumbnail !==
-          this.getKeyInStore("imageUrl") + `defaultPhoto.jpg`;
+        if (key === "employees") {
+          elem.thumbnail =
+            elem.thumbnail !==
+            this.getKeyInStore("imageUrl") + `defaultPhoto.jpg`;
+        }
       }
 
       try {
@@ -107,7 +111,7 @@ export const useEmplStore = defineStore("EmplStore", {
 
     // для получения отформатированных данных из стора и их алфавитная сортировка А - Я
     formatStoreData(key) {
-      return this.alphabetSortStart([...this.getAllEmployeesArray(key)]);
+      return this.alphabetSortStart([...this.getKeyInStore(key).values()]);
     },
 
     setMessage(key) {
@@ -117,16 +121,22 @@ export const useEmplStore = defineStore("EmplStore", {
           : "Нет сотрудников, соответствующих вашему поиску");
     },
 
-    // !!! тут нужно подумать как будет храниться второй json
-    // с архивными сотрудниками
-    // saveInArchive(id) {
-    //   this.archive = this.getEmptyStore("archive")
-    //     ? this.setMapEmployees(employeesArchive, "archive")
-    //     : this.getKeyInStore("archive");
-    //
-    //   let delEmployee = this.getEmployeeById("employees", id);
-    //   this.archive.set(id, delEmployee);
-    // },
+    // сохранить уволенного в архиве
+    async saveInArchive(id) {
+      try {
+        if (this.getEmptyStore("archive")) {
+          await this.dataGetBackend("archive", "getArchiveUrl");
+        }
+        this.message = this.setMessage("archive");
+      } catch (error) {
+        this.message = `Ошибка  ${error}`;
+      }
+
+      let delEmployee = this.getEmployeeById("employees", id);
+      await this.getKeyInStore("archive").set(id, delEmployee);
+
+      await this.dataPutBackend("archive", "putArchiveUrl");
+    },
 
     delEmployee(id) {
       this.employees.delete(id);
