@@ -321,7 +321,9 @@ export default {
   methods: {
     ...mapActions(useEmplStore, [
       "delEmployee",
-      "addEmployee"
+      "addEmployee",
+      "dataPutBackend",
+      "dataGetBackend"
     ]),
 
     uploadPhoto() {
@@ -342,13 +344,19 @@ export default {
       return unmaskedEmployee;
     },
 
-    onSaveEmployee(paramsId) {
+    async onSaveEmployee(paramsId) {
       this.setRequiredField();
 
       this.$emit("editNo");
       this.delEmployee(paramsId);
 
       this.addEmployee(this.getUnmaskedEmployee());
+
+      // отправляю на сервер
+      await this.dataPutBackend("employees", "putBasicUrl");
+
+      // обновляю с сервера в сторе
+      await this.dataGetBackend("employees", "getBasicUrl");
     },
 
     popupConfirm() {
