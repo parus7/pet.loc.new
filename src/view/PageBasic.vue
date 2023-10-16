@@ -64,8 +64,8 @@ export default {
     this.queryRoutCategory = this.$route.query.category;
 
     this.employees = this.queryRoutValue && this.queryRoutCategory
-      ? this.employees.filter(
-        (elem) => elem[this.queryRoutCategory].toLowerCase() === this.queryRoutValue)
+      ? this.employees.filter((elem) =>
+        this.setLowerCase(String(elem[this.queryRoutCategory])) === this.setLowerCase(this.queryRoutValue))
       : this.employees;
   },
 
@@ -91,6 +91,15 @@ export default {
       "setMessage",
       "delEmployee"
     ]),
+
+    setLowerCase(str) {
+      return str =
+        str.startsWith("#")
+          ? "#" + str.split("").splice(1).join("").toLowerCase()
+          : typeof str !== "number"
+            ? str.toLowerCase()
+            : str;
+    },
 
     // для форматирование данных с сервера и их сортировка  (нужно в Page)
     async basicDataToStore() {
@@ -121,10 +130,11 @@ export default {
       }, 4444);
     },
 
-    // для сортировки данных по категории (PageMainHeader)
+    // для сортировки данных по категории ( из PageMainHeader)
     onFilterBasicData(event) {
       this.employees = event.category && event.value
-        ? this.employees.filter((elem) => elem[event.category].toLowerCase() === event.value)
+        ? this.employees.filter((elem) =>
+          this.setLowerCase(String(elem[event.category])) === this.setLowerCase(event.value))
         : this.employees;
 
       this.message = this.setMessage("employees");

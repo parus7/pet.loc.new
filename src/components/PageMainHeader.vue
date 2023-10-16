@@ -214,7 +214,7 @@ export default {
 
     filterEmployee() {
       this.inputValue =
-        this.myMask === "" ? this.inputValue.toLowerCase() : this.mask.unmasked;
+        this.myMask === "" ? this.inputValue : this.mask.unmasked;
 
       this.$emit("filterEmployee", {
         category: this.category.item,
