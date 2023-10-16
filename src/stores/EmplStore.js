@@ -112,9 +112,11 @@ export const useEmplStore = defineStore("EmplStore", {
       }
     },
 
-    // для получения отформатированных данных из стора и их алфавитная сортировка А - Я
+    // для алфавитной сортировки
     formatStoreData(key) {
-      return this.alphabetSortStart([...this.getKeyInStore(key).values()]);
+      return !this.isAlphabet
+        ? this.alphabetSortStart([...this.getKeyInStore(key).values()])
+        : this.alphabetSortEnd([...this.getKeyInStore(key).values()]);
     },
 
     setMessage(key) {

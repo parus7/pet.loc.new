@@ -166,7 +166,7 @@ export default {
     // сброс фильтра по категории
     onResetFilter() {
       this.filteredEmployees = [];
-      this.employees = this.sortingAlphabet([...this.getKeyInStore("employees").values()]);
+      this.employees = this.formatStoreData("employees");
     },
 
     // удаление сотрудника в архив
