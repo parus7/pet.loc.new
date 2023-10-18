@@ -49,6 +49,8 @@
 
       <slot name="linkRecovery"></slot>
 
+      <slot name="toPageBasic"></slot>
+
     </div>
   </div>
 </template>

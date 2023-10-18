@@ -6,15 +6,22 @@
     :errorMessage="errorMessage"
   >
 
-    <!--     @getEntrance="requestEntry($event)"-->
-
     <template v-slot:linkRecovery>
       <RouterLink
         class="login-field__prompt"
-        :to="{
-        name: 'recovery',
-      }"
-      >Забыли пароль?
+        :to="{name: 'recovery' }"
+      >
+        Забыли пароль?
+      </RouterLink>
+
+    </template>
+
+    <template v-slot:toPageBasic>
+      <RouterLink
+        class="login-field__prompt"
+        :to="{name: 'basic'}"
+      >
+        Назад, на главную
       </RouterLink>
 
     </template>
@@ -25,7 +32,7 @@
 <script>
 import PageEntrance from "@/components/PageEntrance.vue";
 import PageColorButton from "@/components/UI/PageColorButton.vue";
-import axios from "axios";
+
 
 export default {
   components: { PageColorButton, PageEntrance },
@@ -41,16 +48,7 @@ export default {
     };
   },
 
-  methods: {
-    // requestEntry(event) {
-    //   axios.post("http://saa.44321.ru/", {
-    //     login: event.login,
-    //     password: event.password
-    //   })
-    //     .then(response => this.$router.push({ name: "basic" }))
-    //     .catch(error => (this.errorMessage = "Неверный логин  или пароль"));
-    // }
-  }
+  methods: {}
 };
 </script>
 
@@ -67,3 +65,4 @@ export default {
   font-size: 0.97rem;
 }
 </style>
+
