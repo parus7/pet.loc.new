@@ -32,6 +32,18 @@
         </PageButton>
       </span>
     </RouterLink>
+
+    <!--    <RouterLink :to="{ name: 'food' }" tabindex="-1">-->
+    <span class="tooltip tooltip-position" data-name="схема&nbsp;проезда&nbsp;и&nbsp;реквизиты">
+   <PageButton
+     aria-label="схема проезда и реквизиты"
+   >
+     <IconMap />
+   </PageButton>
+ </span>
+    <!--    </RouterLink>-->
+
+
   </div>
 </template>
 
@@ -39,11 +51,12 @@
 import IconGift from "./icons/IconGift.vue";
 import IconFood from "./icons/IconFood.vue";
 import IconArchive from "./icons/IconArchive.vue";
+import IconMap from "./icons/IconMap.vue";
 
 import PageButton from "./UI/PageButton.vue";
 
 export default {
-  components: { IconGift, IconFood, IconArchive, PageButton },
+  components: { IconGift, IconFood, IconArchive, IconMap, PageButton },
 
   props: {
     amountBirthdays: Number
