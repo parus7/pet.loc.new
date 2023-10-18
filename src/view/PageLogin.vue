@@ -4,8 +4,9 @@
     :isRecovery="isRecovery"
     :buttonTitle="buttonTitle"
     :errorMessage="errorMessage"
-    @getEntrance="requestEntry($event)"
   >
+
+    <!--     @getEntrance="requestEntry($event)"-->
 
     <template v-slot:linkRecovery>
       <RouterLink
@@ -41,14 +42,14 @@ export default {
   },
 
   methods: {
-    requestEntry(event) {
-      axios.post("http://saa.44321.ru/", {
-        login: event.login,
-        password: event.password
-      })
-        .then(response => this.$router.push({ name: "basic" }))
-        .catch(error => (this.errorMessage = "Неверный логин  или пароль"));
-    }
+    // requestEntry(event) {
+    //   axios.post("http://saa.44321.ru/", {
+    //     login: event.login,
+    //     password: event.password
+    //   })
+    //     .then(response => this.$router.push({ name: "basic" }))
+    //     .catch(error => (this.errorMessage = "Неверный логин  или пароль"));
+    // }
   }
 };
 </script>

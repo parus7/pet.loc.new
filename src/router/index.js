@@ -16,21 +16,21 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
   routes: [
-    // {
-    //   path: "/",
-    //   name: "login",
-    //   component: PageLogin,
-    // },
-    // {
-    //   path: "/recovery",
-    //   name: "recovery",
-    //   component: PagePasswordRecovery,
-    // },
-    // {
-    //   path: "/basic",
-    //   name: "basic",
-    //   component: PageBasic,
-    // },
+    {
+      path: "/",
+      name: "basic",
+      component: PageBasic,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: PageLogin,
+    },
+    {
+      path: "/recovery",
+      name: "recovery",
+      component: PagePasswordRecovery,
+    },
     {
       path: "/archive",
       name: "archive",
@@ -66,12 +66,6 @@ const router = createRouter({
     //   component: TheError404,
     //   props: true
     // },
-
-    {
-      path: "/",
-      name: "basic",
-      component: PageBasic,
-    },
   ],
 });
 

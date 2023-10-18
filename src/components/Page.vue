@@ -24,8 +24,13 @@
       :isMarked="isMarked"
       @deleteEmployee="$emit('deleteEmployee',  $event )"
     />
-  </div>
 
+    <div class="page__footer-box">
+      <PageFooter
+        class="page__footer" />
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -33,9 +38,10 @@ import PageMainHeader from "@/components/PageMainHeader.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import PageBar from "@/components/PageBar.vue";
 import PageList from "@/components/PageList.vue";
+import PageFooter from "@/components/PageFooter.vue";
 
 export default {
-  components: { PageMainHeader, PageHeader, PageList, PageBar },
+  components: { PageMainHeader, PageHeader, PageList, PageBar, PageFooter },
 
   props: {
     employees: Object,
@@ -55,7 +61,8 @@ export default {
   margin: 0 auto;
 }
 
-.page__header-box {
+.page__header-box,
+.page__footer-box {
   position: sticky;
   top: 0;
   left: 0;
@@ -64,5 +71,10 @@ export default {
   background-color: var(--vt-c-white);
   padding: 30px 0 10px;
   z-index: 999;
+}
+
+.page__footer-box {
+  bottom: 0;
+  padding: 10px 0 30px;
 }
 </style>
