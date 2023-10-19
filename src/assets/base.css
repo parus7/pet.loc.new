@@ -137,3 +137,14 @@ fieldset {
 .hidden {
     visibility: hidden;
 }
+
+.color-theme__main {
+    background-color: var(--vt-c-white-mute);
+    box-shadow: 0 0 2px 2px var(--vt-c-active-2);
+}
+
+.color-theme__secondary {
+    background-color: var(--vt-c-active-2);
+    box-shadow: 0 2px 0 0 var(--vt-c-active-4);
+}
+

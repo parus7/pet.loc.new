@@ -38,7 +38,9 @@ export default {
 .list {
   display: flex;
   flex-direction: column;
+  width: 99%;
   gap: 10px;
+  margin: 0 auto;
 }
 
 .list-enter-active,

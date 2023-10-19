@@ -33,7 +33,7 @@
       </span>
     </RouterLink>
 
-    <!--    <RouterLink :to="{ name: 'food' }" tabindex="-1">-->
+    <!--    <RouterLink :to="{ name: '' }" tabindex="-1">-->
     <span class="tooltip tooltip-position" data-name="схема&nbsp;проезда&nbsp;и&nbsp;реквизиты">
    <PageButton
      aria-label="схема проезда и реквизиты"
@@ -68,7 +68,7 @@ export default {
 .bar {
   display: flex;
   justify-content: center;
-  gap: 16%;
+  gap: 8%;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);

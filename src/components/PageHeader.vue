@@ -1,5 +1,7 @@
 <template>
-  <div class="secondary-header">
+  <div class="secondary-header"
+       :class="{ 'color-theme__secondary': !isMain }"
+  >
     <slot name="inputArchiveSearch"></slot>
     <RouterLink
       :to="{ name: 'basic' }"
@@ -25,7 +27,11 @@ import PageColorButton from "@/components/UI/PageColorButton.vue";
 import IconGoTo from "@/components/icons/IconGoTo.vue";
 
 export default {
-  components: { PageColorButton, IconGoTo }
+  components: { PageColorButton, IconGoTo },
+
+  props: {
+    isMain: Boolean
+  }
 };
 
 </script>
@@ -35,10 +41,9 @@ export default {
   display: flex;
   justify-content: end;
   column-gap: 5%;
-  background-color: var(--vt-c-active-2);
-  box-shadow: 2px 2px 0 0 var(--vt-c-active-4);
   border-radius: 8px;
   padding: 10px;
+  margin: 0;
 }
 
 .tooltip-position:hover::after {

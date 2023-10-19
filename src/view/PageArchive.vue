@@ -1,6 +1,7 @@
 <template>
   <Page
     :employees="employees"
+    :isMain="isMain"
     :message="message"
   >
 
@@ -39,7 +40,8 @@ export default {
     return {
       employees: [],
       inputValue: "",
-      message: ""
+      message: "",
+      isMain: false
     };
   },
 

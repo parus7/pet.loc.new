@@ -50,16 +50,10 @@ import "vue3-carousel/dist/carousel.css";
 
 import { useEmplStore } from "@/stores/EmplStore";
 import { mapState } from "pinia";
-import Page from "@/components/Page.vue";
 
 export default defineComponent({
   name: "WrapAround",
-  components: {
-    Page,
-    Carousel,
-    Slide,
-    Navigation
-  },
+  components: { Carousel, Slide, Navigation },
 
   data() {
     return {
@@ -122,14 +116,14 @@ export default defineComponent({
   flex-direction: column;
   background-color: var(--vt-c-active-2);
   border-radius: 8px;
-  padding: 25px 0;
+  padding: 0;
 }
 
 .carousel__item {
   width: 100%;
   min-height: 400px;
   border-radius: 8px;
-  padding: 25px;
+  padding: 0 25px;
 }
 
 .carousel__prev,
@@ -143,6 +137,7 @@ export default defineComponent({
 }
 
 .carousel__table {
+  padding: 10px;
   margin: 0 auto;
 }
 
@@ -153,7 +148,7 @@ export default defineComponent({
 
 @media screen and (max-width: 425px) {
   .carousel__box {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 }
 

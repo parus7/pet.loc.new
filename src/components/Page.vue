@@ -27,7 +27,9 @@
 
     <div class="page__footer-box">
       <PageFooter
-        class="page__footer" />
+        class="page__footer"
+        :isMain="isMain"
+      />
     </div>
 
   </div>
@@ -69,12 +71,13 @@ export default {
   display: grid;
   row-gap: 10px;
   background-color: var(--vt-c-white);
-  padding: 30px 0 10px;
+  border-radius: 8px;
+  padding: 30px 0 20px;
   z-index: 999;
 }
 
 .page__footer-box {
-  bottom: 0;
-  padding: 10px 0 30px;
+  /*bottom: 0;*/
+  padding: 20px 0 30px;
 }
 </style>

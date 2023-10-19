@@ -1,9 +1,9 @@
 <template>
   <svg
     class="icon icon-map"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    width="25"
+    height="25"
+    viewBox="0 0 23 23"
     fill="none"
     xmlns="http://www.w3.org/2000/svg">
     <path
@@ -21,6 +21,6 @@ export default {
 <style scoped>
 .icon-map {
   width: 25px;
-  fill: var(--vt-c-active-10);
+  fill: var(--vt-c-active-9);
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <template
+  <div
     class="employee"
-    :class="{ secondary: !isMain }"
+    :class=" !isMain ? 'color-theme__secondary' : 'color-theme__main '"
   >
 
     <span
@@ -21,6 +21,7 @@
       width="35"
       height="35"
     />
+
     <span
       class="employee__cn ">{{ employee["cn"] }}
     </span>
@@ -86,7 +87,7 @@
       Вы хотите удалить сотрудника?
 
     </PagePopup>
-  </template>
+  </div>
 
 </template>
 
@@ -176,13 +177,12 @@ export default {
 .employee {
   display: grid;
   grid-template-columns: min-content auto minmax(auto, 30%) 1fr 50px 105px repeat(2, auto);
-  gap: 3%;
+  gap: 20px;
 
   align-items: center;
   border-radius: 8px;
-  box-shadow: 0 2px 0 0 var(--vt-c-active-2);
-  background-color: var(--vt-c-white-mute);
-  padding: 10px;
+  padding: 5px 10px;
+  margin: 0;
 }
 
 .input-mask {
@@ -191,11 +191,6 @@ export default {
   font-style: normal;
   outline: none;
   padding: 0;
-}
-
-.secondary {
-  background-color: var(--vt-c-active-2);
-  box-shadow: 0 2px 0 0 var(--vt-c-active-4);
 }
 
 .employee__photo {
