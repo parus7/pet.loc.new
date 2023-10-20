@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <template v-if="employees.length > 0">
-      <transition-group name="list">
+      <transition-group name="animation">
         <PageElem
           v-for="employee in employees"
           :key="employee.id"
@@ -41,17 +41,6 @@ export default {
   width: 99%;
   gap: 10px;
   margin: 0 auto;
-}
-
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease-in-out;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(150px);
 }
 
 .list__message {

@@ -148,3 +148,15 @@ fieldset {
     box-shadow: 0 2px 0 0 var(--vt-c-active-4);
 }
 
+/*general animation*/
+.animation-enter-active,
+.animation-leave-active {
+    transition: all 1s ease-in-out;
+}
+
+.animation-enter-from,
+.animation-leave-to {
+    opacity: 0;
+    transform: translateX(350px);
+}
+

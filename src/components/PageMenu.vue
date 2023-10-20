@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <transition-group name="menu">
+  <div class="wrapper">
+    <transition-group name="animation">
       <ul class="menu" v-if="isSettings">
 
         <IconClose
           class="menu__close"
           @click="closeMenu" />
-
 
         <li class="menu__item">
           <PageButton>
@@ -91,17 +90,6 @@ export default {
   position: absolute;
   top: 10px;
   right: 10px;
-}
-
-.menu-enter-active,
-.menu-leave-active {
-  transition: all 0.5s ease-in-out;
-}
-
-.menu-enter-from,
-.menu-leave-to {
-  opacity: 0;
-  transform: translateX(150px);
 }
 
 @media screen and  (max-width: 425px) {

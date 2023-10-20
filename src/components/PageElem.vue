@@ -1,9 +1,9 @@
 <template>
-  <div
-    class="employee"
-    :class=" !isMain ? 'color-theme__secondary' : 'color-theme__main '"
-  >
-
+  <div class="wrapper">
+    <div
+      class="employee"
+      :class=" !isMain ? 'color-theme__secondary' : 'color-theme__main '"
+    >
     <span
       class="employee__color-mark"
       :class="{ hidden: !isMain }"
@@ -12,65 +12,65 @@
     >
     </span>
 
-    <!-- class "status " for the field  "hide" in employee (employeeData.json)-->
-    <img
-      class="employee__photo"
-      :class="{ status: employee['hide'] }"
-      :alt="`id: ${employee['id']}`"
-      :src="employee['thumbnail']"
-      width="35"
-      height="35"
-    />
+      <!-- class "status " for the field  "hide" in employee (employeeData.json)-->
+      <img
+        class="employee__photo"
+        :class="{ status: employee['hide'] }"
+        :alt="`id: ${employee['id']}`"
+        :src="employee['thumbnail']"
+        width="35"
+        height="35"
+      />
 
-    <span
-      class="employee__cn ">{{ employee["cn"] }}
+      <span
+        class="employee__cn ">{{ employee["cn"] }}
     </span>
 
-    <span
-      class="employee__item-email">{{ employee["email"] }}
+      <span
+        class="employee__item-email">{{ employee["email"] }}
     </span>
 
-    <input
-      class="employee__item-telephone input-mask"
-      type="text"
-      aria-label="phone"
-      v-model="employee['telephone']"
-      v-maska
-      data-maska="##-##"
-      tabindex="-1"
-      readonly
-    />
+      <input
+        class="employee__item-telephone input-mask"
+        type="text"
+        aria-label="phone"
+        v-model="employee['telephone']"
+        v-maska
+        data-maska="##-##"
+        tabindex="-1"
+        readonly
+      />
 
-    <input
-      class="employee__item-mobile input-mask"
-      type="text"
-      aria-label="mobile"
-      v-model="employee['mobile']"
-      v-maska
-      data-maska="### ###-##-##"
-      tabindex="-1"
-      readonly
-    />
+      <input
+        class="employee__item-mobile input-mask"
+        type="text"
+        aria-label="mobile"
+        v-model="employee['mobile']"
+        v-maska
+        data-maska="### ###-##-##"
+        tabindex="-1"
+        readonly
+      />
 
-    <RouterLink
-      :to="{
+      <RouterLink
+        :to="{
         name: isMain  ? 'basicCard' : 'archiveCard',
         params: { id: employee['id'] }
       }"
-      tabindex="-1"
-    >
+        tabindex="-1"
+      >
       <span class="tooltip tooltip-position" data-name="в&nbsp;профиль">
         <PageButton aria-label="переход в профиль сотрудника">
           <IconFullInfo />
         </PageButton>
       </span>
-    </RouterLink>
+      </RouterLink>
 
-    <span
-      class="tooltip tooltip-position"
-      :class="{ hidden: !isMain }"
-      data-name="удалить&nbsp;в&nbsp;архив"
-    >
+      <span
+        class="tooltip tooltip-position"
+        :class="{ hidden: !isMain }"
+        data-name="удалить&nbsp;в&nbsp;архив"
+      >
         <PageButton
           aria-label="удалить сотрудника в архив"
           @click="isOpenDelete = true"
@@ -79,6 +79,8 @@
         </PageButton>
       </span>
 
+
+    </div>
     <PagePopup
       :is-open="isOpenDelete"
       @close="isOpenDelete = false"
@@ -88,7 +90,6 @@
 
     </PagePopup>
   </div>
-
 </template>
 
 <script>

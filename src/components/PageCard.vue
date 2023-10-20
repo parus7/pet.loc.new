@@ -1,211 +1,212 @@
 <template>
-  <form
-    class="card-form"
-    id="add-employee"
-    @submit.prevent="sendForm"
-  >
-
-    <div
-      class="card-form__uploader"
-      @mouseover="upload = true && isEdit"
-      @mouseleave="upload = false"
+  <div class="wrapper">
+    <form
+      class="card-form"
+      id="add-employee"
+      @submit.prevent="sendForm"
     >
 
-      <label v-if='upload && employeePhoto === ""'>
-        <IconUpload
-          class="card-form__uploader-icon"
+      <div
+        class="card-form__uploader"
+        @mouseover="upload = true && isEdit"
+        @mouseleave="upload = false"
+      >
+
+        <label v-if='upload && employeePhoto === ""'>
+          <IconUpload
+            class="card-form__uploader-icon"
+          />
+
+          <input
+            type="file"
+            id="uploaderInput"
+            ref="uploaderInput"
+            @change="uploadPhoto"
+          />
+        </label>
+
+        <img
+          class="card-form__photo"
+          :class="{ status: employee['hide'] }"
+          :alt="`id: ${employee['id']}`"
+          :src="employee['thumbnail']"
+          width="110"
+          height="110"
         />
 
-        <input
-          type="file"
-          id="uploaderInput"
-          ref="uploaderInput"
-          @change="uploadPhoto"
-        />
-      </label>
+      </div>
 
-      <img
-        class="card-form__photo"
-        :class="{ status: employee['hide'] }"
-        :alt="`id: ${employee['id']}`"
-        :src="employee['thumbnail']"
-        width="110"
-        height="110"
-      />
+      <fieldset class="card-form__full-name" :disabled="!isEdit">
+        <label class="card-form__label card-form__label-required"
+        >Фамилия*
+          <input
+            id="last_name"
+            type="text"
+            aria-label="фамилия сотрудника"
+            tabindex="2"
+            ref="lastName"
+            v-model.trim="employee['last_name']"
+          />
+        </label>
 
-    </div>
+        <label class="card-form__label card-form__label-required">Имя*
+          <input
+            id="first_name"
+            type="text"
+            aria-label="имя сотрудника"
+            tabindex="3"
+            ref="firstName"
+            v-model.trim="employee['first_name']"
+          />
+        </label>
 
-    <fieldset class="card-form__full-name" :disabled="!isEdit">
-      <label class="card-form__label card-form__label-required"
-      >Фамилия*
-        <input
-          id="last_name"
-          type="text"
-          aria-label="фамилия сотрудника"
-          tabindex="2"
-          ref="lastName"
-          v-model.trim="employee['last_name']"
-        />
-      </label>
+        <label class="card-form__label">Отчество
+          <input
+            id="middle_name"
+            type="text"
+            aria-label="отчество сотрудника"
+            tabindex="4"
+            v-model.trim="employee['middle_name']"
+          />
+        </label>
+      </fieldset>
 
-      <label class="card-form__label card-form__label-required">Имя*
-        <input
-          id="first_name"
-          type="text"
-          aria-label="имя сотрудника"
-          tabindex="3"
-          ref="firstName"
-          v-model.trim="employee['first_name']"
-        />
-      </label>
+      <fieldset class="card-form__personal" :disabled="!isEdit">
+        <label class="card-form__label">ID
+          <input
+            id="id_employee"
+            type="text"
+            aria-label="id сотрудника"
+            tabindex="-1"
+            v-model.trim="employee['id']"
+            disabled
+          />
+        </label>
 
-      <label class="card-form__label">Отчество
-        <input
-          id="middle_name"
-          type="text"
-          aria-label="отчество сотрудника"
-          tabindex="4"
-          v-model.trim="employee['middle_name']"
-        />
-      </label>
-    </fieldset>
+        <label class="card-form__label">Пол
+          <select
+            id="gender"
+            aria-label="пол сотрудника"
+            tabindex="5"
+            v-model.trim="employee['gender']"
+          >
+            <option selected disabled>Выберите вариант</option>
+            <option>мужской</option>
+            <option>женский</option>
+            <option>неизвестный</option>
+          </select>
+        </label>
 
-    <fieldset class="card-form__personal" :disabled="!isEdit">
-      <label class="card-form__label">ID
-        <input
-          id="id_employee"
-          type="text"
-          aria-label="id сотрудника"
-          tabindex="-1"
-          v-model.trim="employee['id']"
-          disabled
-        />
-      </label>
+        <label class="card-form__label">ДР
+          <input
+            id="birthday"
+            type="text"
+            aria-label="день рождения сотрудника"
+            tabindex="6"
+            v-model.trim="employee['birthday']"
+            v-maska="maskaBirthday"
+            data-maska="##.##"
+          />
+        </label>
+      </fieldset>
 
-      <label class="card-form__label">Пол
-        <select
-          id="gender"
-          aria-label="пол сотрудника"
-          tabindex="5"
-          v-model.trim="employee['gender']"
-        >
-          <option selected disabled>Выберите вариант</option>
-          <option>мужской</option>
-          <option>женский</option>
-          <option>неизвестный</option>
-        </select>
-      </label>
+      <fieldset class="card-form__contacts" :disabled="!isEdit">
+        <label class="card-form__label">Вн. тел.
+          <input
+            id="telephone"
+            type="text"
+            aria-label="внутренний номер сотрудника"
+            tabindex="7"
+            v-model.trim="employee['telephone']"
+            v-maska="maskaTelephone"
+            data-maska="##-##"
+          />
+        </label>
 
-      <label class="card-form__label">ДР
-        <input
-          id="birthday"
-          type="text"
-          aria-label="день рождения сотрудника"
-          tabindex="6"
-          v-model.trim="employee['birthday']"
-          v-maska="maskaBirthday"
-          data-maska="##.##"
-        />
-      </label>
-    </fieldset>
+        <label class="card-form__label">Моб. тел.
+          <input
+            id="mobile"
+            type="text"
+            aria-label="мобильный номер сотрудника"
+            tabindex="8"
+            v-model.trim="employee['mobile']"
+            v-maska="maskaMobile"
+            data-maska="### ###-##-##"
+          />
+        </label>
 
-    <fieldset class="card-form__contacts" :disabled="!isEdit">
-      <label class="card-form__label">Вн. тел.
-        <input
-          id="telephone"
-          type="text"
-          aria-label="внутренний номер сотрудника"
-          tabindex="7"
-          v-model.trim="employee['telephone']"
-          v-maska="maskaTelephone"
-          data-maska="##-##"
-        />
-      </label>
+        <label class="card-form__label">Email
+          <input
+            id="email"
+            type="email"
+            aria-label="email сотрудника"
+            tabindex="9"
+            v-model.trim="employee['email']"
+          />
+        </label>
+      </fieldset>
 
-      <label class="card-form__label">Моб. тел.
-        <input
-          id="mobile"
-          type="text"
-          aria-label="мобильный номер сотрудника"
-          tabindex="8"
-          v-model.trim="employee['mobile']"
-          v-maska="maskaMobile"
-          data-maska="### ###-##-##"
-        />
-      </label>
+      <fieldset class="card-form__address" :disabled="!isEdit">
+        <label class="card-form__label">Город
+          <input
+            id="city"
+            type="text"
+            aria-label="город проживания сотрудника"
+            tabindex="10"
+            ref="city"
+            v-model.trim="employee['city']"
+            required
+          />
+        </label>
 
-      <label class="card-form__label">Email
-        <input
-          id="email"
-          type="email"
-          aria-label="email сотрудника"
-          tabindex="9"
-          v-model.trim="employee['email']"
-        />
-      </label>
-    </fieldset>
+        <label class="card-form__label">Компания
+          <input
+            id="company"
+            type="text"
+            aria-label="компания, в которой работает сотрудник"
+            tabindex="11"
+            v-model.trim="employee['company']"
+          />
+        </label>
 
-    <fieldset class="card-form__address" :disabled="!isEdit">
-      <label class="card-form__label">Город
-        <input
-          id="city"
-          type="text"
-          aria-label="город проживания сотрудника"
-          tabindex="10"
-          ref="city"
-          v-model.trim="employee['city']"
-          required
-        />
-      </label>
+        <label class="card-form__label">Отдел
+          <input
+            id="department"
+            type="text"
+            aria-label="департамент, в котором работает сотрудник"
+            tabindex="12"
+            v-model.trim="employee['department']"
+          />
+        </label>
 
-      <label class="card-form__label">Компания
-        <input
-          id="company"
-          type="text"
-          aria-label="компания, в которой работает сотрудник"
-          tabindex="11"
-          v-model.trim="employee['company']"
-        />
-      </label>
+        <label class="card-form__label">Должность
+          <input
+            id="title"
+            type="text"
+            aria-label="должность сотрудника"
+            tabindex="13"
+            v-model.trim="employee['title']"
+          />
+        </label>
 
-      <label class="card-form__label">Отдел
-        <input
-          id="department"
-          type="text"
-          aria-label="департамент, в котором работает сотрудник"
-          tabindex="12"
-          v-model.trim="employee['department']"
-        />
-      </label>
+        <label class="card-form__label">Хэштег
+          <input
+            id="hashtag"
+            type="text"
+            aria-label="хэштег"
+            class="card-form__hashtag"
+            tabindex="14"
+            v-model.trim="employee['hashtag']"
+          />
+        </label>
+      </fieldset>
 
-      <label class="card-form__label">Должность
-        <input
-          id="title"
-          type="text"
-          aria-label="должность сотрудника"
-          tabindex="13"
-          v-model.trim="employee['title']"
-        />
-      </label>
-
-      <label class="card-form__label">Хэштег
-        <input
-          id="hashtag"
-          type="text"
-          aria-label="хэштег"
-          class="card-form__hashtag"
-          tabindex="14"
-          v-model.trim="employee['hashtag']"
-        />
-      </label>
-    </fieldset>
-
-    <template v-if="!isMain">
-      <p class="card-form__explanations">* обязательное поле для ввода</p>
-    </template>
-
-    <div class=" card-form__buttons">
       <template v-if="!isMain">
+        <p class="card-form__explanations">* обязательное поле для ввода</p>
+      </template>
+
+      <div class=" card-form__buttons">
+        <template v-if="!isMain">
         <span
           class="tooltip tooltip-position"
           data-name="редактировать"
@@ -219,7 +220,7 @@
           </PageColorButton>
         </span>
 
-        <span class="tooltip tooltip-position" data-name="сохранить">
+          <span class="tooltip tooltip-position" data-name="сохранить">
           <PageColorButton
             tabindex="15"
             aria-label="кнопка сохранения данных сотрудника"
@@ -228,18 +229,9 @@
             <IconSave />
           </PageColorButton>
         </span>
+        </template>
 
-        <PagePopup
-          :is-open="isOpenEdit"
-          @ok="popupConfirm"
-          @close="isOpenEdit = false"
-        >
-          Вы хотите изменить данные сотрудника?
-
-        </PagePopup>
-      </template>
-
-      <span class="tooltip tooltip-position" data-name="выйти">
+        <span class="tooltip tooltip-position" data-name="выйти">
         <PageColorButton
           tabindex="isMain ? '16': '1'"
           aria-label="кнопка выхода"
@@ -249,8 +241,17 @@
           <IconGoTo />
         </PageColorButton>
       </span>
-    </div>
-  </form>
+      </div>
+    </form>
+
+    <PagePopup
+      :is-open="isOpenEdit"
+      @ok="popupConfirm"
+      @close="isOpenEdit = false"
+    >
+      Вы хотите изменить данные сотрудника?
+    </PagePopup>
+  </div>
 </template>
 
 <script>
@@ -457,7 +458,7 @@ input[type="file"] {
   left: 0;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .card-form {
     display: flex;
     flex-direction: column;

@@ -267,7 +267,6 @@ export default {
   display: grid;
   grid-template-columns:auto auto 50% auto auto;
   justify-content: space-between;
-  column-gap: 2%;
 
   background-color: var(--vt-c-white-mute);
   box-shadow: 2px 2px 0 0 var(--vt-c-active-2);

@@ -1,31 +1,36 @@
 <template>
-  <div v-if="isOpen" class="popup" @click="closePopup">
+  <div class="wrapper">
+    <transition-group name="animation">
+      <div v-if="isOpen" class="popup" @click="closePopup">
 
-    <div class="popup__body" @click.stop>
-      Внимание!
+        <div class="popup__body" @click.stop>
+          Внимание!
 
-      <span>
+          <span>
         <slot></slot>
       </span>
 
-      <div class="popup__wrapper">
-        <PageColorButton
-          class="popup__button"
-          aria-label="подтверждение действия"
-          @click="okPopup"
-        >
-          &nbsp;Да&nbsp;
-        </PageColorButton>
+          <div class="popup__wrapper">
+            <PageColorButton
+              class="popup__button"
+              aria-label="подтверждение действия"
+              @click="okPopup"
+            >
+              &nbsp;Да&nbsp;
+            </PageColorButton>
 
-        <PageColorButton
-          class="popup__button"
-          aria-label="отмены действия"
-          @click="closePopup"
-        >
-          Нет
-        </PageColorButton>
+            <PageColorButton
+              class="popup__button"
+              aria-label="отмены действия"
+              @click="closePopup"
+            >
+              Нет
+            </PageColorButton>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -63,7 +68,7 @@ export default {
   right: 0;
   bottom: 0;
   background: var(--vt-c-white-background-confirm);
-  z-index: 111;
+  z-index: 1000;
 }
 
 .popup__body {
@@ -77,6 +82,7 @@ export default {
 
   width: 220px;
   background: var(--vt-c-white);
+  box-shadow: 0 5px 20px var(--vt-c-grey-silver);
   border-radius: 20px;
   padding: 20px;
 }
@@ -93,9 +99,9 @@ export default {
   font-size: 0.86rem;
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
   .popup__body {
-    right: 15%;
+    right: 10%;
   }
 }
 </style>
