@@ -5,7 +5,10 @@
   >
 
     <span class="tooltip tooltip-position" data-name="настройки">
-         <PageButton aria-label="настройки">
+         <PageButton
+           aria-label="настройки"
+           @click="isSettings=true"
+         >
       <IconSettings />
          </PageButton>
       </span>
@@ -18,18 +21,29 @@
            </span>
     </RouterLink>
 
+    <PageMenu
+      :isSettings="isSettings"
+      @close="isSettings=false" />
+
   </div>
 </template>
 
 <script>
 import IconSettings from "@/components/icons/IconSettings.vue";
 import IconHR from "@/components/icons/IconHR.vue";
-import PageButton from "./UI/PageButton.vue";
+import PageButton from "@/components/UI/PageButton.vue";
+import PageMenu from "@/components/PageMenu.vue";
 
 
 export default {
   name: "PageFooter.vue",
-  components: { IconSettings, IconHR, PageButton },
+  components: { IconSettings, IconHR, PageButton, PageMenu },
+
+  data() {
+    return {
+      isSettings: false
+    };
+  },
 
   props: {
     isMain: Boolean
