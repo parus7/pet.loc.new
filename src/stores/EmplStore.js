@@ -12,6 +12,7 @@ export const useEmplStore = defineStore("EmplStore", {
       putBasicUrl: "put.php",
       getArchiveUrl: "get_arch.php",
       putArchiveUrl: "put_arch.php",
+      isAlphabet: false,
     };
   },
 
@@ -19,7 +20,7 @@ export const useEmplStore = defineStore("EmplStore", {
     getEmptyStore: (state) => (key) =>
       !state[key] ? true : state[key].size === 0,
 
-    getAllEmployeesArray: (state) => (key) => state[key].values(),
+    getStore: (state) => () => state,
 
     getKeyInStore: (state) => (key) => state[key],
 
@@ -35,6 +36,10 @@ export const useEmplStore = defineStore("EmplStore", {
       month.length === 1 ? (month = "0" + month) : month;
 
       return day + month;
+    },
+
+    setToggle(flag) {
+      return (this.getStore()[flag] = !this.getStore()[flag]);
     },
 
     // взять с сервера
@@ -197,10 +202,6 @@ export const useEmplStore = defineStore("EmplStore", {
         updatedEmpl.middle_name;
 
       this.employees.set(updatedEmpl.id, updatedEmpl);
-    },
-
-    alphabetToggle() {
-      return (this.isAlphabet = !this.isAlphabet);
     },
 
     alphabetSortStart(obj) {

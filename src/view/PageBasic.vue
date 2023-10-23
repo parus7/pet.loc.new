@@ -46,7 +46,7 @@ export default {
       message: "",
       amountBirthdays: null,
       isMain: true,
-      isAlphabet: false,
+      isAlphabet: null,
       isMarked: null,
       isReset: false,
       filteredEmployees: [],
@@ -83,13 +83,13 @@ export default {
       "dataPutBackend",
       "dataGetBackend",
       "createEmployee",
-      "alphabetToggle",
       "saveInArchive",
       "alphabetSortStart",
       "alphabetSortEnd",
       "createNextId",
       "setMessage",
-      "delEmployee"
+      "delEmployee",
+      "setToggle"
     ]),
 
     setLowerCase(str) {
@@ -159,7 +159,7 @@ export default {
 
     // переключение сортировки от А-Я  в  Я-А
     onAlphabetSort() {
-      this.isAlphabet = this.alphabetToggle();
+      this.isAlphabet = this.setToggle("isAlphabet");
       this.sortingAlphabet(this.employees);
     },
 
