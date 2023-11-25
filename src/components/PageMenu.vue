@@ -8,23 +8,35 @@
           @click="closeMenu" />
 
         <li class="menu__item">
-          <PageButton>
-            <IconTooltip />
+          <PageButton
+            @click="isTooltip = !isTooltip"
+          >
+           <span v-show="!isTooltip">
+           <IconTooltip />
+             </span>
+
+            <span v-show="isTooltip">
+           <IconTooltipOff />
+             </span>
           </PageButton>
-          <p>Удалить подсказки</p>
+
+          <p v-show="isTooltip">Удалить&nbsp;подсказки</p>
+          <p v-show="!isTooltip">Добавить&nbsp;подсказки</p>
         </li>
 
         <li class="menu__item">
-          <PageButton @click="toggleColorTheme">
+          <PageButton @click=" this.isColorTheme = !this.isColorTheme">
             <span v-show="isColorTheme">
               <IconSun />
             </span>
 
             <span v-show="!isColorTheme">
-              <IconMoon />
-            </span>
+            <IconMoon />
+              </span>
           </PageButton>
-          <p> Смена цветовой темы</p>
+
+          <p v-show="!isColorTheme"> Ночной&nbsp;режим</p>
+          <p v-show="isColorTheme"> Дневной&nbsp;режим</p>
         </li>
 
       </ul>
@@ -34,6 +46,7 @@
 
 <script>
 import IconTooltip from "@/components/icons/IconTooltip.vue";
+import IconTooltipOff from "@/components/icons/IconTooltipOff.vue";
 import IconSun from "@/components/icons/IconSun.vue";
 import IconMoon from "@/components/icons/IconMoon.vue";
 import PageButton from "@/components/UI/PageButton.vue";
@@ -42,14 +55,15 @@ import IconClose from "@/components/icons/IconClose.vue";
 export default {
   name: "PageMenu.vue",
 
-  components: { IconTooltip, IconSun, IconMoon, PageButton, IconClose },
+  components: { IconTooltip, IconTooltipOff, IconSun, IconMoon, PageButton, IconClose },
   props: {
     isSettings: Boolean
   },
 
   data() {
     return {
-      isColorTheme: false
+      isColorTheme: false,
+      isTooltip: true
     };
   },
 
