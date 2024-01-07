@@ -7,12 +7,20 @@ export const useEmplStore = defineStore("EmplStore", {
       archive: new Map(),
       slidersCarousel: [],
       imageUrl: "https://saa.44321.ru/assets/img/",
-      serverUrl: "https://saa.44321.ru/",
-      getBasicUrl: "get.php",
-      putBasicUrl: "put.php",
-      getArchiveUrl: "get_arch.php",
-      putArchiveUrl: "put_arch.php",
+      //serverUrl: "https://saa.44321.ru/",
+      //getBasicUrl: "get.php",
+      //putBasicUrl: "put.php",
+      //getArchiveUrl: "get_arch.php",
+      //putArchiveUrl: "put_arch.php",
       isAlphabet: false,
+      // need move 2 other store
+      //imageUrl: "https://127.0.0.1:7000/assets/",
+      serverUrl: "http://127.0.0.1:7000/",
+      getBasicUrl: "v1/",
+      putBasicUrl: "v1/",
+      getArchiveUrl: "v1/arch/",
+      putArchiveUrl: "v1/arch/",
+      token:""
     };
   },
 
@@ -44,6 +52,7 @@ export const useEmplStore = defineStore("EmplStore", {
 
     // взять с сервера
     async dataGetBackend(key, url) {
+      console.log("Get data url:",this.getKeyInStore("serverUrl") + this.getKeyInStore(url))
       try {
         let response = await fetch(
           this.getKeyInStore("serverUrl") + this.getKeyInStore(url),
@@ -107,7 +116,9 @@ export const useEmplStore = defineStore("EmplStore", {
           {
             method: "POST",
             headers: {
-              "Content-Type": "multipart/form-data",
+              // "Content-Type": "multipart/form-data",
+              "Content-Type": "application/json",
+              "authentication": this.token
             },
             body: JSON.stringify(arr),
           }
@@ -211,5 +222,35 @@ export const useEmplStore = defineStore("EmplStore", {
     alphabetSortEnd(obj) {
       return obj.sort((a, b) => b.cn.localeCompare(a.cn));
     },
+    
+    async getLogin(user, pass) {
+      //very need verify input data!!!
+      let data = {
+        login: user,
+        password: pass
+      };
+      // console.log("Get login url:",this.getKeyInStore("serverUrl") + this.getKeyInStore("getBasicUrl")+ "login")
+      try {
+        let promise = await fetch(
+          this.getKeyInStore("serverUrl") + this.getKeyInStore("getBasicUrl") + "login",
+          {
+            method: "POST",
+            // mode: "cors",
+            // cache: "no-cache",
+            // credentials: "same-origin", // при деплое на общий сервер.
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+        let res = await promise.json();
+        console.log(this.token);
+        this.token = res.token;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    
   },
 });

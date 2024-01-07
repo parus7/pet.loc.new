@@ -57,6 +57,8 @@
 
 <script>
 import PageColorButton from "@/components/UI/PageColorButton.vue";
+import { mapState, mapActions } from "pinia";
+import { useEmplStore } from "@/stores/EmplStore";
 
 export default {
   components: { PageColorButton },
@@ -78,7 +80,13 @@ export default {
   },
 
   methods: {
+
+    ...mapActions(useEmplStore, [
+      'getLogin',
+    ]),
+
     getEntrance() {
+      this.getLogin(this.login, this.password)
       this.isRecovery
         ? this.$emit("getRecovery", { login: this.login || this.recoveryLogin })
         : this.$emit("getEntrance", { login: this.login, password: this.password });
