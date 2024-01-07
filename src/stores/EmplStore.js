@@ -229,10 +229,10 @@ export const useEmplStore = defineStore("EmplStore", {
         login: user,
         password: pass
       };
-      // console.log("Get login url:",this.getKeyInStore("serverUrl") + this.getKeyInStore("getBasicUrl")+ "login")
+      // console.log("Get login url:", this.serverUrl, this.getBasicUrl, "login")
       try {
         let promise = await fetch(
-          this.getKeyInStore("serverUrl") + this.getKeyInStore("getBasicUrl") + "login",
+          this.serverUrl + this.getBasicUrl + "login",
           {
             method: "POST",
             // mode: "cors",
@@ -245,7 +245,6 @@ export const useEmplStore = defineStore("EmplStore", {
           }
         );
         let res = await promise.json();
-        console.log(this.token);
         this.token = res.token;
       } catch (error) {
         console.error(error);
